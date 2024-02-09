@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "CSCI 5302 - Final Project",
     "section": "",
-    "text": "1 Abstract\n\n\nhello world!\n\n\nThis is where our abstract will go",
+    "text": "1 Abstract\n\n\nhello world!\n\n\nThis is where our abstract will go.\nHere’s an example of inserting a plot directly into our paper\n\n\n\n\n\n\n\n\nFigure 1.1: a matplotlib plot\n\n\n\n\n\nHere’s an example of pulling some data in from our github repo",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Abstract</span>"
     ]
@@ -134,7 +134,7 @@
     "href": "proposal.html#timeline",
     "title": "1  Proposal",
     "section": "1.6 Timeline",
-    "text": "1.6 Timeline\n\n\n\n\n\n\n\n\n\naction\ndate\nwho\n\n\n\n\n0\n\n\n\n\n\n1\n\n\n\n\n\n2",
+    "text": "1.6 Timeline\n\n\n\n\n\n\n\n\n\naction\ndate\nwho\ncompletion date\n\n\n\n\n0\n\n\n\n\n\n\n1\n\n\n\n\n\n\n2",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Proposal</span>"
     ]

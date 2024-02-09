@@ -2,6 +2,87 @@
 
 ```{python}
 print("hello world!")
+import pandas as pd, numpy as np, matplotlib.pyplot as plt
+import scipy as sp
+#import chart_studio.plotly as py
+from plotly.offline import iplot, init_notebook_mode
+import plotly.graph_objects as go
+
+
 ```
 
-This is where our abstract will go
+This is where our abstract will go.
+
+Here's an example of inserting a plot directly into our paper
+
+```{python}
+#| label: fig-a
+#| fig-cap: a matplotlib plot
+x = np.linspace(-5,5)
+y = x**2
+plt.scatter(
+    x,y
+)
+```
+
+Here's an example of pulling some data in from our github repo
+
+```{python}
+init_notebook_mode(connected=True)
+
+temp = pd.read_csv('../data/Fatalities.csv')
+
+temp['ST'] = temp['state'].str.upper()
+
+#add the ratio column to examine the plot by ratio of alcohol fatalitites to all fatalities
+temp['afatal_ratio'] = temp['afatal'] / temp['fatal']
+
+fig = go.Figure()
+
+#collection point for data to be held from each slider position
+slider_info = []
+
+#slice the data by year 
+for y in range(temp['year'].min(),temp['year'].max()+1):
+    #get the current year's data
+    year_data = temp[temp['year']==y]
+
+    #build a dictionary to house the data for the year
+    #we specify "choropleth" to feed the dictionary to plotly
+    #when we have a slider change
+    dict_year_data = {
+        'type':'choropleth',
+        'locations':year_data['ST'], #we want information by-state
+        'z':year_data['afatal_ratio'], #plot the ratio of alcohol fatalities to all fatalities.
+        'locationmode':'USA-states', #look at the US
+        'colorbar':{'title':'alcohol-related fatalities (%)'} #label the color axis
+    }
+    #collect all the data to add to our slider information
+    slider_info.append(dict_year_data)
+
+steps = []
+for i in range(len(slider_info)):
+    step = dict(
+        method='restyle',
+        args=['visible',[False]*len(slider_info)],
+        #start the slider index at 1982
+        label='{}'.format(i+1982)
+    )
+    step['args'][1][i] = True
+    steps.append(step)
+
+sliders = [dict(active=len(steps)-1,pad={"t":1},steps=steps)]
+
+layout = dict(
+    title='Alcohol-Related Fatality Rate 1982-1988',
+    geo=dict(scope='usa',projection={'type':'albers usa'}),
+    sliders=sliders,
+    width=1000,
+    height=500
+)
+
+fig = dict(data=slider_info,layout=layout)
+
+iplot(fig)
+
+```

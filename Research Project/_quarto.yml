@@ -22,7 +22,7 @@ book:
   references: references.bib # Unsure if needed
   output-file: CSCI_5302_Final_Report # PDF filename
   cover-image: "images/cover.png"
-  repo-url: "https://github.com/CUBoulder-DS/5301-5000-Final-Report" #update
+  repo-url: "https://github.com/pconnell/" #update
   page-navigation: true
   date: today
 

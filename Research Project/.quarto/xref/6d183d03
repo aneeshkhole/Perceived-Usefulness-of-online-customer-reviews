@@ -1,1 +1,1 @@
-{"options":{"chapters":true},"headings":["sec-abstract"],"entries":[{"order":{"number":1,"section":[1,0,0,0,0,0,0]},"caption":"1 Abstract","key":"sec-abstract"}]}
+{"entries":[{"key":"fig-a","caption":"a matplotlib plot","order":{"section":[1,0,0,0,0,0,0],"number":1}},{"key":"sec-abstract","caption":"1 Abstract","order":{"section":[1,0,0,0,0,0,0],"number":1}}],"options":{"chapters":true},"headings":["sec-abstract"]}

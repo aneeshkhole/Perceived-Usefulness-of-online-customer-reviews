@@ -52,9 +52,9 @@ import pandas as pd
 
 ```{python blockname}
 timeline = [
-    {'action':'','date':'','who':''},
-    {'action':'','date':'','who':''},
-    {'action':'','date':'','who':''},
+    {'action':'','date':'','who':'','completion date':''},
+    {'action':'','date':'','who':'','completion date':''},
+    {'action':'','date':'','who':'','completion date':''},
 ]
 
 pd.DataFrame(timeline)
