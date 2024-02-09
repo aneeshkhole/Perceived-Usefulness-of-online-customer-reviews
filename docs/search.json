@@ -68,5 +68,75 @@
     "crumbs": [
       "References"
     ]
+  },
+  {
+    "objectID": "proposal.html",
+    "href": "proposal.html",
+    "title": "1  Proposal",
+    "section": "",
+    "text": "1.1 Motivation / Why",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Proposal</span>"
+    ]
+  },
+  {
+    "objectID": "proposal.html#motivation-why",
+    "href": "proposal.html#motivation-why",
+    "title": "1  Proposal",
+    "section": "",
+    "text": "Why are we doing this project?\n\n\n1.1.1 What\n\n\n1.1.2 Who\n\n\n1.1.3 How",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Proposal</span>"
+    ]
+  },
+  {
+    "objectID": "proposal.html#research-questions",
+    "href": "proposal.html#research-questions",
+    "title": "1  Proposal",
+    "section": "1.2 Research Questions",
+    "text": "1.2 Research Questions",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Proposal</span>"
+    ]
+  },
+  {
+    "objectID": "proposal.html#literature-survey",
+    "href": "proposal.html#literature-survey",
+    "title": "1  Proposal",
+    "section": "1.3 Literature Survey",
+    "text": "1.3 Literature Survey\n\nWhat work has been done previously in this area?\nIdentify other research papers or documents and look at “future research”",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Proposal</span>"
+    ]
+  },
+  {
+    "objectID": "proposal.html#proposed-work",
+    "href": "proposal.html#proposed-work",
+    "title": "1  Proposal",
+    "section": "1.4 Proposed Work",
+    "text": "1.4 Proposed Work\n\nData collection strategy\n\nspecific features / aspects\nidentified source(s)\nLibraries: python re, BeautifulSoup, Selenium, scipy, numpy, pandas…?\n\nData Cleaning strategy\n\nRegular expression substitutions\nStandardization for different scores / ratings, …\n\nAnalysis strategy\n\n?",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Proposal</span>"
+    ]
+  },
+  {
+    "objectID": "proposal.html#definition-of-success",
+    "href": "proposal.html#definition-of-success",
+    "title": "1  Proposal",
+    "section": "1.5 Definition of Success",
+    "text": "1.5 Definition of Success\n\nTBD",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Proposal</span>"
+    ]
+  },
+  {
+    "objectID": "proposal.html#timeline",
+    "href": "proposal.html#timeline",
+    "title": "1  Proposal",
+    "section": "1.6 Timeline",
+    "text": "1.6 Timeline\n\n\n\n\n\n\n\n\n\naction\ndate\nwho\n\n\n\n\n0\n\n\n\n\n\n1\n\n\n\n\n\n2",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Proposal</span>"
+    ]
   }
 ]

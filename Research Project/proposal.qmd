@@ -1,0 +1,61 @@
+# Proposal
+
+```{python}
+import pandas as pd
+```
+
+## Motivation / Why
+
+* Why are we doing this project?
+
+### What
+
+### Who
+
+### How
+
+## Research Questions
+
+## Literature Survey
+
+* What work has been done previously in this area?
+
+* Identify other research papers or documents and look at "future research"
+
+## Proposed Work
+
+* Data collection strategy
+
+    * specific features / aspects
+
+    * identified source(s)
+
+    * Libraries:  python re, BeautifulSoup, Selenium, scipy, numpy, pandas...?
+
+* Data Cleaning strategy
+
+    * Regular expression substitutions
+
+    * Standardization for different scores / ratings, ...
+
+* Analysis strategy
+
+    * ?
+
+* 
+
+## Definition of Success
+
+* TBD
+
+## Timeline
+
+```{python blockname}
+timeline = [
+    {'action':'','date':'','who':''},
+    {'action':'','date':'','who':''},
+    {'action':'','date':'','who':''},
+]
+
+pd.DataFrame(timeline)
+```

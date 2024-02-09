@@ -10,6 +10,7 @@ book:
     - "Aneesh Khole"
     - "Uttara"
   chapters:
+    - proposal.qmd
     - index.qmd
     - intro.qmd
     - data.qmd
@@ -62,12 +63,12 @@ format:
 
 ## Extra settings
 execute:
-  echo: false # Don't include code in the report
-  freeze: false # Not useful when rendering across multiple users
-  warning: false
-  error: false
+  echo: False # Don't include code in the report
+  freeze: False # Not useful when rendering across multiple users
+  warning: False
+  error: False
 
 ## PDF creation settings
-latex-clean: true # delete latex files after rendering
-latex-auto-mk: true
-latex-auto-install: true
+latex-clean: True # delete latex files after rendering
+latex-auto-mk: True
+latex-auto-install: True
