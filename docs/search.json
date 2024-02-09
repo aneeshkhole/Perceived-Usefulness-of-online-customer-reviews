@@ -6,27 +6,27 @@
     "section": "",
     "text": "1 Abstract\n\n\nhello world!\n\n\nThis is where our abstract will go",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Abstract</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Abstract</span>"
     ]
   },
   {
     "objectID": "intro.html",
     "href": "intro.html",
-    "title": "2  Introduction",
+    "title": "3  Introduction",
     "section": "",
     "text": "Here’s our introductory section",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction</span>"
     ]
   },
   {
     "objectID": "data.html",
     "href": "data.html",
-    "title": "3  Data",
+    "title": "4  Data",
     "section": "",
     "text": "Here’s our data section.",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Data</span>"
     ]
   },
   {
@@ -42,21 +42,21 @@
   {
     "objectID": "results.html",
     "href": "results.html",
-    "title": "5  Results",
+    "title": "6  Results",
     "section": "",
     "text": "Here’s our results section",
     "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Results</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Results</span>"
     ]
   },
   {
     "objectID": "conclusions.html",
     "href": "conclusions.html",
-    "title": "6  Conclusions",
+    "title": "7  Conclusions",
     "section": "",
     "text": "Here’s our conclusions section",
     "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Conclusions</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Conclusions</span>"
     ]
   },
   {

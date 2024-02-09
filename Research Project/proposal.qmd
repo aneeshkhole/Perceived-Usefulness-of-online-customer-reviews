@@ -1,4 +1,4 @@
-# Proposal
+# Proposal {#sec-proposal}
 
 ```{python}
 import pandas as pd

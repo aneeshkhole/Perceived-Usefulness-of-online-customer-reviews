@@ -8,7 +8,7 @@ book:
   author:
     - "Patrick Connelly"
     - "Aneesh Khole"
-    - "Uttara"
+    - "Uttara Ketkar"
   chapters:
     - proposal.qmd
     - index.qmd
