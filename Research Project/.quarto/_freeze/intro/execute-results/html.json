@@ -1,0 +1,12 @@
+{
+  "hash": "454967849d910599503e5b00c80d60d4",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "# Introduction {#sec-intro}\n\n\n\nHere's our introductory section\n\n",
+    "supporting": [
+      "intro_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

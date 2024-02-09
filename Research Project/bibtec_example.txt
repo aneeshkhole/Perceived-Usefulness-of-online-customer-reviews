@@ -1,0 +1,83 @@
+@misc{utkdataset,
+	title = {{UTKFace}},
+	journal = {UTKFace},
+	year = {2021},
+	month = oct,
+	note = {[Online; accessed 24. Nov. 2023]},
+	url = {https://susanqq.github.io/UTKFace}
+}
+
+@inproceedings{fairface,
+  title={FairFace: Face Attribute Dataset for Balanced Race, Gender, and Age for Bias Measurement and Mitigation},
+  author={Karkkainen, Kimmo and Joo, Jungseock},
+  booktitle={Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision},
+  year={2021},
+  pages={1548-1558}
+}
+
+@inproceedings{deepface,
+  title        = {HyperExtended LightFace: A Facial Attribute Analysis Framework},
+  author       = {Serengil, Sefik Ilkin and Ozpinar, Alper},
+  booktitle    = {2021 International Conference on Engineering and Emerging Technologies (ICEET)},
+  pages        = {1-4},
+  year         = {2021},
+  doi          = {10.1109/ICEET53442.2021.9659697},
+  url          = {https://doi.org/10.1109/ICEET53442.2021.9659697},
+  organization = {IEEE}
+}
+
+@article{nytimes,
+	author = {Lohr, Steve},
+	title = {{Facial Recognition Is Accurate, if You{'}re a White Guy}},
+	journal = {N.Y. Times},
+	year = {2018},
+	month = feb,
+	issn = {0362-4331},
+	publisher = {The New York Times},
+	url = {https://www.nytimes.com/2018/02/09/technology/facial-recognition-race-artificial-intelligence.html}
+}
+
+@misc{perplineup,
+	title = {{The Perpetual Line-Up: Unregulated Police Face Recognition in America}},
+	journal = {{Center on Privacy {&} Technology}},
+	author = {{Georgetown Law}},
+	year = {2016},
+	month = oct,
+	note = {[Online; accessed 5. Dec. 2023]},
+	url = {https://www.perpetuallineup.org}
+}
+
+@misc{nist,
+	title = {{NIST Study Evaluates Effects of Race, Age, Sex on Face Recognition Software {$\vert$} NIST}},
+	journal = {NIST},
+	author = {NIST},
+	year = {2020},
+	month = may,
+	note = {[Online; accessed 5. Dec. 2023]},
+	url = {https://www.nist.gov/news-events/news/2019/12/nist-study-evaluates-effects-race-age-sex-face-recognition-software}
+}
+
+
+@article{mediumPerf,
+	author = {Huilgol, Purva},
+	title = {{Accuracy vs. F1-Score - Analytics Vidhya - Medium}},
+	journal = {Medium},
+	year = {2021},
+	month = dec,
+	issn = {6258-2372},
+	publisher = {Analytics Vidhya},
+	url = {https://medium.com/analytics-vidhya/accuracy-vs-f1-score-6258237beca2}
+}
+
+@misc{joyGender,
+	author = {Buolamwini, Joy},
+	title = {{Gender Shades: Intersectional Accuracy Disparities in}},
+	journal = {MIT Media Lab},
+	year = {2023},
+	month = dec,
+	note = {[Online; accessed 13. Dec. 2023]},
+	url = {https://www.media.mit.edu/publications/gender-shades-intersectional-accuracy-disparities-in-commercial-gender-classification}
+}
+
+
+

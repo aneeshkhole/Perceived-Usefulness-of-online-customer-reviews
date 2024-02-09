@@ -1,0 +1,12 @@
+{
+  "hash": "ac3cf66c4691ddd5c9cdf11e4c91add6",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "# Data {#sec-data}\n\n\n\nHere's our data section.\n\n",
+    "supporting": [
+      "data_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

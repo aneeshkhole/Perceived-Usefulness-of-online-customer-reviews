@@ -1,0 +1,73 @@
+project:
+  type: book
+  output-dir: "../docs"
+
+## Overall settings
+book:
+  title: "CSCI 5302 - Final Project"
+  author:
+    - "Patrick Connelly"
+    - "Aneesh Khole"
+    - "Uttara"
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - data.qmd
+    - methods.qmd
+    - results.qmd
+    - conclusions.qmd
+    - references.qmd
+  downloads: [pdf]
+  references: references.bib # Unsure if needed
+  output-file: CSCI_5302_Final_Report # PDF filename
+  cover-image: "images/cover.png"
+  repo-url: "https://github.com/CUBoulder-DS/5301-5000-Final-Report" #update
+  page-navigation: true
+  date: today
+
+bibliography: references.bib
+nocite: |
+  @*
+
+## Controls for each output format
+format:
+  html:
+    theme: 
+      - flatly
+      - custom.scss
+    page-layout: full
+    smooth-scroll: true
+    number-sections: true
+    citations-hover: true
+    grid:
+      body-width: 1000px
+      sidebar-width: 150px
+    quarto-required: ">= 1.4.0" # To fix crossrefs
+  pdf:
+    quarto-required: ">= 1.4.0"
+    documentclass: scrreprt
+    number-depth: 4
+    toc: true
+    geometry:
+      - margin=0.5in
+    link-citations: true
+    header-includes: # dont need?
+      - \usepackage{float}
+      - \usepackage{booktabs, caption, longtable, colortbl, array} # To make gt package work
+      - \floatplacement{table}{H}
+      - \floatplacement{image}{H}
+    hyperrefoptions:
+      - linktoc=all
+    latex-output-dir: "../docs"
+
+## Extra settings
+execute:
+  echo: false # Don't include code in the report
+  freeze: false # Not useful when rendering across multiple users
+  warning: false
+  error: false
+
+## PDF creation settings
+latex-clean: true # delete latex files after rendering
+latex-auto-mk: true
+latex-auto-install: true

@@ -1,0 +1,6 @@
+jupyter
+nbconvert
+pandas
+numpy
+plotly
+scipy

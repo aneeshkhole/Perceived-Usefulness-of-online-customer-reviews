@@ -1,0 +1,72 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "CSCI 5302 - Final Project",
+    "section": "",
+    "text": "1 Abstract\n\n\nhello world!\n\n\nThis is where our abstract will go",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Abstract</span>"
+    ]
+  },
+  {
+    "objectID": "intro.html",
+    "href": "intro.html",
+    "title": "2  Introduction",
+    "section": "",
+    "text": "Here’s our introductory section",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "data.html",
+    "href": "data.html",
+    "title": "3  Data",
+    "section": "",
+    "text": "Here’s our data section.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data</span>"
+    ]
+  },
+  {
+    "objectID": "methods.html",
+    "href": "methods.html",
+    "title": "4  Methods",
+    "section": "",
+    "text": "Buolamwini, Joy. 2023. “Gender Shades: Intersectional Accuracy Disparities in.” MIT Media Lab. https://www.media.mit.edu/publications/gender-shades-intersectional-accuracy-disparities-in-commercial-gender-classification.\n\n\nGeorgetown Law. 2016. “The Perpetual Line-Up: Unregulated Police Face Recognition in America.” Center on Privacy & Technology. https://www.perpetuallineup.org.\n\n\nHuilgol, Purva. 2021. “Accuracy vs. F1-Score - Analytics Vidhya - Medium.” Medium, December. https://medium.com/analytics-vidhya/accuracy-vs-f1-score-6258237beca2.\n\n\nKarkkainen, Kimmo, and Jungseock Joo. 2021. “FairFace: Face Attribute Dataset for Balanced Race, Gender, and Age for Bias Measurement and Mitigation.” In Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision, 1548–58.\n\n\nLohr, Steve. 2018. “Facial Recognition Is Accurate, if You’re a White Guy.” N.Y. Times, February. https://www.nytimes.com/2018/02/09/technology/facial-recognition-race-artificial-intelligence.html.\n\n\nNIST. 2020. “NIST Study Evaluates Effects of Race, Age, Sex on Face Recognition Software \\(\\vert\\) NIST.” NIST. https://www.nist.gov/news-events/news/2019/12/nist-study-evaluates-effects-race-age-sex-face-recognition-software.\n\n\nSerengil, Sefik Ilkin, and Alper Ozpinar. 2021. “HyperExtended LightFace: A Facial Attribute Analysis Framework.” In 2021 International Conference on Engineering and Emerging Technologies (ICEET), 1–4. IEEE. https://doi.org/10.1109/ICEET53442.2021.9659697.\n\n\n“UTKFace.” 2021. UTKFace. https://susanqq.github.io/UTKFace.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Methods</span>"
+    ]
+  },
+  {
+    "objectID": "results.html",
+    "href": "results.html",
+    "title": "5  Results",
+    "section": "",
+    "text": "Here’s our results section",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Results</span>"
+    ]
+  },
+  {
+    "objectID": "conclusions.html",
+    "href": "conclusions.html",
+    "title": "6  Conclusions",
+    "section": "",
+    "text": "Here’s our conclusions section",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Conclusions</span>"
+    ]
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "Buolamwini, Joy. 2023. “Gender Shades:\nIntersectional Accuracy Disparities in.” MIT Media\nLab. https://www.media.mit.edu/publications/gender-shades-intersectional-accuracy-disparities-in-commercial-gender-classification.\n\n\nGeorgetown Law. 2016. “The Perpetual Line-Up:\nUnregulated Police Face Recognition in America.”\nCenter on Privacy & Technology.\nhttps://www.perpetuallineup.org.\n\n\nHuilgol, Purva. 2021. “Accuracy vs. F1-Score\n- Analytics Vidhya - Medium.” Medium, December.\nhttps://medium.com/analytics-vidhya/accuracy-vs-f1-score-6258237beca2.\n\n\nKarkkainen, Kimmo, and Jungseock Joo. 2021. “FairFace: Face\nAttribute Dataset for Balanced Race, Gender, and Age for Bias\nMeasurement and Mitigation.” In Proceedings of the IEEE/CVF\nWinter Conference on Applications of Computer Vision, 1548–58.\n\n\nLohr, Steve. 2018. “Facial Recognition Is\nAccurate, if You’re a White Guy.” N.Y.\nTimes, February. https://www.nytimes.com/2018/02/09/technology/facial-recognition-race-artificial-intelligence.html.\n\n\nNIST. 2020. “NIST Study Evaluates Effects of\nRace, Age, Sex on Face Recognition Software | NIST.” NIST.\nhttps://www.nist.gov/news-events/news/2019/12/nist-study-evaluates-effects-race-age-sex-face-recognition-software.\n\n\nSerengil, Sefik Ilkin, and Alper Ozpinar. 2021. “HyperExtended\nLightFace: A Facial Attribute Analysis Framework.” In 2021\nInternational Conference on Engineering and Emerging Technologies\n(ICEET), 1–4. IEEE. https://doi.org/10.1109/ICEET53442.2021.9659697.\n\n\n“UTKFace.” 2021. UTKFace. https://susanqq.github.io/UTKFace.",
+    "crumbs": [
+      "References"
+    ]
+  }
+]
