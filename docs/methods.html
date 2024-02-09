@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>CSCI 5302 - Final Project - 4&nbsp; Methods</title>
+<title>CSCI 5302 - Final Project - 5&nbsp; Methods</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -90,35 +70,6 @@ div.csl-indent {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -131,7 +82,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./methods.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Methods</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./methods.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Methods</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -148,7 +99,7 @@ window.Quarto = {
     <div class="sidebar-title mb-0 py-0">
       <a href="./">CSCI 5302 - Final Project</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/CUBoulder-DS/5301-5000-Final-Report" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/pconnell/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <a href="./CSCI_5302_Final_Report.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
 </div>
     </div>
@@ -162,38 +113,44 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./proposal.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Proposal</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Abstract</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Abstract</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./methods.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Methods</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Methods</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./results.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Results</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Results</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./conclusions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Conclusions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Conclusions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -215,7 +172,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-methods" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Methods</span></span></h1>
+<h1 class="title"><span id="sec-methods" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Methods</span></span></h1>
 </div>
 
 
@@ -232,34 +189,9 @@ window.Quarto = {
 </header>
 
 
+<p>Here’s where we’ll list out our methods</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-joyGender" class="csl-entry" role="listitem">
-Buolamwini, Joy. 2023. <span>“<span class="nocase">Gender Shades: Intersectional Accuracy Disparities in</span>.”</span> <em>MIT Media Lab</em>. <a href="https://www.media.mit.edu/publications/gender-shades-intersectional-accuracy-disparities-in-commercial-gender-classification">https://www.media.mit.edu/publications/gender-shades-intersectional-accuracy-disparities-in-commercial-gender-classification</a>.
-</div>
-<div id="ref-perplineup" class="csl-entry" role="listitem">
-Georgetown Law. 2016. <span>“<span class="nocase">The Perpetual Line-Up: Unregulated Police Face Recognition in America</span>.”</span> <em><span>Center on Privacy <span>&amp;</span> Technology</span></em>. <a href="https://www.perpetuallineup.org">https://www.perpetuallineup.org</a>.
-</div>
-<div id="ref-mediumPerf" class="csl-entry" role="listitem">
-Huilgol, Purva. 2021. <span>“<span class="nocase">Accuracy vs. F1-Score - Analytics Vidhya - Medium</span>.”</span> <em>Medium</em>, December. <a href="https://medium.com/analytics-vidhya/accuracy-vs-f1-score-6258237beca2">https://medium.com/analytics-vidhya/accuracy-vs-f1-score-6258237beca2</a>.
-</div>
-<div id="ref-fairface" class="csl-entry" role="listitem">
-Karkkainen, Kimmo, and Jungseock Joo. 2021. <span>“FairFace: Face Attribute Dataset for Balanced Race, Gender, and Age for Bias Measurement and Mitigation.”</span> In <em>Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision</em>, 1548–58.
-</div>
-<div id="ref-nytimes" class="csl-entry" role="listitem">
-Lohr, Steve. 2018. <span>“<span class="nocase">Facial Recognition Is Accurate, if You<span>’</span>re a White Guy</span>.”</span> <em>N.Y. Times</em>, February. <a href="https://www.nytimes.com/2018/02/09/technology/facial-recognition-race-artificial-intelligence.html">https://www.nytimes.com/2018/02/09/technology/facial-recognition-race-artificial-intelligence.html</a>.
-</div>
-<div id="ref-nist" class="csl-entry" role="listitem">
-NIST. 2020. <span>“<span class="nocase">NIST Study Evaluates Effects of Race, Age, Sex on Face Recognition Software <span><span class="math inline">\(\vert\)</span></span> NIST</span>.”</span> <em>NIST</em>. <a href="https://www.nist.gov/news-events/news/2019/12/nist-study-evaluates-effects-race-age-sex-face-recognition-software">https://www.nist.gov/news-events/news/2019/12/nist-study-evaluates-effects-race-age-sex-face-recognition-software</a>.
-</div>
-<div id="ref-deepface" class="csl-entry" role="listitem">
-Serengil, Sefik Ilkin, and Alper Ozpinar. 2021. <span>“HyperExtended LightFace: A Facial Attribute Analysis Framework.”</span> In <em>2021 International Conference on Engineering and Emerging Technologies (ICEET)</em>, 1–4. IEEE. <a href="https://doi.org/10.1109/ICEET53442.2021.9659697">https://doi.org/10.1109/ICEET53442.2021.9659697</a>.
-</div>
-<div id="ref-utkdataset" class="csl-entry" role="listitem">
-<span>“<span>UTKFace</span>.”</span> 2021. <em>UTKFace</em>. <a href="https://susanqq.github.io/UTKFace">https://susanqq.github.io/UTKFace</a>.
-</div>
-</div>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -652,12 +584,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation column-page-right">
   <div class="nav-page nav-page-previous">
       <a href="./data.html" class="pagination-link  aria-label=" &lt;span="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./results.html" class="pagination-link" aria-label="<span class='chapter-number'>5</span>&nbsp; <span class='chapter-title'>Results</span>">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Results</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./results.html" class="pagination-link" aria-label="<span class='chapter-number'>6</span>&nbsp; <span class='chapter-title'>Results</span>">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Results</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

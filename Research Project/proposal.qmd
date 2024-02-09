@@ -52,8 +52,16 @@ import pandas as pd
 
 ```{python blockname}
 timeline = [
-    {'action':'','date':'','who':'','completion date':''},
-    {'action':'','date':'','who':'','completion date':''},
+    {'action':'Produce Proposal','date':'20 Feb 2023','who':'All','completion date':''},\
+    {'action':'Identify variables of Interest','date':'','who':'','completion date':''},
+    {'action':'Identify and Document Analysis Plan','date':'','who':'','completion date':''},
+    {'action':'Review Robots.txt files','date':'','who':'','completion date':''},\
+    {'action':'Define and ','date':'','who':'','completion date':''},
+    {'action':'Website Parsing - Site 1','date':'','who':'','completion date':''},
+    {'action':'Website Parsing - Site 2','date':'','who':'','completion date':''},
+    {'action':'Website Parsing - Site 3','date':'','who':'','completion date':''},
+
+
     {'action':'','date':'','who':'','completion date':''},
 ]
 

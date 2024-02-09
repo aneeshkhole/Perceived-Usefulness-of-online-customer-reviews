@@ -32,11 +32,11 @@
   {
     "objectID": "methods.html",
     "href": "methods.html",
-    "title": "4  Methods",
+    "title": "5  Methods",
     "section": "",
-    "text": "Buolamwini, Joy. 2023. “Gender Shades: Intersectional Accuracy Disparities in.” MIT Media Lab. https://www.media.mit.edu/publications/gender-shades-intersectional-accuracy-disparities-in-commercial-gender-classification.\n\n\nGeorgetown Law. 2016. “The Perpetual Line-Up: Unregulated Police Face Recognition in America.” Center on Privacy & Technology. https://www.perpetuallineup.org.\n\n\nHuilgol, Purva. 2021. “Accuracy vs. F1-Score - Analytics Vidhya - Medium.” Medium, December. https://medium.com/analytics-vidhya/accuracy-vs-f1-score-6258237beca2.\n\n\nKarkkainen, Kimmo, and Jungseock Joo. 2021. “FairFace: Face Attribute Dataset for Balanced Race, Gender, and Age for Bias Measurement and Mitigation.” In Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision, 1548–58.\n\n\nLohr, Steve. 2018. “Facial Recognition Is Accurate, if You’re a White Guy.” N.Y. Times, February. https://www.nytimes.com/2018/02/09/technology/facial-recognition-race-artificial-intelligence.html.\n\n\nNIST. 2020. “NIST Study Evaluates Effects of Race, Age, Sex on Face Recognition Software \\(\\vert\\) NIST.” NIST. https://www.nist.gov/news-events/news/2019/12/nist-study-evaluates-effects-race-age-sex-face-recognition-software.\n\n\nSerengil, Sefik Ilkin, and Alper Ozpinar. 2021. “HyperExtended LightFace: A Facial Attribute Analysis Framework.” In 2021 International Conference on Engineering and Emerging Technologies (ICEET), 1–4. IEEE. https://doi.org/10.1109/ICEET53442.2021.9659697.\n\n\n“UTKFace.” 2021. UTKFace. https://susanqq.github.io/UTKFace.",
+    "text": "Here’s where we’ll list out our methods",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Methods</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Methods</span>"
     ]
   },
   {
@@ -134,7 +134,7 @@
     "href": "proposal.html#timeline",
     "title": "1  Proposal",
     "section": "1.6 Timeline",
-    "text": "1.6 Timeline\n\n\n\n\n\n\n\n\n\naction\ndate\nwho\ncompletion date\n\n\n\n\n0\n\n\n\n\n\n\n1\n\n\n\n\n\n\n2",
+    "text": "1.6 Timeline\n\n\n\n\n\n\n\n\n\naction\ndate\nwho\ncompletion date\n\n\n\n\n0\nProduce Proposal\n20 Feb 2023\nAll\n\n\n\n1\nIdentify variables of Interest\n\n\n\n\n\n2\nIdentify and Document Analysis Plan\n\n\n\n\n\n3\nReview Robots.txt files\n\n\n\n\n\n4\nDefine and\n\n\n\n\n\n5\nWebsite Parsing - Site 1\n\n\n\n\n\n6\nWebsite Parsing - Site 2\n\n\n\n\n\n7\nWebsite Parsing - Site 3\n\n\n\n\n\n8",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Proposal</span>"
     ]

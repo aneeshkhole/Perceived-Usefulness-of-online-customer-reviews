@@ -30,6 +30,7 @@ Here's an example of pulling some data in from our github repo
 ```{python}
 init_notebook_mode(connected=True)
 
+#reference data directly that sits in the github repo
 temp = pd.read_csv('../data/Fatalities.csv')
 
 temp['ST'] = temp['state'].str.upper()
