@@ -84,7 +84,7 @@
     "href": "proposal.html#motivation-why",
     "title": "1  Proposal",
     "section": "",
-    "text": "Why are we doing this project?\n\n\n1.1.1 What\n\n\n1.1.2 Who\n\n\n1.1.3 How",
+    "text": "Why are we doing this project?\n\n\n1.1.1 What\n\nExpounding upon research from (name here) per the recommendations at the end of their paper for further research\n\nAdditional products in different categories (identify types here)\n\nSee how and where the model adjusts\n\nClassification of reviewers / customers\n\nadd this as a metric / weight to determine review “usefulness”\n\nTake a novel product and see if the model still fits\n\n\n\n\n1.1.2 Who\n\nOnline customers for websites (a,b,c) - still need to identify\n\n\n\n1.1.3 How\n\nData gathering: web scraping, cleaning (regular expressions)\n\nCustomer metadata - classifying customers\nData standardization\n\nProcessing\n\nNatural Language Processing",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Proposal</span>"
     ]
@@ -94,7 +94,7 @@
     "href": "proposal.html#research-questions",
     "title": "1  Proposal",
     "section": "1.2 Research Questions",
-    "text": "1.2 Research Questions",
+    "text": "1.2 Research Questions\n\nCan reviewer or customer type classifications impact the perceived usefulness of a product review?\nCan we support the generalization of review classification to determine their perceived usefulness?",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Proposal</span>"
     ]
@@ -104,7 +104,7 @@
     "href": "proposal.html#literature-survey",
     "title": "1  Proposal",
     "section": "1.3 Literature Survey",
-    "text": "1.3 Literature Survey\n\nWhat work has been done previously in this area?\nIdentify other research papers or documents and look at “future research”",
+    "text": "1.3 Literature Survey\n\nWhat work has been done previously in this area?\nIdentify other research papers or documents and look at “future research”\nRead Perceived usefulness of online customer reviews: A review mining approach using machine learning & exploratory data analysis\n\nLook in the footnotes for additional related work\nLook specifically outside of this doc for research on customer / reviewer classification\nIdentify and document the resources, and further refine our work plan.",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Proposal</span>"
     ]
@@ -124,7 +124,7 @@
     "href": "proposal.html#definition-of-success",
     "title": "1  Proposal",
     "section": "1.5 Definition of Success",
-    "text": "1.5 Definition of Success\n\nTBD",
+    "text": "1.5 Definition of Success\n\nDoes our model match the usefulness rating provided by other users on (website(s)).",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Proposal</span>"
     ]

@@ -10,17 +10,53 @@ import pandas as pd
 
 ### What
 
+* Expounding upon research from (name here) per the recommendations at the end of their paper for further research
+
+    * Additional products in different categories (identify types here)
+
+        * See how and where the model adjusts
+
+    * Classification of reviewers / customers
+
+        * add this as a metric / weight to determine review "usefulness"
+    
+    * Take a novel product and see if the model still fits
+
 ### Who
+
+* Online customers for websites (a,b,c) - still need to identify
 
 ### How
 
+* Data gathering: web scraping, cleaning (regular expressions)
+
+    * Customer metadata - classifying customers
+
+    * Data standardization
+
+* Processing
+
+    * Natural Language Processing
+
 ## Research Questions
+
+* Can reviewer or customer type classifications impact the perceived usefulness of a product review?
+
+* Can we support the generalization of review classification to determine their perceived usefulness?
 
 ## Literature Survey
 
 * What work has been done previously in this area?
 
 * Identify other research papers or documents and look at "future research"
+
+* Read **Perceived usefulness of online customer reviews: A review mining approach using machine learning & exploratory data analysis** 
+
+    * Look in the footnotes for additional related work
+
+    * Look specifically outside of this doc for research on customer / reviewer classification
+
+    * Identify and document the resources, and further refine our work plan.
 
 ## Proposed Work
 
@@ -46,22 +82,20 @@ import pandas as pd
 
 ## Definition of Success
 
-* TBD
+* Does our model match the usefulness rating provided by other users on (website(s)).
 
 ## Timeline
 
 ```{python blockname}
 timeline = [
-    {'action':'Produce Proposal','date':'20 Feb 2023','who':'All','completion date':''},\
+    {'action':'Produce Proposal','date':'20 Feb 2023','who':'All','completion date':''},
     {'action':'Identify variables of Interest','date':'','who':'','completion date':''},
     {'action':'Identify and Document Analysis Plan','date':'','who':'','completion date':''},
-    {'action':'Review Robots.txt files','date':'','who':'','completion date':''},\
+    {'action':'Review Robots.txt files','date':'','who':'','completion date':''},
     {'action':'Define and ','date':'','who':'','completion date':''},
     {'action':'Website Parsing - Site 1','date':'','who':'','completion date':''},
     {'action':'Website Parsing - Site 2','date':'','who':'','completion date':''},
     {'action':'Website Parsing - Site 3','date':'','who':'','completion date':''},
-
-
     {'action':'','date':'','who':'','completion date':''},
 ]
 
