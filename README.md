@@ -2,8 +2,9 @@
 
 The final project for Data Mining CSCI 5302.
 
-Rubric / Requirements
+Link to website - https://pconnell.github.io/CSCI-Final-Project/
 
+Rubric / Requirements
 
 1. Need to pick your own topic.
 
