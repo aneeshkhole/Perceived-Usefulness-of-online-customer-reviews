@@ -1,8 +1,58 @@
 # Data {#sec-data}
 
 ```{python}
-#module imports
+#module imports|
 import pandas as pd, numpy as np, matplotlib.pyplot as plt
 ```
 
 Here's our data section.
+
+## Collection
+In collecting our data, in order to adhere to the model implemented by *(original paper here)*, we require the following data points, at a minimum:
+
+```{python dataReqs}
+#|tbl: tbl-data-reqs
+data_reqs = {
+    'Variable':['Star Rating', 'Review Content', 'Useful Votes'],
+    'Data Type':['float','string','integer']
+}
+tbl_data_reqs = pd.DataFrame(data_reqs)
+tbl_data_reqs.set_index('Variable')
+tbl_data_reqs.style.hide(axis='index')
+```
+
+To classify products...we need metadata of the product itself.  We are seeking to use the following products, and for each, we'll collect the following data:
+
+* Original Products: (update to table later)
+
+    * Video Games (rating I.e. pg, pg-13, R, but from MSRB ratings).
+
+    * Digital/Physical Music (duration, music style / genre, others?)
+
+    * Grocery Products (calories per serving, special markers [gluten-free, fat-free, vegan], )  - *potential hypothesis that grocery products with special markings may be more experience-based than search-based.*
+
+Additional Products
+
+* Clothing - likely a mixed product, potentially ranging from search-based for plain t-shirts to experience-based for high fashion products
+
+    * material?
+
+* Laptops / Computers 
+
+    * Likely a mix between search and experience
+
+    * RAM, CPU, Storage, OS Included, Graphics Type, ...
+
+* Something else?
+
+## Preparation, Standardization, and Cleaning
+
+* Gathering from Amazon (All Products)
+
+* Gathering from BestBuy (Electronic Products, no grocery or clothing)
+
+* Gathering from Target (All products)
+
+## Visualization
+
+ 

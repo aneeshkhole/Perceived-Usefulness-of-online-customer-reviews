@@ -1,15 +1,105 @@
-# Abstract {#sec-abstract}
+# Introduction {#sec-intro}
 
 ```{python}
-print("hello world!")
+#print("hello world!")
 import pandas as pd, numpy as np, matplotlib.pyplot as plt
 import scipy as sp
 #import chart_studio.plotly as py
 from plotly.offline import iplot, init_notebook_mode
 import plotly.graph_objects as go
-
-
 ```
+
+## Concept and Motivation
+
+Customers, when searching for products with specific features and aspects, need sufficient information to make a decision as to whether to procure a specific product.  *(Information on search products vs. experience vs. mixed).*  When a product is more in the directon of experience vs. search-based, other customers' experiences can shed light on its features and return on investment than information directly from the vendor can.  Having reviews from reliable sources with sufficiently detailed information can enable greater confidence in a purchase, improved customer satisfaction, and smooth the process of ecommerce for customers.
+
+We seek to expound upon the research of *paper reference here* to explore additional recommended research areas, in the direction
+
+## What / Where
+
+*(Citation)* provided the following areas for recommended additional research at the conclusion of their paper: 
+
+* Expand the number of products beyond 3 items (one search, one experience, one mixed)
+
+* Explore customer metadata for classifying reviewer types <!--Team - I don't know that we can actually go about getting customer metadata.  This may be a bridge too far for us unless the site(s) we identify can provide such information--> 
+
+We seek to explore Item #1 above and explore the possibility of assessing a scale for products to determine the extent to which they are a search-based or an experience-based product.  Having a continuous scale between 0 and 1 can potentially simplify the formulas used by the authors down to a single equation: 
+
+$$
+
+$$
+
+We seek to examine additional products and product types between multiple e-commerce websites (BestBuy, Target, Amazon)
+
+## Why It Matters
+
+Feedback from customers is beneficial, but it is not always ordered by the most informative or beneficial feedback first.  Certain features of data such as... can impact the usefulness of the feedback on a customer-by-customer basis.  Level of detail, star-rating, and number of votes that support the review as being useful to a customer can all help determine its usefulness to other customers.  Were e-commerce 
+
+Examining additional product types can enable the generalization of the authors' methodology to other products.  Furthermore, the exploration of a sliding scale for search vs. experience-based products can further support generalization and business goals.  Producing a reliable scale and methods for classifying a products' degree of being experienced-based can inform vendors on:
+
+* How to best sort product reviews
+
+* Examine what are the most helpful reviews to know the performance of the product alongside customer experience and sentiment
+
+* Adjust the product, its marketing, or future production based upon market efficacy.
+
+* 
+
+## Literature Survey
+
+* **Additional commentary on original paper here**
+
+* **Paper(s) on product classification (search-experience-mixed)**
+
+* **Paper(s) on user/consumer/reviewer classification**
+
+## Research Questions
+
+* Can the model from *(original paper citation)* be generalized with
+
+    a. larger volume of products and product types?
+
+    b. a sliding scale weight for degree to which a product is a "search" (0) or "experience" (1) product?
+
+* Can products be classified on degree of search or experience *(need other research that can tell us what features of a product determine what makes a product a search vs. experience product)* using:
+
+    a. Feature 1
+
+    b. Feature 2
+
+    c. Some combination of features?
+
+## Goals / Definition of Success
+
+* Replicate similar results to *(original paper citation)* with similar product types
+
+* Expound upon *(original paper citation)* with additional products, including:
+
+    a. Product 1
+
+    b. Product 2
+
+    c. Product 3
+
+    d. Verify goodness of fit of original model
+
+* Perform analysis of multiple product types to produce a weighting for degree of how experienced-based the product is.
+
+* Assess weighting of products in terms of degree of "experience" base, and use an updated formula on
+
+    a. Original Model
+
+    b. Updated Model
+
+    c. Extrapolation on data outside the models.
+
+* Success of our effort and this methodology is met if it produces as-good or better performance of the experience weight-based model vs. the original model from *(original paper citation here)*
+
+
+
+
+
+
 
 This is where our abstract will go.
 

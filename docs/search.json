@@ -4,9 +4,9 @@
     "href": "index.html",
     "title": "CSCI 5302 - Final Project",
     "section": "",
-    "text": "1 Abstract\n\n\nhello world!\n\n\nThis is where our abstract will go.\nHere’s an example of inserting a plot directly into our paper\n\n\n\n\n\n\n\n\nFigure 1.1: a matplotlib plot\n\n\n\n\n\nHere’s an example of pulling some data in from our github repo",
+    "text": "1 Introduction",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Abstract</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
     ]
   },
   {
@@ -22,11 +22,11 @@
   {
     "objectID": "data.html",
     "href": "data.html",
-    "title": "4  Data",
+    "title": "2  Data",
     "section": "",
-    "text": "Here’s our data section.",
+    "text": "2.1 Collection\nIn collecting our data, in order to adhere to the model implemented by (original paper here), we require the following data points, at a minimum:\nVariable\nData Type\n\n\n\n\nStar Rating\nfloat\n\n\nReview Content\nstring\n\n\nUseful Votes\ninteger\nTo classify products…we need metadata of the product itself. We are seeking to use the following products, and for each, we’ll collect the following data:\nAdditional Products",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Data</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data</span>"
     ]
   },
   {
@@ -137,6 +137,166 @@
     "text": "1.6 Timeline\n\n\n\n\n\n\n\n\n\naction\ndate\nwho\ncompletion date\n\n\n\n\n0\nProduce Proposal\n20 Feb 2023\nAll\n\n\n\n1\nIdentify variables of Interest\n\n\n\n\n\n2\nIdentify and Document Analysis Plan\n\n\n\n\n\n3\nReview Robots.txt files\n\n\n\n\n\n4\nDefine and\n\n\n\n\n\n5\nWebsite Parsing - Site 1\n\n\n\n\n\n6\nWebsite Parsing - Site 2\n\n\n\n\n\n7\nWebsite Parsing - Site 3\n\n\n\n\n\n8",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Proposal</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#concept-and-motivation",
+    "href": "index.html#concept-and-motivation",
+    "title": "CSCI 5302 - Final Project",
+    "section": "1.1 Concept and Motivation",
+    "text": "1.1 Concept and Motivation\nCustomers, when searching for products with specific features and aspects, need sufficient information to make a decision as to whether to procure a specific product. (Information on search products vs. experience vs. mixed). When a product is more in the directon of experience vs. search-based, other customers’ experiences can shed light on its features and return on investment than information directly from the vendor can. Having reviews from reliable sources with sufficiently detailed information can enable greater confidence in a purchase, improved customer satisfaction, and smooth the process of ecommerce for customers.\nWe seek to expound upon the research of paper reference here to explore additional recommended research areas, in the direction",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#what-where",
+    "href": "index.html#what-where",
+    "title": "CSCI 5302 - Final Project",
+    "section": "1.2 What / Where",
+    "text": "1.2 What / Where\n(Citation) provided the following areas for recommended additional research at the conclusion of their paper:\n\nExpand the number of products beyond 3 items (one search, one experience, one mixed)\nExplore customer metadata for classifying reviewer types \n\nWe seek to explore Item #1 above and explore the possibility of assessing a scale for products to determine the extent to which they are a search-based or an experience-based product. Having a continuous scale between 0 and 1 can potentially simplify the formulas used by the authors down to a single equation:\n$$\n$$\nWe seek to examine additional products and product types between multiple e-commerce websites (BestBuy, Target, Amazon)",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#why-it-matters",
+    "href": "index.html#why-it-matters",
+    "title": "CSCI 5302 - Final Project",
+    "section": "1.3 Why It Matters",
+    "text": "1.3 Why It Matters\nFeedback from customers is beneficial, but it is not always ordered by the most informative or beneficial feedback first. Certain features of data such as… can impact the usefulness of the feedback on a customer-by-customer basis. Level of detail, star-rating, and number of votes that support the review as being useful to a customer can all help determine its usefulness to other customers. Were e-commerce\nExamining additional product types can enable the generalization of the authors’ methodology to other products. Furthermore, the exploration of a sliding scale for search vs. experience-based products can further support generalization and business goals. Producing a reliable scale and methods for classifying a products’ degree of being experienced-based can inform vendors on:\n\nHow to best sort product reviews\nExamine what are the most helpful reviews to know the performance of the product alongside customer experience and sentiment\nAdjust the product, its marketing, or future production based upon market efficacy.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#literature-survey",
+    "href": "index.html#literature-survey",
+    "title": "CSCI 5302 - Final Project",
+    "section": "1.4 Literature Survey",
+    "text": "1.4 Literature Survey\n\nAdditional commentary on original paper here\nPaper(s) on product classification (search-experience-mixed)\nPaper(s) on user/consumer/reviewer classification",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#research-questions",
+    "href": "index.html#research-questions",
+    "title": "CSCI 5302 - Final Project",
+    "section": "1.5 Research Questions",
+    "text": "1.5 Research Questions\n\nCan the model from (original paper citation) be generalized with\n\nlarger volume of products and product types?\na sliding scale weight for degree to which a product is a “search” (0) or “experience” (1) product?\n\nCan products be classified on degree of search or experience (need other research that can tell us what features of a product determine what makes a product a search vs. experience product) using:\n\nFeature 1\nFeature 2\nSome combination of features?",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#goals-definition-of-success",
+    "href": "index.html#goals-definition-of-success",
+    "title": "CSCI 5302 - Final Project",
+    "section": "1.6 Goals / Definition of Success",
+    "text": "1.6 Goals / Definition of Success\n\nReplicate similar results to (original paper citation) with similar product types\nExpound upon (original paper citation) with additional products, including:\n\nProduct 1\nProduct 2\nProduct 3\nVerify goodness of fit of original model\n\nPerform analysis of multiple product types to produce a weighting for degree of how experienced-based the product is.\nAssess weighting of products in terms of degree of “experience” base, and use an updated formula on\n\nOriginal Model\nUpdated Model\nExtrapolation on data outside the models.\n\nSuccess of our effort and this methodology is met if it produces as-good or better performance of the experience weight-based model vs. the original model from (original paper citation here)\n\nThis is where our abstract will go.\nHere’s an example of inserting a plot directly into our paper\n\n\n\n\n\n\n\n\nFigure 1.1: a matplotlib plot\n\n\n\n\n\nHere’s an example of pulling some data in from our github repo",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "models implemented.html",
+    "href": "models implemented.html",
+    "title": "3  Models Implemented",
+    "section": "",
+    "text": "3.1 (Citation) Model",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Models Implemented</span>"
+    ]
+  },
+  {
+    "objectID": "conclusion.html",
+    "href": "conclusion.html",
+    "title": "4  Conclusions",
+    "section": "",
+    "text": "Here’s our conclusions section",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Conclusions</span>"
+    ]
+  },
+  {
+    "objectID": "models implemented.html#model-for-experience-weight",
+    "href": "models implemented.html#model-for-experience-weight",
+    "title": "3  Models Implemented",
+    "section": "3.2 Model for Experience Weight",
+    "text": "3.2 Model for Experience Weight",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Models Implemented</span>"
+    ]
+  },
+  {
+    "objectID": "models implemented.html#modified-citation-model",
+    "href": "models implemented.html#modified-citation-model",
+    "title": "3  Models Implemented",
+    "section": "3.3 Modified (Citation) Model",
+    "text": "3.3 Modified (Citation) Model",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Models Implemented</span>"
+    ]
+  },
+  {
+    "objectID": "models implemented.html#model-comparison",
+    "href": "models implemented.html#model-comparison",
+    "title": "3  Models Implemented",
+    "section": "3.4 Model Comparison",
+    "text": "3.4 Model Comparison",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Models Implemented</span>"
+    ]
+  },
+  {
+    "objectID": "data.html#collection",
+    "href": "data.html#collection",
+    "title": "2  Data",
+    "section": "",
+    "text": "Original Products: (update to table later)\n\nVideo Games (rating I.e. pg, pg-13, R, but from MSRB ratings).\nDigital/Physical Music (duration, music style / genre, others?)\nGrocery Products (calories per serving, special markers [gluten-free, fat-free, vegan], ) - potential hypothesis that grocery products with special markings may be more experience-based than search-based.\n\n\n\n\nClothing - likely a mixed product, potentially ranging from search-based for plain t-shirts to experience-based for high fashion products\n\nmaterial?\n\nLaptops / Computers\n\nLikely a mix between search and experience\nRAM, CPU, Storage, OS Included, Graphics Type, …\n\nSomething else?",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data</span>"
+    ]
+  },
+  {
+    "objectID": "data.html#preparation-and-standardization",
+    "href": "data.html#preparation-and-standardization",
+    "title": "2  Data",
+    "section": "2.2 Preparation and Standardization",
+    "text": "2.2 Preparation and Standardization",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data</span>"
+    ]
+  },
+  {
+    "objectID": "data.html#cleaning",
+    "href": "data.html#cleaning",
+    "title": "2  Data",
+    "section": "2.3 Cleaning",
+    "text": "2.3 Cleaning",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data</span>"
+    ]
+  },
+  {
+    "objectID": "data.html#visualization",
+    "href": "data.html#visualization",
+    "title": "2  Data",
+    "section": "2.3 Visualization",
+    "text": "2.3 Visualization",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data</span>"
+    ]
+  },
+  {
+    "objectID": "data.html#preparation-standardization-and-cleaning",
+    "href": "data.html#preparation-standardization-and-cleaning",
+    "title": "2  Data",
+    "section": "2.2 Preparation, Standardization, and Cleaning",
+    "text": "2.2 Preparation, Standardization, and Cleaning\n\nGathering from Amazon (All Products)\nGathering from BestBuy (Electronic Products, no grocery or clothing)\nGathering from Target (All products)",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data</span>"
     ]
   }
 ]

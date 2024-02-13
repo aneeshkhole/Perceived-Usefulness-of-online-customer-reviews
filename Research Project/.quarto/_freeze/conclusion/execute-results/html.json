@@ -1,0 +1,12 @@
+{
+  "hash": "08e32c74b60813d13ec068abef9c9763",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "# Conclusions {#sec-conclusions}\n\n\n\nHere's our conclusions section\n\n",
+    "supporting": [
+      "conclusion_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

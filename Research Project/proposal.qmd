@@ -97,7 +97,7 @@ timeline = [
     {'action':'Website Parsing - Site 2','date':'','who':'','completion date':''},
     {'action':'Website Parsing - Site 3','date':'','who':'','completion date':''},
     {'action':'','date':'','who':'','completion date':''},
-]
+]r
 
 pd.DataFrame(timeline)
 ```

@@ -1,3 +1,0 @@
-# Methods {#sec-methods}
-
-Here's where we'll list out our methods

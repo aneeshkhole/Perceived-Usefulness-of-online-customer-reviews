@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>CSCI 5302 - Final Project - 2&nbsp; Data</title>
+<title>CSCI 5302 - Final Project - 4&nbsp; Conclusions</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,15 +23,15 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./models implemented.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./references.html" rel="next">
+<link href="./models implemented.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -69,9 +69,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-
-<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 </head>
@@ -85,7 +82,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./conclusion.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Conclusions</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -122,19 +119,19 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data.html" class="sidebar-item-text sidebar-link active">
+  <a href="./data.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./models implemented.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Models Implemented</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Methods</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./conclusion.html" class="sidebar-item-text sidebar-link">
+  <a href="./conclusion.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Conclusions</span></span></a>
   </div>
 </li>
@@ -149,28 +146,20 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#collection" id="toc-collection" class="nav-link active" data-scroll-target="#collection"><span class="header-section-number">2.1</span> Collection</a></li>
-  <li><a href="#preparation-standardization-and-cleaning" id="toc-preparation-standardization-and-cleaning" class="nav-link" data-scroll-target="#preparation-standardization-and-cleaning"><span class="header-section-number">2.2</span> Preparation, Standardization, and Cleaning</a></li>
-  <li><a href="#visualization" id="toc-visualization" class="nav-link" data-scroll-target="#visualization"><span class="header-section-number">2.3</span> Visualization</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
-<main class="content column-body" id="quarto-document-content">
+<main class="content column-page-right" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-data" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data</span></span></h1>
+<h1 class="title"><span id="sec-conclusions" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Conclusions</span></span></h1>
 </div>
 
 
 
-<div class="quarto-title-meta column-body">
+<div class="quarto-title-meta column-page-right">
 
     
   
@@ -182,75 +171,9 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Here’s our data section.</p>
-<section id="collection" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="collection"><span class="header-section-number">2.1</span> Collection</h2>
-<p>In collecting our data, in order to adhere to the model implemented by <em>(original paper here)</em>, we require the following data points, at a minimum:</p>
-<div id="84e1ddbb" class="cell" data-tbl="tbl-data-reqs" data-execution_count="2">
-<div class="cell-output cell-output-display" data-execution_count="2">
-<style type="text/css">
-</style>
-
-<table id="T_88faa" data-quarto-postprocess="true" class="table table-sm table-striped small">
-<thead>
-<tr class="header">
-<th id="T_88faa_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Variable</th>
-<th id="T_88faa_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Data Type</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td id="T_88faa_row0_col0" class="data row0 col0">Star Rating</td>
-<td id="T_88faa_row0_col1" class="data row0 col1">float</td>
-</tr>
-<tr class="even">
-<td id="T_88faa_row1_col0" class="data row1 col0">Review Content</td>
-<td id="T_88faa_row1_col1" class="data row1 col1">string</td>
-</tr>
-<tr class="odd">
-<td id="T_88faa_row2_col0" class="data row2 col0">Useful Votes</td>
-<td id="T_88faa_row2_col1" class="data row2 col1">integer</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p>To classify products…we need metadata of the product itself. We are seeking to use the following products, and for each, we’ll collect the following data:</p>
-<ul>
-<li><p>Original Products: (update to table later)</p>
-<ul>
-<li><p>Video Games (rating I.e. pg, pg-13, R, but from MSRB ratings).</p></li>
-<li><p>Digital/Physical Music (duration, music style / genre, others?)</p></li>
-<li><p>Grocery Products (calories per serving, special markers [gluten-free, fat-free, vegan], ) - <em>potential hypothesis that grocery products with special markings may be more experience-based than search-based.</em></p></li>
-</ul></li>
-</ul>
-<p>Additional Products</p>
-<ul>
-<li><p>Clothing - likely a mixed product, potentially ranging from search-based for plain t-shirts to experience-based for high fashion products</p>
-<ul>
-<li>material?</li>
-</ul></li>
-<li><p>Laptops / Computers</p>
-<ul>
-<li><p>Likely a mix between search and experience</p></li>
-<li><p>RAM, CPU, Storage, OS Included, Graphics Type, …</p></li>
-</ul></li>
-<li><p>Something else?</p></li>
-</ul>
-</section>
-<section id="preparation-standardization-and-cleaning" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="preparation-standardization-and-cleaning"><span class="header-section-number">2.2</span> Preparation, Standardization, and Cleaning</h2>
-<ul>
-<li><p>Gathering from Amazon (All Products)</p></li>
-<li><p>Gathering from BestBuy (Electronic Products, no grocery or clothing)</p></li>
-<li><p>Gathering from Target (All products)</p></li>
-</ul>
-</section>
-<section id="visualization" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="visualization"><span class="header-section-number">2.3</span> Visualization</h2>
+<p>Here’s our conclusions section</p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -640,15 +563,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<nav class="page-navigation column-body">
+<nav class="page-navigation column-page-right">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link  aria-label=" &lt;span="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span>
+      <a href="./models implemented.html" class="pagination-link  aria-label=" &lt;span="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Methods</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./models implemented.html" class="pagination-link" aria-label="<span class='chapter-number'>3</span>&nbsp; <span class='chapter-title'>Models Implemented</span>">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Models Implemented</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./references.html" class="pagination-link" aria-label="References">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

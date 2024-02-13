@@ -1,0 +1,12 @@
+# Models Implemented {#sec-models-implemented}
+
+Here's where we'll list out our models
+
+## (Citation) Model
+
+## Model for Experience Weight
+
+## Modified (Citation) Model
+
+## Model Comparison
+

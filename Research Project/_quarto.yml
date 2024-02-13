@@ -10,13 +10,13 @@ book:
     - "Aneesh Khole"
     - "Uttara Ketkar"
   chapters:
-    - proposal.qmd
+    #- proposal.qmd
     - index.qmd
-    - intro.qmd
+    #- intro.qmd
     - data.qmd
-    - methods.qmd
-    - results.qmd
-    - conclusions.qmd
+    - "models implemented.qmd"
+    #- results.qmd
+    - conclusion.qmd
     - references.qmd
   downloads: [pdf]
   references: references.bib # Unsure if needed
