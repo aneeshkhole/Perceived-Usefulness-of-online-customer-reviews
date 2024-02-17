@@ -7,6 +7,12 @@ import pandas as pd, numpy as np, matplotlib.pyplot as plt
 
 Here's our data section.
 
+## Some items to research
+
+* [Wikipedia](https://en.wikipedia.org/wiki/SEC_classification_of_goods_and_services)
+
+* 
+
 ## Collection
 In collecting our data, in order to adhere to the model implemented by *(original paper here)*, we require the following data points, at a minimum:
 

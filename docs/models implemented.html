@@ -70,6 +70,35 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -151,10 +180,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#citation-model" id="toc-citation-model" class="nav-link active" data-scroll-target="#citation-model"><span class="header-section-number">3.1</span> (Citation) Model</a></li>
-  <li><a href="#model-for-experience-weight" id="toc-model-for-experience-weight" class="nav-link" data-scroll-target="#model-for-experience-weight"><span class="header-section-number">3.2</span> Model for Experience Weight</a></li>
-  <li><a href="#modified-citation-model" id="toc-modified-citation-model" class="nav-link" data-scroll-target="#modified-citation-model"><span class="header-section-number">3.3</span> Modified (Citation) Model</a></li>
-  <li><a href="#model-comparison" id="toc-model-comparison" class="nav-link" data-scroll-target="#model-comparison"><span class="header-section-number">3.4</span> Model Comparison</a></li>
+  <li><a href="#examined-models-from-literature-research" id="toc-examined-models-from-literature-research" class="nav-link active" data-scroll-target="#examined-models-from-literature-research"><span class="header-section-number">3.1</span> Examined Models from Literature Research</a></li>
+  <li><a href="#potential-model-for-search-vs.-experience-weight-scale-of-0-1" id="toc-potential-model-for-search-vs.-experience-weight-scale-of-0-1" class="nav-link" data-scroll-target="#potential-model-for-search-vs.-experience-weight-scale-of-0-1"><span class="header-section-number">3.2</span> Potential Model for Search vs.&nbsp;Experience Weight (scale of 0-1)</a>
+  <ul class="collapse">
+  <li><a href="#jaccard-similarity-measure" id="toc-jaccard-similarity-measure" class="nav-link" data-scroll-target="#jaccard-similarity-measure"><span class="header-section-number">3.2.1</span> Jaccard Similarity Measure</a></li>
+  </ul></li>
+  <li><a href="#model-comparison" id="toc-model-comparison" class="nav-link" data-scroll-target="#model-comparison"><span class="header-section-number">3.3</span> Model Comparison</a></li>
   </ul>
 </nav>
     </div>
@@ -181,17 +212,76 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>Here’s where we’ll list out our models</p>
-<section id="citation-model" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="citation-model"><span class="header-section-number">3.1</span> (Citation) Model</h2>
+<section id="examined-models-from-literature-research" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="examined-models-from-literature-research"><span class="header-section-number">3.1</span> Examined Models from Literature Research</h2>
+<ul>
+<li><p>Perceived Usefulness of Product Reviews</p>
+<ul>
+<li>Modeling for search vs.&nbsp;experience goods as “mitigations” on reviews, examining their impact on perceived review usefulness</li>
+</ul></li>
+<li><p>Wealth of Data Paper on Customer Evaulation</p>
+<ul>
+<li><p>Examination of ‘Vine’ customers from Amazon</p></li>
+<li><p>Don’t think that BestBuy or Target have the same.</p></li>
+<li><p>Scope of this would be limited to Amazon, combining research from Perceived Usefulness paper (i.e.&nbsp;their modeling) with a customer “trustworthiness” score for Amazon Vine customers</p>
+<ul>
+<li><p>May have challenges identifying products with Vine customers</p></li>
+<li><p>Should also have a look at “verified purchase” customers, too.</p></li>
+</ul></li>
+<li><p>Weaknesses (from authors)</p>
+<ul>
+<li><p>Their NLP instance wasn’t well trained for fully accurate</p></li>
+<li><p>Their weighting system was manually (i.e.&nbsp;arbitrarily) set as opposed to having a labeled dataset</p></li>
+<li><p>Can we fix these problems? If so - what data is needed?</p></li>
+</ul></li>
+</ul></li>
+</ul>
 </section>
-<section id="model-for-experience-weight" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="model-for-experience-weight"><span class="header-section-number">3.2</span> Model for Experience Weight</h2>
+<section id="potential-model-for-search-vs.-experience-weight-scale-of-0-1" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="potential-model-for-search-vs.-experience-weight-scale-of-0-1"><span class="header-section-number">3.2</span> Potential Model for Search vs.&nbsp;Experience Weight (scale of 0-1)</h2>
+<section id="jaccard-similarity-measure" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="jaccard-similarity-measure"><span class="header-section-number">3.2.1</span> Jaccard Similarity Measure</h3>
+<p>https://www.sciencedirect.com/science/article/pii/S1567422318300450</p>
+<ul>
+<li><p>Can be used to produce a similarity between two items on a scale of 0 to 1</p></li>
+<li><p>May be able to use this for evaluation of a novel item against a pure-search good vs.&nbsp;a pure-experience good.</p>
+<ul>
+<li><p>May require additional calculation / computation between these two values - maybe its arithmetic or harmonic mean between search and experience</p></li>
+<li><p>Using that, we could potentially produce a weight.</p></li>
+<li><p>Authors models</p>
+<ul>
+<li><p>Model 1: <span class="math inline">\(\text{Perceived Usefulness} = \beta_0 + \beta_1 \cdot \text{Review Content} + \beta_2 \cdot \text{Review Length} + \beta_3\cdot \text{Star Rating} + \beta_4 \cdot \text{Total Votes Received} + \epsilon_1\)</span></p></li>
+<li><p>Model 2 (product type as a moderator): <span class="math inline">\(\text{Perceived Usefulness} = \beta_0 + \beta_1 \cdot \text{Review Content} + \beta_2 \cdot \text{Review Length} + \beta_3\cdot \text{Star Rating} + \beta_4 \cdot \text{Total Votes Received} + \beta_5 \cdot \text{Digital Music} + \beta_6 \cdot \text{Video Game} + \beta_7 \cdot \text{Review Content}\cdot \text{ Digital Music} + \beta_8\cdot\text{Review Content}\cdot\text{ Video Game} + \epsilon_2\)</span></p></li>
+<li><p>Our proposition #1 (may require some modification) <span class="math display">\[
+\text{Perceived Usefulness} = \beta_0 + \beta_1 \cdot \text{Review Content} + \beta_2 \cdot \text{Review Length} + \beta_3\cdot \text{Star Rating} + \beta_4 \cdot \text{Total Votes Received} + \gamma\cdot\text{Review Content}
+\]</span></p></li>
+</ul></li>
+</ul></li>
+</ul>
+<p>or</p>
+<p><span class="math display">\[
+\text{Perceived Usefulness} = \beta_0 + \gamma\cdot\beta_1\cdot\text{Review Content} + \beta_2 \cdot \text{Review Length} + \beta_3\cdot \text{Star Rating} + \beta_4 \cdot \text{Total Votes Received}
+\]</span></p>
+<ul>
+<li><p>Where <span class="math inline">\(\gamma\)</span> is the Jaccard Similarity Score between a given product and elements we are identifying as “pure” experience and “pure” search good.</p></li>
+<li><p>Operationalizaton of Jaccard Similarity score Variable (i.e.&nbsp;inputs)</p>
+<ul>
+<li><p>Search good: those with attributes that can be evaluated prior to purchase or consumption. Consumers rely on prior experience, direct product inspection and other information search activities to locate information that assists in the evaluation process. Most products fall into the search goods category (e.g.&nbsp;clothing, office stationery, home furnishings).</p></li>
+<li><p>Number of measurement specifications?</p></li>
+<li><p>comment/review information?</p></li>
+<li><p>What else could we gather that could be considered a “universal” tangible or intangible feature from a product online? They need to be applicable to both search and experience goods.</p></li>
+</ul></li>
+<li><p>Experience good: those that can be accurately evaluated only after the product has been purchased and experienced. Many personal services fall into this category (e.g.&nbsp;restaurant, hairdresser, beauty salon, theme park, travel, holiday).</p>
+<ul>
+<li><p>subjective descriptiveness vs.&nbsp;</p></li>
+<li><p>comment/review information?</p></li>
+</ul></li>
+<li><p>Are there other methods aside from Jaccard Similarity?</p></li>
+</ul>
 </section>
-<section id="modified-citation-model" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="modified-citation-model"><span class="header-section-number">3.3</span> Modified (Citation) Model</h2>
 </section>
-<section id="model-comparison" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="model-comparison"><span class="header-section-number">3.4</span> Model Comparison</h2>
+<section id="model-comparison" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="model-comparison"><span class="header-section-number">3.3</span> Model Comparison</h2>
 
 
 </section>

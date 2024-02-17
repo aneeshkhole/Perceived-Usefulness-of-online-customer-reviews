@@ -2,11 +2,84 @@
 
 Here's where we'll list out our models
 
-## (Citation) Model
+## Examined Models from Literature Research
 
-## Model for Experience Weight
+* Perceived Usefulness of Product Reviews
 
-## Modified (Citation) Model
+    - Modeling for search vs. experience goods as "mitigations" on reviews, examining their impact on perceived review usefulness
+
+* Wealth of Data Paper on Customer Evaulation
+
+    - Examination of 'Vine' customers from Amazon
+
+    - Don't think that BestBuy or Target have the same.
+
+    - Scope of this would be limited to Amazon, combining research from Perceived Usefulness paper (i.e. their modeling) with a customer "trustworthiness" score for Amazon Vine customers
+
+        - May have challenges identifying products with Vine customers
+
+        - Should also have a look at "verified purchase" customers, too.
+
+    - Weaknesses (from authors)
+
+        - Their NLP instance wasn't well trained for fully accurate
+
+        - Their weighting system was manually (i.e. arbitrarily) set as opposed to having a labeled dataset
+
+        - Can we fix these problems? If so - what data is needed?
+
+    
+
+## Potential Model for Search vs. Experience Weight (scale of 0-1)
+
+### Jaccard Similarity Measure
+
+https://www.sciencedirect.com/science/article/pii/S1567422318300450
+
+* Can be used to produce a similarity between two items on a scale of 0 to 1
+
+* May be able to use this for evaluation of a novel item against a pure-search good vs. a pure-experience good.
+
+    * May require additional calculation / computation between these two values - maybe its arithmetic or harmonic mean between search and experience
+
+    * Using that, we could potentially produce a weight.
+
+    * Authors models
+
+        * Model 1: $\text{Perceived Usefulness} = \beta_0 + \beta_1 \cdot \text{Review Content} + \beta_2 \cdot \text{Review Length} + \beta_3\cdot \text{Star Rating} + \beta_4 \cdot \text{Total Votes Received} + \epsilon_1$
+
+        * Model 2 (product type as a moderator): $\text{Perceived Usefulness} = \beta_0 + \beta_1 \cdot \text{Review Content} + \beta_2 \cdot \text{Review Length} + \beta_3\cdot \text{Star Rating} + \beta_4 \cdot \text{Total Votes Received} + \beta_5 \cdot \text{Digital Music} + \beta_6 \cdot \text{Video Game} + \beta_7 \cdot \text{Review Content}\cdot \text{ Digital Music} + \beta_8\cdot\text{Review Content}\cdot\text{ Video Game} + \epsilon_2$
+
+        * Our proposition #1 (may require some modification)
+$$
+\text{Perceived Usefulness} = \beta_0 + \beta_1 \cdot \text{Review Content} + \beta_2 \cdot \text{Review Length} + \beta_3\cdot \text{Star Rating} + \beta_4 \cdot \text{Total Votes Received} + \gamma\cdot\text{Review Content}
+$$
+
+or
+
+$$
+\text{Perceived Usefulness} = \beta_0 + \gamma\cdot\beta_1\cdot\text{Review Content} + \beta_2 \cdot \text{Review Length} + \beta_3\cdot \text{Star Rating} + \beta_4 \cdot \text{Total Votes Received}
+$$
+
+* Where $\gamma$ is the Jaccard Similarity Score between a given product and elements we are identifying as "pure" experience and "pure" search good.
+
+* Operationalizaton of Jaccard Similarity score Variable (i.e. inputs)
+
+    * Search good: those with attributes that can be evaluated prior to purchase or consumption. Consumers rely on prior experience, direct product inspection and other information search activities to locate information that assists in the evaluation process. Most products fall into the search goods category (e.g. clothing, office stationery, home furnishings).
+
+    * Number of measurement specifications?
+
+    * comment/review information?
+
+    * What else could we gather that could be considered a "universal" tangible or intangible feature from a product online?  They need to be applicable to both search and experience goods.
+
+* Experience good: those that can be accurately evaluated only after the product has been purchased and experienced. Many personal services fall into this category (e.g. restaurant, hairdresser, beauty salon, theme park, travel, holiday).
+
+    * subjective descriptiveness vs. 
+
+    * comment/review information?
+
+* Are there other methods aside from Jaccard Similarity? 
 
 ## Model Comparison
 

@@ -24,7 +24,7 @@
     "href": "data.html",
     "title": "2  Data",
     "section": "",
-    "text": "2.1 Collection\nIn collecting our data, in order to adhere to the model implemented by (original paper here), we require the following data points, at a minimum:\nVariable\nData Type\n\n\n\n\nStar Rating\nfloat\n\n\nReview Content\nstring\n\n\nUseful Votes\ninteger\nTo classify products…we need metadata of the product itself. We are seeking to use the following products, and for each, we’ll collect the following data:\nAdditional Products",
+    "text": "2.1 Some items to research",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data</span>"
     ]
@@ -204,7 +204,7 @@
     "href": "models implemented.html",
     "title": "3  Models Implemented",
     "section": "",
-    "text": "3.1 (Citation) Model",
+    "text": "3.1 Examined Models from Literature Research",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Models Implemented</span>"
     ]
@@ -243,8 +243,8 @@
     "objectID": "models implemented.html#model-comparison",
     "href": "models implemented.html#model-comparison",
     "title": "3  Models Implemented",
-    "section": "3.4 Model Comparison",
-    "text": "3.4 Model Comparison",
+    "section": "3.3 Model Comparison",
+    "text": "3.3 Model Comparison",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Models Implemented</span>"
     ]
@@ -253,8 +253,8 @@
     "objectID": "data.html#collection",
     "href": "data.html#collection",
     "title": "2  Data",
-    "section": "",
-    "text": "Original Products: (update to table later)\n\nVideo Games (rating I.e. pg, pg-13, R, but from MSRB ratings).\nDigital/Physical Music (duration, music style / genre, others?)\nGrocery Products (calories per serving, special markers [gluten-free, fat-free, vegan], ) - potential hypothesis that grocery products with special markings may be more experience-based than search-based.\n\n\n\n\nClothing - likely a mixed product, potentially ranging from search-based for plain t-shirts to experience-based for high fashion products\n\nmaterial?\n\nLaptops / Computers\n\nLikely a mix between search and experience\nRAM, CPU, Storage, OS Included, Graphics Type, …\n\nSomething else?",
+    "section": "2.2 Collection",
+    "text": "2.2 Collection\nIn collecting our data, in order to adhere to the model implemented by (original paper here), we require the following data points, at a minimum:\n\n\n\n\n\n\n\nVariable\nData Type\n\n\n\n\nStar Rating\nfloat\n\n\nReview Content\nstring\n\n\nUseful Votes\ninteger\n\n\n\n\n\nTo classify products…we need metadata of the product itself. We are seeking to use the following products, and for each, we’ll collect the following data:\n\nOriginal Products: (update to table later)\n\nVideo Games (rating I.e. pg, pg-13, R, but from MSRB ratings).\nDigital/Physical Music (duration, music style / genre, others?)\nGrocery Products (calories per serving, special markers [gluten-free, fat-free, vegan], ) - potential hypothesis that grocery products with special markings may be more experience-based than search-based.\n\n\nAdditional Products\n\nClothing - likely a mixed product, potentially ranging from search-based for plain t-shirts to experience-based for high fashion products\n\nmaterial?\n\nLaptops / Computers\n\nLikely a mix between search and experience\nRAM, CPU, Storage, OS Included, Graphics Type, …\n\nSomething else?",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data</span>"
     ]
@@ -283,8 +283,8 @@
     "objectID": "data.html#visualization",
     "href": "data.html#visualization",
     "title": "2  Data",
-    "section": "2.3 Visualization",
-    "text": "2.3 Visualization",
+    "section": "2.4 Visualization",
+    "text": "2.4 Visualization",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data</span>"
     ]
@@ -293,10 +293,40 @@
     "objectID": "data.html#preparation-standardization-and-cleaning",
     "href": "data.html#preparation-standardization-and-cleaning",
     "title": "2  Data",
-    "section": "2.2 Preparation, Standardization, and Cleaning",
-    "text": "2.2 Preparation, Standardization, and Cleaning\n\nGathering from Amazon (All Products)\nGathering from BestBuy (Electronic Products, no grocery or clothing)\nGathering from Target (All products)",
+    "section": "2.3 Preparation, Standardization, and Cleaning",
+    "text": "2.3 Preparation, Standardization, and Cleaning\n\nGathering from Amazon (All Products)\nGathering from BestBuy (Electronic Products, no grocery or clothing)\nGathering from Target (All products)",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data</span>"
+    ]
+  },
+  {
+    "objectID": "data.html#some-items-to-research",
+    "href": "data.html#some-items-to-research",
+    "title": "2  Data",
+    "section": "",
+    "text": "Wikipedia",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data</span>"
+    ]
+  },
+  {
+    "objectID": "models implemented.html#examined-models-from-literature-research",
+    "href": "models implemented.html#examined-models-from-literature-research",
+    "title": "3  Models Implemented",
+    "section": "",
+    "text": "Perceived Usefulness of Product Reviews\n\nModeling for search vs. experience goods as “mitigations” on reviews, examining their impact on perceived review usefulness\n\nWealth of Data Paper on Customer Evaulation\n\nExamination of ‘Vine’ customers from Amazon\nDon’t think that BestBuy or Target have the same.\nScope of this would be limited to Amazon, combining research from Perceived Usefulness paper (i.e. their modeling) with a customer “trustworthiness” score for Amazon Vine customers\n\nMay have challenges identifying products with Vine customers\nShould also have a look at “verified purchase” customers, too.\n\nWeaknesses (from authors)\n\nTheir NLP instance wasn’t well trained for fully accurate\nTheir weighting system was manually (i.e. arbitrarily) set as opposed to having a labeled dataset\nCan we fix these problems? If so - what data is needed?",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Models Implemented</span>"
+    ]
+  },
+  {
+    "objectID": "models implemented.html#potential-model-for-search-vs.-experience-weight-scale-of-0-1",
+    "href": "models implemented.html#potential-model-for-search-vs.-experience-weight-scale-of-0-1",
+    "title": "3  Models Implemented",
+    "section": "3.2 Potential Model for Search vs. Experience Weight (scale of 0-1)",
+    "text": "3.2 Potential Model for Search vs. Experience Weight (scale of 0-1)\n\n3.2.1 Jaccard Similarity Measure\nhttps://www.sciencedirect.com/science/article/pii/S1567422318300450\n\nCan be used to produce a similarity between two items on a scale of 0 to 1\nMay be able to use this for evaluation of a novel item against a pure-search good vs. a pure-experience good.\n\nMay require additional calculation / computation between these two values - maybe its arithmetic or harmonic mean between search and experience\nUsing that, we could potentially produce a weight.\nAuthors models\n\nModel 1: \\(\\text{Perceived Usefulness} = \\beta_0 + \\beta_1 \\cdot \\text{Review Content} + \\beta_2 \\cdot \\text{Review Length} + \\beta_3\\cdot \\text{Star Rating} + \\beta_4 \\cdot \\text{Total Votes Received} + \\epsilon_1\\)\nModel 2 (product type as a moderator): \\(\\text{Perceived Usefulness} = \\beta_0 + \\beta_1 \\cdot \\text{Review Content} + \\beta_2 \\cdot \\text{Review Length} + \\beta_3\\cdot \\text{Star Rating} + \\beta_4 \\cdot \\text{Total Votes Received} + \\beta_5 \\cdot \\text{Digital Music} + \\beta_6 \\cdot \\text{Video Game} + \\beta_7 \\cdot \\text{Review Content}\\cdot \\text{ Digital Music} + \\beta_8\\cdot\\text{Review Content}\\cdot\\text{ Video Game} + \\epsilon_2\\)\nOur proposition #1 (may require some modification) \\[\n\\text{Perceived Usefulness} = \\beta_0 + \\beta_1 \\cdot \\text{Review Content} + \\beta_2 \\cdot \\text{Review Length} + \\beta_3\\cdot \\text{Star Rating} + \\beta_4 \\cdot \\text{Total Votes Received} + \\gamma\\cdot\\text{Review Content}\n\\]\n\n\n\nor\n\\[\n\\text{Perceived Usefulness} = \\beta_0 + \\gamma\\cdot\\beta_1\\cdot\\text{Review Content} + \\beta_2 \\cdot \\text{Review Length} + \\beta_3\\cdot \\text{Star Rating} + \\beta_4 \\cdot \\text{Total Votes Received}\n\\]\n\nWhere \\(\\gamma\\) is the Jaccard Similarity Score between a given product and elements we are identifying as “pure” experience and “pure” search good.\nOperationalizaton of Jaccard Similarity score Variable (i.e. inputs)\n\nSearch good: those with attributes that can be evaluated prior to purchase or consumption. Consumers rely on prior experience, direct product inspection and other information search activities to locate information that assists in the evaluation process. Most products fall into the search goods category (e.g. clothing, office stationery, home furnishings).\nNumber of measurement specifications?\ncomment/review information?\nWhat else could we gather that could be considered a “universal” tangible or intangible feature from a product online? They need to be applicable to both search and experience goods.\n\nExperience good: those that can be accurately evaluated only after the product has been purchased and experienced. Many personal services fall into this category (e.g. restaurant, hairdresser, beauty salon, theme park, travel, holiday).\n\nsubjective descriptiveness vs. \ncomment/review information?\n\nAre there other methods aside from Jaccard Similarity?",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Models Implemented</span>"
     ]
   }
 ]
