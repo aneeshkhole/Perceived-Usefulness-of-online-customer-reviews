@@ -10,28 +10,30 @@ import plotly.graph_objects as go
 ```
 
 ## Concept and Motivation
-
+<!--PC-->
 Customers, when searching for products with specific features and aspects, need sufficient information to make a decision as to whether to procure a specific product.  *(Information on search products vs. experience vs. mixed).*  When a product is more in the directon of experience vs. search-based, other customers' experiences can shed light on its features and return on investment than information directly from the vendor can.  Having reviews from reliable sources with sufficiently detailed information can enable greater confidence in a purchase, improved customer satisfaction, and smooth the process of ecommerce for customers.
 
 We seek to expound upon the research of *paper reference here* to explore additional recommended research areas, in the direction
 
 ## What / Where
-
-*(Citation)* provided the following areas for recommended additional research at the conclusion of their paper: 
+<!-- -->
+*(Citation)* provided the following areas for recommended additional research at the conclusion of their paper: <!--PC-->
 
 * Expand the number of products beyond 3 items (one search, one experience, one mixed)
 
 * Explore customer metadata for classifying reviewer types <!--Team - I don't know that we can actually go about getting customer metadata.  This may be a bridge too far for us unless the site(s) we identify can provide such information--> 
 
-We seek to explore Item #1 above and explore the possibility of assessing a scale for products to determine the extent to which they are a search-based or an experience-based product.  Having a continuous scale between 0 and 1 can potentially simplify the formulas used by the authors down to a single equation: 
+We seek to explore Item #1 and #2 above and explore the possibility of assessing a scale for products to determine the extent to which they are a search-based or an experience-based product.   We've explored additonal research from other teams to identify additional potential methods
 
-$$
+* <!--AK talk about Naive Bayes, Kansei Method-->
 
-$$
+* <!--UK - talk about Customer Reliability methods--> 
 
-We seek to examine additional products and product types between multiple e-commerce websites (BestBuy, Target, Amazon)
+We seek to examine additional products and product types between multiple e-commerce websites (BestBuy, Target, Amazon).
 
 ## Why It Matters
+
+<!--PC--> 
 
 Feedback from customers is beneficial, but it is not always ordered by the most informative or beneficial feedback first.  Certain features of data such as... can impact the usefulness of the feedback on a customer-by-customer basis.  Level of detail, star-rating, and number of votes that support the review as being useful to a customer can all help determine its usefulness to other customers.  Were e-commerce 
 
@@ -43,7 +45,9 @@ Examining additional product types can enable the generalization of the authors'
 
 * Adjust the product, its marketing, or future production based upon market efficacy.
 
-* 
+* <!--AK talk about Naive Bayes, Kansei Method-->
+
+* <!--UK - talk about Customer Reliability methods--> 
 
 ## Literature Survey
 
@@ -52,6 +56,8 @@ Examining additional product types can enable the generalization of the authors'
 * **Paper(s) on product classification (search-experience-mixed)**
 
 * **Paper(s) on user/consumer/reviewer classification**
+<!--PC, UK, AK-->
+* **All papers you've found, provide a summary of what they did and any key results**
 
 ## Research Questions
 
@@ -61,7 +67,46 @@ Examining additional product types can enable the generalization of the authors'
 
     b. a sliding scale weight for degree to which a product is a "search" (0) or "experience" (1) product?
 
+    c. Adding modifiers to review content based upon:
+
+        * Customer / Reviewer Reliability?
+
+    <!--AK add bullet(s) on Naive Bayes classifier-->
+
 * Can products be classified on degree of search or experience *(need other research that can tell us what features of a product determine what makes a product a search vs. experience product)* using:
+    <!--PC --->
+
+    * Which of the 5 senses the product engages?
+
+    * 
+
+<!-- 
+
+NEW: true/false.
+
+Discounted / lower price?
+
+Fiction/Non-Fiction book concept?
+
+Rarity: 1-of-a-kind or limited production, vs. bulk produced?
+
+Factory Produced: T/F
+
+Environmentally Friendly? T/F
+
+Touch: t/f
+
+Hear: t/f 
+
+Smell: t/f 
+
+See: t/f (is the primary purpose to look at the item)
+
+Taste: t/f 
+
+ALL (): please list your ideas for true/false variables here
+
+-->
 
     a. Feature 1
 
@@ -69,21 +114,33 @@ Examining additional product types can enable the generalization of the authors'
 
     c. Some combination of features?
 
+* Can different natrual language processing libraries provide a better fit for the Review Content metric itself?
+
+* <!-- AK 2 research questions -->
+
+* <!-- UK 2 research questions -->
+
 ## Goals / Definition of Success
+
+<!-- --> 
 
 * Replicate similar results to *(original paper citation)* with similar product types
 
 * Expound upon *(original paper citation)* with additional products, including:
 
-    a. Product 1
+    a. Original products from (paper): Digital Music, Video Game, and Grocery Item
 
-    b. Product 2
+    b. Additional products (Amazon and Target): Furniture Items, Clothing Items, Home Appliances, Books, Cosmetics, Cleaning supplies?
 
-    c. Product 3
+    c. Additional Proucts (Amazon, Target, BestBuy): Electronics.
 
     d. Verify goodness of fit of original model
 
-* Perform analysis of multiple product types to produce a weighting for degree of how experienced-based the product is.
+* Determing best metrics and/or modifiers for Review Content and Customer Reliability
+
+* Achieving similar or better fit than original paper's modeling; extrapolate to other product types.
+
+<!-- * Perform analysis of multiple product types to produce a weighting for degree of how experienced-based the product is.
 
 * Assess weighting of products in terms of degree of "experience" base, and use an updated formula on
 
@@ -93,7 +150,7 @@ Examining additional product types can enable the generalization of the authors'
 
     c. Extrapolation on data outside the models.
 
-* Success of our effort and this methodology is met if it produces as-good or better performance of the experience weight-based model vs. the original model from *(original paper citation here)*
+* Success of our effort and this methodology is met if it produces as-good or better performance of the experience weight-based model vs. the original model from *(original paper citation here)* -->
 
 
 

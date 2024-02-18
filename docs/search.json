@@ -144,7 +144,7 @@
     "href": "index.html#concept-and-motivation",
     "title": "CSCI 5302 - Final Project",
     "section": "1.1 Concept and Motivation",
-    "text": "1.1 Concept and Motivation\nCustomers, when searching for products with specific features and aspects, need sufficient information to make a decision as to whether to procure a specific product. (Information on search products vs. experience vs. mixed). When a product is more in the directon of experience vs. search-based, other customers’ experiences can shed light on its features and return on investment than information directly from the vendor can. Having reviews from reliable sources with sufficiently detailed information can enable greater confidence in a purchase, improved customer satisfaction, and smooth the process of ecommerce for customers.\nWe seek to expound upon the research of paper reference here to explore additional recommended research areas, in the direction",
+    "text": "1.1 Concept and Motivation\n\nCustomers, when searching for products with specific features and aspects, need sufficient information to make a decision as to whether to procure a specific product. (Information on search products vs. experience vs. mixed). When a product is more in the directon of experience vs. search-based, other customers’ experiences can shed light on its features and return on investment than information directly from the vendor can. Having reviews from reliable sources with sufficiently detailed information can enable greater confidence in a purchase, improved customer satisfaction, and smooth the process of ecommerce for customers.\nWe seek to expound upon the research of paper reference here to explore additional recommended research areas, in the direction",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
     ]
@@ -154,7 +154,7 @@
     "href": "index.html#what-where",
     "title": "CSCI 5302 - Final Project",
     "section": "1.2 What / Where",
-    "text": "1.2 What / Where\n(Citation) provided the following areas for recommended additional research at the conclusion of their paper:\n\nExpand the number of products beyond 3 items (one search, one experience, one mixed)\nExplore customer metadata for classifying reviewer types \n\nWe seek to explore Item #1 above and explore the possibility of assessing a scale for products to determine the extent to which they are a search-based or an experience-based product. Having a continuous scale between 0 and 1 can potentially simplify the formulas used by the authors down to a single equation:\n$$\n$$\nWe seek to examine additional products and product types between multiple e-commerce websites (BestBuy, Target, Amazon)",
+    "text": "1.2 What / Where\n\n(Citation) provided the following areas for recommended additional research at the conclusion of their paper: \n\nExpand the number of products beyond 3 items (one search, one experience, one mixed)\nExplore customer metadata for classifying reviewer types \n\nWe seek to explore Item #1 and #2 above and explore the possibility of assessing a scale for products to determine the extent to which they are a search-based or an experience-based product. We’ve explored additonal research from other teams to identify additional potential methods\n\n\n\n\nWe seek to examine additional products and product types between multiple e-commerce websites (BestBuy, Target, Amazon).",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
     ]
@@ -164,7 +164,7 @@
     "href": "index.html#why-it-matters",
     "title": "CSCI 5302 - Final Project",
     "section": "1.3 Why It Matters",
-    "text": "1.3 Why It Matters\nFeedback from customers is beneficial, but it is not always ordered by the most informative or beneficial feedback first. Certain features of data such as… can impact the usefulness of the feedback on a customer-by-customer basis. Level of detail, star-rating, and number of votes that support the review as being useful to a customer can all help determine its usefulness to other customers. Were e-commerce\nExamining additional product types can enable the generalization of the authors’ methodology to other products. Furthermore, the exploration of a sliding scale for search vs. experience-based products can further support generalization and business goals. Producing a reliable scale and methods for classifying a products’ degree of being experienced-based can inform vendors on:\n\nHow to best sort product reviews\nExamine what are the most helpful reviews to know the performance of the product alongside customer experience and sentiment\nAdjust the product, its marketing, or future production based upon market efficacy.",
+    "text": "1.3 Why It Matters\n\nFeedback from customers is beneficial, but it is not always ordered by the most informative or beneficial feedback first. Certain features of data such as… can impact the usefulness of the feedback on a customer-by-customer basis. Level of detail, star-rating, and number of votes that support the review as being useful to a customer can all help determine its usefulness to other customers. Were e-commerce\nExamining additional product types can enable the generalization of the authors’ methodology to other products. Furthermore, the exploration of a sliding scale for search vs. experience-based products can further support generalization and business goals. Producing a reliable scale and methods for classifying a products’ degree of being experienced-based can inform vendors on:\n\nHow to best sort product reviews\nExamine what are the most helpful reviews to know the performance of the product alongside customer experience and sentiment\nAdjust the product, its marketing, or future production based upon market efficacy.",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
     ]
@@ -174,7 +174,7 @@
     "href": "index.html#literature-survey",
     "title": "CSCI 5302 - Final Project",
     "section": "1.4 Literature Survey",
-    "text": "1.4 Literature Survey\n\nAdditional commentary on original paper here\nPaper(s) on product classification (search-experience-mixed)\nPaper(s) on user/consumer/reviewer classification",
+    "text": "1.4 Literature Survey\n\nAdditional commentary on original paper here\nPaper(s) on product classification (search-experience-mixed)\nPaper(s) on user/consumer/reviewer classification \nAll papers you’ve found, provide a summary of what they did and any key results",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
     ]
@@ -184,7 +184,7 @@
     "href": "index.html#research-questions",
     "title": "CSCI 5302 - Final Project",
     "section": "1.5 Research Questions",
-    "text": "1.5 Research Questions\n\nCan the model from (original paper citation) be generalized with\n\nlarger volume of products and product types?\na sliding scale weight for degree to which a product is a “search” (0) or “experience” (1) product?\n\nCan products be classified on degree of search or experience (need other research that can tell us what features of a product determine what makes a product a search vs. experience product) using:\n\nFeature 1\nFeature 2\nSome combination of features?",
+    "text": "1.5 Research Questions\n\nCan the model from (original paper citation) be generalized with\n\nlarger volume of products and product types?\na sliding scale weight for degree to which a product is a “search” (0) or “experience” (1) product?\nAdding modifiers to review content based upon:\n\nCustomer / Reviewer Reliability?\n\n\n\nCan products be classified on degree of search or experience (need other research that can tell us what features of a product determine what makes a product a search vs. experience product) using: \n\nWhich of the 5 senses the product engages?\n\n\n\n\na. Feature 1\n\nb. Feature 2\n\nc. Some combination of features?\n\nCan different natrual language processing libraries provide a better fit for the Review Content metric itself?",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
     ]
@@ -194,7 +194,7 @@
     "href": "index.html#goals-definition-of-success",
     "title": "CSCI 5302 - Final Project",
     "section": "1.6 Goals / Definition of Success",
-    "text": "1.6 Goals / Definition of Success\n\nReplicate similar results to (original paper citation) with similar product types\nExpound upon (original paper citation) with additional products, including:\n\nProduct 1\nProduct 2\nProduct 3\nVerify goodness of fit of original model\n\nPerform analysis of multiple product types to produce a weighting for degree of how experienced-based the product is.\nAssess weighting of products in terms of degree of “experience” base, and use an updated formula on\n\nOriginal Model\nUpdated Model\nExtrapolation on data outside the models.\n\nSuccess of our effort and this methodology is met if it produces as-good or better performance of the experience weight-based model vs. the original model from (original paper citation here)\n\nThis is where our abstract will go.\nHere’s an example of inserting a plot directly into our paper\n\n\n\n\n\n\n\n\nFigure 1.1: a matplotlib plot\n\n\n\n\n\nHere’s an example of pulling some data in from our github repo",
+    "text": "1.6 Goals / Definition of Success\n\n\nReplicate similar results to (original paper citation) with similar product types\nExpound upon (original paper citation) with additional products, including:\n\nOriginal products from (paper): Digital Music, Video Game, and Grocery Item\nAdditional products (Amazon and Target): Furniture Items, Clothing Items, Home Appliances, Books, Cosmetics, Cleaning supplies?\nAdditional Proucts (Amazon, Target, BestBuy): Electronics.\nVerify goodness of fit of original model\n\nDeterming best metrics and/or modifiers for Review Content and Customer Reliability\nAchieving similar or better fit than original paper’s modeling; extrapolate to other product types.\n\n\nThis is where our abstract will go.\nHere’s an example of inserting a plot directly into our paper\n\n\n\n\n\n\n\n\nFigure 1.1: a matplotlib plot\n\n\n\n\n\nHere’s an example of pulling some data in from our github repo",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
     ]
