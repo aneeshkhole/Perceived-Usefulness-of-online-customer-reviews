@@ -23,9 +23,11 @@ We seek to expound upon the research of *paper reference here* to explore additi
 
 * Explore customer metadata for classifying reviewer types <!--Team - I don't know that we can actually go about getting customer metadata.  This may be a bridge too far for us unless the site(s) we identify can provide such information--> 
 
-We seek to explore Item #1 and #2 above and explore the possibility of assessing a scale for products to determine the extent to which they are a search-based or an experience-based product.   We've explored additonal research from other teams to identify additional potential methods
+We seek to explore Item #1 and #2 above and explore the possibility of assessing a scale for products to determine the extent to which they are a search-based or an experience-based product. We've explored additonal research from other teams to identify additional potential methods
 
-* <!--AK talk about Naive Bayes, Kansei Method-->
+* Determine the polarity of a customer review by employing a classifier such as Naive Bayes. <!--AK talk about Naive Bayes, Kansei Method-->
+
+* Use Kansei engineering approaches to convert unstructured product-related texts into feature–affective opinions.  
 
 * <!--UK - talk about Customer Reliability methods--> 
 
@@ -45,7 +47,12 @@ Examining additional product types can enable the generalization of the authors'
 
 * Adjust the product, its marketing, or future production based upon market efficacy.
 
-* <!--AK talk about Naive Bayes, Kansei Method-->
+* Understanding the emotions a customer wants to express through a review is crucial as it will affect the "recommendation score" of that particular product or a different one from a similar category.
+
+    * To contribute in determining this recommendation score, we can use a probabilistic machine learning algorithm like Naive Bayes to determine the polarity (positive, negative, or neutral) of customer reviews.
+    
+    * Typically used for amending product design, Kansei Engineering can be used to incorporate human emotional responses into evaluation of a customer review. 
+  <!--AK talk about Naive Bayes, Kansei Method--> 
 
 * <!--UK - talk about Customer Reliability methods--> 
 
@@ -59,18 +66,36 @@ Examining additional product types can enable the generalization of the authors'
 <!--PC, UK, AK-->
 * **All papers you've found, provide a summary of what they did and any key results**
 
+    * Hu, W., Gong, Z., & Guo, J. (2010). Mining Product Features from Online Reviews. 2010 IEEE 7th International Conference on E-Business Engineering. doi:10.1109/icebe.2010.51
+    
+        
+
+    * Rajeev, P. V., & Rekha, V. S. (2015). Recommending products to customers using opinion mining of online product reviews and features. 2015 International Conference on Circuits, Power and Computing Technologies [ICCPCT-2015]. doi:10.1109/iccpct.2015.7159433 
+        
+        * This paper presents techniques like Opinion mining, feature extraction and Naives Bayes classification for review polarity determination. The authors suggest performing both Objective and Subjective analysis of features by considering qualitative and quantitative features of the data respectively.  
+
+    * Wang, W. M., Li, Z., Tian, Z. G., Wang, J. W., & Cheng, M. N. (2018). Extracting and summarizing affective features and responses from online product descriptions and reviews: A Kansei text mining approach. Engineering Applications of Artificial Intelligence, 73, 149–162. doi:10.1016/j.engappai.2018.05.005
+
+        * Authors have proposed a solution by implementing Kansei engineering and text mining simultaneously which will help customers in decision making process. It helps to categorize reviews into multiple sections and perform text mining by NLP techniques like Sentence segmentation, Tokenization, POS tagging
+
+
+
 ## Research Questions
 
 * Can the model from *(original paper citation)* be generalized with
 
-    a. larger volume of products and product types?
+    - larger volume of products and product types?
 
-    b. a sliding scale weight for degree to which a product is a "search" (0) or "experience" (1) product?
+    - a sliding scale weight for degree to which a product is a "search" (0) or "experience" (1) product?
 
-    c. Adding modifiers to review content based upon:
+    - Adding modifiers to review content based upon:
 
         * Customer / Reviewer Reliability?
 
+    - Can the polarity of reviews be judged accurately by using a Naive Bayes classification model? 
+
+        - What is the impact of different feature extraction methods (e.g., bag-of-words, TF-IDF) on the performance of Naive Bayes classification model?
+     
     <!--AK add bullet(s) on Naive Bayes classifier-->
 
 * Can products be classified on degree of search or experience *(need other research that can tell us what features of a product determine what makes a product a search vs. experience product)* using:
@@ -116,7 +141,8 @@ ALL (): please list your ideas for true/false variables here
 
 * Can different natrual language processing libraries provide a better fit for the Review Content metric itself?
 
-* <!-- AK 2 research questions -->
+* How does sentiment in customer reviews correlate with customer satisfaction metrics or sales figures for a particular product?
+<!-- AK 2 research questions -->
 
 * <!-- UK 2 research questions -->
 
