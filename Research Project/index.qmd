@@ -29,7 +29,7 @@ We seek to explore Item #1 and #2 above and explore the possibility of assessing
 
 * Use Kansei engineering approaches to convert unstructured product-related texts into feature–affective opinions.  
 
-* <!--UK - talk about Customer Reliability methods--> 
+* Try to identify if a customer’s review is ‘reliable’ based on star-rating and textual feedback ‘sentiment score’.  <!--UK - talk about Customer Reliability methods--> 
 
 We seek to examine additional products and product types between multiple e-commerce websites (BestBuy, Target, Amazon).
 
@@ -54,7 +54,12 @@ Examining additional product types can enable the generalization of the authors'
     * Typically used for amending product design, Kansei Engineering can be used to incorporate human emotional responses into evaluation of a customer review. 
   <!--AK talk about Naive Bayes, Kansei Method--> 
 
-* <!--UK - talk about Customer Reliability methods--> 
+* Determine which customer is trustworthy, meaning who has actually purchased the product versus a customer who gave a false review. Based on the ‘customer reputation score’, our aim is to classify customers into groups to judge reviewer reliability. This has two main aspects:
+
+    * Star-rating score which is a discrete scale that tells the inclination of a customer.
+    
+    * Text review ‘sentiment score’ using NLP that explains customer opinions based on words.
+    <!--UK - talk about Customer Reliability methods--> 
 
 ## Literature Survey
 
@@ -68,7 +73,7 @@ Examining additional product types can enable the generalization of the authors'
 
     * Hu, W., Gong, Z., & Guo, J. (2010). Mining Product Features from Online Reviews. 2010 IEEE 7th International Conference on E-Business Engineering. doi:10.1109/icebe.2010.51
     
-        
+        * The proposed system employs a two-step process for opinion mining: identifying opinion sentences using a SentiWordNet-based algorithm and extracting product features from all reviews in the database. This feature extraction function focuses on identifying commonly expressed positive or negative opinions before extracting explicit and implicit product features.
 
     * Rajeev, P. V., & Rekha, V. S. (2015). Recommending products to customers using opinion mining of online product reviews and features. 2015 International Conference on Circuits, Power and Computing Technologies [ICCPCT-2015]. doi:10.1109/iccpct.2015.7159433 
         
@@ -144,7 +149,12 @@ ALL (): please list your ideas for true/false variables here
 * How does sentiment in customer reviews correlate with customer satisfaction metrics or sales figures for a particular product?
 <!-- AK 2 research questions -->
 
-* <!-- UK 2 research questions -->
+* Can we categorize customer reviews based on customer experience and sentiment?
+
+* Do specific product star ratings tend to incite more reviews, and if so, how does this impact the overall reputation measurement?
+
+* Are specific quality descriptors in text-based reviews (e.g., 'enthusiastic', 'disappointed') strongly associated with certain rating levels, and how does this association affect product reputation?
+<!-- UK 2 research questions -->
 
 ## Goals / Definition of Success
 
