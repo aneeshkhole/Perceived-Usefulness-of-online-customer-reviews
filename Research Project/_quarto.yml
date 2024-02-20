@@ -26,7 +26,7 @@ book:
   page-navigation: true
   date: today
 
-bibliography: references.bib
+bibliography: refs.bib
 nocite: |
   @*
 
@@ -40,6 +40,7 @@ format:
     smooth-scroll: true
     number-sections: true
     citations-hover: true
+    link-citations: true
     grid:
       body-width: 1000px
       sidebar-width: 150px

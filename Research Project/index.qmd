@@ -13,25 +13,27 @@ import plotly.graph_objects as go
 <!--PC-->
 Customers, when searching for products with specific features and aspects, need sufficient information to make a decision as to whether to procure a specific product.  *(Information on search products vs. experience vs. mixed).*  When a product is more in the directon of experience vs. search-based, other customers' experiences can shed light on its features and return on investment than information directly from the vendor can.  Having reviews from reliable sources with sufficiently detailed information can enable greater confidence in a purchase, improved customer satisfaction, and smooth the process of ecommerce for customers.
 
-We seek to expound upon the research of *paper reference here* to explore additional recommended research areas, in the direction
+We seek to expound upon the research of [@percUse] to explore additional recommended research areas to improve upon and increase the general applicability of the model.
 
 ## What / Where
 <!-- -->
-*(Citation)* provided the following areas for recommended additional research at the conclusion of their paper: <!--PC-->
+@percUse provided the following areas for recommended additional research at the conclusion of their paper: <!--PC-->
 
-* Expand the number of products beyond 3 items (one search, one experience, one mixed)
+1. Expand the number of products beyond 3 items (one search, one experience, one mixed) to better generalize the model.
 
-* Explore customer metadata for classifying reviewer types <!--Team - I don't know that we can actually go about getting customer metadata.  This may be a bridge too far for us unless the site(s) we identify can provide such information--> 
+1. Explore customer or reviewer metadata for classifying reviewer types to enhance model performance.
 
-We seek to explore Item #1 and #2 above and explore the possibility of assessing a scale for products to determine the extent to which they are a search-based or an experience-based product. We've explored additonal research from other teams to identify additional potential methods
+<!--Team - I don't know that we can actually go about getting customer metadata.  This may be a bridge too far for us unless the site(s) we identify can provide such information--> 
+
+We seek to explore Item #1 and #2 above, and to explore the possibility of assessing a scale for products to determine the extent to which they are a search or experience-based product.  We've explored work from other research teams to identify potential methods we can leverage to pursue these ends.
 
 * Determine the polarity of a customer review by employing a classifier such as Naive Bayes. <!--AK talk about Naive Bayes, Kansei Method-->
 
-* Use Kansei engineering approaches to convert unstructured product-related texts into feature–affective opinions.  
+* Use Kansei engineering approaches to convert unstructured product-related texts into feature–affective opinions.
 
-* Try to identify if a customer’s review is ‘reliable’ based on star-rating and textual feedback ‘sentiment score’.  <!--UK - talk about Customer Reliability methods--> 
+* Attempt to assess the reliability of a customer's review based on star-rating and a 'sentiment score' of their textual feedback.  <!--UK - talk about Customer Reliability methods--> 
 
-We seek to examine additional products and product types between multiple e-commerce websites (BestBuy, Target, Amazon).
+Exploring combinations of these research methods, we will pursue potential improvements on the models outlined in @percUse.  We will examine additional products and product types between multiple e-commerce websites (BestBuy, Target, Amazon).
 
 ## Why It Matters
 
@@ -71,82 +73,48 @@ Examining additional product types can enable the generalization of the authors'
 <!--PC, UK, AK-->
 * **All papers you've found, provide a summary of what they did and any key results**
 
-    * Hu, W., Gong, Z., & Guo, J. (2010). Mining Product Features from Online Reviews. 2010 IEEE 7th International Conference on E-Business Engineering. doi:10.1109/icebe.2010.51
+    * Hu, W., Gong, Z., & Guo, J. (2010). Mining Product Features from Online Reviews. 2010 IEEE 7th International Conference on E-Business Engineering. doi:10.1109/icebe.2010.51. @Hu_Gong_Guo_2010
     
         * The proposed system employs a two-step process for opinion mining: identifying opinion sentences using a SentiWordNet-based algorithm and extracting product features from all reviews in the database. This feature extraction function focuses on identifying commonly expressed positive or negative opinions before extracting explicit and implicit product features.
 
-    * Rajeev, P. V., & Rekha, V. S. (2015). Recommending products to customers using opinion mining of online product reviews and features. 2015 International Conference on Circuits, Power and Computing Technologies [ICCPCT-2015]. doi:10.1109/iccpct.2015.7159433 
+    * Rajeev, P. V., & Rekha, V. S. (2015). Recommending products to customers using opinion mining of online product reviews and features. 2015 International Conference on Circuits, Power and Computing Technologies [ICCPCT-2015]. doi:10.1109/iccpct.2015.7159433. @Rajeev_Rekha_2015
         
         * This paper presents techniques like Opinion mining, feature extraction and Naives Bayes classification for review polarity determination. The authors suggest performing both Objective and Subjective analysis of features by considering qualitative and quantitative features of the data respectively.  
 
-    * Wang, W. M., Li, Z., Tian, Z. G., Wang, J. W., & Cheng, M. N. (2018). Extracting and summarizing affective features and responses from online product descriptions and reviews: A Kansei text mining approach. Engineering Applications of Artificial Intelligence, 73, 149–162. doi:10.1016/j.engappai.2018.05.005
+    * Wang, W. M., Li, Z., Tian, Z. G., Wang, J. W., & Cheng, M. N. (2018). Extracting and summarizing affective features and responses from online product descriptions and reviews: A Kansei text mining approach. Engineering Applications of Artificial Intelligence, 73, 149–162. doi:10.1016/j.engappai.2018.05.005. @Wang_Li_Tian_Wang_Cheng_2018
 
         * Authors have proposed a solution by implementing Kansei engineering and text mining simultaneously which will help customers in decision making process. It helps to categorize reviews into multiple sections and perform text mining by NLP techniques like Sentence segmentation, Tokenization, POS tagging
 
 
-
 ## Research Questions
 
-* Can the model from *(original paper citation)* be generalized with
+* Can the model from @percUse be generalized with
 
-    - larger volume of products and product types?
+    - larger volume of products and product types from which to mine data?
 
-    - a sliding scale weight for degree to which a product is a "search" (0) or "experience" (1) product?
+    - a sliding scalar multiplier representing the degree to which a product is a "search" (0) or "experience" (1) product?
 
     - Adding modifiers to review content based upon:
 
         * Customer / Reviewer Reliability?
 
-    - Can the polarity of reviews be judged accurately by using a Naive Bayes classification model? 
+* Can the polarity of reviews be judged accurately by using a Naive Bayes classification model? @Hu_Gong_Guo_2010
 
-        - What is the impact of different feature extraction methods (e.g., bag-of-words, TF-IDF) on the performance of Naive Bayes classification model?
-     
-    <!--AK add bullet(s) on Naive Bayes classifier-->
+    - What is the impact of different feature extraction methods (e.g., bag-of-words, TF-IDF) on the performance of Naive Bayes classification model? @Wang_Li_Tian_Wang_Cheng_2018
 
-* Can products be classified on degree of search or experience *(need other research that can tell us what features of a product determine what makes a product a search vs. experience product)* using:
-    <!--PC --->
+* Can products be classified on their degree of being search or experience based by examining product variables such as:
+
+    * Degree of specificity in the product description?
+
+    * Whether the product is offered in brand-new condition only, or offered as new, used, or refurbished?
 
     * Which of the 5 senses the product engages?
 
-    * 
+    * Item rarity (limited production or unique items vs. bulk-produced items)?
 
-<!-- 
+* Can newer natrual language processing libraries provide a better fit for @percUse 's Review Content metrics?
 
-NEW: true/false.
-
-Discounted / lower price?
-
-Fiction/Non-Fiction book concept?
-
-Rarity: 1-of-a-kind or limited production, vs. bulk produced?
-
-Factory Produced: T/F
-
-Environmentally Friendly? T/F
-
-Touch: t/f
-
-Hear: t/f 
-
-Smell: t/f 
-
-See: t/f (is the primary purpose to look at the item)
-
-Taste: t/f 
-
-ALL (): please list your ideas for true/false variables here
-
--->
-
-    a. Feature 1
-
-    b. Feature 2
-
-    c. Some combination of features?
-
-* Can different natrual language processing libraries provide a better fit for the Review Content metric itself?
-
-* How does sentiment in customer reviews correlate with customer satisfaction metrics or sales figures for a particular product?
+* How does sentiment in customer reviews correlate with customer satisfaction metrics or sales figures for a particular product? @
 <!-- AK 2 research questions -->
 
 * Can we categorize customer reviews based on customer experience and sentiment?
@@ -154,21 +122,22 @@ ALL (): please list your ideas for true/false variables here
 * Do specific product star ratings tend to incite more reviews, and if so, how does this impact the overall reputation measurement?
 
 * Are specific quality descriptors in text-based reviews (e.g., 'enthusiastic', 'disappointed') strongly associated with certain rating levels, and how does this association affect product reputation?
+
 <!-- UK 2 research questions -->
 
 ## Goals / Definition of Success
 
 <!-- --> 
 
-* Replicate similar results to *(original paper citation)* with similar product types
+* Replicate similar results to @percUse with similar product types
 
-* Expound upon *(original paper citation)* with additional products, including:
+* Expound upon @percUse with additional products, including:
 
     a. Original products from (paper): Digital Music, Video Game, and Grocery Item
 
-    b. Additional products (Amazon and Target): Furniture Items, Clothing Items, Home Appliances, Books, Cosmetics, Cleaning supplies?
+    b. Additional products (Amazon and Target): Furniture Items, Clothing Items, Home Appliances, Books, Cosmetics, Cleaning supplies
 
-    c. Additional Proucts (Amazon, Target, BestBuy): Electronics.
+    c. Additional Proucts (Amazon, Target, BestBuy): Electronics
 
     d. Verify goodness of fit of original model
 
@@ -176,23 +145,14 @@ ALL (): please list your ideas for true/false variables here
 
 * Achieving similar or better fit than original paper's modeling; extrapolate to other product types.
 
-<!-- * Perform analysis of multiple product types to produce a weighting for degree of how experienced-based the product is.
+<!-- Adding success for other research questions --> 
+* Determining strength of correlation metrics (support, confidence, lift) between Naive Bayes' classifier for review polarity @Hu_Gong_Guo_2010
 
-* Assess weighting of products in terms of degree of "experience" base, and use an updated formula on
+    * Integrate with the model and test if Naive Bayes shows strong correlation metrics.
 
-    a. Original Model
+    * Compare and contrast the model with and without incorporation.
 
-    b. Updated Model
-
-    c. Extrapolation on data outside the models.
-
-* Success of our effort and this methodology is met if it produces as-good or better performance of the experience weight-based model vs. the original model from *(original paper citation here)* -->
-
-
-
-
-
-
+<!--
 
 This is where our abstract will go.
 
@@ -269,4 +229,4 @@ fig = dict(data=slider_info,layout=layout)
 
 iplot(fig)
 
-```
+```-->
