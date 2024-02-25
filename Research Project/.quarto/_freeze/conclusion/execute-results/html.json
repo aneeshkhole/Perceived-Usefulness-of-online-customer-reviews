@@ -4,7 +4,7 @@
     "engine": "jupyter",
     "markdown": "# Conclusion {#sec-conclusions}\n\n\n\nHere's our conclusions section\n\n",
     "supporting": [
-      "conclusion_files\\figure-html"
+      "conclusion_files"
     ],
     "filters": [],
     "includes": {}
