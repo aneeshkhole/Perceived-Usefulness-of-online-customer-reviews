@@ -1,4 +1,4 @@
-# Data {#sec-data}
+# Data Exploration {#sec-data}
 
 ```{python}
 #module imports|
@@ -19,12 +19,23 @@ In collecting our data, in order to adhere to the model implemented by *(origina
 ```{python dataReqs}
 #|tbl: tbl-data-reqs
 data_reqs = {
-    'Variable':['Star Rating', 'Review Content', 'Useful Votes'],
-    'Data Type':['float','string','integer']
+    'Variable':['Product Title','Product Category*','Product Details/Specs', 'Verified Purchase', 'Star Rating', 'Review Content', 'Useful Votes'],
+    'Data Type':['string','string','string','boolean','float','string','integer']
 }
 tbl_data_reqs = pd.DataFrame(data_reqs)
 tbl_data_reqs.set_index('Variable')
 tbl_data_reqs.style.hide(axis='index')
+```
+
+```{python dataCalcs}
+#|tbl: tbl-data-calcs
+data_calcs = {
+    'Variable':['Review Length', 'Sentiment Score','Reputation Score','Product Type Score','Polarity Score'],
+    'Data Type':['integer','float','float','float','float']
+}
+tbl_data_calcs  = pd.DataFrame(data_calcs)
+tbl_data_calcs.set_index('Variable')
+tbl_data_calcs.style.hide(axis='index')
 ```
 
 To classify products...we need metadata of the product itself.  We are seeking to use the following products, and for each, we'll collect the following data:
@@ -36,6 +47,18 @@ To classify products...we need metadata of the product itself.  We are seeking t
     * Digital/Physical Music (duration, music style / genre, others?)
 
     * Grocery Products (calories per serving, special markers [gluten-free, fat-free, vegan], )  - *potential hypothesis that grocery products with special markings may be more experience-based than search-based.*
+
+<!-- 
+
+    a. Original products from (paper): Digital Music, Video Game, and Grocery Item
+
+    b. Additional products (Amazon and Target): Furniture Items, Clothing Items, Home Appliances, Books, Cosmetics, Cleaning supplies
+
+    c. Additional Proucts (Amazon, Target, BestBuy): Electronics
+
+    d. Verify goodness of fit of original model
+
+-->
 
 Additional Products
 

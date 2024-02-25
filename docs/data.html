@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>CSCI 5302 - Final Project - 2&nbsp; Data</title>
+<title>CSCI 5302 - Final Project - 2&nbsp; Data Exploration</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -105,7 +105,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Exploration</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -143,7 +143,7 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Exploration</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -155,7 +155,7 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./conclusion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Conclusions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Conclusion</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -186,7 +186,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-data" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data</span></span></h1>
+<h1 class="title"><span id="sec-data" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Exploration</span></span></h1>
 </div>
 
 
@@ -214,30 +214,83 @@ div.csl-indent {
 <section id="collection" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="collection"><span class="header-section-number">2.2</span> Collection</h2>
 <p>In collecting our data, in order to adhere to the model implemented by <em>(original paper here)</em>, we require the following data points, at a minimum:</p>
-<div id="e6ee2839" class="cell" data-tbl="tbl-data-reqs" data-execution_count="2">
+<div id="d86506e9" class="cell" data-tbl="tbl-data-reqs" data-execution_count="2">
 <div class="cell-output cell-output-display" data-execution_count="2">
 <style type="text/css">
 </style>
 
-<table id="T_f1aa2" data-quarto-postprocess="true" class="table table-sm table-striped small">
+<table id="T_19c7d" data-quarto-postprocess="true" class="table table-sm table-striped small">
 <thead>
 <tr class="header">
-<th id="T_f1aa2_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Variable</th>
-<th id="T_f1aa2_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Data Type</th>
+<th id="T_19c7d_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Variable</th>
+<th id="T_19c7d_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Data Type</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_f1aa2_row0_col0" class="data row0 col0">Star Rating</td>
-<td id="T_f1aa2_row0_col1" class="data row0 col1">float</td>
+<td id="T_19c7d_row0_col0" class="data row0 col0">Product Title</td>
+<td id="T_19c7d_row0_col1" class="data row0 col1">string</td>
 </tr>
 <tr class="even">
-<td id="T_f1aa2_row1_col0" class="data row1 col0">Review Content</td>
-<td id="T_f1aa2_row1_col1" class="data row1 col1">string</td>
+<td id="T_19c7d_row1_col0" class="data row1 col0">Product Category*</td>
+<td id="T_19c7d_row1_col1" class="data row1 col1">string</td>
 </tr>
 <tr class="odd">
-<td id="T_f1aa2_row2_col0" class="data row2 col0">Useful Votes</td>
-<td id="T_f1aa2_row2_col1" class="data row2 col1">integer</td>
+<td id="T_19c7d_row2_col0" class="data row2 col0">Product Details/Specs</td>
+<td id="T_19c7d_row2_col1" class="data row2 col1">string</td>
+</tr>
+<tr class="even">
+<td id="T_19c7d_row3_col0" class="data row3 col0">Verified Purchase</td>
+<td id="T_19c7d_row3_col1" class="data row3 col1">boolean</td>
+</tr>
+<tr class="odd">
+<td id="T_19c7d_row4_col0" class="data row4 col0">Star Rating</td>
+<td id="T_19c7d_row4_col1" class="data row4 col1">float</td>
+</tr>
+<tr class="even">
+<td id="T_19c7d_row5_col0" class="data row5 col0">Review Content</td>
+<td id="T_19c7d_row5_col1" class="data row5 col1">string</td>
+</tr>
+<tr class="odd">
+<td id="T_19c7d_row6_col0" class="data row6 col0">Useful Votes</td>
+<td id="T_19c7d_row6_col1" class="data row6 col1">integer</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="10f96121" class="cell" data-tbl="tbl-data-calcs" data-execution_count="3">
+<div class="cell-output cell-output-display" data-execution_count="3">
+<style type="text/css">
+</style>
+
+<table id="T_cba2f" data-quarto-postprocess="true" class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th id="T_cba2f_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Variable</th>
+<th id="T_cba2f_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Data Type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td id="T_cba2f_row0_col0" class="data row0 col0">Review Length</td>
+<td id="T_cba2f_row0_col1" class="data row0 col1">integer</td>
+</tr>
+<tr class="even">
+<td id="T_cba2f_row1_col0" class="data row1 col0">Sentiment Score</td>
+<td id="T_cba2f_row1_col1" class="data row1 col1">float</td>
+</tr>
+<tr class="odd">
+<td id="T_cba2f_row2_col0" class="data row2 col0">Reputation Score</td>
+<td id="T_cba2f_row2_col1" class="data row2 col1">float</td>
+</tr>
+<tr class="even">
+<td id="T_cba2f_row3_col0" class="data row3 col0">Product Type Score</td>
+<td id="T_cba2f_row3_col1" class="data row3 col1">float</td>
+</tr>
+<tr class="odd">
+<td id="T_cba2f_row4_col0" class="data row4 col0">Polarity Score</td>
+<td id="T_cba2f_row4_col1" class="data row4 col1">float</td>
 </tr>
 </tbody>
 </table>
@@ -252,6 +305,17 @@ div.csl-indent {
 <li><p>Grocery Products (calories per serving, special markers [gluten-free, fat-free, vegan], ) - <em>potential hypothesis that grocery products with special markings may be more experience-based than search-based.</em></p></li>
 </ul></li>
 </ul>
+<!-- 
+
+    a. Original products from (paper): Digital Music, Video Game, and Grocery Item
+
+    b. Additional products (Amazon and Target): Furniture Items, Clothing Items, Home Appliances, Books, Cosmetics, Cleaning supplies
+
+    c. Additional Proucts (Amazon, Target, BestBuy): Electronics
+
+    d. Verify goodness of fit of original model
+
+-->
 <p>Additional Products</p>
 <ul>
 <li><p>Clothing - likely a mixed product, potentially ranging from search-based for plain t-shirts to experience-based for high fashion products</p>

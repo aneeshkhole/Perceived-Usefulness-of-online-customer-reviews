@@ -9,7 +9,7 @@
 <meta name="author" content="Patrick Connelly">
 <meta name="author" content="Aneesh Khole">
 <meta name="author" content="Uttara Ketkar">
-<meta name="dcterms.date" content="2024-02-24">
+<meta name="dcterms.date" content="2024-02-25">
 
 <title>CSCI 5302 - Final Project</title>
 <style>
@@ -146,7 +146,7 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Exploration</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -158,7 +158,7 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./conclusion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Conclusions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Conclusion</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -214,7 +214,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">February 24, 2024</p>
+      <p class="date">February 25, 2024</p>
     </div>
   </div>
   
@@ -237,20 +237,40 @@ div.csl-indent {
 </section>
 <section id="what-where" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="what-where"><span class="header-section-number">1.2</span> What / Where</h2>
-<!-- -->
-<p><span class="citation" data-cites="percUse">Guha Majumder, Dutta Gupta, and Paul (<a href="references.html#ref-percUse" role="doc-biblioref">2022</a>)</span> provided the following areas for recommended additional research at the conclusion of their paper: <!--PC--></p>
+<p><span class="citation" data-cites="percUse">Guha Majumder, Dutta Gupta, and Paul (<a href="references.html#ref-percUse" role="doc-biblioref">2022</a>)</span> provided the following summary model for what aspects and features they took into consideration in predicting the perceived usefulness of a customer review in <a href="#fig-img-1" class="quarto-xref">Figure&nbsp;<span>1.1</span></a>.</p>
+<div id="fig-img-1" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-img-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src=".\imgs/Orig_Model.jpg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-img-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.1: Model Overview
+</figcaption>
+</figure>
+</div>
+<p>Furthermore, the authors provided the following areas for recommended additional research at the conclusion of their paper: <!--PC--></p>
 <ol type="1">
 <li><p>Expand the number of products beyond 3 items (one search, one experience, one mixed) to better generalize the model.</p></li>
 <li><p>Explore customer or reviewer metadata for classifying reviewer types to enhance model performance.</p></li>
 </ol>
-<!--Team - I don't know that we can actually go about getting customer metadata.  This may be a bridge too far for us unless the site(s) we identify can provide such information-->
 <p>We seek to examine the above two above items, and to explore the possibility of assessing a scale for products to determine the extent to which they are a search or experience-based product. We further seek to inspect additional potential modifiers to the underlying model for statistical and operational applicability; we’ve sought out work from other research teams to identify potential methods we can leverage to pursue these ends.</p>
 <ul>
 <li><p>Determining the polarity of a customer review by employing a classifier such as Naive Bayes.</p></li>
 <li><p>Using Kansei engineering approaches to convert unstructured product-related texts into feature–affective opinions.</p></li>
 <li><p>Attempting to assess the reliability of a customer’s review based on star-rating and a ‘sentiment score’ of their textual feedback.</p></li>
 </ul>
-<p>Exploring methods employed within each of combinations of these research methods, we will pursue potential improvements on the models outlined in <span class="citation" data-cites="percUse">Guha Majumder, Dutta Gupta, and Paul (<a href="references.html#ref-percUse" role="doc-biblioref">2022</a>)</span>. We will examine additional products and product types between multiple e-commerce websites (BestBuy, Target, Amazon).</p>
+<p>Exploring methods employed within each of combinations of these research efforts, we will pursue potential improvements on the models outlined in <span class="citation" data-cites="percUse">Guha Majumder, Dutta Gupta, and Paul (<a href="references.html#ref-percUse" role="doc-biblioref">2022</a>)</span>. We will examine additional products and product types between multiple e-commerce websites (BestBuy, Target, Amazon). A summary of our explorations are depicted in <a href="#fig-img-2" class="quarto-xref">Figure&nbsp;<span>1.2</span></a>.</p>
+<div id="fig-img-2" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-img-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src=".\imgs/Updated_Model.jpg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-img-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.2: Model Modification Goals
+</figcaption>
+</figure>
+</div>
+<p>This is not final, but what we plan to explore. If any metrics or measurements are found to not be significant in analysis and prediction of usefulness of a review, we will seek to explain the relationships (or lack thereof) and modify the final model accordingly. By incorporating these additional measures, we may be able to improve upon and generalize the original model to multiple product types across multiple e-commerce vendors.</p>
 </section>
 <section id="why-it-matters" class="level2" data-number="1.3">
 <h2 data-number="1.3" class="anchored" data-anchor-id="why-it-matters"><span class="header-section-number">1.3</span> Why It Matters</h2>
@@ -281,10 +301,14 @@ div.csl-indent {
 </section>
 <section id="literature-survey" class="level2" data-number="1.4">
 <h2 data-number="1.4" class="anchored" data-anchor-id="literature-survey"><span class="header-section-number">1.4</span> Literature Survey</h2>
+<!--* **Paper(s) on user/consumer/reviewer classification**
+<!--PC, UK, AK
+* **All papers you've found, provide a summary of what they did and any key results** -->
 <ul>
-<li><p><strong>Paper(s) on user/consumer/reviewer classification</strong> <!--PC, UK, AK--></p></li>
-<li><p><strong>All papers you’ve found, provide a summary of what they did and any key results</strong> <!-- note: all of these are now listed in the refs.bib file and can be referenced using the examples below.  We can add more references as needed!--></p>
+<li><p><span class="citation" data-cites="percUse">Guha Majumder, Dutta Gupta, and Paul (<a href="references.html#ref-percUse" role="doc-biblioref">2022</a>)</span></p>
 <ul>
+<li>Examined multiple-linear regression modeling to calculate the usefulness of an online review based upon type of product (search vs.&nbsp;experience), review sentiment, review star rating, review length, and number of votes for the review as being “useful”. Suggested exploration using larger number of products as well as customer/reviewer metadata.</li>
+</ul></li>
 <li><p><span class="citation" data-cites="Hu_Gong_Guo_2010">Hu, Gong, and Guo (<a href="references.html#ref-Hu_Gong_Guo_2010" role="doc-biblioref">2010</a>)</span> <!--Hu, W., Gong, Z., & Guo, J. (2010). Mining Product Features from Online Reviews. 2010 IEEE 7th International Conference on E-Business Engineering. doi:10.1109/icebe.2010.51.--></p>
 <ul>
 <li>The proposed system employs a two-step process for opinion mining: identifying opinion sentences using a SentiWordNet-based algorithm and extracting product features from all reviews in the database. This feature extraction function focuses on identifying commonly expressed positive or negative opinions before extracting explicit and implicit product features.</li>
@@ -295,21 +319,21 @@ div.csl-indent {
 </ul></li>
 <li><p><span class="citation" data-cites="Wang_Li_Tian_Wang_Cheng_2018">Wang et al. (<a href="references.html#ref-Wang_Li_Tian_Wang_Cheng_2018" role="doc-biblioref">2018</a>)</span> <!--Wang, W. M., Li, Z., Tian, Z. G., Wang, J. W., & Cheng, M. N. (2018). Extracting and summarizing affective features and responses from online product descriptions and reviews: A Kansei text mining approach. Engineering Applications of Artificial Intelligence, 73, 149–162. doi:10.1016/j.engappai.2018.05.005.--></p>
 <ul>
-<li>Authors have proposed a solution by implementing Kansei engineering and text mining simultaneously which will help customers in decision making process. It helps to categorize reviews into multiple sections and perform text mining by NLP techniques like Sentence segmentation, Tokenization, POS tagging</li>
-</ul></li>
+<li>Authors have proposed a solution by implementing Kansei engineering and text mining simultaneously which will help customers in decision making process. It helps to categorize reviews into multiple sections and perform text mining by NLP techniques like Sentence segmentation, Tokenization, and POS tagging.</li>
 </ul></li>
 </ul>
 </section>
 <section id="research-questions" class="level2" data-number="1.5">
 <h2 data-number="1.5" class="anchored" data-anchor-id="research-questions"><span class="header-section-number">1.5</span> Research Questions</h2>
 <ul>
-<li><p>Can the model from <span class="citation" data-cites="percUse">Guha Majumder, Dutta Gupta, and Paul (<a href="references.html#ref-percUse" role="doc-biblioref">2022</a>)</span> be generalized with</p>
+<li><p>Can the model from <span class="citation" data-cites="percUse">Guha Majumder, Dutta Gupta, and Paul (<a href="references.html#ref-percUse" role="doc-biblioref">2022</a>)</span> be generalized with:</p>
 <ul>
 <li><p>larger volume of products and product types from which to mine data?</p></li>
 <li><p>a sliding scalar multiplier representing the degree to which a product is a “search” (0) or “experience” (1) product?</p></li>
 <li><p>Adding modifiers to review content based upon:</p>
 <ul>
-<li>Customer / Reviewer Reliability?</li>
+<li><p>Customer / Reviewer reliability and reputation?</p></li>
+<li><p>Review Polarity?</p></li>
 </ul></li>
 </ul></li>
 <li><p>Can the polarity of reviews be judged accurately by using a Naive Bayes classification model? <span class="citation" data-cites="Hu_Gong_Guo_2010">Hu, Gong, and Guo (<a href="references.html#ref-Hu_Gong_Guo_2010" role="doc-biblioref">2010</a>)</span></p>
@@ -323,8 +347,8 @@ div.csl-indent {
 <li><p>Which of the 5 senses the product engages? (e.g.&nbsp;engagement of more senses, or engagement of solely specific senses like hearing and vision may suggest more experience-based than search based; examine relationship between search and experience vs.&nbsp;senses engaged)</p></li>
 <li><p>Item rarity (limited production or unique items vs.&nbsp;bulk-produced items)? (e.g.&nbsp;limited production products may be more experience-based than search-based)</p></li>
 </ul></li>
-<li><p>Can newer natrual language processing libraries provide a better fit for <span class="citation" data-cites="percUse">Guha Majumder, Dutta Gupta, and Paul (<a href="references.html#ref-percUse" role="doc-biblioref">2022</a>)</span> ’s Review Content metrics?</p></li>
-<li><p>How does sentiment in customer reviews correlate with customer satisfaction metrics or sales figures for a particular product? @ <!-- AK 2 research questions --></p></li>
+<li><p>Can newer natrual language processing libraries provide a better fit for Review Content metrics examined by <span class="citation" data-cites="percUse">Guha Majumder, Dutta Gupta, and Paul (<a href="references.html#ref-percUse" role="doc-biblioref">2022</a>)</span>?</p></li>
+<li><p>How does sentiment in customer reviews correlate with customer satisfaction metrics or sales figures for a particular product? <!-- AK 2 research questions --></p></li>
 <li><p>Can we categorize customer reviews based on customer experience and sentiment?</p></li>
 <li><p>Do specific product star ratings tend to incite more reviews, and if so, how does this impact the overall reputation measurement?</p></li>
 <li><p>Are specific quality descriptors in text-based reviews (e.g., ‘enthusiastic’, ‘disappointed’) strongly associated with certain rating levels, and how does this association affect product reputation?</p></li>
@@ -353,6 +377,11 @@ div.csl-indent {
 <li><p>Integrate with the model and test if Naive Bayes shows strong correlation metrics.</p></li>
 <li><p>Compare and contrast the model with and without incorporation.</p></li>
 </ul></li>
+<li><p>Successful computation of reputation scores for reviewers</p>
+<ul>
+<li><p>Check applicability across all sites used for determination of validity within the model.</p></li>
+<li><p>If valid and applicable, execute model against testing data set to ensure it holds.</p></li>
+</ul></li>
 </ul>
 <!--NOTE: Need success metrics/plan for sentiment-->
 </section>
@@ -370,73 +399,69 @@ Table&nbsp;1.1: Major Project Tasks
 <style type="text/css">
 </style>
 
-<table id="T_ffdd4" class="do-not-create-environment cell table table-sm table-striped small" data-quarto-postprocess="true">
+<table id="T_815a3" class="do-not-create-environment cell table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
-<th id="T_ffdd4_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Task</th>
-<th id="T_ffdd4_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Due Date</th>
+<th id="T_815a3_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Task</th>
+<th id="T_815a3_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Due Date</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_ffdd4_row0_col0" class="data row0 col0">Milestone 1 Submission</td>
-<td id="T_ffdd4_row0_col1" class="data row0 col1"></td>
+<td id="T_815a3_row0_col0" class="data row0 col0">Milestone 1 Submission</td>
+<td id="T_815a3_row0_col1" class="data row0 col1">Feb 26 2024</td>
 </tr>
 <tr class="even">
-<td id="T_ffdd4_row1_col0" class="data row1 col0">Product Identification and Selection</td>
-<td id="T_ffdd4_row1_col1" class="data row1 col1"></td>
+<td id="T_815a3_row1_col0" class="data row1 col0">Product Identification and Selection</td>
+<td id="T_815a3_row1_col1" class="data row1 col1">Feb 28 2024</td>
 </tr>
 <tr class="odd">
-<td id="T_ffdd4_row2_col0" class="data row2 col0">Vendor Identification and Selection</td>
-<td id="T_ffdd4_row2_col1" class="data row2 col1"></td>
+<td id="T_815a3_row2_col0" class="data row2 col0">Vendor Identification and Selection</td>
+<td id="T_815a3_row2_col1" class="data row2 col1">Feb 28 2024</td>
 </tr>
 <tr class="even">
-<td id="T_ffdd4_row3_col0" class="data row3 col0">Data Collection</td>
-<td id="T_ffdd4_row3_col1" class="data row3 col1"></td>
+<td id="T_815a3_row3_col0" class="data row3 col0">Data Collection</td>
+<td id="T_815a3_row3_col1" class="data row3 col1">Mar 8 2024</td>
 </tr>
 <tr class="odd">
-<td id="T_ffdd4_row4_col0" class="data row4 col0">Data Cleaning/Pre-Processing</td>
-<td id="T_ffdd4_row4_col1" class="data row4 col1"></td>
+<td id="T_815a3_row4_col0" class="data row4 col0">Data Cleaning/Pre-Processing</td>
+<td id="T_815a3_row4_col1" class="data row4 col1">Mar 17 2024</td>
 </tr>
 <tr class="even">
-<td id="T_ffdd4_row5_col0" class="data row5 col0">Review Classification (Naive Bayes, Sentiment, Kansei)</td>
-<td id="T_ffdd4_row5_col1" class="data row5 col1"></td>
+<td id="T_815a3_row5_col0" class="data row5 col0">Milestone 2 Submission</td>
+<td id="T_815a3_row5_col1" class="data row5 col1">Mar 20 2024</td>
 </tr>
 <tr class="odd">
-<td id="T_ffdd4_row6_col0" class="data row6 col0">Product Classification</td>
-<td id="T_ffdd4_row6_col1" class="data row6 col1"></td>
+<td id="T_815a3_row6_col0" class="data row6 col0">Review Classification (Naive Bayes, Kansei)</td>
+<td id="T_815a3_row6_col1" class="data row6 col1">Mar 27 2024</td>
 </tr>
 <tr class="even">
-<td id="T_ffdd4_row7_col0" class="data row7 col0">Milestone 2 Submission</td>
-<td id="T_ffdd4_row7_col1" class="data row7 col1"></td>
+<td id="T_815a3_row7_col0" class="data row7 col0">Product Classification</td>
+<td id="T_815a3_row7_col1" class="data row7 col1">Mar 27 2024</td>
 </tr>
 <tr class="odd">
-<td id="T_ffdd4_row8_col0" class="data row8 col0">Exploratory Data Analysis</td>
-<td id="T_ffdd4_row8_col1" class="data row8 col1"></td>
+<td id="T_815a3_row8_col0" class="data row8 col0">Reputation Classification</td>
+<td id="T_815a3_row8_col1" class="data row8 col1">Mar 27 2024</td>
 </tr>
 <tr class="even">
-<td id="T_ffdd4_row9_col0" class="data row9 col0">Modeling - Search vs. Experience</td>
-<td id="T_ffdd4_row9_col1" class="data row9 col1"></td>
+<td id="T_815a3_row9_col0" class="data row9 col0">Exploratory Data Analysis</td>
+<td id="T_815a3_row9_col1" class="data row9 col1">Mar 31 2024</td>
 </tr>
 <tr class="odd">
-<td id="T_ffdd4_row10_col0" class="data row10 col0">Model Reproduction - Original Paper</td>
-<td id="T_ffdd4_row10_col1" class="data row10 col1"></td>
+<td id="T_815a3_row10_col0" class="data row10 col0">Milestone 3 Submission</td>
+<td id="T_815a3_row10_col1" class="data row10 col1">Unknown</td>
 </tr>
 <tr class="even">
-<td id="T_ffdd4_row11_col0" class="data row11 col0">Model Analysis for Selection</td>
-<td id="T_ffdd4_row11_col1" class="data row11 col1"></td>
+<td id="T_815a3_row11_col0" class="data row11 col0">Model Selection</td>
+<td id="T_815a3_row11_col1" class="data row11 col1">April 7 2024</td>
 </tr>
 <tr class="odd">
-<td id="T_ffdd4_row12_col0" class="data row12 col0">Model Testing:</td>
-<td id="T_ffdd4_row12_col1" class="data row12 col1"></td>
+<td id="T_815a3_row12_col0" class="data row12 col0">Model Testing:</td>
+<td id="T_815a3_row12_col1" class="data row12 col1">April 11 2024</td>
 </tr>
 <tr class="even">
-<td id="T_ffdd4_row13_col0" class="data row13 col0">Milestone 3 Submission</td>
-<td id="T_ffdd4_row13_col1" class="data row13 col1"></td>
-</tr>
-<tr class="odd">
-<td id="T_ffdd4_row14_col0" class="data row14 col0">Milestone 4 Submission</td>
-<td id="T_ffdd4_row14_col1" class="data row14 col1"></td>
+<td id="T_815a3_row13_col0" class="data row13 col0">Complete Final Paper / Milestone 4</td>
+<td id="T_815a3_row13_col1" class="data row13 col1">April 17 2024</td>
 </tr>
 </tbody>
 </table>
@@ -932,8 +957,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./data.html" class="pagination-link" aria-label="<span class='chapter-number'>2</span>&nbsp; <span class='chapter-title'>Data</span>">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./data.html" class="pagination-link" aria-label="<span class='chapter-number'>2</span>&nbsp; <span class='chapter-title'>Data Exploration</span>">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Exploration</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

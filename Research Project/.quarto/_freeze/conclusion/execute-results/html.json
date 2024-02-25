@@ -1,10 +1,10 @@
 {
-  "hash": "08e32c74b60813d13ec068abef9c9763",
+  "hash": "bafce1e179170e5ba86082e95bc4f9ac",
   "result": {
     "engine": "jupyter",
-    "markdown": "# Conclusions {#sec-conclusions}\n\n\n\nHere's our conclusions section\n\n",
+    "markdown": "# Conclusion {#sec-conclusions}\n\n\n\nHere's our conclusions section\n\n",
     "supporting": [
-      "conclusion_files"
+      "conclusion_files\\figure-html"
     ],
     "filters": [],
     "includes": {}

@@ -1,1 +1,1 @@
-{"entries":[{"caption":"2  Data","order":{"section":[2,0,0,0,0,0,0],"number":1},"key":"sec-data"}],"options":{"chapters":true,"chapter-id":"sec-data"},"headings":["some-items-to-research","collection","preparation-standardization-and-cleaning","visualization","sec-data"]}
+{"headings":["some-items-to-research","collection","preparation-standardization-and-cleaning","visualization","sec-data"],"options":{"chapters":true,"chapter-id":"sec-data"},"entries":[{"order":{"section":[2,0,0,0,0,0,0],"number":1},"key":"sec-data","caption":"2  Data Exploration"}]}

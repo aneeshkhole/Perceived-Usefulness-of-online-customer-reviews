@@ -16,14 +16,16 @@ Customers, when searching for products with specific features and aspects, need 
 We seek to expound upon the research of [@percUse] to explore additional recommended research areas to improve upon and increase the general applicability of the model.
 
 ## What / Where
-<!-- -->
-@percUse provided the following areas for recommended additional research at the conclusion of their paper: <!--PC-->
+
+@percUse provided the following summary model for what aspects and features they took into consideration in predicting the perceived usefulness of a customer review in @fig-img-1.
+
+![Model Overview](/imgs/Orig_Model.jpg){#fig-img-1}
+
+Furthermore, the authors provided the following areas for recommended additional research at the conclusion of their paper: <!--PC-->
 
 1. Expand the number of products beyond 3 items (one search, one experience, one mixed) to better generalize the model.
 
 1. Explore customer or reviewer metadata for classifying reviewer types to enhance model performance.
-
-<!--Team - I don't know that we can actually go about getting customer metadata.  This may be a bridge too far for us unless the site(s) we identify can provide such information--> 
 
 We seek to examine the above two above items, and to explore the possibility of assessing a scale for products to determine the extent to which they are a search or experience-based product.  We further seek to inspect additional potential modifiers to the underlying model for statistical and operational applicability; we've sought out work from other research teams to identify potential methods we can leverage to pursue these ends.
 
@@ -33,7 +35,11 @@ We seek to examine the above two above items, and to explore the possibility of 
 
 * Attempting to assess the reliability of a customer's review based on star-rating and a 'sentiment score' of their textual feedback.  
 
-Exploring methods employed within each of combinations of these research methods, we will pursue potential improvements on the models outlined in @percUse.  We will examine additional products and product types between multiple e-commerce websites (BestBuy, Target, Amazon).
+Exploring methods employed within each of combinations of these research efforts, we will pursue potential improvements on the models outlined in @percUse.  We will examine additional products and product types between multiple e-commerce websites (BestBuy, Target, Amazon).  A summary of our explorations are depicted in @fig-img-2.
+
+![Model Modification Goals](/imgs/Updated_Model.jpg){#fig-img-2}
+
+This is not final, but what we plan to explore. If any metrics or measurements are found to not be significant in analysis and prediction of usefulness of a review, we will seek to explain the relationships (or lack thereof) and modify the final model accordingly.  By incorporating these additional measures, we may be able to improve upon and generalize the original model to multiple product types across multiple e-commerce vendors.
 
 ## Why It Matters
 
@@ -69,25 +75,29 @@ Examining additional product types could support a generalization of the authors
 
 ## Literature Survey
 
-* **Paper(s) on user/consumer/reviewer classification**
-<!--PC, UK, AK-->
-* **All papers you've found, provide a summary of what they did and any key results** <!-- note: all of these are now listed in the refs.bib file and can be referenced using the examples below.  We can add more references as needed!-->
+<!--* **Paper(s) on user/consumer/reviewer classification**
+<!--PC, UK, AK
+* **All papers you've found, provide a summary of what they did and any key results** -->
 
-    * @Hu_Gong_Guo_2010 <!--Hu, W., Gong, Z., & Guo, J. (2010). Mining Product Features from Online Reviews. 2010 IEEE 7th International Conference on E-Business Engineering. doi:10.1109/icebe.2010.51.--> 
+* @percUse 
+
+    * Examined multiple-linear regression modeling to calculate the usefulness of an online review based upon type of product (search vs. experience), review sentiment, review star rating, review length, and number of votes for the review as being "useful".  Suggested exploration using larger number of products as well as customer/reviewer metadata.
+
+* @Hu_Gong_Guo_2010 <!--Hu, W., Gong, Z., & Guo, J. (2010). Mining Product Features from Online Reviews. 2010 IEEE 7th International Conference on E-Business Engineering. doi:10.1109/icebe.2010.51.--> 
+
+    * The proposed system employs a two-step process for opinion mining: identifying opinion sentences using a SentiWordNet-based algorithm and extracting product features from all reviews in the database. This feature extraction function focuses on identifying commonly expressed positive or negative opinions before extracting explicit and implicit product features.
+
+* @Rajeev_Rekha_2015 <!--Rajeev, P. V., & Rekha, V. S. (2015). Recommending products to customers using opinion mining of online product reviews and features. 2015 International Conference on Circuits, Power and Computing Technologies [ICCPCT-2015]. doi:10.1109/iccpct.2015.7159433. --> 
     
-        * The proposed system employs a two-step process for opinion mining: identifying opinion sentences using a SentiWordNet-based algorithm and extracting product features from all reviews in the database. This feature extraction function focuses on identifying commonly expressed positive or negative opinions before extracting explicit and implicit product features.
+    * This paper presents techniques like Opinion mining, feature extraction and Naives Bayes classification for review polarity determination. The authors suggest performing both Objective and Subjective analysis of features by considering qualitative and quantitative features of the data respectively.  
 
-    * @Rajeev_Rekha_2015 <!--Rajeev, P. V., & Rekha, V. S. (2015). Recommending products to customers using opinion mining of online product reviews and features. 2015 International Conference on Circuits, Power and Computing Technologies [ICCPCT-2015]. doi:10.1109/iccpct.2015.7159433. --> 
-        
-        * This paper presents techniques like Opinion mining, feature extraction and Naives Bayes classification for review polarity determination. The authors suggest performing both Objective and Subjective analysis of features by considering qualitative and quantitative features of the data respectively.  
+* @Wang_Li_Tian_Wang_Cheng_2018 <!--Wang, W. M., Li, Z., Tian, Z. G., Wang, J. W., & Cheng, M. N. (2018). Extracting and summarizing affective features and responses from online product descriptions and reviews: A Kansei text mining approach. Engineering Applications of Artificial Intelligence, 73, 149–162. doi:10.1016/j.engappai.2018.05.005.-->
 
-    * @Wang_Li_Tian_Wang_Cheng_2018 <!--Wang, W. M., Li, Z., Tian, Z. G., Wang, J. W., & Cheng, M. N. (2018). Extracting and summarizing affective features and responses from online product descriptions and reviews: A Kansei text mining approach. Engineering Applications of Artificial Intelligence, 73, 149–162. doi:10.1016/j.engappai.2018.05.005.-->
-
-        * Authors have proposed a solution by implementing Kansei engineering and text mining simultaneously which will help customers in decision making process. It helps to categorize reviews into multiple sections and perform text mining by NLP techniques like Sentence segmentation, Tokenization, POS tagging
+    * Authors have proposed a solution by implementing Kansei engineering and text mining simultaneously which will help customers in decision making process. It helps to categorize reviews into multiple sections and perform text mining by NLP techniques like Sentence segmentation, Tokenization, and POS tagging.
 
 ## Research Questions
 
-* Can the model from @percUse be generalized with
+* Can the model from @percUse be generalized with:
 
     - larger volume of products and product types from which to mine data?
 
@@ -95,7 +105,9 @@ Examining additional product types could support a generalization of the authors
 
     - Adding modifiers to review content based upon:
 
-        * Customer / Reviewer Reliability?
+        * Customer / Reviewer reliability and reputation?
+
+        * Review Polarity?
 
 * Can the polarity of reviews be judged accurately by using a Naive Bayes classification model? @Hu_Gong_Guo_2010
 
@@ -111,9 +123,9 @@ Examining additional product types could support a generalization of the authors
 
     * Item rarity (limited production or unique items vs. bulk-produced items)? (e.g. limited production products may be more experience-based than search-based)
 
-* Can newer natrual language processing libraries provide a better fit for @percUse 's Review Content metrics?
+* Can newer natrual language processing libraries provide a better fit for Review Content metrics examined by @percUse?
 
-* How does sentiment in customer reviews correlate with customer satisfaction metrics or sales figures for a particular product? @
+* How does sentiment in customer reviews correlate with customer satisfaction metrics or sales figures for a particular product?
 <!-- AK 2 research questions -->
 
 * Can we categorize customer reviews based on customer experience and sentiment?
@@ -151,6 +163,12 @@ Examining additional product types could support a generalization of the authors
 
     * Compare and contrast the model with and without incorporation.
 
+* Successful computation of reputation scores for reviewers
+
+    * Check applicability across all sites used for determination of validity within the model.
+
+    * If valid and applicable, execute model against testing data set to ensure it holds.
+
 <!--NOTE: Need success metrics/plan for sentiment-->
 
 ## Project Schedule / Timeline
@@ -164,21 +182,21 @@ Below in @tbl-task-list, we lay out the major tasks, deliverables, and their res
 #note to reference a table or a figure in the doc - you do @label
 
 task_list = [
-    {'Task':'Milestone 1 Submission','Due Date':''},
-    {'Task':'Product Identification and Selection','Due Date':''},
-    {'Task':'Vendor Identification and Selection','Due Date':''},
-    {'Task':'Data Collection','Due Date':''},
-    {'Task':'Data Cleaning/Pre-Processing','Due Date':''},
-    {'Task':'Review Classification (Naive Bayes, Sentiment, Kansei)','Due Date':''},
-    {'Task':'Product Classification','Due Date':''},
-    {'Task':'Milestone 2 Submission','Due Date':''},
-    {'Task':'Exploratory Data Analysis','Due Date':''},
-    {'Task':'Modeling - Search vs. Experience','Due Date':''},
-    {'Task':'Model Reproduction - Original Paper','Due Date':''},
-    {'Task':'Model Analysis for Selection','Due Date':''},
-    {'Task':'Model Testing:','Due Date':''},
-    {'Task':'Milestone 3 Submission','Due Date':''},
-    {'Task':'Milestone 4 Submission','Due Date':''},
+    {'Task':'Milestone 1 Submission','Due Date':'Feb 26 2024'},
+    {'Task':'Product Identification and Selection','Due Date':'Feb 28 2024'},
+    {'Task':'Vendor Identification and Selection','Due Date':'Feb 28 2024'},
+    {'Task':'Data Collection','Due Date':'Mar 8 2024'},
+    {'Task':'Data Cleaning/Pre-Processing','Due Date':'Mar 17 2024'},
+    {'Task':'Milestone 2 Submission','Due Date':'Mar 20 2024'},
+    {'Task':'Review Classification (Naive Bayes, Kansei)','Due Date':'Mar 27 2024'},
+    {'Task':'Product Classification','Due Date':'Mar 27 2024'},
+    {'Task':'Reputation Classification','Due Date':'Mar 27 2024'},
+    {'Task':'Exploratory Data Analysis','Due Date':'Mar 31 2024'},
+    {'Task':'Milestone 3 Submission','Due Date':'Unknown'},
+    #{'Task':'Model Reproduction - Original Paper','Due Date':''},
+    {'Task':'Model Selection','Due Date':'April 7 2024'},
+    {'Task':'Model Testing:','Due Date':'April 11 2024'},
+    {'Task':'Complete Final Paper / Milestone 4','Due Date':'April 17 2024'}
 ]
 
 tbl_proj_tasks = pd.DataFrame(
