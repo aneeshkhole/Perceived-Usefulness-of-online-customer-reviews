@@ -1,19 +1,31 @@
-# Data Exploration {#sec-data}
+# Data Collection and Exploration {#sec-data}
 
 ```{python}
 #module imports|
 import pandas as pd, numpy as np, matplotlib.pyplot as plt
 ```
 
-## Collection
+## Data Collection Overview
+
+Leverage python Selenium, urllib, and Beautiful Soup to scrape data from X products.
+
+    * Sought to collect some data from 3 websites - target, amazon, and best buy.
+
+    * Where possible, collect same entity from multiple sites
+
+As part of collection, to the greatest extent we are able, we cleaned information *during* the scraping process.  We leveraged tools such as the python regular expression library and (*anything else?*) to pull the exact information we sought while scraping.  The only possible additional cleaning that may be required after scraping is the handling of unicode characters within product names, product reviews, and so forth.
+
+In terms of simplicity for scraping our data, we will manually identify a list of products.  *original paper* leveraged solely 3 products from Amazon.  Our team seeks to scrape between 20 and 30 products and all their reviews from Target, Amazon, and Best Buy.  By doing so, we are greatly increasing the sample size of data compared to the original work performed.
+
+## Data Collection Details
 
 In collecting our data, in order to adhere to the model implemented by *(original paper here)*, we require the following data points, at a minimum:
 
 ```{python dataReqsProducts}
 #|tbl: tbl-data-reqs-products
 data_reqs_product = {
-    'Variable':['Product Title','Product Category*','Product Details/Specs'],
-    'Data Type':['string','string','string']
+    'Variable':['Product Title','Product Category*','Product Details/Specs', 'Product Cost'],
+    'Data Type':['string','string','string','float']
 }
 tbl_data_reqs = pd.DataFrame(data_reqs_product)
 tbl_data_reqs.set_index('Variable')
@@ -32,7 +44,7 @@ tbl_data_reqs.style.hide(axis='index')
 ```
 
 
-From our collected data, here are some of the calculations we'll need to run for building our models.
+From our collected data, here are some of the calculations we'll need to run for building our models.  If time is available, we will run these calculations using *NLP LIBRARIES HERE* before the completion of this milestone.
 
 ```{python dataCalcs}
 #|tbl: tbl-data-calcs
@@ -45,7 +57,34 @@ tbl_data_calcs.set_index('Variable')
 tbl_data_calcs.style.hide(axis='index')
 ```
 
-In terms of structuring our stored data, we will have a central table.  This should contain a listing of all products we research.  
+In terms of structuring our stored data, we will have a central table and child tables.  Since we will seek, in some cases, to gather the *same* product from multiple websites, we must have a structure that identifies:
+
+* The full listing of products, assigned an arbitrary ID
+
+* A listing of specific products we intend to scrape from each of the websites we've identified.  Adding an additional ID of \[company_name\]-\[arbitrary_product_id\]
+
+* Site-specific product information
+
+* Site-specific review content and metadata
+
+To wrangle the potential amount of data we may collect, we will partition review files into their own files under the following convention:  \[company_name\]-\[arbitrary_product_id\]-review_content.csv.  Using this method will allow us to capture thousands of reviews for multiple products without overrunning GitHub filesize limitations.  Following this convention will also allow us to easily script out the integration of all these files for analysis when we begin building and applying our models.
+
+Additionally, the use of assigning products an arbitrary ID that is common between different vendors will allow us to *directly compare* review and product information across multiple vendors simultaneously to gather additional insights.  Effectively, if we group products by this identifier, we can see how the product performs overall in multiple e-commerce platforms.  Similarly, we can use this information to evaluate and run comparisons and tests on individual products, given the treatment of their offering on different platforms.  This can help generate even more insight before model application.  
+For instance, we may be able to explore questions like:
+
+* Is the price of a product higher, given it's offered on Amazon, BestBuy, or Target?
+
+* Is a product's star rating affected by which e-commerce platform is selling it?
+
+* Is there a substantial difference in number of product reviews on one e-commerce platform vs. another?
+
+* Is one e-commerce platform more likely to have input and feedback on reviews (i.e. higher proportion of "this review is helpful" votes to total number of reviews)?
+
+* What is the difference in the level of detail provided in product descriptions (e.g. for the same product) across each e-commerce platform?
+
+Structuring our data properly during the collection process will enable us to explore and answer these questions.
+
+<!--This should contain a listing of all products we research.  
 
     * We may research the same product from each website.  If we do, we'll need to build a linking table.  It should contain the record ID from the main table, and the ID from the website table (i.e. URL or some other identifier)
 
@@ -61,7 +100,7 @@ To classify products...we need metadata of the product itself.  We are seeking t
 
     * Digital/Physical Music (duration, music style / genre, others?)
 
-    * Grocery Products (calories per serving, special markers [gluten-free, fat-free, vegan], )  - *potential hypothesis that grocery products with special markings may be more experience-based than search-based.*
+    * Grocery Products (calories per serving, special markers [gluten-free, fat-free, vegan], )  - *potential hypothesis that grocery products with special markings may be more experience-based than search-based.*-->
 
 <!-- 
 
@@ -73,15 +112,13 @@ To classify products...we need metadata of the product itself.  We are seeking t
 
     d. Verify goodness of fit of original model
 
--->
-
 Additional Products
 
 * Clothing - likely a mixed product, potentially ranging from search-based for plain t-shirts to experience-based for high fashion products
 
-    * material?
+    * material? -->
 
-## Preparation, Standardization, and Cleaning
+## Collection Procdures?
 
 We wrote code to allow us to (mostly) template out our gathering of information from each website.  The general process for each page is similar for data gathering.  To alleviate any unnecessary burden on the target websites, we manually identified URLs to the specific products we sought out to gather, and wrote our code to iterate through those URLs and pull the necessary data and features we sought.  This hybrid approach saved us time and effort.
 
@@ -93,7 +130,7 @@ We wrote code to allow us to (mostly) template out our gathering of information 
 
 * Gathering from BestBuy (Electronic Products, Furniture Item(s)? - no grocery or clothing)
 
-## Visualization
+## Visualizations
 
 * Inter-Website Comparison of Product Reviews
 
@@ -126,4 +163,8 @@ We wrote code to allow us to (mostly) template out our gathering of information 
         * Inspection of Data and / or Scoring using Kansei method.
 
 * Will need to take note on if / how these variables conform to some form of statistical distribution (uniform, normal, exponential, etc)
+
+## Data Before / After
+
+## Insights from Collection and EDA 
 
