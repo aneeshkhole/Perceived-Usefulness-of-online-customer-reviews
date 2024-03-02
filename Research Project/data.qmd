@@ -5,27 +5,34 @@
 import pandas as pd, numpy as np, matplotlib.pyplot as plt
 ```
 
-Here's our data section.
-
-## Some items to research
-
-* [Wikipedia](https://en.wikipedia.org/wiki/SEC_classification_of_goods_and_services)
-
-* 
-
 ## Collection
+
 In collecting our data, in order to adhere to the model implemented by *(original paper here)*, we require the following data points, at a minimum:
 
-```{python dataReqs}
-#|tbl: tbl-data-reqs
-data_reqs = {
-    'Variable':['Product Title','Product Category*','Product Details/Specs', 'Verified Purchase', 'Star Rating', 'Review Content', 'Useful Votes'],
-    'Data Type':['string','string','string','boolean','float','string','integer']
+```{python dataReqsProducts}
+#|tbl: tbl-data-reqs-products
+data_reqs_product = {
+    'Variable':['Product Title','Product Category*','Product Details/Specs'],
+    'Data Type':['string','string','string']
 }
-tbl_data_reqs = pd.DataFrame(data_reqs)
+tbl_data_reqs = pd.DataFrame(data_reqs_product)
 tbl_data_reqs.set_index('Variable')
 tbl_data_reqs.style.hide(axis='index')
 ```
+
+```{python dataReqsRatings}
+#|tbl: tbl-data-reqs-ratings
+data_reqs_rating = {
+    'Variable':['Verified Purchase', 'Star Rating', 'Review Content', 'Useful Votes'],
+    'Data Type':['boolean','float','string','integer']
+}
+tbl_data_reqs = pd.DataFrame(data_reqs_rating)
+tbl_data_reqs.set_index('Variable')
+tbl_data_reqs.style.hide(axis='index')
+```
+
+
+From our collected data, here are some of the calculations we'll need to run for building our models.
 
 ```{python dataCalcs}
 #|tbl: tbl-data-calcs
@@ -37,6 +44,14 @@ tbl_data_calcs  = pd.DataFrame(data_calcs)
 tbl_data_calcs.set_index('Variable')
 tbl_data_calcs.style.hide(axis='index')
 ```
+
+In terms of structuring our stored data, we will have a central table.  This should contain a listing of all products we research.  
+
+    * We may research the same product from each website.  If we do, we'll need to build a linking table.  It should contain the record ID from the main table, and the ID from the website table (i.e. URL or some other identifier)
+
+    * This table should have a relationship to, possibly a table that exists for each website, or to a single file in which we store all product results.
+
+    * Having this structure could allow us to see if/how product reviews differ between websites (or if a website tends to have a bias towards better or worse reviews)
 
 To classify products...we need metadata of the product itself.  We are seeking to use the following products, and for each, we'll collect the following data:
 
@@ -68,12 +83,47 @@ Additional Products
 
 ## Preparation, Standardization, and Cleaning
 
-* Gathering from Amazon (All Products)
-
-* Gathering from BestBuy (Electronic Products, no grocery or clothing)
+We wrote code to allow us to (mostly) template out our gathering of information from each website.  The general process for each page is similar for data gathering.  To alleviate any unnecessary burden on the target websites, we manually identified URLs to the specific products we sought out to gather, and wrote our code to iterate through those URLs and pull the necessary data and features we sought.  This hybrid approach saved us time and effort.
 
 * Gathering from Target (All products)
 
+    * Target has dynamic content on their webpages.  We used Python Selenium to navigate to product pages and automate the selection of items needed to expand sections to reveal additional data.  We also automated the process of expanding out all reviews so as to iterate through and parse the content of every review for each product in question.  We extracted the fields listed above (reference here) to store in our records tables.
+
+* Gathering from Amazon (All Products)
+
+* Gathering from BestBuy (Electronic Products, Furniture Item(s)? - no grocery or clothing)
+
 ## Visualization
 
- 
+* Inter-Website Comparison of Product Reviews
+
+    * Same Product 
+
+        * Clustering? 
+
+        * Distances?
+
+        * 
+
+    * All Products
+
+    * Inspect the following, visually: 
+    
+        * Product Ratings, 
+        
+        * Customer Sentiments, 
+        
+        * Review Polarity, 
+        
+        * Naive Bayes Classifier, 
+        
+        * Reliability estiamtes, 
+        
+        * Average / Spread of number of ratings per product, 
+        
+        * Average/Spread of Useful Votes per Product Review, 
+        
+        * Inspection of Data and / or Scoring using Kansei method.
+
+* Will need to take note on if / how these variables conform to some form of statistical distribution (uniform, normal, exponential, etc)
+
