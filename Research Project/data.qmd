@@ -1,7 +1,7 @@
 # Data Collection and Exploration {#sec-data}
 
 ```{python}
-#module imports|
+#module imports
 import pandas as pd, numpy as np, matplotlib.pyplot as plt
 ```
 
@@ -9,17 +9,17 @@ import pandas as pd, numpy as np, matplotlib.pyplot as plt
 
 Leverage python Selenium, urllib, and Beautiful Soup to scrape data from X products.
 
-    * Sought to collect some data from 3 websites - target, amazon, and best buy.
+* Sought to collect some data from 3 websites - target, amazon, and best buy.
 
-    * Where possible, collect same entity from multiple sites
+* Where possible, collect same entity from multiple sites
 
 As part of collection, to the greatest extent we are able, we cleaned information *during* the scraping process.  We leveraged tools such as the python regular expression library and (*anything else?*) to pull the exact information we sought while scraping.  The only possible additional cleaning that may be required after scraping is the handling of unicode characters within product names, product reviews, and so forth.
 
-In terms of simplicity for scraping our data, we will manually identify a list of products.  *original paper* leveraged solely 3 products from Amazon.  Our team seeks to scrape between 20 and 30 products and all their reviews from Target, Amazon, and Best Buy.  By doing so, we are greatly increasing the sample size of data compared to the original work performed.
+In terms of simplicity for scraping our data, we will manually identify a list of products.  @percUse leveraged solely 3 products from Amazon.  Our team seeks to scrape between 20 and 30 products and all their reviews from Target, Amazon, and Best Buy.  By doing so, we are greatly increasing the sample size of data compared to the original work performed.
 
 ## Data Collection Details
 
-In collecting our data, in order to adhere to the model implemented by *(original paper here)*, we require the following data points, at a minimum:
+In collecting our data, in order to adhere to the model implemented by @percUse, we require the following data points, at a minimum:
 
 ```{python dataReqsProducts}
 #|tbl: tbl-data-reqs-products
@@ -44,13 +44,13 @@ tbl_data_reqs.style.hide(axis='index')
 ```
 
 
-From our collected data, here are some of the calculations we'll need to run for building our models.  If time is available, we will run these calculations using *NLP LIBRARIES HERE* before the completion of this milestone.
+From our collected data, here are some of the calculations we'll need to run for building our models.  If time is available, we will run these calculations using Python's NLTK before the completion of this milestone.
 
 ```{python dataCalcs}
 #|tbl: tbl-data-calcs
 data_calcs = {
-    'Variable':['Review Length', 'Sentiment Score','Reputation Score','Product Type Score','Polarity Score'],
-    'Data Type':['integer','float','float','float','float']
+    'Variable':['Product Subjectivity','Review Length', 'Sentiment Score','Reputation Score','Product Type Score','Polarity Score'],
+    'Data Type':['float','integer','float','float','float','float']
 }
 tbl_data_calcs  = pd.DataFrame(data_calcs)
 tbl_data_calcs.set_index('Variable')
@@ -70,6 +70,7 @@ In terms of structuring our stored data, we will have a central table and child 
 To wrangle the potential amount of data we may collect, we will partition review files into their own files under the following convention:  \[company_name\]-\[arbitrary_product_id\]-review_content.csv.  Using this method will allow us to capture thousands of reviews for multiple products without overrunning GitHub filesize limitations.  Following this convention will also allow us to easily script out the integration of all these files for analysis when we begin building and applying our models.
 
 Additionally, the use of assigning products an arbitrary ID that is common between different vendors will allow us to *directly compare* review and product information across multiple vendors simultaneously to gather additional insights.  Effectively, if we group products by this identifier, we can see how the product performs overall in multiple e-commerce platforms.  Similarly, we can use this information to evaluate and run comparisons and tests on individual products, given the treatment of their offering on different platforms.  This can help generate even more insight before model application.  
+
 For instance, we may be able to explore questions like:
 
 * Is the price of a product higher, given it's offered on Amazon, BestBuy, or Target?
@@ -83,40 +84,6 @@ For instance, we may be able to explore questions like:
 * What is the difference in the level of detail provided in product descriptions (e.g. for the same product) across each e-commerce platform?
 
 Structuring our data properly during the collection process will enable us to explore and answer these questions.
-
-<!--This should contain a listing of all products we research.  
-
-    * We may research the same product from each website.  If we do, we'll need to build a linking table.  It should contain the record ID from the main table, and the ID from the website table (i.e. URL or some other identifier)
-
-    * This table should have a relationship to, possibly a table that exists for each website, or to a single file in which we store all product results.
-
-    * Having this structure could allow us to see if/how product reviews differ between websites (or if a website tends to have a bias towards better or worse reviews)
-
-To classify products...we need metadata of the product itself.  We are seeking to use the following products, and for each, we'll collect the following data:
-
-* Original Products: (update to table later)
-
-    * Video Games (rating I.e. pg, pg-13, R, but from MSRB ratings).
-
-    * Digital/Physical Music (duration, music style / genre, others?)
-
-    * Grocery Products (calories per serving, special markers [gluten-free, fat-free, vegan], )  - *potential hypothesis that grocery products with special markings may be more experience-based than search-based.*-->
-
-<!-- 
-
-    a. Original products from (paper): Digital Music, Video Game, and Grocery Item
-
-    b. Additional products (Amazon and Target): Furniture Items, Clothing Items, Home Appliances, Books, Cosmetics, Cleaning supplies
-
-    c. Additional Proucts (Amazon, Target, BestBuy): Electronics
-
-    d. Verify goodness of fit of original model
-
-Additional Products
-
-* Clothing - likely a mixed product, potentially ranging from search-based for plain t-shirts to experience-based for high fashion products
-
-    * material? -->
 
 ## Collection Procdures?
 
@@ -132,6 +99,78 @@ We wrote code to allow us to (mostly) template out our gathering of information 
 
 ## Visualizations
 
+* We require a minimum of 10 unique EDA plots for this milestone.  We've outlined some of the below but need our data in order and unified prior to development.
+
+    * Scatter Plots
+```{python ScatterPlots}
+
+```
+    * Bar Plots 
+
+```{python BarPlots}
+
+```
+
+    * Box Plots
+
+```{python BoxPlots}
+
+```
+
+    * Violin Plots (e.g. same product, two different websites)
+
+```{python ViolinPlots}
+
+```
+
+    * review length
+
+        * vs star rating
+
+        * vs sentiment
+
+    * Product description / detail length
+
+        * Potentially explore "specificity" classifier
+
+    * Correlation analyses and linear regressions
+
+```{python LinRegs}
+
+```
+
+    * Heatmaps
+
+```{python Heatmaps}
+
+```
+
+    * Tukey test visuals
+
+```{python exampleCode}
+
+#conducting a welch_anova test for 
+#difference of treatment (e.g. website vs. score)
+#import pingouin as pg 
+#welch_anova
+#pg.welch_anova(data=df, between='company',dv=star_rating|sentiment|polarity|total_star_rating)
+
+
+#tukey test 
+
+#from statsmodels.stats.multicomp import pairwise_tukeyhsd
+# tukey_test = pairwise_tukey_hsd(
+#     endog=df[col],
+#     groups=df[col2],
+#     alpha=sig_level
+# )
+# tukey_test.plot_simultaneous()
+# plt.title('Tukey test results A vs. B')
+# plt.xlabel('tested variable')
+# plt.ylabel('treatments (e.g. website)')
+# print(tukey_test.summary())
+
+```
 * Inter-Website Comparison of Product Reviews
 
     * Same Product 
@@ -140,25 +179,25 @@ We wrote code to allow us to (mostly) template out our gathering of information 
 
         * Distances?
 
-        * 
-
     * All Products
 
     * Inspect the following, visually: 
     
-        * Product Ratings, 
+        * Product Ratings
         
-        * Customer Sentiments, 
+        * Customer Sentiments **try to score before plotting & turn-in**
         
-        * Review Polarity, 
+        * Review Polarity **try to score and store before plotting**
         
-        * Naive Bayes Classifier, 
+        * Naive Bayes Classifier
         
-        * Reliability estiamtes, 
+        * Reliability estimates
+
+        * Product description subjectivity scores **try to score and store before turn-in** 
         
-        * Average / Spread of number of ratings per product, 
+        * Average / Spread of number of ratings per product, **try to score and store before turn-in** 
         
-        * Average/Spread of Useful Votes per Product Review, 
+        * Average/Spread of Useful Votes per Product Review, **try to score and store before turn-in** 
         
         * Inspection of Data and / or Scoring using Kansei method.
 
@@ -166,5 +205,8 @@ We wrote code to allow us to (mostly) template out our gathering of information 
 
 ## Data Before / After
 
+* 
+
 ## Insights from Collection and EDA 
 
+* 

@@ -208,114 +208,119 @@ div.csl-indent {
 <section id="data-collection-overview" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="data-collection-overview"><span class="header-section-number">2.1</span> Data Collection Overview</h2>
 <p>Leverage python Selenium, urllib, and Beautiful Soup to scrape data from X products.</p>
-<pre><code>* Sought to collect some data from 3 websites - target, amazon, and best buy.
-
-* Where possible, collect same entity from multiple sites</code></pre>
+<ul>
+<li><p>Sought to collect some data from 3 websites - target, amazon, and best buy.</p></li>
+<li><p>Where possible, collect same entity from multiple sites</p></li>
+</ul>
 <p>As part of collection, to the greatest extent we are able, we cleaned information <em>during</em> the scraping process. We leveraged tools such as the python regular expression library and (<em>anything else?</em>) to pull the exact information we sought while scraping. The only possible additional cleaning that may be required after scraping is the handling of unicode characters within product names, product reviews, and so forth.</p>
-<p>In terms of simplicity for scraping our data, we will manually identify a list of products. <em>original paper</em> leveraged solely 3 products from Amazon. Our team seeks to scrape between 20 and 30 products and all their reviews from Target, Amazon, and Best Buy. By doing so, we are greatly increasing the sample size of data compared to the original work performed.</p>
+<p>In terms of simplicity for scraping our data, we will manually identify a list of products. <span class="citation" data-cites="percUse">Guha Majumder, Dutta Gupta, and Paul (<a href="references.html#ref-percUse" role="doc-biblioref">2022</a>)</span> leveraged solely 3 products from Amazon. Our team seeks to scrape between 20 and 30 products and all their reviews from Target, Amazon, and Best Buy. By doing so, we are greatly increasing the sample size of data compared to the original work performed.</p>
 </section>
 <section id="data-collection-details" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="data-collection-details"><span class="header-section-number">2.2</span> Data Collection Details</h2>
-<p>In collecting our data, in order to adhere to the model implemented by <em>(original paper here)</em>, we require the following data points, at a minimum:</p>
-<div id="3467b220" class="cell" data-tbl="tbl-data-reqs-products" data-execution_count="2">
+<p>In collecting our data, in order to adhere to the model implemented by <span class="citation" data-cites="percUse">Guha Majumder, Dutta Gupta, and Paul (<a href="references.html#ref-percUse" role="doc-biblioref">2022</a>)</span>, we require the following data points, at a minimum:</p>
+<div id="049e55d8" class="cell" data-tbl="tbl-data-reqs-products" data-execution_count="2">
 <div class="cell-output cell-output-display" data-execution_count="2">
 <style type="text/css">
 </style>
 
-<table id="T_e77b9" data-quarto-postprocess="true" class="table table-sm table-striped small">
+<table id="T_2b784" data-quarto-postprocess="true" class="table table-sm table-striped small">
 <thead>
 <tr class="header">
-<th id="T_e77b9_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Variable</th>
-<th id="T_e77b9_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Data Type</th>
+<th id="T_2b784_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Variable</th>
+<th id="T_2b784_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Data Type</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_e77b9_row0_col0" class="data row0 col0">Product Title</td>
-<td id="T_e77b9_row0_col1" class="data row0 col1">string</td>
+<td id="T_2b784_row0_col0" class="data row0 col0">Product Title</td>
+<td id="T_2b784_row0_col1" class="data row0 col1">string</td>
 </tr>
 <tr class="even">
-<td id="T_e77b9_row1_col0" class="data row1 col0">Product Category*</td>
-<td id="T_e77b9_row1_col1" class="data row1 col1">string</td>
+<td id="T_2b784_row1_col0" class="data row1 col0">Product Category*</td>
+<td id="T_2b784_row1_col1" class="data row1 col1">string</td>
 </tr>
 <tr class="odd">
-<td id="T_e77b9_row2_col0" class="data row2 col0">Product Details/Specs</td>
-<td id="T_e77b9_row2_col1" class="data row2 col1">string</td>
+<td id="T_2b784_row2_col0" class="data row2 col0">Product Details/Specs</td>
+<td id="T_2b784_row2_col1" class="data row2 col1">string</td>
 </tr>
 <tr class="even">
-<td id="T_e77b9_row3_col0" class="data row3 col0">Product Cost</td>
-<td id="T_e77b9_row3_col1" class="data row3 col1">float</td>
+<td id="T_2b784_row3_col0" class="data row3 col0">Product Cost</td>
+<td id="T_2b784_row3_col1" class="data row3 col1">float</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<div id="9e94a9cb" class="cell" data-tbl="tbl-data-reqs-ratings" data-execution_count="3">
+<div id="509a19eb" class="cell" data-tbl="tbl-data-reqs-ratings" data-execution_count="3">
 <div class="cell-output cell-output-display" data-execution_count="3">
 <style type="text/css">
 </style>
 
-<table id="T_ad057" data-quarto-postprocess="true" class="table table-sm table-striped small">
+<table id="T_5ca40" data-quarto-postprocess="true" class="table table-sm table-striped small">
 <thead>
 <tr class="header">
-<th id="T_ad057_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Variable</th>
-<th id="T_ad057_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Data Type</th>
+<th id="T_5ca40_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Variable</th>
+<th id="T_5ca40_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Data Type</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_ad057_row0_col0" class="data row0 col0">Verified Purchase</td>
-<td id="T_ad057_row0_col1" class="data row0 col1">boolean</td>
+<td id="T_5ca40_row0_col0" class="data row0 col0">Verified Purchase</td>
+<td id="T_5ca40_row0_col1" class="data row0 col1">boolean</td>
 </tr>
 <tr class="even">
-<td id="T_ad057_row1_col0" class="data row1 col0">Star Rating</td>
-<td id="T_ad057_row1_col1" class="data row1 col1">float</td>
+<td id="T_5ca40_row1_col0" class="data row1 col0">Star Rating</td>
+<td id="T_5ca40_row1_col1" class="data row1 col1">float</td>
 </tr>
 <tr class="odd">
-<td id="T_ad057_row2_col0" class="data row2 col0">Review Content</td>
-<td id="T_ad057_row2_col1" class="data row2 col1">string</td>
+<td id="T_5ca40_row2_col0" class="data row2 col0">Review Content</td>
+<td id="T_5ca40_row2_col1" class="data row2 col1">string</td>
 </tr>
 <tr class="even">
-<td id="T_ad057_row3_col0" class="data row3 col0">Useful Votes</td>
-<td id="T_ad057_row3_col1" class="data row3 col1">integer</td>
+<td id="T_5ca40_row3_col0" class="data row3 col0">Useful Votes</td>
+<td id="T_5ca40_row3_col1" class="data row3 col1">integer</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<p>From our collected data, here are some of the calculations we’ll need to run for building our models. If time is available, we will run these calculations using <em>NLP LIBRARIES HERE</em> before the completion of this milestone.</p>
-<div id="6ecb2117" class="cell" data-tbl="tbl-data-calcs" data-execution_count="4">
+<p>From our collected data, here are some of the calculations we’ll need to run for building our models. If time is available, we will run these calculations using Python’s NLTK before the completion of this milestone.</p>
+<div id="13f9b333" class="cell" data-tbl="tbl-data-calcs" data-execution_count="4">
 <div class="cell-output cell-output-display" data-execution_count="4">
 <style type="text/css">
 </style>
 
-<table id="T_0a249" data-quarto-postprocess="true" class="table table-sm table-striped small">
+<table id="T_f4e1d" data-quarto-postprocess="true" class="table table-sm table-striped small">
 <thead>
 <tr class="header">
-<th id="T_0a249_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Variable</th>
-<th id="T_0a249_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Data Type</th>
+<th id="T_f4e1d_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Variable</th>
+<th id="T_f4e1d_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Data Type</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_0a249_row0_col0" class="data row0 col0">Review Length</td>
-<td id="T_0a249_row0_col1" class="data row0 col1">integer</td>
+<td id="T_f4e1d_row0_col0" class="data row0 col0">Product Subjectivity</td>
+<td id="T_f4e1d_row0_col1" class="data row0 col1">float</td>
 </tr>
 <tr class="even">
-<td id="T_0a249_row1_col0" class="data row1 col0">Sentiment Score</td>
-<td id="T_0a249_row1_col1" class="data row1 col1">float</td>
+<td id="T_f4e1d_row1_col0" class="data row1 col0">Review Length</td>
+<td id="T_f4e1d_row1_col1" class="data row1 col1">integer</td>
 </tr>
 <tr class="odd">
-<td id="T_0a249_row2_col0" class="data row2 col0">Reputation Score</td>
-<td id="T_0a249_row2_col1" class="data row2 col1">float</td>
+<td id="T_f4e1d_row2_col0" class="data row2 col0">Sentiment Score</td>
+<td id="T_f4e1d_row2_col1" class="data row2 col1">float</td>
 </tr>
 <tr class="even">
-<td id="T_0a249_row3_col0" class="data row3 col0">Product Type Score</td>
-<td id="T_0a249_row3_col1" class="data row3 col1">float</td>
+<td id="T_f4e1d_row3_col0" class="data row3 col0">Reputation Score</td>
+<td id="T_f4e1d_row3_col1" class="data row3 col1">float</td>
 </tr>
 <tr class="odd">
-<td id="T_0a249_row4_col0" class="data row4 col0">Polarity Score</td>
-<td id="T_0a249_row4_col1" class="data row4 col1">float</td>
+<td id="T_f4e1d_row4_col0" class="data row4 col0">Product Type Score</td>
+<td id="T_f4e1d_row4_col1" class="data row4 col1">float</td>
+</tr>
+<tr class="even">
+<td id="T_f4e1d_row5_col0" class="data row5 col0">Polarity Score</td>
+<td id="T_f4e1d_row5_col1" class="data row5 col1">float</td>
 </tr>
 </tbody>
 </table>
@@ -329,8 +334,8 @@ div.csl-indent {
 <li><p>Site-specific review content and metadata</p></li>
 </ul>
 <p>To wrangle the potential amount of data we may collect, we will partition review files into their own files under the following convention: [company_name]-[arbitrary_product_id]-review_content.csv. Using this method will allow us to capture thousands of reviews for multiple products without overrunning GitHub filesize limitations. Following this convention will also allow us to easily script out the integration of all these files for analysis when we begin building and applying our models.</p>
-<p>Additionally, the use of assigning products an arbitrary ID that is common between different vendors will allow us to <em>directly compare</em> review and product information across multiple vendors simultaneously to gather additional insights. Effectively, if we group products by this identifier, we can see how the product performs overall in multiple e-commerce platforms. Similarly, we can use this information to evaluate and run comparisons and tests on individual products, given the treatment of their offering on different platforms. This can help generate even more insight before model application.<br>
-For instance, we may be able to explore questions like:</p>
+<p>Additionally, the use of assigning products an arbitrary ID that is common between different vendors will allow us to <em>directly compare</em> review and product information across multiple vendors simultaneously to gather additional insights. Effectively, if we group products by this identifier, we can see how the product performs overall in multiple e-commerce platforms. Similarly, we can use this information to evaluate and run comparisons and tests on individual products, given the treatment of their offering on different platforms. This can help generate even more insight before model application.</p>
+<p>For instance, we may be able to explore questions like:</p>
 <ul>
 <li><p>Is the price of a product higher, given it’s offered on Amazon, BestBuy, or Target?</p></li>
 <li><p>Is a product’s star rating affected by which e-commerce platform is selling it?</p></li>
@@ -339,38 +344,6 @@ For instance, we may be able to explore questions like:</p>
 <li><p>What is the difference in the level of detail provided in product descriptions (e.g.&nbsp;for the same product) across each e-commerce platform?</p></li>
 </ul>
 <p>Structuring our data properly during the collection process will enable us to explore and answer these questions.</p>
-<!--This should contain a listing of all products we research.  
-
-    * We may research the same product from each website.  If we do, we'll need to build a linking table.  It should contain the record ID from the main table, and the ID from the website table (i.e. URL or some other identifier)
-
-    * This table should have a relationship to, possibly a table that exists for each website, or to a single file in which we store all product results.
-
-    * Having this structure could allow us to see if/how product reviews differ between websites (or if a website tends to have a bias towards better or worse reviews)
-
-To classify products...we need metadata of the product itself.  We are seeking to use the following products, and for each, we'll collect the following data:
-
-* Original Products: (update to table later)
-
-    * Video Games (rating I.e. pg, pg-13, R, but from MSRB ratings).
-
-    * Digital/Physical Music (duration, music style / genre, others?)
-
-    * Grocery Products (calories per serving, special markers [gluten-free, fat-free, vegan], )  - *potential hypothesis that grocery products with special markings may be more experience-based than search-based.*-->
-<!-- 
-
-    a. Original products from (paper): Digital Music, Video Game, and Grocery Item
-
-    b. Additional products (Amazon and Target): Furniture Items, Clothing Items, Home Appliances, Books, Cosmetics, Cleaning supplies
-
-    c. Additional Proucts (Amazon, Target, BestBuy): Electronics
-
-    d. Verify goodness of fit of original model
-
-Additional Products
-
-* Clothing - likely a mixed product, potentially ranging from search-based for plain t-shirts to experience-based for high fashion products
-
-    * material? -->
 </section>
 <section id="collection-procdures" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="collection-procdures"><span class="header-section-number">2.3</span> Collection Procdures?</h2>
@@ -387,24 +360,43 @@ Additional Products
 <section id="visualizations" class="level2" data-number="2.4">
 <h2 data-number="2.4" class="anchored" data-anchor-id="visualizations"><span class="header-section-number">2.4</span> Visualizations</h2>
 <ul>
+<li><p>We require a minimum of 10 unique EDA plots for this milestone. We’ve outlined some of the below but need our data in order and unified prior to development.</p>
+<ul>
+<li><p>Scatter Plots</p></li>
+<li><p>Bar Plots</p></li>
+<li><p>Box Plots</p></li>
+<li><p>Violin Plots (e.g.&nbsp;same product, two different websites)</p></li>
+<li><p>review length</p>
+<ul>
+<li><p>vs star rating</p></li>
+<li><p>vs sentiment</p></li>
+</ul></li>
+<li><p>Product description / detail length</p>
+<ul>
+<li>Potentially explore “specificity” classifier</li>
+</ul></li>
+<li><p>Correlation analyses and linear regressions</p></li>
+<li><p>Heatmaps</p></li>
+<li><p>Tukey test visuals</p></li>
+</ul></li>
 <li><p>Inter-Website Comparison of Product Reviews</p>
 <ul>
 <li><p>Same Product</p>
 <ul>
 <li><p>Clustering?</p></li>
 <li><p>Distances?</p></li>
-<li></li>
 </ul></li>
 <li><p>All Products</p></li>
 <li><p>Inspect the following, visually:</p>
 <ul>
-<li><p>Product Ratings,</p></li>
-<li><p>Customer Sentiments,</p></li>
-<li><p>Review Polarity,</p></li>
-<li><p>Naive Bayes Classifier,</p></li>
-<li><p>Reliability estiamtes,</p></li>
-<li><p>Average / Spread of number of ratings per product,</p></li>
-<li><p>Average/Spread of Useful Votes per Product Review,</p></li>
+<li><p>Product Ratings</p></li>
+<li><p>Customer Sentiments <strong>try to score before plotting &amp; turn-in</strong></p></li>
+<li><p>Review Polarity <strong>try to score and store before plotting</strong></p></li>
+<li><p>Naive Bayes Classifier</p></li>
+<li><p>Reliability estimates</p></li>
+<li><p>Product description subjectivity scores <strong>try to score and store before turn-in</strong></p></li>
+<li><p>Average / Spread of number of ratings per product, <strong>try to score and store before turn-in</strong></p></li>
+<li><p>Average/Spread of Useful Votes per Product Review, <strong>try to score and store before turn-in</strong></p></li>
 <li><p>Inspection of Data and / or Scoring using Kansei method.</p></li>
 </ul></li>
 </ul></li>
@@ -413,9 +405,15 @@ Additional Products
 </section>
 <section id="data-before-after" class="level2" data-number="2.5">
 <h2 data-number="2.5" class="anchored" data-anchor-id="data-before-after"><span class="header-section-number">2.5</span> Data Before / After</h2>
+<ul>
+<li></li>
+</ul>
 </section>
 <section id="insights-from-collection-and-eda" class="level2" data-number="2.6">
 <h2 data-number="2.6" class="anchored" data-anchor-id="insights-from-collection-and-eda"><span class="header-section-number">2.6</span> Insights from Collection and EDA</h2>
+<ul>
+<li></li>
+</ul>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">

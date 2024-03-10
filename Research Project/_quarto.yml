@@ -34,7 +34,7 @@ nocite: |
 format:
   html:
     theme: 
-      - flatly
+      - cosmo #flatly
       - custom.scss
     page-layout: full
     smooth-scroll: true

@@ -84,49 +84,69 @@
     "href": "data.html",
     "title": "2  Data Collection and Exploration",
     "section": "",
-    "text": "2.1 Data Collection Overview\nLeverage python Selenium, urllib, and Beautiful Soup to scrape data from X products.\nAs part of collection, to the greatest extent we are able, we cleaned information during the scraping process. We leveraged tools such as the python regular expression library and (anything else?) to pull the exact information we sought while scraping. The only possible additional cleaning that may be required after scraping is the handling of unicode characters within product names, product reviews, and so forth.\nIn terms of simplicity for scraping our data, we will manually identify a list of products. original paper leveraged solely 3 products from Amazon. Our team seeks to scrape between 20 and 30 products and all their reviews from Target, Amazon, and Best Buy. By doing so, we are greatly increasing the sample size of data compared to the original work performed.",
+    "text": "2.1 Data Collection Overview\nLeverage python Selenium, urllib, and Beautiful Soup to scrape data from X products.\nAs part of collection, to the greatest extent we are able, we cleaned information during the scraping process. We leveraged tools such as the python regular expression library and (anything else?) to pull the exact information we sought while scraping. The only possible additional cleaning that may be required after scraping is the handling of unicode characters within product names, product reviews, and so forth.\nIn terms of simplicity for scraping our data, we will manually identify a list of products. Guha Majumder, Dutta Gupta, and Paul (2022) leveraged solely 3 products from Amazon. Our team seeks to scrape between 20 and 30 products and all their reviews from Target, Amazon, and Best Buy. By doing so, we are greatly increasing the sample size of data compared to the original work performed.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data Collection and Exploration</span>"
     ]
   },
   {
-    "objectID": "data.html#some-items-to-research",
-    "href": "data.html#some-items-to-research",
-    "title": "2  Data Exploration",
+    "objectID": "data.html#data-collection-overview",
+    "href": "data.html#data-collection-overview",
+    "title": "2  Data Collection and Exploration",
     "section": "",
-    "text": "Wikipedia",
+    "text": "Sought to collect some data from 3 websites - target, amazon, and best buy.\nWhere possible, collect same entity from multiple sites",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data Exploration</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data Collection and Exploration</span>"
     ]
   },
   {
-    "objectID": "data.html#collection",
-    "href": "data.html#collection",
-    "title": "2  Data Exploration",
-    "section": "2.2 Collection",
-    "text": "2.2 Collection\nIn collecting our data, in order to adhere to the model implemented by (original paper here), we require the following data points, at a minimum:\n\n\n\n\n\n\n\nVariable\nData Type\n\n\n\n\nProduct Title\nstring\n\n\nProduct Category*\nstring\n\n\nProduct Details/Specs\nstring\n\n\nVerified Purchase\nboolean\n\n\nStar Rating\nfloat\n\n\nReview Content\nstring\n\n\nUseful Votes\ninteger\n\n\n\n\n\n\n\n\n\n\n\n\nVariable\nData Type\n\n\n\n\nReview Length\ninteger\n\n\nSentiment Score\nfloat\n\n\nReputation Score\nfloat\n\n\nProduct Type Score\nfloat\n\n\nPolarity Score\nfloat\n\n\n\n\n\nTo classify products…we need metadata of the product itself. We are seeking to use the following products, and for each, we’ll collect the following data:\n\nOriginal Products: (update to table later)\n\nVideo Games (rating I.e. pg, pg-13, R, but from MSRB ratings).\nDigital/Physical Music (duration, music style / genre, others?)\nGrocery Products (calories per serving, special markers [gluten-free, fat-free, vegan], ) - potential hypothesis that grocery products with special markings may be more experience-based than search-based.\n\n\n\nAdditional Products\n\nClothing - likely a mixed product, potentially ranging from search-based for plain t-shirts to experience-based for high fashion products\n\nmaterial?\n\nLaptops / Computers\n\nLikely a mix between search and experience\nRAM, CPU, Storage, OS Included, Graphics Type, …\n\nSomething else?",
+    "objectID": "data.html#data-collection-details",
+    "href": "data.html#data-collection-details",
+    "title": "2  Data Collection and Exploration",
+    "section": "2.2 Data Collection Details",
+    "text": "2.2 Data Collection Details\nIn collecting our data, in order to adhere to the model implemented by Guha Majumder, Dutta Gupta, and Paul (2022), we require the following data points, at a minimum:\n\n\n\n\n\n\n\nVariable\nData Type\n\n\n\n\nProduct Title\nstring\n\n\nProduct Category*\nstring\n\n\nProduct Details/Specs\nstring\n\n\nProduct Cost\nfloat\n\n\n\n\n\n\n\n\n\n\n\n\nVariable\nData Type\n\n\n\n\nVerified Purchase\nboolean\n\n\nStar Rating\nfloat\n\n\nReview Content\nstring\n\n\nUseful Votes\ninteger\n\n\n\n\n\nFrom our collected data, here are some of the calculations we’ll need to run for building our models. If time is available, we will run these calculations using Python’s NLTK before the completion of this milestone.\n\n\n\n\n\n\n\nVariable\nData Type\n\n\n\n\nProduct Subjectivity\nfloat\n\n\nReview Length\ninteger\n\n\nSentiment Score\nfloat\n\n\nReputation Score\nfloat\n\n\nProduct Type Score\nfloat\n\n\nPolarity Score\nfloat\n\n\n\n\n\nIn terms of structuring our stored data, we will have a central table and child tables. Since we will seek, in some cases, to gather the same product from multiple websites, we must have a structure that identifies:\n\nThe full listing of products, assigned an arbitrary ID\nA listing of specific products we intend to scrape from each of the websites we’ve identified. Adding an additional ID of [company_name]-[arbitrary_product_id]\nSite-specific product information\nSite-specific review content and metadata\n\nTo wrangle the potential amount of data we may collect, we will partition review files into their own files under the following convention: [company_name]-[arbitrary_product_id]-review_content.csv. Using this method will allow us to capture thousands of reviews for multiple products without overrunning GitHub filesize limitations. Following this convention will also allow us to easily script out the integration of all these files for analysis when we begin building and applying our models.\nAdditionally, the use of assigning products an arbitrary ID that is common between different vendors will allow us to directly compare review and product information across multiple vendors simultaneously to gather additional insights. Effectively, if we group products by this identifier, we can see how the product performs overall in multiple e-commerce platforms. Similarly, we can use this information to evaluate and run comparisons and tests on individual products, given the treatment of their offering on different platforms. This can help generate even more insight before model application.\nFor instance, we may be able to explore questions like:\n\nIs the price of a product higher, given it’s offered on Amazon, BestBuy, or Target?\nIs a product’s star rating affected by which e-commerce platform is selling it?\nIs there a substantial difference in number of product reviews on one e-commerce platform vs. another?\nIs one e-commerce platform more likely to have input and feedback on reviews (i.e. higher proportion of “this review is helpful” votes to total number of reviews)?\nWhat is the difference in the level of detail provided in product descriptions (e.g. for the same product) across each e-commerce platform?\n\nStructuring our data properly during the collection process will enable us to explore and answer these questions.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data Exploration</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data Collection and Exploration</span>"
     ]
   },
   {
-    "objectID": "data.html#preparation-standardization-and-cleaning",
-    "href": "data.html#preparation-standardization-and-cleaning",
-    "title": "2  Data Exploration",
-    "section": "2.3 Preparation, Standardization, and Cleaning",
-    "text": "2.3 Preparation, Standardization, and Cleaning\n\nGathering from Amazon (All Products)\nGathering from BestBuy (Electronic Products, no grocery or clothing)\nGathering from Target (All products)",
+    "objectID": "data.html#collection-procdures",
+    "href": "data.html#collection-procdures",
+    "title": "2  Data Collection and Exploration",
+    "section": "2.3 Collection Procdures?",
+    "text": "2.3 Collection Procdures?\nWe wrote code to allow us to (mostly) template out our gathering of information from each website. The general process for each page is similar for data gathering. To alleviate any unnecessary burden on the target websites, we manually identified URLs to the specific products we sought out to gather, and wrote our code to iterate through those URLs and pull the necessary data and features we sought. This hybrid approach saved us time and effort.\n\nGathering from Target (All products)\n\nTarget has dynamic content on their webpages. We used Python Selenium to navigate to product pages and automate the selection of items needed to expand sections to reveal additional data. We also automated the process of expanding out all reviews so as to iterate through and parse the content of every review for each product in question. We extracted the fields listed above (reference here) to store in our records tables.\n\nGathering from Amazon (All Products)\nGathering from BestBuy (Electronic Products, Furniture Item(s)? - no grocery or clothing)",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data Exploration</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data Collection and Exploration</span>"
     ]
   },
   {
-    "objectID": "data.html#visualization",
-    "href": "data.html#visualization",
-    "title": "2  Data Exploration",
-    "section": "2.4 Visualization",
-    "text": "2.4 Visualization\n\n\n\n\nGuha Majumder, Madhumita, Sangita Dutta Gupta, and Justin Paul. 2022. “Perceived Usefulness of Online Customer Reviews: A Review Mining Approach Using Machine Learning & Exploratory Data Analysis.” Journal of Business Research 150 (November): 147–64. https://doi.org/10.1016/j.jbusres.2022.06.012.\n\n\nHu, Weishu, Zhiguo Gong, and Jingzhi Guo. 2010. “Mining Product Features from Online Reviews.” 2010 IEEE 7th International Conference on E-Business Engineering, November. https://doi.org/10.1109/icebe.2010.51.\n\n\nRajeev, P Venkata, and V Smrithi Rekha. 2015. “Recommending Products to Customers Using Opinion Mining of Online Product Reviews and Features.” 2015 International Conference on Circuits, Power and Computing Technologies [ICCPCT-2015], March. https://doi.org/10.1109/iccpct.2015.7159433.\n\n\nWang, W. M., Z. Li, Z. G. Tian, J. W. Wang, and M. N. Cheng. 2018. “Extracting and Summarizing Affective Features and Responses from Online Product Descriptions and Reviews: A Kansei Text Mining Approach.” Engineering Applications of Artificial Intelligence 73 (August): 149–62. https://doi.org/10.1016/j.engappai.2018.05.005.",
+    "objectID": "data.html#visualizations",
+    "href": "data.html#visualizations",
+    "title": "2  Data Collection and Exploration",
+    "section": "2.4 Visualizations",
+    "text": "2.4 Visualizations\n\nWe require a minimum of 10 unique EDA plots for this milestone. We’ve outlined some of the below but need our data in order and unified prior to development.\n\nScatter Plots\nBar Plots\nBox Plots\nViolin Plots (e.g. same product, two different websites)\nreview length\n\nvs star rating\nvs sentiment\n\nProduct description / detail length\n\nPotentially explore “specificity” classifier\n\nCorrelation analyses and linear regressions\nHeatmaps\nTukey test visuals\n\nInter-Website Comparison of Product Reviews\n\nSame Product\n\nClustering?\nDistances?\n\nAll Products\nInspect the following, visually:\n\nProduct Ratings\nCustomer Sentiments try to score before plotting & turn-in\nReview Polarity try to score and store before plotting\nNaive Bayes Classifier\nReliability estimates\nProduct description subjectivity scores try to score and store before turn-in\nAverage / Spread of number of ratings per product, try to score and store before turn-in\nAverage/Spread of Useful Votes per Product Review, try to score and store before turn-in\nInspection of Data and / or Scoring using Kansei method.\n\n\nWill need to take note on if / how these variables conform to some form of statistical distribution (uniform, normal, exponential, etc)",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data Exploration</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data Collection and Exploration</span>"
+    ]
+  },
+  {
+    "objectID": "data.html#data-before-after",
+    "href": "data.html#data-before-after",
+    "title": "2  Data Collection and Exploration",
+    "section": "2.5 Data Before / After",
+    "text": "2.5 Data Before / After",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data Collection and Exploration</span>"
+    ]
+  },
+  {
+    "objectID": "data.html#insights-from-collection-and-eda",
+    "href": "data.html#insights-from-collection-and-eda",
+    "title": "2  Data Collection and Exploration",
+    "section": "2.6 Insights from Collection and EDA",
+    "text": "2.6 Insights from Collection and EDA\n\n\n\n\n\n\n\nGuha Majumder, Madhumita, Sangita Dutta Gupta, and Justin Paul. 2022. “Perceived Usefulness of Online Customer Reviews: A Review Mining Approach Using Machine Learning & Exploratory Data Analysis.” Journal of Business Research 150 (November): 147–64. https://doi.org/10.1016/j.jbusres.2022.06.012.\n\n\nHu, Weishu, Zhiguo Gong, and Jingzhi Guo. 2010. “Mining Product Features from Online Reviews.” 2010 IEEE 7th International Conference on E-Business Engineering, November. https://doi.org/10.1109/icebe.2010.51.\n\n\nRajeev, P Venkata, and V Smrithi Rekha. 2015. “Recommending Products to Customers Using Opinion Mining of Online Product Reviews and Features.” 2015 International Conference on Circuits, Power and Computing Technologies [ICCPCT-2015], March. https://doi.org/10.1109/iccpct.2015.7159433.\n\n\nWang, W. M., Z. Li, Z. G. Tian, J. W. Wang, and M. N. Cheng. 2018. “Extracting and Summarizing Affective Features and Responses from Online Product Descriptions and Reviews: A Kansei Text Mining Approach.” Engineering Applications of Artificial Intelligence 73 (August): 149–62. https://doi.org/10.1016/j.engappai.2018.05.005.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data Collection and Exploration</span>"
     ]
   },
   {
@@ -187,66 +207,6 @@
     "text": "Guha Majumder, Madhumita, Sangita Dutta Gupta, and Justin Paul. 2022.\n“Perceived Usefulness of Online Customer Reviews: A Review Mining\nApproach Using Machine Learning & Exploratory Data Analysis.”\nJournal of Business Research 150 (November): 147–64. https://doi.org/10.1016/j.jbusres.2022.06.012.\n\n\nHu, Weishu, Zhiguo Gong, and Jingzhi Guo. 2010. “Mining Product\nFeatures from Online Reviews.” 2010 IEEE 7th International\nConference on E-Business Engineering, November. https://doi.org/10.1109/icebe.2010.51.\n\n\nRajeev, P Venkata, and V Smrithi Rekha. 2015. “Recommending\nProducts to Customers Using Opinion Mining of Online Product Reviews and\nFeatures.” 2015 International Conference on Circuits, Power\nand Computing Technologies [ICCPCT-2015], March. https://doi.org/10.1109/iccpct.2015.7159433.\n\n\nWang, W. M., Z. Li, Z. G. Tian, J. W. Wang, and M. N. Cheng. 2018.\n“Extracting and Summarizing Affective Features and Responses from\nOnline Product Descriptions and Reviews: A Kansei Text Mining\nApproach.” Engineering Applications of Artificial\nIntelligence 73 (August): 149–62. https://doi.org/10.1016/j.engappai.2018.05.005.",
     "crumbs": [
       "References"
-    ]
-  },
-  {
-    "objectID": "data.html#data-collection-overview",
-    "href": "data.html#data-collection-overview",
-    "title": "2  Data Collection and Exploration",
-    "section": "",
-    "text": "* Sought to collect some data from 3 websites - target, amazon, and best buy.\n\n* Where possible, collect same entity from multiple sites",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data Collection and Exploration</span>"
-    ]
-  },
-  {
-    "objectID": "data.html#data-collection-details",
-    "href": "data.html#data-collection-details",
-    "title": "2  Data Collection and Exploration",
-    "section": "2.2 Data Collection Details",
-    "text": "2.2 Data Collection Details\nIn collecting our data, in order to adhere to the model implemented by (original paper here), we require the following data points, at a minimum:\n\n\n\n\n\n\n\nVariable\nData Type\n\n\n\n\nProduct Title\nstring\n\n\nProduct Category*\nstring\n\n\nProduct Details/Specs\nstring\n\n\nProduct Cost\nfloat\n\n\n\n\n\n\n\n\n\n\n\n\nVariable\nData Type\n\n\n\n\nVerified Purchase\nboolean\n\n\nStar Rating\nfloat\n\n\nReview Content\nstring\n\n\nUseful Votes\ninteger\n\n\n\n\n\nFrom our collected data, here are some of the calculations we’ll need to run for building our models. If time is available, we will run these calculations using NLP LIBRARIES HERE before the completion of this milestone.\n\n\n\n\n\n\n\nVariable\nData Type\n\n\n\n\nReview Length\ninteger\n\n\nSentiment Score\nfloat\n\n\nReputation Score\nfloat\n\n\nProduct Type Score\nfloat\n\n\nPolarity Score\nfloat\n\n\n\n\n\nIn terms of structuring our stored data, we will have a central table and child tables. Since we will seek, in some cases, to gather the same product from multiple websites, we must have a structure that identifies:\n\nThe full listing of products, assigned an arbitrary ID\nA listing of specific products we intend to scrape from each of the websites we’ve identified. Adding an additional ID of [company_name]-[arbitrary_product_id]\nSite-specific product information\nSite-specific review content and metadata\n\nTo wrangle the potential amount of data we may collect, we will partition review files into their own files under the following convention: [company_name]-[arbitrary_product_id]-review_content.csv. Using this method will allow us to capture thousands of reviews for multiple products without overrunning GitHub filesize limitations. Following this convention will also allow us to easily script out the integration of all these files for analysis when we begin building and applying our models.\nAdditionally, the use of assigning products an arbitrary ID that is common between different vendors will allow us to directly compare review and product information across multiple vendors simultaneously to gather additional insights. Effectively, if we group products by this identifier, we can see how the product performs overall in multiple e-commerce platforms. Similarly, we can use this information to evaluate and run comparisons and tests on individual products, given the treatment of their offering on different platforms. This can help generate even more insight before model application.\nFor instance, we may be able to explore questions like:\n\nIs the price of a product higher, given it’s offered on Amazon, BestBuy, or Target?\nIs a product’s star rating affected by which e-commerce platform is selling it?\nIs there a substantial difference in number of product reviews on one e-commerce platform vs. another?\nIs one e-commerce platform more likely to have input and feedback on reviews (i.e. higher proportion of “this review is helpful” votes to total number of reviews)?\nWhat is the difference in the level of detail provided in product descriptions (e.g. for the same product) across each e-commerce platform?\n\nStructuring our data properly during the collection process will enable us to explore and answer these questions.",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data Collection and Exploration</span>"
-    ]
-  },
-  {
-    "objectID": "data.html#collection-procdures",
-    "href": "data.html#collection-procdures",
-    "title": "2  Data Collection and Exploration",
-    "section": "2.3 Collection Procdures?",
-    "text": "2.3 Collection Procdures?\nWe wrote code to allow us to (mostly) template out our gathering of information from each website. The general process for each page is similar for data gathering. To alleviate any unnecessary burden on the target websites, we manually identified URLs to the specific products we sought out to gather, and wrote our code to iterate through those URLs and pull the necessary data and features we sought. This hybrid approach saved us time and effort.\n\nGathering from Target (All products)\n\nTarget has dynamic content on their webpages. We used Python Selenium to navigate to product pages and automate the selection of items needed to expand sections to reveal additional data. We also automated the process of expanding out all reviews so as to iterate through and parse the content of every review for each product in question. We extracted the fields listed above (reference here) to store in our records tables.\n\nGathering from Amazon (All Products)\nGathering from BestBuy (Electronic Products, Furniture Item(s)? - no grocery or clothing)",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data Collection and Exploration</span>"
-    ]
-  },
-  {
-    "objectID": "data.html#visualizations",
-    "href": "data.html#visualizations",
-    "title": "2  Data Collection and Exploration",
-    "section": "2.4 Visualizations",
-    "text": "2.4 Visualizations\n\nInter-Website Comparison of Product Reviews\n\nSame Product\n\nClustering?\nDistances?\n\n\nAll Products\nInspect the following, visually:\n\nProduct Ratings,\nCustomer Sentiments,\nReview Polarity,\nNaive Bayes Classifier,\nReliability estiamtes,\nAverage / Spread of number of ratings per product,\nAverage/Spread of Useful Votes per Product Review,\nInspection of Data and / or Scoring using Kansei method.\n\n\nWill need to take note on if / how these variables conform to some form of statistical distribution (uniform, normal, exponential, etc)",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data Collection and Exploration</span>"
-    ]
-  },
-  {
-    "objectID": "data.html#data-before-after",
-    "href": "data.html#data-before-after",
-    "title": "2  Data Collection and Exploration",
-    "section": "2.5 Data Before / After",
-    "text": "2.5 Data Before / After",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data Collection and Exploration</span>"
-    ]
-  },
-  {
-    "objectID": "data.html#insights-from-collection-and-eda",
-    "href": "data.html#insights-from-collection-and-eda",
-    "title": "2  Data Collection and Exploration",
-    "section": "2.6 Insights from Collection and EDA",
-    "text": "2.6 Insights from Collection and EDA\n\n\n\n\nGuha Majumder, Madhumita, Sangita Dutta Gupta, and Justin Paul. 2022. “Perceived Usefulness of Online Customer Reviews: A Review Mining Approach Using Machine Learning & Exploratory Data Analysis.” Journal of Business Research 150 (November): 147–64. https://doi.org/10.1016/j.jbusres.2022.06.012.\n\n\nHu, Weishu, Zhiguo Gong, and Jingzhi Guo. 2010. “Mining Product Features from Online Reviews.” 2010 IEEE 7th International Conference on E-Business Engineering, November. https://doi.org/10.1109/icebe.2010.51.\n\n\nRajeev, P Venkata, and V Smrithi Rekha. 2015. “Recommending Products to Customers Using Opinion Mining of Online Product Reviews and Features.” 2015 International Conference on Circuits, Power and Computing Technologies [ICCPCT-2015], March. https://doi.org/10.1109/iccpct.2015.7159433.\n\n\nWang, W. M., Z. Li, Z. G. Tian, J. W. Wang, and M. N. Cheng. 2018. “Extracting and Summarizing Affective Features and Responses from Online Product Descriptions and Reviews: A Kansei Text Mining Approach.” Engineering Applications of Artificial Intelligence 73 (August): 149–62. https://doi.org/10.1016/j.engappai.2018.05.005.",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data Collection and Exploration</span>"
     ]
   }
 ]
