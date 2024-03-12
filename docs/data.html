@@ -43,7 +43,7 @@ div.csl-indent {
 }</style>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -89,9 +89,6 @@ div.csl-indent {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-
-<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 </head>
@@ -218,112 +215,144 @@ div.csl-indent {
 <section id="data-collection-details" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="data-collection-details"><span class="header-section-number">2.2</span> Data Collection Details</h2>
 <p>In collecting our data, in order to adhere to the model implemented by <span class="citation" data-cites="percUse">Guha Majumder, Dutta Gupta, and Paul (<a href="references.html#ref-percUse" role="doc-biblioref">2022</a>)</span>, we require the following data points, at a minimum:</p>
-<div id="049e55d8" class="cell" data-tbl="tbl-data-reqs-products" data-execution_count="2">
-<div class="cell-output cell-output-display" data-execution_count="2">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>                      Data Type
+Variable                       
+Product Title            string
+Product Category*        string
+Product Details/Specs    string
+Product Cost              float</code></pre>
+</div>
+<div class="cell-output-display">
 <style type="text/css">
 </style>
 
-<table id="T_2b784" data-quarto-postprocess="true" class="table table-sm table-striped small">
+<table id="T_031f4" data-quarto-postprocess="true" class="table table-sm table-striped small">
 <thead>
 <tr class="header">
-<th id="T_2b784_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Variable</th>
-<th id="T_2b784_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Data Type</th>
+<th id="T_031f4_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Variable</th>
+<th id="T_031f4_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Data Type</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_2b784_row0_col0" class="data row0 col0">Product Title</td>
-<td id="T_2b784_row0_col1" class="data row0 col1">string</td>
+<td id="T_031f4_row0_col0" class="data row0 col0">Product Title</td>
+<td id="T_031f4_row0_col1" class="data row0 col1">string</td>
 </tr>
 <tr class="even">
-<td id="T_2b784_row1_col0" class="data row1 col0">Product Category*</td>
-<td id="T_2b784_row1_col1" class="data row1 col1">string</td>
+<td id="T_031f4_row1_col0" class="data row1 col0">Product Category*</td>
+<td id="T_031f4_row1_col1" class="data row1 col1">string</td>
 </tr>
 <tr class="odd">
-<td id="T_2b784_row2_col0" class="data row2 col0">Product Details/Specs</td>
-<td id="T_2b784_row2_col1" class="data row2 col1">string</td>
+<td id="T_031f4_row2_col0" class="data row2 col0">Product Details/Specs</td>
+<td id="T_031f4_row2_col1" class="data row2 col1">string</td>
 </tr>
 <tr class="even">
-<td id="T_2b784_row3_col0" class="data row3 col0">Product Cost</td>
-<td id="T_2b784_row3_col1" class="data row3 col1">float</td>
+<td id="T_031f4_row3_col0" class="data row3 col0">Product Cost</td>
+<td id="T_031f4_row3_col1" class="data row3 col1">float</td>
 </tr>
 </tbody>
 </table>
+
+
 </div>
 </div>
-<div id="509a19eb" class="cell" data-tbl="tbl-data-reqs-ratings" data-execution_count="3">
-<div class="cell-output cell-output-display" data-execution_count="3">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>                  Data Type
+Variable                   
+Verified Purchase   boolean
+Star Rating           float
+Review Content       string
+Useful Votes        integer</code></pre>
+</div>
+<div class="cell-output-display">
 <style type="text/css">
 </style>
 
-<table id="T_5ca40" data-quarto-postprocess="true" class="table table-sm table-striped small">
+<table id="T_e0064" data-quarto-postprocess="true" class="table table-sm table-striped small">
 <thead>
 <tr class="header">
-<th id="T_5ca40_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Variable</th>
-<th id="T_5ca40_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Data Type</th>
+<th id="T_e0064_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Variable</th>
+<th id="T_e0064_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Data Type</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_5ca40_row0_col0" class="data row0 col0">Verified Purchase</td>
-<td id="T_5ca40_row0_col1" class="data row0 col1">boolean</td>
+<td id="T_e0064_row0_col0" class="data row0 col0">Verified Purchase</td>
+<td id="T_e0064_row0_col1" class="data row0 col1">boolean</td>
 </tr>
 <tr class="even">
-<td id="T_5ca40_row1_col0" class="data row1 col0">Star Rating</td>
-<td id="T_5ca40_row1_col1" class="data row1 col1">float</td>
+<td id="T_e0064_row1_col0" class="data row1 col0">Star Rating</td>
+<td id="T_e0064_row1_col1" class="data row1 col1">float</td>
 </tr>
 <tr class="odd">
-<td id="T_5ca40_row2_col0" class="data row2 col0">Review Content</td>
-<td id="T_5ca40_row2_col1" class="data row2 col1">string</td>
+<td id="T_e0064_row2_col0" class="data row2 col0">Review Content</td>
+<td id="T_e0064_row2_col1" class="data row2 col1">string</td>
 </tr>
 <tr class="even">
-<td id="T_5ca40_row3_col0" class="data row3 col0">Useful Votes</td>
-<td id="T_5ca40_row3_col1" class="data row3 col1">integer</td>
+<td id="T_e0064_row3_col0" class="data row3 col0">Useful Votes</td>
+<td id="T_e0064_row3_col1" class="data row3 col1">integer</td>
 </tr>
 </tbody>
 </table>
+
+
 </div>
 </div>
 <p>From our collected data, here are some of the calculations we’ll need to run for building our models. If time is available, we will run these calculations using Python’s NLTK before the completion of this milestone.</p>
-<div id="13f9b333" class="cell" data-tbl="tbl-data-calcs" data-execution_count="4">
-<div class="cell-output cell-output-display" data-execution_count="4">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>                     Data Type
+Variable                      
+Product Subjectivity     float
+Review Length          integer
+Sentiment Score          float
+Reputation Score         float
+Product Type Score       float
+Polarity Score           float</code></pre>
+</div>
+<div class="cell-output-display">
 <style type="text/css">
 </style>
 
-<table id="T_f4e1d" data-quarto-postprocess="true" class="table table-sm table-striped small">
+<table id="T_6500b" data-quarto-postprocess="true" class="table table-sm table-striped small">
 <thead>
 <tr class="header">
-<th id="T_f4e1d_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Variable</th>
-<th id="T_f4e1d_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Data Type</th>
+<th id="T_6500b_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Variable</th>
+<th id="T_6500b_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Data Type</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_f4e1d_row0_col0" class="data row0 col0">Product Subjectivity</td>
-<td id="T_f4e1d_row0_col1" class="data row0 col1">float</td>
+<td id="T_6500b_row0_col0" class="data row0 col0">Product Subjectivity</td>
+<td id="T_6500b_row0_col1" class="data row0 col1">float</td>
 </tr>
 <tr class="even">
-<td id="T_f4e1d_row1_col0" class="data row1 col0">Review Length</td>
-<td id="T_f4e1d_row1_col1" class="data row1 col1">integer</td>
+<td id="T_6500b_row1_col0" class="data row1 col0">Review Length</td>
+<td id="T_6500b_row1_col1" class="data row1 col1">integer</td>
 </tr>
 <tr class="odd">
-<td id="T_f4e1d_row2_col0" class="data row2 col0">Sentiment Score</td>
-<td id="T_f4e1d_row2_col1" class="data row2 col1">float</td>
+<td id="T_6500b_row2_col0" class="data row2 col0">Sentiment Score</td>
+<td id="T_6500b_row2_col1" class="data row2 col1">float</td>
 </tr>
 <tr class="even">
-<td id="T_f4e1d_row3_col0" class="data row3 col0">Reputation Score</td>
-<td id="T_f4e1d_row3_col1" class="data row3 col1">float</td>
+<td id="T_6500b_row3_col0" class="data row3 col0">Reputation Score</td>
+<td id="T_6500b_row3_col1" class="data row3 col1">float</td>
 </tr>
 <tr class="odd">
-<td id="T_f4e1d_row4_col0" class="data row4 col0">Product Type Score</td>
-<td id="T_f4e1d_row4_col1" class="data row4 col1">float</td>
+<td id="T_6500b_row4_col0" class="data row4 col0">Product Type Score</td>
+<td id="T_6500b_row4_col1" class="data row4 col1">float</td>
 </tr>
 <tr class="even">
-<td id="T_f4e1d_row5_col0" class="data row5 col0">Polarity Score</td>
-<td id="T_f4e1d_row5_col1" class="data row5 col1">float</td>
+<td id="T_6500b_row5_col0" class="data row5 col0">Polarity Score</td>
+<td id="T_6500b_row5_col1" class="data row5 col1">float</td>
 </tr>
 </tbody>
 </table>
+
+
 </div>
 </div>
 <p>In terms of structuring our stored data, we will have a central table and child tables. Since we will seek, in some cases, to gather the <em>same</em> product from multiple websites, we must have a structure that identifies:</p>
@@ -362,23 +391,26 @@ div.csl-indent {
 <ul>
 <li><p>We require a minimum of 10 unique EDA plots for this milestone. We’ve outlined some of the below but need our data in order and unified prior to development.</p>
 <ul>
-<li><p>Scatter Plots</p></li>
-<li><p>Bar Plots</p></li>
-<li><p>Box Plots</p></li>
-<li><p>Violin Plots (e.g.&nbsp;same product, two different websites)</p></li>
-<li><p>review length</p>
+<li>Scatter Plots</li>
+</ul></li>
+</ul>
+<pre><code>* Bar Plots </code></pre>
+<pre><code>* Box Plots</code></pre>
+<pre><code>* Violin Plots (e.g. same product, two different websites)</code></pre>
+<pre><code>* review length
+
+    * vs star rating
+
+    * vs sentiment
+
+* Product description / detail length
+
+    * Potentially explore "specificity" classifier
+
+* Correlation analyses and linear regressions</code></pre>
+<pre><code>* Heatmaps</code></pre>
+<pre><code>* Tukey test visuals</code></pre>
 <ul>
-<li><p>vs star rating</p></li>
-<li><p>vs sentiment</p></li>
-</ul></li>
-<li><p>Product description / detail length</p>
-<ul>
-<li>Potentially explore “specificity” classifier</li>
-</ul></li>
-<li><p>Correlation analyses and linear regressions</p></li>
-<li><p>Heatmaps</p></li>
-<li><p>Tukey test visuals</p></li>
-</ul></li>
 <li><p>Inter-Website Comparison of Product Reviews</p>
 <ul>
 <li><p>Same Product</p>
@@ -414,6 +446,11 @@ div.csl-indent {
 <ul>
 <li></li>
 </ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Hello,world!"</code></pre>
+</div>
+</div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">

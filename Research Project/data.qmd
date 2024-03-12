@@ -210,3 +210,7 @@ We wrote code to allow us to (mostly) template out our gathering of information 
 ## Insights from Collection and EDA 
 
 * 
+
+<!-- ```{r TryBothOnePaper}
+print("Hello,world!")
+``` -->
