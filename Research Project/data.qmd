@@ -100,6 +100,7 @@ We wrote code to allow us to (mostly) template out our gathering of information 
     * Target has dynamic content on their webpages.  We used Python Selenium to navigate to product pages and automate the selection of items needed to expand sections to reveal additional data.  We also automated the process of expanding out all reviews so as to iterate through and parse the content of every review for each product in question.  We extracted the fields listed above (reference here) to store in our records tables.
 
 * Gathering from Amazon (All Products)
+    * Product & Review data was scraped from Amazon's website using Python and Selenium. A Selenium WebDriver was utilized to automate web browser interactions. After navigating to product categories like electronics, home appliances, furniture, books, and grocery, Selenium's functions were employed to locate review elements. These elements were then parsed and collected, storing the data in a structured format i.e. a CSV file. Pagination handling was implemented to scrape reviews from multiple pages. 
 
 * Gathering from BestBuy (Electronic Products, Furniture Item(s)? - no grocery or clothing)
 
