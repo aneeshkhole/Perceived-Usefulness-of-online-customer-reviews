@@ -83,9 +83,15 @@ For instance, we may be able to explore questions like:
 
 * What is the difference in the level of detail provided in product descriptions (e.g. for the same product) across each e-commerce platform?
 
+* Do certain product categories perform better on specific platforms?
+
+* Are users more likely to leave reviews on one platform over another?
+
+* Do customers show different purchasing behaviors based on promotional strategies employed by platforms?
+
 Structuring our data properly during the collection process will enable us to explore and answer these questions.
 
-## Collection Procdures?
+## Collection Procedures?
 
 We wrote code to allow us to (mostly) template out our gathering of information from each website.  The general process for each page is similar for data gathering.  To alleviate any unnecessary burden on the target websites, we manually identified URLs to the specific products we sought out to gather, and wrote our code to iterate through those URLs and pull the necessary data and features we sought.  This hybrid approach saved us time and effort.
 
@@ -96,6 +102,8 @@ We wrote code to allow us to (mostly) template out our gathering of information 
 * Gathering from Amazon (All Products)
 
 * Gathering from BestBuy (Electronic Products, Furniture Item(s)? - no grocery or clothing)
+
+    * Just like Target and Amazon, even BestBuy has dynamic content on its web page. We employed Python with Selenium to automate the exploration of product pages, unveiling hidden content, and harvesting essential data. Employing Selenium's functionalities, we initiated the traversal process, enabling the program to automatically expand pertinent sections to uncover additional information. By targeting elements such as product details and reviews, we orchestrated the seamless extraction of critical fields from each product's page. This automated approach allowed us to efficiently parse through an extensive array of reviews, ensuring a comprehensive analysis of user feedback for the products under scrutiny. We systematically stored the extracted data in our records tables for further analysis and reference.
 
 ## Visualizations
 
