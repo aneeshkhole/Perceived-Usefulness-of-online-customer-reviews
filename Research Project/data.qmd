@@ -3,6 +3,10 @@
 ```{python}
 #module imports
 import pandas as pd, numpy as np, matplotlib.pyplot as plt
+import seaborn as sns
+import pingouin as pg
+from statsmodels.stats.multicomp import pairwise_tukeyhsd
+review_data = pd.read_csv('../data/combined_review_table.csv')
 ```
 
 ## Data Collection Overview
@@ -111,10 +115,41 @@ We wrote code to allow us to (mostly) template out our gathering of information 
 * We require a minimum of 10 unique EDA plots for this milestone.  We've outlined some of the below but need our data in order and unified prior to development.
 
     * Scatter Plots
-```{python ScatterPlots}
+```{python fig-violin-plots1}
+#| label:    fig-violin-plots1
+#| fig-cap:  "Violin Plots of Review Star-Rating vs. Subjectivity, by Site"
 
+vplot_polarity_stars = sns.FacetGrid(
+    data = review_data,
+    col='site'
+)
+vplot_polarity_stars.map_dataframe(
+    sns.violinplot,
+    x='review_star_rating',
+    y='review_subjectivity'
+)
+plt.show()
 ```
-    * Bar Plots 
+
+```{python fig-violin-plots2}
+#| label: fig-violin-plots2
+#| fig-cap: "Violin Plots for Star Rating vs. Polarity, by Site"
+
+vplot_polarity_stars = sns.FacetGrid(
+    data = review_data,
+    col='site'
+)
+vplot_polarity_stars.map_dataframe(
+    sns.violinplot,
+    x='review_star_rating',
+    y='review_polarity'
+)
+plt.show()
+```
+
+Generally, in @fig-violin-plots1 and @fig-violin-plots2, we see a trend for the median polarity and subjectivity of each review to increase as the star rating increases.  We also see that, generally, the data suggest that we have a minimum of neutral polarity that tends towards positive as star rating increases.
+
+* Bar Plots 
 
 ```{python BarPlots}
 
@@ -122,9 +157,49 @@ We wrote code to allow us to (mostly) template out our gathering of information 
 
     * Box Plots
 
-```{python BoxPlots}
+```{python fig-outliers-star-rating}
+#| label: fig-outliers-star-rating
+#| fig-cap: "Outliers for Review Star Rating"
 
+boxplot_star_rating = sns.FacetGrid(
+    data=review_data,
+    col='site'
+)
+boxplot_star_rating.map_dataframe(
+    sns.boxplot,
+    y='review_star_rating'
+)
 ```
+
+```{python fig-outliers-polarity}
+#| label: fig-outliers-polarity
+#| fig-cap: "Outliers for Review Polarity"
+
+boxplot_polarity = sns.FacetGrid(
+    data=review_data,
+    col='site'
+)
+boxplot_polarity.map_dataframe(
+    sns.boxplot,
+    y='review_polarity'
+)
+```
+
+```{python fig-outliers-subjectivity}
+#| label: fig-outliers-subjectivity
+#| fig-cap: "Outliers for Review Subjectivity"
+
+boxplot_star_rating = sns.FacetGrid(
+    data=review_data,
+    col='site'
+)
+boxplot_star_rating.map_dataframe(
+    sns.boxplot,
+    y='review_subjectivity'
+)
+```
+
+
 
     * Violin Plots (e.g. same product, two different websites)
 
@@ -154,7 +229,46 @@ We wrote code to allow us to (mostly) template out our gathering of information 
 
 ```
 
-    * Tukey test visuals
+    * Tukey test 
+
+```{python fig-tukey-tests}
+#| label: fig-tukey-tests
+#| fig-cap: "Tukey Tests for Star Rating, Polarity, and Subjectivity, by-Site"
+
+star = pairwise_tukeyhsd(
+    endog=review_data['review_star_rating'],
+    groups=review_data['site'],
+    alpha=0.5
+)
+pol = pairwise_tukeyhsd(
+    endog=review_data['review_polarity'],
+    groups=review_data['site'],
+    alpha=0.5
+)
+subj = pairwise_tukeyhsd(
+    endog=review_data['review_subjectivity'],
+    groups=review_data['site'],
+    alpha=0.5
+)
+
+fig,axes=plt.subplots(nrows=3,ncols=1)
+
+tests = [
+    (star,"Tukey Test - Star Rating (95%)"),
+    (pol,"Tukey Test - Polarity (95%)"),
+    (subj,"Tukey Test - Subjectivity (95%)")
+]
+
+for i in range(len(tests)):
+    tests[i][0].plot_simultaneous(ax=axes[i])
+    axes[i].set_title(tests[i][1])
+
+plt.tight_layout()
+plt.show()
+
+```
+
+The Tukey honest significance tests, depicted in @fig-tukey-tests suggest some interesting patterns between the three websites.  Namely, target and best buy seem to have (across the board) higher star ratings, polarity, and subjectivity than the same variables for Amazon!  Additionally, for each variable and each website, it seems there is no overlap in the variables at the 95% confidence level.  The only exception here is for subjectivity between Target and BestBuy.  
 
 ```{python exampleCode}
 
@@ -180,6 +294,13 @@ We wrote code to allow us to (mostly) template out our gathering of information 
 # print(tukey_test.summary())
 
 ```
+
+### Exploring Sentiments - Star Rating vs. Sentiment Variables
+
+```{python}
+
+```
+
 * Inter-Website Comparison of Product Reviews
 
     * Same Product 
@@ -214,11 +335,41 @@ We wrote code to allow us to (mostly) template out our gathering of information 
 
 ## Data Before / After
 
-* 
+Much of our data cleaning occured during the collection process.  Our team took specific steps to pursue cleaning during collection to simplify the process of bringing all information together:
+
+* Using regular expressions to extract key values from text blocks
+
+* Leveraging XPATH, class names, and element IDs to identify HTML fields in which our desired data points resided
+
+Post-scraping, we had to pursue some additional cleanup
+
+* Removal of unicode characters from review content where possible through coding and scripting.
+
+* Conversion of numbers, stored as strings, to integers (i.e. star ratings, cost/dollar amounts)
+
+* Handling of missing values (i.e. no ratings, no star ratings, no cost listed)
+
+A particular challenge we came across during the data cleaning process was the handling foreign language reviews, highly repetitive reviews, and misspelled reviews.  To better support our calculated measures for subjectivity and polarity, we leveraged the langdetect library to attempt to classify the languages of each of our 45,000+ reviews collected.  
+
+```{python tbl-foreign-lang-reviews}
+#| label: tbl-foreign-lang-reviews
+#| tbl-cap: Examples of reviews written in foreign languages
+foreign_lang = pd.DataFrame(
+    review_data[review_data['review_lang']!='en']
+)
+
+foreign_lang[50:60][['site','reviewer_name','review_content']]
+```
+
+In some cases, the language classification by langdetect was a false negative (i.e. classified as a language other than english, when it was indeed English).  In our data exploration, we found that many of these false positives were outliers in other categories (whether for review length, review subjectivity, review polarity, or star rating).  As such, we find it prudent to exclude these reviews from our dataset when pursuing model development.  
+
+In total, langdetect classified fewer than X reviews (accounting for X.XX% of our collected reviews) as being non-English.  Excluding these reviews should have minimal impact on the pursuit of model development.
 
 ## Insights from Collection and EDA 
 
-* 
+* Statistically significant differences for review star rating, subjectivity, polarity across each of the three websites.
+
+* Exclusion of outliers for one or more categories could result in excluding lower star rating reviews, which could impact model
 
 <!-- ```{r TryBothOnePaper}
 print("Hello,world!")
