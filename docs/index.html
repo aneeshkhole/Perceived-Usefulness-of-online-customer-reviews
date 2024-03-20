@@ -9,7 +9,7 @@
 <meta name="author" content="Patrick Connelly">
 <meta name="author" content="Aneesh Khole">
 <meta name="author" content="Uttara Ketkar">
-<meta name="dcterms.date" content="2024-03-19">
+<meta name="dcterms.date" content="2024-03-20">
 
 <title>CSCI 5302 - Final Project</title>
 <style>
@@ -179,13 +179,14 @@ div.csl-indent {
   <ul>
   <li><a href="#sec-intro" id="toc-sec-intro" class="nav-link active" data-scroll-target="#sec-intro"><span class="header-section-number">1</span> Introduction</a>
   <ul class="collapse">
-  <li><a href="#concept-and-motivation" id="toc-concept-and-motivation" class="nav-link" data-scroll-target="#concept-and-motivation"><span class="header-section-number">1.1</span> Concept and Motivation</a></li>
-  <li><a href="#what-where" id="toc-what-where" class="nav-link" data-scroll-target="#what-where"><span class="header-section-number">1.2</span> What / Where</a></li>
-  <li><a href="#why-it-matters" id="toc-why-it-matters" class="nav-link" data-scroll-target="#why-it-matters"><span class="header-section-number">1.3</span> Why It Matters</a></li>
-  <li><a href="#literature-survey" id="toc-literature-survey" class="nav-link" data-scroll-target="#literature-survey"><span class="header-section-number">1.4</span> Literature Survey</a></li>
-  <li><a href="#research-questions" id="toc-research-questions" class="nav-link" data-scroll-target="#research-questions"><span class="header-section-number">1.5</span> Research Questions</a></li>
-  <li><a href="#goals-definition-of-success" id="toc-goals-definition-of-success" class="nav-link" data-scroll-target="#goals-definition-of-success"><span class="header-section-number">1.6</span> Goals / Definition of Success</a></li>
-  <li><a href="#project-schedule-timeline" id="toc-project-schedule-timeline" class="nav-link" data-scroll-target="#project-schedule-timeline"><span class="header-section-number">1.7</span> Project Schedule / Timeline</a></li>
+  <li><a href="#abstract" id="toc-abstract" class="nav-link" data-scroll-target="#abstract"><span class="header-section-number">1.1</span> Abstract</a></li>
+  <li><a href="#concept-and-motivation" id="toc-concept-and-motivation" class="nav-link" data-scroll-target="#concept-and-motivation"><span class="header-section-number">1.2</span> Concept and Motivation</a></li>
+  <li><a href="#our-research-plan" id="toc-our-research-plan" class="nav-link" data-scroll-target="#our-research-plan"><span class="header-section-number">1.3</span> Our Research Plan</a></li>
+  <li><a href="#why-it-matters" id="toc-why-it-matters" class="nav-link" data-scroll-target="#why-it-matters"><span class="header-section-number">1.4</span> Why It Matters</a></li>
+  <li><a href="#literature-survey" id="toc-literature-survey" class="nav-link" data-scroll-target="#literature-survey"><span class="header-section-number">1.5</span> Literature Survey</a></li>
+  <li><a href="#research-questions" id="toc-research-questions" class="nav-link" data-scroll-target="#research-questions"><span class="header-section-number">1.6</span> Research Questions</a></li>
+  <li><a href="#goals-definition-of-success" id="toc-goals-definition-of-success" class="nav-link" data-scroll-target="#goals-definition-of-success"><span class="header-section-number">1.7</span> Goals / Definition of Success</a></li>
+  <li><a href="#project-schedule-timeline" id="toc-project-schedule-timeline" class="nav-link" data-scroll-target="#project-schedule-timeline"><span class="header-section-number">1.8</span> Project Schedule / Timeline</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -214,7 +215,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 19, 2024</p>
+      <p class="date">March 20, 2024</p>
     </div>
   </div>
   
@@ -229,14 +230,18 @@ div.csl-indent {
 
 <section id="sec-intro" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1><p><img src="images/cover.png" title="CSCI 5302 - Final Project" class="quarto-cover-image img-fluid"></p>
-<section id="concept-and-motivation" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="concept-and-motivation"><span class="header-section-number">1.1</span> Concept and Motivation</h2>
+<section id="abstract" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="abstract"><span class="header-section-number">1.1</span> Abstract</h2>
+<p>We explore the research performed in <span class="citation" data-cites="percUse">Guha Majumder, Dutta Gupta, and Paul (<a href="references.html#ref-percUse" role="doc-biblioref">2022</a>)</span>, and seek to further it via their recommendations for predicting the perceived usefulness of online customer reviews to potential customers. Our work focuses on the expansion and generalization of their multiple linear regression model. To check the model’s general applicability, we collect additional products and reviews, and do so for the same products from multiple e-commerce websites to examine whether such models are applicable to any platform, or if the models may be platform-specific. Furthermore, we explore use of additional features and coefficients, and use of other prediction and classification models to assess the degree to which a customer review is useful to future customers.</p>
+</section>
+<section id="concept-and-motivation" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="concept-and-motivation"><span class="header-section-number">1.2</span> Concept and Motivation</h2>
 <!--PC-->
 <p>Customers, when searching for products with specific features and aspects, need sufficient information to make a decision as to whether to procure a specific product. According to research by <span class="citation" data-cites="percUse">Guha Majumder, Dutta Gupta, and Paul (<a href="references.html#ref-percUse" role="doc-biblioref">2022</a>)</span>, if a customer can gather and understand product quality before the purchase, it is considered a search good, while experience goods are those which must be purchased or experienced to evaluate them. When a product is more in the directon of experience vs.&nbsp;search-based, other customers’ experiences can shed light on its features and return on investment than information directly from the vendor can. Having reviews from reliable sources with sufficiently detailed information can enable greater confidence in a purchase, improved customer satisfaction, and smooth the process of ecommerce for customers.</p>
 <p>We seek to expound upon the research of <span class="citation" data-cites="percUse">(<a href="references.html#ref-percUse" role="doc-biblioref">Guha Majumder, Dutta Gupta, and Paul 2022</a>)</span> to explore additional recommended research areas to improve upon and increase the general applicability of the model.</p>
 </section>
-<section id="what-where" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="what-where"><span class="header-section-number">1.2</span> What / Where</h2>
+<section id="our-research-plan" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="our-research-plan"><span class="header-section-number">1.3</span> Our Research Plan</h2>
 <p><span class="citation" data-cites="percUse">Guha Majumder, Dutta Gupta, and Paul (<a href="references.html#ref-percUse" role="doc-biblioref">2022</a>)</span> provided the following summary model for what aspects and features they took into consideration in predicting the perceived usefulness of a customer review in <a href="#fig-img-1" class="quarto-xref">Figure&nbsp;<span>1.1</span></a>.</p>
 <div id="fig-img-1" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -272,15 +277,15 @@ Figure&nbsp;1.2: Model Modification Goals
 </div>
 <p>This is not final, but what we plan to explore. If any metrics or measurements are found to not be significant in analysis and prediction of usefulness of a review, we will seek to explain the relationships (or lack thereof) and modify the final model accordingly. By incorporating these additional measures, we may be able to improve upon and generalize the original model to multiple product types across multiple e-commerce vendors.</p>
 </section>
-<section id="why-it-matters" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="why-it-matters"><span class="header-section-number">1.3</span> Why It Matters</h2>
+<section id="why-it-matters" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="why-it-matters"><span class="header-section-number">1.4</span> Why It Matters</h2>
 <!--PC-->
 <p>Feedback from customers can be beneficial to both vendors and consumers, but it is not always ordered by the most informative or beneficial feedback first. Certain features of products, reviews, and reviewers (such as reviewer reliability, review quality, product quality, specificity and detail of the product, amongst others) can impact the usefulness of the feedback on a customer-by-customer basis. Level of detail, star-rating, and number of votes that support the review as being useful to a customer can all help determine its usefulness to other customers. Leveraging metrics and data associated with a product, a review, and a reviewer together may allow for online vendors to improve consumer e-commerce experience, support identificaion of issues with product quality and sales, and enable vendors to adjust practices in product marketing, inventory, and manufacture.</p>
 <p>Examining additional product types could support a generalization of the authors’ methodology to other products. Furthermore, the exploration of a sliding scale for search vs.&nbsp;experience-based products can further support generalization and business goals. Producing a reliable scale and methods for classifying a products’ degree of being experienced-based can inform vendors on:</p>
 <ul>
-<li><p>How to best sort product reviews</p></li>
-<li><p>Examine what are the most helpful reviews to know the performance of the product alongside customer experience and sentiment</p></li>
-<li><p>Adjust the product, its marketing, or future production based upon market efficacy</p></li>
+<li><p>How to best sort product reviews.</p></li>
+<li><p>Examine what are the most helpful reviews to know the performance of the product alongside customer experience and sentiment.</p></li>
+<li><p>Adjust the product, its marketing, or future production based upon market efficacy.</p></li>
 </ul>
 <!--not sure that this fits here...is this a separate paragraph talking about what else we're trying to do? Or do we re-word?-->
 <!-- 
@@ -299,11 +304,8 @@ Figure&nbsp;1.2: Model Modification Goals
 </ul></li>
 </ul>
 </section>
-<section id="literature-survey" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="literature-survey"><span class="header-section-number">1.4</span> Literature Survey</h2>
-<!--* **Paper(s) on user/consumer/reviewer classification**
-<!--PC, UK, AK
-* **All papers you've found, provide a summary of what they did and any key results** -->
+<section id="literature-survey" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="literature-survey"><span class="header-section-number">1.5</span> Literature Survey</h2>
 <ul>
 <li><p><span class="citation" data-cites="percUse">Guha Majumder, Dutta Gupta, and Paul (<a href="references.html#ref-percUse" role="doc-biblioref">2022</a>)</span></p>
 <ul>
@@ -323,8 +325,8 @@ Figure&nbsp;1.2: Model Modification Goals
 </ul></li>
 </ul>
 </section>
-<section id="research-questions" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="research-questions"><span class="header-section-number">1.5</span> Research Questions</h2>
+<section id="research-questions" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="research-questions"><span class="header-section-number">1.6</span> Research Questions</h2>
 <ul>
 <li><p>Can the model from <span class="citation" data-cites="percUse">Guha Majumder, Dutta Gupta, and Paul (<a href="references.html#ref-percUse" role="doc-biblioref">2022</a>)</span> be generalized with:</p>
 <ul>
@@ -355,8 +357,8 @@ Figure&nbsp;1.2: Model Modification Goals
 </ul>
 <!-- UK 2 research questions -->
 </section>
-<section id="goals-definition-of-success" class="level2" data-number="1.6">
-<h2 data-number="1.6" class="anchored" data-anchor-id="goals-definition-of-success"><span class="header-section-number">1.6</span> Goals / Definition of Success</h2>
+<section id="goals-definition-of-success" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="goals-definition-of-success"><span class="header-section-number">1.7</span> Goals / Definition of Success</h2>
 <!-- -->
 <ul>
 <li><p>Replicate similar results to <span class="citation" data-cites="percUse">Guha Majumder, Dutta Gupta, and Paul (<a href="references.html#ref-percUse" role="doc-biblioref">2022</a>)</span> with similar product types</p></li>
@@ -385,8 +387,8 @@ Figure&nbsp;1.2: Model Modification Goals
 </ul>
 <!--NOTE: Need success metrics/plan for sentiment-->
 </section>
-<section id="project-schedule-timeline" class="level2" data-number="1.7">
-<h2 data-number="1.7" class="anchored" data-anchor-id="project-schedule-timeline"><span class="header-section-number">1.7</span> Project Schedule / Timeline</h2>
+<section id="project-schedule-timeline" class="level2" data-number="1.8">
+<h2 data-number="1.8" class="anchored" data-anchor-id="project-schedule-timeline"><span class="header-section-number">1.8</span> Project Schedule / Timeline</h2>
 <p>Below in <a href="#tbl-task-list" class="quarto-xref">Table&nbsp;<span>1.1</span></a>, we lay out the major tasks, deliverables, and their respective due dates for this effort.</p>
 <div class="cell" data-execution_count="2">
 <div id="tbl-task-list" class="cell quarto-float anchored" data-execution_count="2">
@@ -399,69 +401,69 @@ Table&nbsp;1.1: Major Project Tasks
 <style type="text/css">
 </style>
 
-<table id="T_ff326" class="do-not-create-environment cell table table-sm table-striped small" data-quarto-postprocess="true">
+<table id="T_be86e" class="do-not-create-environment cell table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
-<th id="T_ff326_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Task</th>
-<th id="T_ff326_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Due Date</th>
+<th id="T_be86e_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Task</th>
+<th id="T_be86e_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Due Date</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_ff326_row0_col0" class="data row0 col0">Milestone 1 Submission</td>
-<td id="T_ff326_row0_col1" class="data row0 col1">Feb 26 2024</td>
+<td id="T_be86e_row0_col0" class="data row0 col0">Milestone 1 Submission</td>
+<td id="T_be86e_row0_col1" class="data row0 col1">Feb 26 2024</td>
 </tr>
 <tr class="even">
-<td id="T_ff326_row1_col0" class="data row1 col0">Product Identification and Selection</td>
-<td id="T_ff326_row1_col1" class="data row1 col1">Feb 28 2024</td>
+<td id="T_be86e_row1_col0" class="data row1 col0">Product Identification and Selection</td>
+<td id="T_be86e_row1_col1" class="data row1 col1">Feb 28 2024</td>
 </tr>
 <tr class="odd">
-<td id="T_ff326_row2_col0" class="data row2 col0">Vendor Identification and Selection</td>
-<td id="T_ff326_row2_col1" class="data row2 col1">Feb 28 2024</td>
+<td id="T_be86e_row2_col0" class="data row2 col0">Vendor Identification and Selection</td>
+<td id="T_be86e_row2_col1" class="data row2 col1">Feb 28 2024</td>
 </tr>
 <tr class="even">
-<td id="T_ff326_row3_col0" class="data row3 col0">Data Collection</td>
-<td id="T_ff326_row3_col1" class="data row3 col1">Mar 8 2024</td>
+<td id="T_be86e_row3_col0" class="data row3 col0">Data Collection</td>
+<td id="T_be86e_row3_col1" class="data row3 col1">Mar 8 2024</td>
 </tr>
 <tr class="odd">
-<td id="T_ff326_row4_col0" class="data row4 col0">Data Cleaning/Pre-Processing</td>
-<td id="T_ff326_row4_col1" class="data row4 col1">Mar 17 2024</td>
+<td id="T_be86e_row4_col0" class="data row4 col0">Data Cleaning/Pre-Processing</td>
+<td id="T_be86e_row4_col1" class="data row4 col1">Mar 17 2024</td>
 </tr>
 <tr class="even">
-<td id="T_ff326_row5_col0" class="data row5 col0">Milestone 2 Submission</td>
-<td id="T_ff326_row5_col1" class="data row5 col1">Mar 20 2024</td>
+<td id="T_be86e_row5_col0" class="data row5 col0">Milestone 2 Submission</td>
+<td id="T_be86e_row5_col1" class="data row5 col1">Mar 20 2024</td>
 </tr>
 <tr class="odd">
-<td id="T_ff326_row6_col0" class="data row6 col0">Review Classification (Naive Bayes, Kansei)</td>
-<td id="T_ff326_row6_col1" class="data row6 col1">Mar 27 2024</td>
+<td id="T_be86e_row6_col0" class="data row6 col0">Review Classification (Naive Bayes, Kansei)</td>
+<td id="T_be86e_row6_col1" class="data row6 col1">Mar 27 2024</td>
 </tr>
 <tr class="even">
-<td id="T_ff326_row7_col0" class="data row7 col0">Product Classification</td>
-<td id="T_ff326_row7_col1" class="data row7 col1">Mar 27 2024</td>
+<td id="T_be86e_row7_col0" class="data row7 col0">Product Classification</td>
+<td id="T_be86e_row7_col1" class="data row7 col1">Mar 27 2024</td>
 </tr>
 <tr class="odd">
-<td id="T_ff326_row8_col0" class="data row8 col0">Reputation Classification</td>
-<td id="T_ff326_row8_col1" class="data row8 col1">Mar 27 2024</td>
+<td id="T_be86e_row8_col0" class="data row8 col0">Reputation Classification</td>
+<td id="T_be86e_row8_col1" class="data row8 col1">Mar 27 2024</td>
 </tr>
 <tr class="even">
-<td id="T_ff326_row9_col0" class="data row9 col0">Exploratory Data Analysis</td>
-<td id="T_ff326_row9_col1" class="data row9 col1">Mar 31 2024</td>
+<td id="T_be86e_row9_col0" class="data row9 col0">Exploratory Data Analysis</td>
+<td id="T_be86e_row9_col1" class="data row9 col1">Mar 31 2024</td>
 </tr>
 <tr class="odd">
-<td id="T_ff326_row10_col0" class="data row10 col0">Milestone 3 Submission</td>
-<td id="T_ff326_row10_col1" class="data row10 col1">Unknown</td>
+<td id="T_be86e_row10_col0" class="data row10 col0">Milestone 3 Submission</td>
+<td id="T_be86e_row10_col1" class="data row10 col1">Unknown</td>
 </tr>
 <tr class="even">
-<td id="T_ff326_row11_col0" class="data row11 col0">Model Selection</td>
-<td id="T_ff326_row11_col1" class="data row11 col1">April 7 2024</td>
+<td id="T_be86e_row11_col0" class="data row11 col0">Model Selection</td>
+<td id="T_be86e_row11_col1" class="data row11 col1">April 7 2024</td>
 </tr>
 <tr class="odd">
-<td id="T_ff326_row12_col0" class="data row12 col0">Model Testing:</td>
-<td id="T_ff326_row12_col1" class="data row12 col1">April 11 2024</td>
+<td id="T_be86e_row12_col0" class="data row12 col0">Model Testing:</td>
+<td id="T_be86e_row12_col1" class="data row12 col1">April 11 2024</td>
 </tr>
 <tr class="even">
-<td id="T_ff326_row13_col0" class="data row13 col0">Complete Final Paper / Milestone 4</td>
-<td id="T_ff326_row13_col1" class="data row13 col1">April 17 2024</td>
+<td id="T_be86e_row13_col0" class="data row13 col0">Complete Final Paper / Milestone 4</td>
+<td id="T_be86e_row13_col1" class="data row13 col1">April 17 2024</td>
 </tr>
 </tbody>
 </table>
@@ -470,82 +472,6 @@ Table&nbsp;1.1: Major Project Tasks
 </figure>
 </div>
 </div>
-<!--
-
-This is where our abstract will go.
-
-Here's an example of inserting a plot directly into our paper
-
-::: {#cell-fig-a .cell execution_count=3}
-
-::: {.cell-output .cell-output-display}
-![a matplotlib plot](index_files/figure-html/fig-a-output-1.png){#fig-a width=566 height=411}
-:::
-:::
-
-
-Here's an example of pulling some data in from our github repo
-
-
-init_notebook_mode(connected=True)
-
-#reference data directly that sits in the github repo
-temp = pd.read_csv('../data/Fatalities.csv')
-
-temp['ST'] = temp['state'].str.upper()
-
-#add the ratio column to examine the plot by ratio of alcohol fatalitites to all fatalities
-temp['afatal_ratio'] = temp['afatal'] / temp['fatal']
-
-fig = go.Figure()
-
-#collection point for data to be held from each slider position
-slider_info = []
-
-#slice the data by year 
-for y in range(temp['year'].min(),temp['year'].max()+1):
-    #get the current year's data
-    year_data = temp[temp['year']==y]
-
-    #build a dictionary to house the data for the year
-    #we specify "choropleth" to feed the dictionary to plotly
-    #when we have a slider change
-    dict_year_data = {
-        'type':'choropleth',
-        'locations':year_data['ST'], #we want information by-state
-        'z':year_data['afatal_ratio'], #plot the ratio of alcohol fatalities to all fatalities.
-        'locationmode':'USA-states', #look at the US
-        'colorbar':{'title':'alcohol-related fatalities (%)'} #label the color axis
-    }
-    #collect all the data to add to our slider information
-    slider_info.append(dict_year_data)
-
-steps = []
-for i in range(len(slider_info)):
-    step = dict(
-        method='restyle',
-        args=['visible',[False]*len(slider_info)],
-        #start the slider index at 1982
-        label='{}'.format(i+1982)
-    )
-    step['args'][1][i] = True
-    steps.append(step)
-
-sliders = [dict(active=len(steps)-1,pad={"t":1},steps=steps)]
-
-layout = dict(
-    title='Alcohol-Related Fatality Rate 1982-1988',
-    geo=dict(scope='usa',projection={'type':'albers usa'}),
-    sliders=sliders,
-    width=1000,
-    height=500
-)
-
-fig = dict(data=slider_info,layout=layout)
-
-iplot(fig)
-
-```-->
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">

@@ -2,9 +2,19 @@
 
 Here's where we'll list out our models
 
-## Examined Models from Literature Research
+## Examined Model - Multiple Linear Regression
 
-* Perceived Usefulness of Product Reviews
+### Base Model 
+
+### Model Modifications
+
+## Examined Model - Decision Tree
+
+## Examined Model - Naive Bayes
+
+## Examined Model - ?
+
+<!--* Perceived Usefulness of Product Reviews
 
     - Modeling for search vs. experience goods as "mitigations" on reviews, examining their impact on perceived review usefulness
 
@@ -79,7 +89,7 @@ $$
 
     * comment/review information?
 
-* Are there other methods aside from Jaccard Similarity? 
+* Are there other methods aside from Jaccard Similarity? -->
 
 ## Model Comparison
 

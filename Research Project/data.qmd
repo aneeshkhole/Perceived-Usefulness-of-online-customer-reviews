@@ -1,29 +1,43 @@
 # Data Collection and Exploration {#sec-data}
 
 ```{python}
-#module imports
+#module and data imports
 import pandas as pd, numpy as np, matplotlib.pyplot as plt
 import seaborn as sns
 import pingouin as pg
 from statsmodels.stats.multicomp import pairwise_tukeyhsd
-review_data = pd.read_csv('../data/combined_review_table.csv')
+import statsmodels.api as sm
+
+product_data = pd.read_csv('../data/master_product_list.csv')
+#review_data = pd.read_csv('../data/combined_review_table.csv')
+review_data = pd.read_csv('../data/all_reviews_without_unicode.csv')
+review_data_base = pd.DataFrame(review_data)
+review_data = pd.DataFrame(
+    review_data[
+        (review_data['productID'].isin([1,2,3,5,6,8,9,11,12,13,14,15])) &
+        (review_data['review_lang']=='en')
+    ]
+)
+   
+review_metrics = pd.read_csv('../data/combined_review_metrics.csv')
 ```
+
+```{python}
+review_data_base['prodSiteID'].unique()
+```
+
 
 ## Data Collection Overview
 
-Leverage python Selenium, urllib, and Beautiful Soup to scrape data from X products.
+The original efforts by @percUse selected three products, all listed on Amazon for sale.  In our efforts, we leveraged python Selenium, urllib, and Beautiful Soup to scrape data from 20 different products across multiple websites (Amazon, BestBuy, and Target).  Where possible, we sought to collect the exact same 20 products from each site and customer feedback associated with each.
 
-* Sought to collect some data from 3 websites - target, amazon, and best buy.
+As part of collection, to the greatest extent we were able, we cleaned information *during* the scraping process.  Doing this enabled us to have minimal cleaning efforts after collection.  Post collection, remaining items such as handling and removing special characters, unicode characters, addressing customer reviews written in foreign languages, and addressing misspellings remained necessary.
 
-* Where possible, collect same entity from multiple sites
-
-As part of collection, to the greatest extent we are able, we cleaned information *during* the scraping process.  We leveraged tools such as the python regular expression library and (*anything else?*) to pull the exact information we sought while scraping.  The only possible additional cleaning that may be required after scraping is the handling of unicode characters within product names, product reviews, and so forth.
-
-In terms of simplicity for scraping our data, we will manually identify a list of products.  @percUse leveraged solely 3 products from Amazon.  Our team seeks to scrape between 20 and 30 products and all their reviews from Target, Amazon, and Best Buy.  By doing so, we are greatly increasing the sample size of data compared to the original work performed.
+In terms of simplicity for scraping our data, we manually identified a list of products from each of the aforementioned sites.  Our team divided responsibilities to produce scraping code customized for each of the three websites.
 
 ## Data Collection Details
 
-In collecting our data, in order to adhere to the model implemented by @percUse, we require the following data points, at a minimum:
+In collecting our data, in order to adhere to the model implemented by @percUse, we required the following data points: 
 
 ```{python dataReqsProducts}
 #|tbl: tbl-data-reqs-products
@@ -36,8 +50,17 @@ tbl_data_reqs.set_index('Variable')
 tbl_data_reqs.style.hide(axis='index')
 ```
 
-```{python dataReqsRatings}
-#|tbl: tbl-data-reqs-ratings
+For the product category variable - we may add our own manual categorization.  @percUse manually set the value for this variable.  Part of the intent of our research is to seek out means and methods to replace this variable with a continuous scale (ranging from 0 for a "search" good, to a 1 for an "experience" good).  
+
+As an initial proxy for this variable and to operationalize it, we leverage a measure of subjectivity for the product - namely how subjective (e.g. how many adverb, adjective, and other word modifiers) are present within the details and specifications of a product.  A product that more aligns to a "search" product, we hypothesize, will have fewer modifying words and be oriented toward the facts of the object.  
+
+For example, a desk has specific dimensions for length, width, and height, an associated weight, and material from which the desk is made, and possibly some warranty information - all of which are likely to be contained within the product description and specifications.  We would characterize such a good as a "search" good (or a 0 on our scale).  Leveraging existing language processing tools should allow us to calculate a value for subjectivity in the product's description and specifications.  
+
+Initially, we'll explore product subjectivity in the combination of the specification and the description, though it may be necessary to explore product subjectivity solely within one of these fields or the other to pursue our modeling. 
+
+```{python tbl-data-reqs-ratings}
+#| label: tbl-data-reqs-ratings
+#| tbl-cap: Review Data Required
 data_reqs_rating = {
     'Variable':['Verified Purchase', 'Star Rating', 'Review Content', 'Useful Votes'],
     'Data Type':['boolean','float','string','integer']
@@ -47,47 +70,42 @@ tbl_data_reqs.set_index('Variable')
 tbl_data_reqs.style.hide(axis='index')
 ```
 
+In @tbl-data-reqs-ratings, we outline the specific datapoints we sought out for reviews across each website.  @percUse leveraged star rating, review content (specifically the review length), and the number of votes for the review being useful as key measures in their research.  To further their work, we plan on exploring the impacts of verified product purchasers and the impact of verification on how useful a review may be to potential customers.
 
-From our collected data, here are some of the calculations we'll need to run for building our models.  If time is available, we will run these calculations using Python's NLTK before the completion of this milestone.
-
-```{python dataCalcs}
-#|tbl: tbl-data-calcs
+```{python tbl-data-calcs}
+#| label: tbl-data-calcs
+#| tbl-cap: Additional Calculated Columns, Post Data Collection
 data_calcs = {
-    'Variable':['Product Subjectivity','Review Length', 'Sentiment Score','Reputation Score','Product Type Score','Polarity Score'],
-    'Data Type':['float','integer','float','float','float','float']
+    'Variable':['Product Subjectivity','Review Length (Words)', 'Review Subjectivity','Review Polarity'],
+    'Data Type':['float','integer','float','float']
 }
+#sentiment score, product type score, ...
 tbl_data_calcs  = pd.DataFrame(data_calcs)
 tbl_data_calcs.set_index('Variable')
 tbl_data_calcs.style.hide(axis='index')
 ```
 
-In terms of structuring our stored data, we will have a central table and child tables.  Since we will seek, in some cases, to gather the *same* product from multiple websites, we must have a structure that identifies:
+Post collection, we added the calculations listed in @tbl-data-calcs to our review data and product data (less reputation score).  Each of these calculations will allow us to better understand our underlying data and explore possibilities of where and how each may fit into models for review usefulness.
 
-* The full listing of products, assigned an arbitrary ID
+We have also established a master listing of all products for which we collected data and have associated arbitrary identifiers with the products.  In instances where we've successfully pulled data for *identical* products from multiple websites, it can allow us to explore the impact on product and review metrics and investigate the listing site as a treatment variable. 
 
-* A listing of specific products we intend to scrape from each of the websites we've identified.  Adding an additional ID of \[company_name\]-\[arbitrary_product_id\]
+For instance - exploring the impact of review subjectivity, polarity, length, and usefulness, based upon which site the product was listed.
 
-* Site-specific product information
+## Data Exploration
 
-* Site-specific review content and metadata
+After collection and cleaning, we plan to explore our data via visualization, seeking to answer key research questions.
 
-To wrangle the potential amount of data we may collect, we will partition review files into their own files under the following convention:  \[company_name\]-\[arbitrary_product_id\]-review_content.csv.  Using this method will allow us to capture thousands of reviews for multiple products without overrunning GitHub filesize limitations.  Following this convention will also allow us to easily script out the integration of all these files for analysis when we begin building and applying our models.
-
-Additionally, the use of assigning products an arbitrary ID that is common between different vendors will allow us to *directly compare* review and product information across multiple vendors simultaneously to gather additional insights.  Effectively, if we group products by this identifier, we can see how the product performs overall in multiple e-commerce platforms.  Similarly, we can use this information to evaluate and run comparisons and tests on individual products, given the treatment of their offering on different platforms.  This can help generate even more insight before model application.  
-
-For instance, we may be able to explore questions like:
-
-* Is the price of a product higher, given it's offered on Amazon, BestBuy, or Target?
+* Is the price of a product higher, given it's offered on Amazon, BestBuy, or Target? <!--Eliminate?-->
 
 * Is a product's star rating affected by which e-commerce platform is selling it?
 
 * Is there a substantial difference in number of product reviews on one e-commerce platform vs. another?
 
-* Is one e-commerce platform more likely to have input and feedback on reviews (i.e. higher proportion of "this review is helpful" votes to total number of reviews)?
+* Is one e-commerce platform more likely to have input and feedback on reviews (i.e. higher proportion of "this review is helpful" votes to total number of reviews)? <!--Eliminate?-->
 
-* What is the difference in the level of detail provided in product descriptions (e.g. for the same product) across each e-commerce platform?
+* What is the difference in the level of detail provided in product descriptions (e.g. for the same product) across each e-commerce platform?  
 
-* Do certain product categories perform better on specific platforms?
+* Do certain product categories perform better on specific platforms? <!--Eliminate?-->
 
 * Are users more likely to leave reviews on one platform over another?
 
@@ -97,65 +115,140 @@ Structuring our data properly during the collection process will enable us to ex
 
 ## Collection Procedures?
 
-We wrote code to allow us to (mostly) template out our gathering of information from each website.  The general process for each page is similar for data gathering.  To alleviate any unnecessary burden on the target websites, we manually identified URLs to the specific products we sought out to gather, and wrote our code to iterate through those URLs and pull the necessary data and features we sought.  This hybrid approach saved us time and effort.
-
-* Gathering from Target (All products)
-
-    * Target has dynamic content on their webpages.  We used Python Selenium to navigate to product pages and automate the selection of items needed to expand sections to reveal additional data.  We also automated the process of expanding out all reviews so as to iterate through and parse the content of every review for each product in question.  We extracted the fields listed above (reference here) to store in our records tables.
+We wrote code to allow us to gather information from each website.  The general process for each e-commerce platform is similar.  To alleviate any unnecessary burden for any of these websites, we manually identified URLs to the specific products we sought out to gather, and wrote our code to iterate through those URLs and pull the necessary data and features we sought.  This manual identification also allowed us to ensure, in most cases, that we were getting the *exact* same product during data capture.  This hybrid approach enabled higher certainty in getting the same product while also accelerating collection, structuring, and cleaning of product review information.
 
 * Gathering from Amazon (All Products)
+
     * Product & Review data was scraped from Amazon's website using Python and Selenium. A Selenium WebDriver was utilized to automate web browser interactions. After navigating to product categories like electronics, home appliances, furniture, books, and grocery, Selenium's functions were employed to locate review elements. These elements were then parsed and collected, storing the data in a structured format i.e. a CSV file. Pagination handling was implemented to scrape reviews from multiple pages. 
 
 * Gathering from BestBuy (Electronic Products, Furniture Item(s)? - no grocery or clothing)
 
     * Just like Target and Amazon, even BestBuy has dynamic content on its web page. We employed Python with Selenium to automate the exploration of product pages, unveiling hidden content, and harvesting essential data. Employing Selenium's functionalities, we initiated the traversal process, enabling the program to automatically expand pertinent sections to uncover additional information. By targeting elements such as product details and reviews, we orchestrated the seamless extraction of critical fields from each product's page. This automated approach allowed us to efficiently parse through an extensive array of reviews, ensuring a comprehensive analysis of user feedback for the products under scrutiny. We systematically stored the extracted data in our records tables for further analysis and reference.
 
-## Visualizations
+* Gathering from Target (All products)
 
-* We require a minimum of 10 unique EDA plots for this milestone.  We've outlined some of the below but need our data in order and unified prior to development.
+    * Target has dynamic content on their webpages.  We used Python Selenium to navigate to product pages and automate the selection of items needed to expand sections to reveal additional data.  We also automated the process of expanding out all reviews so as to iterate through and parse the content of every review for each product in question. 
 
-    * Scatter Plots
-```{python fig-violin-plots1}
-#| label:    fig-violin-plots1
-#| fig-cap:  "Violin Plots of Review Star-Rating vs. Subjectivity, by Site"
+## Data Exploration and Visualization
 
-vplot_polarity_stars = sns.FacetGrid(
-    data = review_data,
-    col='site'
-)
-vplot_polarity_stars.map_dataframe(
-    sns.violinplot,
-    x='review_star_rating',
-    y='review_subjectivity'
-)
+For our data exploration, we plan to examine solely the reviews for which we have data from all of our websites.  Due to the nature of the vendors, not all offer the same products online.  We've included some unique products from each site (and may even gather more), but will exclude them from initial analysis. 
+
+The reason for only examining common products is to check for comparability and similarity of the products associated variables (e.g. product subjectivity, review subjectivity, review polarity, star rating, and so forth) between the websites.  If they are similar or comparable, it may mean that we could use single models to make predictions on the usefulness of customer feedback.  If they are substantially dissimilar, it may mean that modifiers are needed based upon the e-commerce platform in which the product is listed.
+
+We'll start by looking at distributions of some of these key variables, and check some of the common trends between them, potentially moving on to hypothesis testing of these variables to check for statistically significant differences.
+
+### Univariate Plots and Distributions
+
+```{python fig-qq-plots-rating}
+#| label: fig-hist-plots
+#| fig-cap: Histogram Plot (star-rating, by-site)
+
+fig,ax = plt.subplots(nrows=1,ncols=3)
+sites = ['Amazon','Target','BestBuy']
+for i in range(len(sites)):
+    sns.histplot(
+        data=review_data[review_data['site']==sites[i]],
+        x='review_star_rating',
+        ax=ax[i]
+    )
+    ax[i].set_title(sites[i])
+    if i > 0:
+        ax[i].set_ylabel("")
+plt.suptitle("Histogram Plots for Star Rating By Site")
+plt.tight_layout()
 plt.show()
 ```
 
-```{python fig-violin-plots2}
-#| label: fig-violin-plots2
-#| fig-cap: "Violin Plots for Star Rating vs. Polarity, by Site"
+Examining the histogram plots for star-rating by website, we can see that, generally, reviews tend to provide positive feedback for the selected products.
 
-vplot_polarity_stars = sns.FacetGrid(
-    data = review_data,
-    col='site'
-)
-vplot_polarity_stars.map_dataframe(
-    sns.violinplot,
-    x='review_star_rating',
-    y='review_polarity'
-)
+```{python fig-qq-plots-subj}
+#| label: fig-qq-plots-subj
+#| fig-cap: Q-Q plots (star-rating, by-site)
+
+fig,ax = plt.subplots(nrows=1,ncols=3)
+sites = ['Amazon','Target','BestBuy']
+for i in range(len(sites)):
+    x = review_data[review_data['site']==sites[i]]['review_subjectivity']
+    mu = x.mean()
+    sig = x.std()
+    norm = (x-mu)/sig
+    sm.qqplot(norm,ax=ax[i])
+    ax[i].axline((0,0),slope=1,color='black')
+    ax[i].set_title("{}".format(sites[i]))
+    if i > 0:
+        ax[i].set_ylabel("")
+#plt.tight_layout()
+plt.suptitle("Q-Q Plots for Review Subjectivity")
 plt.show()
 ```
 
-Generally, in @fig-violin-plots1 and @fig-violin-plots2, we see a trend for the median polarity and subjectivity of each review to increase as the star rating increases.  We also see that, generally, the data suggest that we have a minimum of neutral polarity that tends towards positive as star rating increases.
+Across all three websites, there appears to be consistency with adherence to, and issues with, the normal distribution for subjectivity.  These charts suggest sufficient normal distribution of review subjectivity (degree of inclusion of word modifiers such as adverbs and adjectives).  
 
-* Bar Plots 
+Therre seems to be slight skewness in the tails of these Q-Q distributions.  Filtering off some of the outliers may grant us reasonable relevance and assurance to perform hypothesis testing and evaluation of these variables across sites (e.g. ANOVA, F-Testing, etc)
 
-```{python BarPlots}
+```{python fig-qq-plots-pol}
+#| label: fig-qq-plots-pol
+#| fig-cap: Q-Q plots (star-rating, by-site)
 
+fig,ax = plt.subplots(nrows=1,ncols=3)
+sites = ['Amazon','Target','BestBuy']
+fig,ax = plt.subplots(nrows=1,ncols=3)
+
+for i in range(len(sites)):
+    x = review_data[review_data['site']==sites[i]]['review_polarity']
+    mu = x.mean()
+    sig = x.std()
+    norm = (x-mu)/sig
+    sm.qqplot(norm,ax=ax[i])
+    ax[i].axline((0,0),slope=1,color='black')
+    ax[i].set_title("{}".format(sites[i]))
+    if i > 0:
+        ax[i].set_ylabel("")
+plt.suptitle("Q-Q Plots for Review Polarity")
+#plt.tight_layout()
+plt.show()
 ```
 
-    * Box Plots
+Similar to review subjectivity, review polarity has good adherence to the normal distribution (particularly on the quantile interval of \[-2,2\]).  There are similar issues in the tails of these distributions as exist for review subjectivity.  As such, reduction in outliers may enable us to perform hypothesis testing during our model design and implementation.
+
+
+```{python fig-helpful-vote-dist}
+#| label: fig-helpful-vote-dist
+#| fig-cap: "Distribution of Review Helpful Votes"
+fig,ax = plt.subplots(nrows=1,ncols=3)
+sites = ['Amazon','Target','BestBuy']
+for i in range(len(sites)):
+    sns.kdeplot(
+        data=review_data[review_data['site']==sites[i]],
+        x='review_helpful_votes',ax=ax[i],color='green'
+    )
+    ax[i].set_title('site = '+sites[i])
+plt.xlim(0,10)
+plt.tight_layout()
+plt.show()
+```
+
+```{python fig-rand-exp-dist}
+#| label: fig-rand-exp-dist
+#| fig-cap: "Random Exponential Distributions with Means by Site"
+
+fig,ax = plt.subplots(nrows=1,ncols=3)
+for i in range(len(sites)):
+    mu = review_data[review_data['site']==sites[i]]['review_helpful_votes'].mean()
+    sns.kdeplot(
+        np.random.exponential(size=1000,scale=mu),
+        ax=ax[i],color='black'
+    )
+    ax[i].set_title("RExp("+str(round(mu,3))+")")
+plt.xlim(0,10)
+plt.tight_layout()
+plt.show()
+```
+
+Examining the plots of @fig-helpful-vote-dist and @fig-rand-exp-dist, the distribution of helpful votes, per website, appears to be exponentially distributed, with many reviews having an expected total count of helpful votes centered fairly low.  Namely, for amazon, the expected value is approximately 3.69 helpful votes, for Target 0.18 helpful votes, and BestBuy with 0.15 helpful votes.  
+
+Knowing the distribution of these predictions will assist us in the modeling process and may require us to perform variable transformations (e.g. if we pursue a multiple linear regression model).
+
 
 ```{python fig-outliers-star-rating}
 #| label: fig-outliers-star-rating
@@ -199,47 +292,97 @@ boxplot_star_rating.map_dataframe(
 )
 ```
 
+    * Violin Plots
 
+* Bar Plots 
 
-    * Violin Plots (e.g. same product, two different websites)
+### Bi/Multivariate Plots
 
-```{python ViolinPlots}
+```{python fig-bivar-plot}
+#| label: fig-bivar-plot
+#| fig-cap: "Bivariate Plot for Sensitivity and Polarity, by Site"
 
+bivar_subj_pol = sns.FacetGrid(
+    data=review_data,
+    col='site'
+)
+bivar_subj_pol.map_dataframe(
+    sns.kdeplot,
+    x='review_subjectivity',y='review_polarity'
+)
 ```
 
-    * review length
 
-        * vs star rating
+```{python fig-bivar-plot2}
+#| label: fig-bivar-plot2
+#| fig-cap: "Bivariate Plot for Sensitivity and Polarity, by Site"
 
-        * vs sentiment
-
-    * Product description / detail length
-
-        * Potentially explore "specificity" classifier
-
-    * Correlation analyses and linear regressions
-
-```{python LinRegs}
-
+# bivar_subj_pol2 = sns.FacetGrid(
+#     data=review_data[review_data['verified_purchase']==1],
+#     col='site'
+# )
+# bivar_subj_pol2.map_dataframe(
+#     sns.kdeplot,
+#     x='review_subjectivity',y='review_polarity'
+# )
 ```
 
-    * Heatmaps
+    * Box Plots
+```{python fig-violin-plots1}
+#| label:    fig-violin-plots1
+#| fig-cap:  "Violin Plots of Review Star-Rating vs. Subjectivity, by Site"
 
-```{python Heatmaps}
-
+vplot_polarity_stars = sns.FacetGrid(
+    data = review_data,
+    col='site'
+)
+vplot_polarity_stars.map_dataframe(
+    sns.violinplot,
+    x='review_star_rating',
+    y='review_subjectivity'
+)
+plt.show()
 ```
 
-    * Tukey test 
+```{python fig-violin-plots2}
+#| label: fig-violin-plots2
+#| fig-cap: "Violin Plots for Star Rating vs. Polarity, by Site"
+
+vplot_polarity_stars = sns.FacetGrid(
+    data = review_data,
+    col='site'
+)
+vplot_polarity_stars.map_dataframe(
+    sns.violinplot,
+    x='review_star_rating',
+    y='review_polarity'
+)
+plt.show()
+```
+
+Generally, in @fig-violin-plots1 and @fig-violin-plots2, we see a trend for the median polarity and subjectivity of each review to increase as the star rating increases.  We also see that, generally, the data suggest that we have a minimum of neutral polarity that tends towards positive as star rating increases.
+
+Since both median subjectivity and polarity seem to increase with respect to star rating, such a correlation could be useful to us in multiple linear regression, and is generally useful to us for consideration when pursuing model development.
+
+### Hypothesis Testing for Key Feature and Response Variables
+
+Some key features we plan to explore in our modeling include review subjectivity and review polarity.  Knowing whether or not there is a significant difference for these features between the websites on which they're hosted will inform us during model selection, design, and implementation.  As such, we'll perform ANOVA and Tukey Honest Significant Difference Tests on these variables between each site.
+
+
+#### ANOVA Testing
+
+
+#### Tukey Tests with E-Commerce Platform as Treatment
 
 ```{python fig-tukey-tests}
 #| label: fig-tukey-tests
 #| fig-cap: "Tukey Tests for Star Rating, Polarity, and Subjectivity, by-Site"
 
-star = pairwise_tukeyhsd(
-    endog=review_data['review_star_rating'],
-    groups=review_data['site'],
-    alpha=0.5
-)
+# star = pairwise_tukeyhsd(
+#     endog=review_data['review_star_rating'],
+#     groups=review_data['site'],
+#     alpha=0.5
+# )
 pol = pairwise_tukeyhsd(
     endog=review_data['review_polarity'],
     groups=review_data['site'],
@@ -254,7 +397,7 @@ subj = pairwise_tukeyhsd(
 fig,axes=plt.subplots(nrows=3,ncols=1)
 
 tests = [
-    (star,"Tukey Test - Star Rating (95%)"),
+    #(star,"Tukey Test - Star Rating (95%)"),
     (pol,"Tukey Test - Polarity (95%)"),
     (subj,"Tukey Test - Subjectivity (95%)")
 ]
@@ -268,7 +411,7 @@ plt.show()
 
 ```
 
-The Tukey honest significance tests, depicted in @fig-tukey-tests suggest some interesting patterns between the three websites.  Namely, target and best buy seem to have (across the board) higher star ratings, polarity, and subjectivity than the same variables for Amazon!  Additionally, for each variable and each website, it seems there is no overlap in the variables at the 95% confidence level.  The only exception here is for subjectivity between Target and BestBuy.  
+The Tukey honest significance tests, depicted in @fig-tukey-tests suggest some interesting patterns between the three websites.  Namely, target and best buy seem to have (across the board) higher star ratings, polarity, and subjectivity than the same variables for Amazon!  Additionally, for each variable and each website, it seems there is no overlap in the variables at the 95% confidence level.  The only exception here is for subjectivity between Target and BestBuy holding no statistically significant difference.  
 
 ```{python exampleCode}
 
@@ -349,25 +492,54 @@ Post-scraping, we had to pursue some additional cleanup
 
 * Handling of missing values (i.e. no ratings, no star ratings, no cost listed)
 
-A particular challenge we came across during the data cleaning process was the handling foreign language reviews, highly repetitive reviews, and misspelled reviews.  To better support our calculated measures for subjectivity and polarity, we leveraged the langdetect library to attempt to classify the languages of each of our 45,000+ reviews collected.  
+A particular challenge we came across during the data cleaning process was the handling foreign language reviews, highly repetitive reviews, and misspelled reviews.  To better support our calculated measures for subjectivity and polarity, we leveraged the langdetect library to attempt to classify the languages of each of our 45,000+ reviews collected.
 
 ```{python tbl-foreign-lang-reviews}
 #| label: tbl-foreign-lang-reviews
 #| tbl-cap: Examples of reviews written in foreign languages
 foreign_lang = pd.DataFrame(
-    review_data[review_data['review_lang']!='en']
+    review_data_base[review_data_base['review_lang']!='en']
 )
+#pd.set_option('display.height',30)
+# pd.set_option('display.min_rows',5)
+# pd.set_option('display.max_rows',None)
+#40:45, 40:45, 3:8
+sliced_frame = pd.DataFrame(
+    pd.concat([
+        foreign_lang[foreign_lang['site']=='Amazon'][0:5][['site','reviewer_name','review_content']],
+        foreign_lang[foreign_lang['site']=='BestBuy'][0:5][['site','reviewer_name','review_content']],
+        foreign_lang[foreign_lang['site']=='Target'][0:5][['site','reviewer_name','review_content']]
+    ])
+)
+pd.options.display.max_rows = 100
+sliced_frame
 
-foreign_lang[50:60][['site','reviewer_name','review_content']]
+# # display(
+# #     sliced_frame.head(20)
+# # )
+# from IPython.display import Markdown
+# Markdown(sliced_frame.to_markdown(index=False))
 ```
 
 In some cases, the language classification by langdetect was a false negative (i.e. classified as a language other than english, when it was indeed English).  In our data exploration, we found that many of these false positives were outliers in other categories (whether for review length, review subjectivity, review polarity, or star rating).  As such, we find it prudent to exclude these reviews from our dataset when pursuing model development.  
 
-In total, langdetect classified fewer than X reviews (accounting for X.XX% of our collected reviews) as being non-English.  Excluding these reviews should have minimal impact on the pursuit of model development.
+In total, langdetect classified fewer than 440 reviews (accounting for less than 1% of our collected reviews) as being non-English, or being repeated words or gibberish.  Excluding these reviews should have minimal impact on the pursuit of model development.
+
+TextBlob also offers us the ability to attempt to correct the spelling of reviews.  Due to the amount of time it would take us to pursue spelling corre
+
+Here are some additional examples of gibberish or non-contributional text that impact calculations for review subjectivity and polarity.  While some of these could potentially provide value with deeper analysis, we find that these will not contribute significantly to our research.
+
+```{python}
+pd.DataFrame(
+    review_data_base[review_data_base['review_lang']=='Unk'][['site','reviewer_name','review_content']]
+)
+```
+
+We are retaining the totality of the data we've collected, and will filter the data based upon our findings here so as to keep the most relevant and supportive data in building our models.
 
 ## Insights from Collection and EDA 
 
-* Statistically significant differences for review star rating, subjectivity, polarity across each of the three websites.
+* Statistically significant differences for review subjectivity, polarity across each of the three websites.
 
 * Exclusion of outliers for one or more categories could result in excluding lower star rating reviews, which could impact model
 

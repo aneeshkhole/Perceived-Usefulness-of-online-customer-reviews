@@ -176,13 +176,17 @@ div.csl-indent {
   <ul>
   <li><a href="#data-collection-overview" id="toc-data-collection-overview" class="nav-link active" data-scroll-target="#data-collection-overview"><span class="header-section-number">2.1</span> Data Collection Overview</a></li>
   <li><a href="#data-collection-details" id="toc-data-collection-details" class="nav-link" data-scroll-target="#data-collection-details"><span class="header-section-number">2.2</span> Data Collection Details</a></li>
-  <li><a href="#collection-procedures" id="toc-collection-procedures" class="nav-link" data-scroll-target="#collection-procedures"><span class="header-section-number">2.3</span> Collection Procedures?</a></li>
-  <li><a href="#visualizations" id="toc-visualizations" class="nav-link" data-scroll-target="#visualizations"><span class="header-section-number">2.4</span> Visualizations</a>
+  <li><a href="#data-exploration" id="toc-data-exploration" class="nav-link" data-scroll-target="#data-exploration"><span class="header-section-number">2.3</span> Data Exploration</a></li>
+  <li><a href="#collection-procedures" id="toc-collection-procedures" class="nav-link" data-scroll-target="#collection-procedures"><span class="header-section-number">2.4</span> Collection Procedures?</a></li>
+  <li><a href="#data-exploration-and-visualization" id="toc-data-exploration-and-visualization" class="nav-link" data-scroll-target="#data-exploration-and-visualization"><span class="header-section-number">2.5</span> Data Exploration and Visualization</a>
   <ul class="collapse">
-  <li><a href="#exploring-sentiments---star-rating-vs.-sentiment-variables" id="toc-exploring-sentiments---star-rating-vs.-sentiment-variables" class="nav-link" data-scroll-target="#exploring-sentiments---star-rating-vs.-sentiment-variables"><span class="header-section-number">2.4.1</span> Exploring Sentiments - Star Rating vs.&nbsp;Sentiment Variables</a></li>
+  <li><a href="#univariate-plots-and-distributions" id="toc-univariate-plots-and-distributions" class="nav-link" data-scroll-target="#univariate-plots-and-distributions"><span class="header-section-number">2.5.1</span> Univariate Plots and Distributions</a></li>
+  <li><a href="#bimultivariate-plots" id="toc-bimultivariate-plots" class="nav-link" data-scroll-target="#bimultivariate-plots"><span class="header-section-number">2.5.2</span> Bi/Multivariate Plots</a></li>
+  <li><a href="#hypothesis-testing-for-key-feature-and-response-variables" id="toc-hypothesis-testing-for-key-feature-and-response-variables" class="nav-link" data-scroll-target="#hypothesis-testing-for-key-feature-and-response-variables"><span class="header-section-number">2.5.3</span> Hypothesis Testing for Key Feature and Response Variables</a></li>
+  <li><a href="#exploring-sentiments---star-rating-vs.-sentiment-variables" id="toc-exploring-sentiments---star-rating-vs.-sentiment-variables" class="nav-link" data-scroll-target="#exploring-sentiments---star-rating-vs.-sentiment-variables"><span class="header-section-number">2.5.4</span> Exploring Sentiments - Star Rating vs.&nbsp;Sentiment Variables</a></li>
   </ul></li>
-  <li><a href="#data-before-after" id="toc-data-before-after" class="nav-link" data-scroll-target="#data-before-after"><span class="header-section-number">2.5</span> Data Before / After</a></li>
-  <li><a href="#insights-from-collection-and-eda" id="toc-insights-from-collection-and-eda" class="nav-link" data-scroll-target="#insights-from-collection-and-eda"><span class="header-section-number">2.6</span> Insights from Collection and EDA</a></li>
+  <li><a href="#data-before-after" id="toc-data-before-after" class="nav-link" data-scroll-target="#data-before-after"><span class="header-section-number">2.6</span> Data Before / After</a></li>
+  <li><a href="#insights-from-collection-and-eda" id="toc-insights-from-collection-and-eda" class="nav-link" data-scroll-target="#insights-from-collection-and-eda"><span class="header-section-number">2.7</span> Insights from Collection and EDA</a></li>
   </ul>
 </nav>
     </div>
@@ -208,157 +212,174 @@ div.csl-indent {
 </header>
 
 
+<div id="974958b6" class="cell" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="2">
+<pre><code>array(['Amazon1', 'Amazon2', 'Amazon3', 'Amazon4', 'Amazon5', 'Amazon6',
+       'Amazon7', 'Amazon8', 'Amazon9', 'Amazon10', 'Amazon11',
+       'Amazon12', 'Amazon13', 'Amazon14', 'Amazon15', 'Amazon16',
+       'Amazon17', 'Amazon18', 'Amazon19', 'Amazon20', 'Amazon21',
+       'Amazon22', 'Amazon23', 'Amazon24', 'target1', 'target2',
+       'target3', 'target20', 'target5', 'target6', 'target8', 'target9',
+       'target10', 'target11', 'target12', 'target13', 'target14',
+       'target15', 'target16', 'target17', 'target18', 'target19', 'BB1',
+       'BB2', 'BB3', 'BB4', 'BB5', 'BB6', 'BB7', 'BB8', 'BB9', 'BB11',
+       'BB12', 'BB13', 'BB14', 'BB15', 'BB40', 'BB41'], dtype=object)</code></pre>
+</div>
+</div>
 <section id="data-collection-overview" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="data-collection-overview"><span class="header-section-number">2.1</span> Data Collection Overview</h2>
-<p>Leverage python Selenium, urllib, and Beautiful Soup to scrape data from X products.</p>
-<ul>
-<li><p>Sought to collect some data from 3 websites - target, amazon, and best buy.</p></li>
-<li><p>Where possible, collect same entity from multiple sites</p></li>
-</ul>
-<p>As part of collection, to the greatest extent we are able, we cleaned information <em>during</em> the scraping process. We leveraged tools such as the python regular expression library and (<em>anything else?</em>) to pull the exact information we sought while scraping. The only possible additional cleaning that may be required after scraping is the handling of unicode characters within product names, product reviews, and so forth.</p>
-<p>In terms of simplicity for scraping our data, we will manually identify a list of products. <span class="citation" data-cites="percUse">Guha Majumder, Dutta Gupta, and Paul (<a href="references.html#ref-percUse" role="doc-biblioref">2022</a>)</span> leveraged solely 3 products from Amazon. Our team seeks to scrape between 20 and 30 products and all their reviews from Target, Amazon, and Best Buy. By doing so, we are greatly increasing the sample size of data compared to the original work performed.</p>
+<p>The original efforts by <span class="citation" data-cites="percUse">Guha Majumder, Dutta Gupta, and Paul (<a href="references.html#ref-percUse" role="doc-biblioref">2022</a>)</span> selected three products, all listed on Amazon for sale. In our efforts, we leveraged python Selenium, urllib, and Beautiful Soup to scrape data from 20 different products across multiple websites (Amazon, BestBuy, and Target). Where possible, we sought to collect the exact same 20 products from each site and customer feedback associated with each.</p>
+<p>As part of collection, to the greatest extent we were able, we cleaned information <em>during</em> the scraping process. Doing this enabled us to have minimal cleaning efforts after collection. Post collection, remaining items such as handling and removing special characters, unicode characters, addressing customer reviews written in foreign languages, and addressing misspellings remained necessary.</p>
+<p>In terms of simplicity for scraping our data, we manually identified a list of products from each of the aforementioned sites. Our team divided responsibilities to produce scraping code customized for each of the three websites.</p>
 </section>
 <section id="data-collection-details" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="data-collection-details"><span class="header-section-number">2.2</span> Data Collection Details</h2>
-<p>In collecting our data, in order to adhere to the model implemented by <span class="citation" data-cites="percUse">Guha Majumder, Dutta Gupta, and Paul (<a href="references.html#ref-percUse" role="doc-biblioref">2022</a>)</span>, we require the following data points, at a minimum:</p>
-<div id="07c379b6" class="cell" data-tbl="tbl-data-reqs-products" data-execution_count="2">
-<div class="cell-output cell-output-display" data-execution_count="2">
-<style type="text/css">
-</style>
-
-<table id="T_1bb90" data-quarto-postprocess="true" class="table table-sm table-striped small">
-<thead>
-<tr class="header">
-<th id="T_1bb90_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Variable</th>
-<th id="T_1bb90_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Data Type</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td id="T_1bb90_row0_col0" class="data row0 col0">Product Title</td>
-<td id="T_1bb90_row0_col1" class="data row0 col1">string</td>
-</tr>
-<tr class="even">
-<td id="T_1bb90_row1_col0" class="data row1 col0">Product Category*</td>
-<td id="T_1bb90_row1_col1" class="data row1 col1">string</td>
-</tr>
-<tr class="odd">
-<td id="T_1bb90_row2_col0" class="data row2 col0">Product Details/Specs</td>
-<td id="T_1bb90_row2_col1" class="data row2 col1">string</td>
-</tr>
-<tr class="even">
-<td id="T_1bb90_row3_col0" class="data row3 col0">Product Cost</td>
-<td id="T_1bb90_row3_col1" class="data row3 col1">float</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="2a12528b" class="cell" data-tbl="tbl-data-reqs-ratings" data-execution_count="3">
+<p>In collecting our data, in order to adhere to the model implemented by <span class="citation" data-cites="percUse">Guha Majumder, Dutta Gupta, and Paul (<a href="references.html#ref-percUse" role="doc-biblioref">2022</a>)</span>, we required the following data points:</p>
+<div id="8e7f142d" class="cell" data-tbl="tbl-data-reqs-products" data-execution_count="3">
 <div class="cell-output cell-output-display" data-execution_count="3">
 <style type="text/css">
 </style>
 
-<table id="T_c7501" data-quarto-postprocess="true" class="table table-sm table-striped small">
+<table id="T_98d0d" data-quarto-postprocess="true" class="table table-sm table-striped small">
 <thead>
 <tr class="header">
-<th id="T_c7501_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Variable</th>
-<th id="T_c7501_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Data Type</th>
+<th id="T_98d0d_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Variable</th>
+<th id="T_98d0d_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Data Type</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_c7501_row0_col0" class="data row0 col0">Verified Purchase</td>
-<td id="T_c7501_row0_col1" class="data row0 col1">boolean</td>
+<td id="T_98d0d_row0_col0" class="data row0 col0">Product Title</td>
+<td id="T_98d0d_row0_col1" class="data row0 col1">string</td>
 </tr>
 <tr class="even">
-<td id="T_c7501_row1_col0" class="data row1 col0">Star Rating</td>
-<td id="T_c7501_row1_col1" class="data row1 col1">float</td>
+<td id="T_98d0d_row1_col0" class="data row1 col0">Product Category*</td>
+<td id="T_98d0d_row1_col1" class="data row1 col1">string</td>
 </tr>
 <tr class="odd">
-<td id="T_c7501_row2_col0" class="data row2 col0">Review Content</td>
-<td id="T_c7501_row2_col1" class="data row2 col1">string</td>
+<td id="T_98d0d_row2_col0" class="data row2 col0">Product Details/Specs</td>
+<td id="T_98d0d_row2_col1" class="data row2 col1">string</td>
 </tr>
 <tr class="even">
-<td id="T_c7501_row3_col0" class="data row3 col0">Useful Votes</td>
-<td id="T_c7501_row3_col1" class="data row3 col1">integer</td>
+<td id="T_98d0d_row3_col0" class="data row3 col0">Product Cost</td>
+<td id="T_98d0d_row3_col1" class="data row3 col1">float</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<p>From our collected data, here are some of the calculations we’ll need to run for building our models. If time is available, we will run these calculations using Python’s NLTK before the completion of this milestone.</p>
-<div id="42073f95" class="cell" data-tbl="tbl-data-calcs" data-execution_count="4">
+<p>For the product category variable - we may add our own manual categorization. <span class="citation" data-cites="percUse">Guha Majumder, Dutta Gupta, and Paul (<a href="references.html#ref-percUse" role="doc-biblioref">2022</a>)</span> manually set the value for this variable. Part of the intent of our research is to seek out means and methods to replace this variable with a continuous scale (ranging from 0 for a “search” good, to a 1 for an “experience” good).</p>
+<p>As an initial proxy for this variable and to operationalize it, we leverage a measure of subjectivity for the product - namely how subjective (e.g.&nbsp;how many adverb, adjective, and other word modifiers) are present within the details and specifications of a product. A product that more aligns to a “search” product, we hypothesize, will have fewer modifying words and be oriented toward the facts of the object.</p>
+<p>For example, a desk has specific dimensions for length, width, and height, an associated weight, and material from which the desk is made, and possibly some warranty information - all of which are likely to be contained within the product description and specifications. We would characterize such a good as a “search” good (or a 0 on our scale). Leveraging existing language processing tools should allow us to calculate a value for subjectivity in the product’s description and specifications.</p>
+<p>Initially, we’ll explore product subjectivity in the combination of the specification and the description, though it may be necessary to explore product subjectivity solely within one of these fields or the other to pursue our modeling.</p>
+<div class="cell" data-execution_count="4">
+<div id="tbl-data-reqs-ratings" class="cell quarto-float anchored" data-execution_count="4">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-data-reqs-ratings-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2.1: Review Data Required
+</figcaption>
+<div aria-describedby="tbl-data-reqs-ratings-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output cell-output-display" data-execution_count="4">
 <style type="text/css">
 </style>
 
-<table id="T_b781b" data-quarto-postprocess="true" class="table table-sm table-striped small">
+<table id="T_fab7f" class="do-not-create-environment cell table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
-<th id="T_b781b_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Variable</th>
-<th id="T_b781b_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Data Type</th>
+<th id="T_fab7f_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Variable</th>
+<th id="T_fab7f_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Data Type</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_b781b_row0_col0" class="data row0 col0">Product Subjectivity</td>
-<td id="T_b781b_row0_col1" class="data row0 col1">float</td>
+<td id="T_fab7f_row0_col0" class="data row0 col0">Verified Purchase</td>
+<td id="T_fab7f_row0_col1" class="data row0 col1">boolean</td>
 </tr>
 <tr class="even">
-<td id="T_b781b_row1_col0" class="data row1 col0">Review Length</td>
-<td id="T_b781b_row1_col1" class="data row1 col1">integer</td>
+<td id="T_fab7f_row1_col0" class="data row1 col0">Star Rating</td>
+<td id="T_fab7f_row1_col1" class="data row1 col1">float</td>
 </tr>
 <tr class="odd">
-<td id="T_b781b_row2_col0" class="data row2 col0">Sentiment Score</td>
-<td id="T_b781b_row2_col1" class="data row2 col1">float</td>
+<td id="T_fab7f_row2_col0" class="data row2 col0">Review Content</td>
+<td id="T_fab7f_row2_col1" class="data row2 col1">string</td>
 </tr>
 <tr class="even">
-<td id="T_b781b_row3_col0" class="data row3 col0">Reputation Score</td>
-<td id="T_b781b_row3_col1" class="data row3 col1">float</td>
-</tr>
-<tr class="odd">
-<td id="T_b781b_row4_col0" class="data row4 col0">Product Type Score</td>
-<td id="T_b781b_row4_col1" class="data row4 col1">float</td>
-</tr>
-<tr class="even">
-<td id="T_b781b_row5_col0" class="data row5 col0">Polarity Score</td>
-<td id="T_b781b_row5_col1" class="data row5 col1">float</td>
+<td id="T_fab7f_row3_col0" class="data row3 col0">Useful Votes</td>
+<td id="T_fab7f_row3_col1" class="data row3 col1">integer</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<p>In terms of structuring our stored data, we will have a central table and child tables. Since we will seek, in some cases, to gather the <em>same</em> product from multiple websites, we must have a structure that identifies:</p>
+</figure>
+</div>
+</div>
+<p>In <a href="#tbl-data-reqs-ratings" class="quarto-xref">Table&nbsp;<span>2.1</span></a>, we outline the specific datapoints we sought out for reviews across each website. <span class="citation" data-cites="percUse">Guha Majumder, Dutta Gupta, and Paul (<a href="references.html#ref-percUse" role="doc-biblioref">2022</a>)</span> leveraged star rating, review content (specifically the review length), and the number of votes for the review being useful as key measures in their research. To further their work, we plan on exploring the impacts of verified product purchasers and the impact of verification on how useful a review may be to potential customers.</p>
+<div class="cell" data-execution_count="5">
+<div id="tbl-data-calcs" class="cell quarto-float anchored" data-execution_count="5">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-data-calcs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2.2: Additional Calculated Columns, Post Data Collection
+</figcaption>
+<div aria-describedby="tbl-data-calcs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="5">
+<style type="text/css">
+</style>
+
+<table id="T_63dae" class="do-not-create-environment cell table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th id="T_63dae_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Variable</th>
+<th id="T_63dae_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Data Type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td id="T_63dae_row0_col0" class="data row0 col0">Product Subjectivity</td>
+<td id="T_63dae_row0_col1" class="data row0 col1">float</td>
+</tr>
+<tr class="even">
+<td id="T_63dae_row1_col0" class="data row1 col0">Review Length (Words)</td>
+<td id="T_63dae_row1_col1" class="data row1 col1">integer</td>
+</tr>
+<tr class="odd">
+<td id="T_63dae_row2_col0" class="data row2 col0">Review Subjectivity</td>
+<td id="T_63dae_row2_col1" class="data row2 col1">float</td>
+</tr>
+<tr class="even">
+<td id="T_63dae_row3_col0" class="data row3 col0">Review Polarity</td>
+<td id="T_63dae_row3_col1" class="data row3 col1">float</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Post collection, we added the calculations listed in <a href="#tbl-data-calcs" class="quarto-xref">Table&nbsp;<span>2.2</span></a> to our review data and product data (less reputation score). Each of these calculations will allow us to better understand our underlying data and explore possibilities of where and how each may fit into models for review usefulness.</p>
+<p>We have also established a master listing of all products for which we collected data and have associated arbitrary identifiers with the products. In instances where we’ve successfully pulled data for <em>identical</em> products from multiple websites, it can allow us to explore the impact on product and review metrics and investigate the listing site as a treatment variable.</p>
+<p>For instance - exploring the impact of review subjectivity, polarity, length, and usefulness, based upon which site the product was listed.</p>
+</section>
+<section id="data-exploration" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="data-exploration"><span class="header-section-number">2.3</span> Data Exploration</h2>
+<p>After collection and cleaning, we plan to explore our data via visualization, seeking to answer key research questions.</p>
 <ul>
-<li><p>The full listing of products, assigned an arbitrary ID</p></li>
-<li><p>A listing of specific products we intend to scrape from each of the websites we’ve identified. Adding an additional ID of [company_name]-[arbitrary_product_id]</p></li>
-<li><p>Site-specific product information</p></li>
-<li><p>Site-specific review content and metadata</p></li>
-</ul>
-<p>To wrangle the potential amount of data we may collect, we will partition review files into their own files under the following convention: [company_name]-[arbitrary_product_id]-review_content.csv. Using this method will allow us to capture thousands of reviews for multiple products without overrunning GitHub filesize limitations. Following this convention will also allow us to easily script out the integration of all these files for analysis when we begin building and applying our models.</p>
-<p>Additionally, the use of assigning products an arbitrary ID that is common between different vendors will allow us to <em>directly compare</em> review and product information across multiple vendors simultaneously to gather additional insights. Effectively, if we group products by this identifier, we can see how the product performs overall in multiple e-commerce platforms. Similarly, we can use this information to evaluate and run comparisons and tests on individual products, given the treatment of their offering on different platforms. This can help generate even more insight before model application.</p>
-<p>For instance, we may be able to explore questions like:</p>
-<ul>
-<li><p>Is the price of a product higher, given it’s offered on Amazon, BestBuy, or Target?</p></li>
+<li><p>Is the price of a product higher, given it’s offered on Amazon, BestBuy, or Target? <!--Eliminate?--></p></li>
 <li><p>Is a product’s star rating affected by which e-commerce platform is selling it?</p></li>
 <li><p>Is there a substantial difference in number of product reviews on one e-commerce platform vs.&nbsp;another?</p></li>
-<li><p>Is one e-commerce platform more likely to have input and feedback on reviews (i.e.&nbsp;higher proportion of “this review is helpful” votes to total number of reviews)?</p></li>
+<li><p>Is one e-commerce platform more likely to have input and feedback on reviews (i.e.&nbsp;higher proportion of “this review is helpful” votes to total number of reviews)? <!--Eliminate?--></p></li>
 <li><p>What is the difference in the level of detail provided in product descriptions (e.g.&nbsp;for the same product) across each e-commerce platform?</p></li>
-<li><p>Do certain product categories perform better on specific platforms?</p></li>
+<li><p>Do certain product categories perform better on specific platforms? <!--Eliminate?--></p></li>
 <li><p>Are users more likely to leave reviews on one platform over another?</p></li>
 <li><p>Do customers show different purchasing behaviors based on promotional strategies employed by platforms?</p></li>
 </ul>
 <p>Structuring our data properly during the collection process will enable us to explore and answer these questions.</p>
 </section>
-<section id="collection-procedures" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="collection-procedures"><span class="header-section-number">2.3</span> Collection Procedures?</h2>
-<p>We wrote code to allow us to (mostly) template out our gathering of information from each website. The general process for each page is similar for data gathering. To alleviate any unnecessary burden on the target websites, we manually identified URLs to the specific products we sought out to gather, and wrote our code to iterate through those URLs and pull the necessary data and features we sought. This hybrid approach saved us time and effort.</p>
+<section id="collection-procedures" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="collection-procedures"><span class="header-section-number">2.4</span> Collection Procedures?</h2>
+<p>We wrote code to allow us to gather information from each website. The general process for each e-commerce platform is similar. To alleviate any unnecessary burden for any of these websites, we manually identified URLs to the specific products we sought out to gather, and wrote our code to iterate through those URLs and pull the necessary data and features we sought. This manual identification also allowed us to ensure, in most cases, that we were getting the <em>exact</em> same product during data capture. This hybrid approach enabled higher certainty in getting the same product while also accelerating collection, structuring, and cleaning of product review information.</p>
 <ul>
-<li><p>Gathering from Target (All products)</p>
-<ul>
-<li>Target has dynamic content on their webpages. We used Python Selenium to navigate to product pages and automate the selection of items needed to expand sections to reveal additional data. We also automated the process of expanding out all reviews so as to iterate through and parse the content of every review for each product in question. We extracted the fields listed above (reference here) to store in our records tables.</li>
-</ul></li>
 <li><p>Gathering from Amazon (All Products)</p>
 <ul>
 <li>Product &amp; Review data was scraped from Amazon’s website using Python and Selenium. A Selenium WebDriver was utilized to automate web browser interactions. After navigating to product categories like electronics, home appliances, furniture, books, and grocery, Selenium’s functions were employed to locate review elements. These elements were then parsed and collected, storing the data in a structured format i.e.&nbsp;a CSV file. Pagination handling was implemented to scrape reviews from multiple pages.</li>
@@ -367,52 +388,117 @@ div.csl-indent {
 <ul>
 <li>Just like Target and Amazon, even BestBuy has dynamic content on its web page. We employed Python with Selenium to automate the exploration of product pages, unveiling hidden content, and harvesting essential data. Employing Selenium’s functionalities, we initiated the traversal process, enabling the program to automatically expand pertinent sections to uncover additional information. By targeting elements such as product details and reviews, we orchestrated the seamless extraction of critical fields from each product’s page. This automated approach allowed us to efficiently parse through an extensive array of reviews, ensuring a comprehensive analysis of user feedback for the products under scrutiny. We systematically stored the extracted data in our records tables for further analysis and reference.</li>
 </ul></li>
+<li><p>Gathering from Target (All products)</p>
+<ul>
+<li>Target has dynamic content on their webpages. We used Python Selenium to navigate to product pages and automate the selection of items needed to expand sections to reveal additional data. We also automated the process of expanding out all reviews so as to iterate through and parse the content of every review for each product in question.</li>
+</ul></li>
 </ul>
 </section>
-<section id="visualizations" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="visualizations"><span class="header-section-number">2.4</span> Visualizations</h2>
-<ul>
-<li><p>We require a minimum of 10 unique EDA plots for this milestone. We’ve outlined some of the below but need our data in order and unified prior to development.</p>
-<ul>
-<li>Scatter Plots</li>
-</ul></li>
-</ul>
-<div id="cell-fig-violin-plots1" class="cell" data-execution_count="5">
+<section id="data-exploration-and-visualization" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="data-exploration-and-visualization"><span class="header-section-number">2.5</span> Data Exploration and Visualization</h2>
+<p>For our data exploration, we plan to examine solely the reviews for which we have data from all of our websites. Due to the nature of the vendors, not all offer the same products online. We’ve included some unique products from each site (and may even gather more), but will exclude them from initial analysis.</p>
+<p>The reason for only examining common products is to check for comparability and similarity of the products associated variables (e.g.&nbsp;product subjectivity, review subjectivity, review polarity, star rating, and so forth) between the websites. If they are similar or comparable, it may mean that we could use single models to make predictions on the usefulness of customer feedback. If they are substantially dissimilar, it may mean that modifiers are needed based upon the e-commerce platform in which the product is listed.</p>
+<p>We’ll start by looking at distributions of some of these key variables, and check some of the common trends between them, potentially moving on to hypothesis testing of these variables to check for statistically significant differences.</p>
+<section id="univariate-plots-and-distributions" class="level3" data-number="2.5.1">
+<h3 data-number="2.5.1" class="anchored" data-anchor-id="univariate-plots-and-distributions"><span class="header-section-number">2.5.1</span> Univariate Plots and Distributions</h3>
+<div id="cell-fig-hist-plots" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display">
-<div id="fig-violin-plots1" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-hist-plots" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-violin-plots1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="data_files/figure-html/fig-violin-plots1-output-1.png" width="854" height="278" class="figure-img">
+<div aria-describedby="fig-hist-plots-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="data_files/figure-html/fig-hist-plots-output-1.png" width="662" height="475" class="figure-img">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-violin-plots1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2.1: Violin Plots of Review Star-Rating vs.&nbsp;Subjectivity, by Site
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hist-plots-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.1: Histogram Plot (star-rating, by-site)
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div id="cell-fig-violin-plots2" class="cell" data-execution_count="6">
+<p>Examining the histogram plots for star-rating by website, we can see that, generally, reviews tend to provide positive feedback for the selected products.</p>
+<div id="cell-fig-qq-plots-subj" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-display">
-<div id="fig-violin-plots2" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-qq-plots-subj" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-violin-plots2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="data_files/figure-html/fig-violin-plots2-output-1.png" width="854" height="278" class="figure-img">
+<div aria-describedby="fig-qq-plots-subj-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="data_files/figure-html/fig-qq-plots-subj-output-1.png" width="587" height="477" class="figure-img">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-violin-plots2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2.2: Violin Plots for Star Rating vs.&nbsp;Polarity, by Site
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-qq-plots-subj-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.2: Q-Q plots (star-rating, by-site)
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Generally, in <a href="#fig-violin-plots1" class="quarto-xref">Figure&nbsp;<span>2.1</span></a> and <a href="#fig-violin-plots2" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>, we see a trend for the median polarity and subjectivity of each review to increase as the star rating increases. We also see that, generally, the data suggest that we have a minimum of neutral polarity that tends towards positive as star rating increases.</p>
-<ul>
-<li><p>Bar Plots</p>
-<ul>
-<li>Box Plots</li>
-</ul></li>
-</ul>
-<div id="cell-fig-outliers-star-rating" class="cell" data-execution_count="7">
+<p>Across all three websites, there appears to be consistency with adherence to, and issues with, the normal distribution for subjectivity. These charts suggest sufficient normal distribution of review subjectivity (degree of inclusion of word modifiers such as adverbs and adjectives).</p>
+<p>Therre seems to be slight skewness in the tails of these Q-Q distributions. Filtering off some of the outliers may grant us reasonable relevance and assurance to perform hypothesis testing and evaluation of these variables across sites (e.g.&nbsp;ANOVA, F-Testing, etc)</p>
+<div class="cell" data-execution_count="8">
+<div id="fig-qq-plots-pol" class="cell quarto-figure quarto-figure-center quarto-float anchored" data-execution_count="8">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-qq-plots-pol-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display">
+<div id="fig-qq-plots-pol-1" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-qq-plots-pol-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="data_files/figure-html/fig-qq-plots-pol-output-1.png" data-ref-parent="fig-qq-plots-pol" width="581" height="416" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-qq-plots-pol-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Q-Q plots (star-rating, by-site)
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="fig-qq-plots-pol-2" class="quarto-figure quarto-figure-center quarto-float anchored" height="477" width="587">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-qq-plots-pol-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="data_files/figure-html/fig-qq-plots-pol-output-2.png" id="fig-qq-plots-pol-2" data-ref-parent="fig-qq-plots-pol" width="587" height="477" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-qq-plots-pol-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b)
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-qq-plots-pol-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.3
+</figcaption>
+</figure>
+</div>
+</div>
+<p>Similar to review subjectivity, review polarity has good adherence to the normal distribution (particularly on the quantile interval of [-2,2]). There are similar issues in the tails of these distributions as exist for review subjectivity. As such, reduction in outliers may enable us to perform hypothesis testing during our model design and implementation.</p>
+<div id="cell-fig-helpful-vote-dist" class="cell" data-execution_count="9">
+<div class="cell-output cell-output-display">
+<div id="fig-helpful-vote-dist" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-helpful-vote-dist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="data_files/figure-html/fig-helpful-vote-dist-output-1.png" width="662" height="470" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-helpful-vote-dist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.4: Distribution of Review Helpful Votes
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-fig-rand-exp-dist" class="cell" data-execution_count="10">
+<div class="cell-output cell-output-display">
+<div id="fig-rand-exp-dist" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rand-exp-dist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="data_files/figure-html/fig-rand-exp-dist-output-1.png" width="662" height="470" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rand-exp-dist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.5: Random Exponential Distributions with Means by Site
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Examining the plots of <a href="#fig-helpful-vote-dist" class="quarto-xref">Figure&nbsp;<span>2.4</span></a> and <a href="#fig-rand-exp-dist" class="quarto-xref">Figure&nbsp;<span>2.5</span></a>, the distribution of helpful votes, per website, appears to be exponentially distributed, with many reviews having an expected total count of helpful votes centered fairly low. Namely, for amazon, the expected value is approximately 3.69 helpful votes, for Target 0.18 helpful votes, and BestBuy with 0.15 helpful votes.</p>
+<p>Knowing the distribution of these predictions will assist us in the modeling process and may require us to perform variable transformations (e.g.&nbsp;if we pursue a multiple linear regression model).</p>
+<div id="cell-fig-outliers-star-rating" class="cell" data-execution_count="11">
 <div class="cell-output cell-output-display">
 <div id="fig-outliers-star-rating" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -420,13 +506,13 @@ Figure&nbsp;2.2: Violin Plots for Star Rating vs.&nbsp;Polarity, by Site
 <img src="data_files/figure-html/fig-outliers-star-rating-output-1.png" width="854" height="278" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-outliers-star-rating-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2.3: Outliers for Review Star Rating
+Figure&nbsp;2.6: Outliers for Review Star Rating
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div id="cell-fig-outliers-polarity" class="cell" data-execution_count="8">
+<div id="cell-fig-outliers-polarity" class="cell" data-execution_count="12">
 <div class="cell-output cell-output-display">
 <div id="fig-outliers-polarity" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -434,13 +520,13 @@ Figure&nbsp;2.3: Outliers for Review Star Rating
 <img src="data_files/figure-html/fig-outliers-polarity-output-1.png" width="854" height="278" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-outliers-polarity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2.4: Outliers for Review Polarity
+Figure&nbsp;2.7: Outliers for Review Polarity
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div id="cell-fig-outliers-subjectivity" class="cell" data-execution_count="9">
+<div id="cell-fig-outliers-subjectivity" class="cell" data-execution_count="13">
 <div class="cell-output cell-output-display">
 <div id="fig-outliers-subjectivity" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -448,30 +534,74 @@ Figure&nbsp;2.4: Outliers for Review Polarity
 <img src="data_files/figure-html/fig-outliers-subjectivity-output-1.png" width="854" height="278" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-outliers-subjectivity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2.5: Outliers for Review Subjectivity
+Figure&nbsp;2.8: Outliers for Review Subjectivity
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<pre><code>* Violin Plots (e.g. same product, two different websites)
-
-* review length
-
-    * vs star rating
-
-    * vs sentiment
-
-* Product description / detail length
-
-    * Potentially explore "specificity" classifier
-
-* Correlation analyses and linear regressions
-
-* Heatmaps
-
-* Tukey test </code></pre>
-<div id="cell-fig-tukey-tests" class="cell" data-execution_count="10">
+<pre><code>* Violin Plots</code></pre>
+<ul>
+<li>Bar Plots</li>
+</ul>
+</section>
+<section id="bimultivariate-plots" class="level3" data-number="2.5.2">
+<h3 data-number="2.5.2" class="anchored" data-anchor-id="bimultivariate-plots"><span class="header-section-number">2.5.2</span> Bi/Multivariate Plots</h3>
+<div id="cell-fig-bivar-plot" class="cell" data-execution_count="14">
+<div class="cell-output cell-output-display">
+<div id="fig-bivar-plot" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bivar-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="data_files/figure-html/fig-bivar-plot-output-1.png" width="854" height="278" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bivar-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.9: Bivariate Plot for Sensitivity and Polarity, by Site
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<pre><code>* Box Plots</code></pre>
+<div id="cell-fig-violin-plots1" class="cell" data-execution_count="16">
+<div class="cell-output cell-output-display">
+<div id="fig-violin-plots1" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-violin-plots1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="data_files/figure-html/fig-violin-plots1-output-1.png" width="851" height="278" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-violin-plots1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.10: Violin Plots of Review Star-Rating vs.&nbsp;Subjectivity, by Site
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-fig-violin-plots2" class="cell" data-execution_count="17">
+<div class="cell-output cell-output-display">
+<div id="fig-violin-plots2" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-violin-plots2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="data_files/figure-html/fig-violin-plots2-output-1.png" width="854" height="278" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-violin-plots2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.11: Violin Plots for Star Rating vs.&nbsp;Polarity, by Site
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Generally, in <a href="#fig-violin-plots1" class="quarto-xref">Figure&nbsp;<span>2.10</span></a> and <a href="#fig-violin-plots2" class="quarto-xref">Figure&nbsp;<span>2.11</span></a>, we see a trend for the median polarity and subjectivity of each review to increase as the star rating increases. We also see that, generally, the data suggest that we have a minimum of neutral polarity that tends towards positive as star rating increases.</p>
+<p>Since both median subjectivity and polarity seem to increase with respect to star rating, such a correlation could be useful to us in multiple linear regression, and is generally useful to us for consideration when pursuing model development.</p>
+</section>
+<section id="hypothesis-testing-for-key-feature-and-response-variables" class="level3" data-number="2.5.3">
+<h3 data-number="2.5.3" class="anchored" data-anchor-id="hypothesis-testing-for-key-feature-and-response-variables"><span class="header-section-number">2.5.3</span> Hypothesis Testing for Key Feature and Response Variables</h3>
+<p>Some key features we plan to explore in our modeling include review subjectivity and review polarity. Knowing whether or not there is a significant difference for these features between the websites on which they’re hosted will inform us during model selection, design, and implementation. As such, we’ll perform ANOVA and Tukey Honest Significant Difference Tests on these variables between each site.</p>
+<section id="anova-testing" class="level4" data-number="2.5.3.1">
+<h4 data-number="2.5.3.1" class="anchored" data-anchor-id="anova-testing"><span class="header-section-number">2.5.3.1</span> ANOVA Testing</h4>
+</section>
+<section id="tukey-tests-with-e-commerce-platform-as-treatment" class="level4" data-number="2.5.3.2">
+<h4 data-number="2.5.3.2" class="anchored" data-anchor-id="tukey-tests-with-e-commerce-platform-as-treatment"><span class="header-section-number">2.5.3.2</span> Tukey Tests with E-Commerce Platform as Treatment</h4>
+<div id="cell-fig-tukey-tests" class="cell" data-execution_count="18">
 <div class="cell-output cell-output-display">
 <div id="fig-tukey-tests" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -479,15 +609,17 @@ Figure&nbsp;2.5: Outliers for Review Subjectivity
 <img src="data_files/figure-html/fig-tukey-tests-output-1.png" width="950" height="566" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tukey-tests-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2.6: Tukey Tests for Star Rating, Polarity, and Subjectivity, by-Site
+Figure&nbsp;2.12: Tukey Tests for Star Rating, Polarity, and Subjectivity, by-Site
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>The Tukey honest significance tests, depicted in <a href="#fig-tukey-tests" class="quarto-xref">Figure&nbsp;<span>2.6</span></a> suggest some interesting patterns between the three websites. Namely, target and best buy seem to have (across the board) higher star ratings, polarity, and subjectivity than the same variables for Amazon! Additionally, for each variable and each website, it seems there is no overlap in the variables at the 95% confidence level. The only exception here is for subjectivity between Target and BestBuy.</p>
-<section id="exploring-sentiments---star-rating-vs.-sentiment-variables" class="level3" data-number="2.4.1">
-<h3 data-number="2.4.1" class="anchored" data-anchor-id="exploring-sentiments---star-rating-vs.-sentiment-variables"><span class="header-section-number">2.4.1</span> Exploring Sentiments - Star Rating vs.&nbsp;Sentiment Variables</h3>
+<p>The Tukey honest significance tests, depicted in <a href="#fig-tukey-tests" class="quarto-xref">Figure&nbsp;<span>2.12</span></a> suggest some interesting patterns between the three websites. Namely, target and best buy seem to have (across the board) higher star ratings, polarity, and subjectivity than the same variables for Amazon! Additionally, for each variable and each website, it seems there is no overlap in the variables at the 95% confidence level. The only exception here is for subjectivity between Target and BestBuy holding no statistically significant difference.</p>
+</section>
+</section>
+<section id="exploring-sentiments---star-rating-vs.-sentiment-variables" class="level3" data-number="2.5.4">
+<h3 data-number="2.5.4" class="anchored" data-anchor-id="exploring-sentiments---star-rating-vs.-sentiment-variables"><span class="header-section-number">2.5.4</span> Exploring Sentiments - Star Rating vs.&nbsp;Sentiment Variables</h3>
 <ul>
 <li><p>Inter-Website Comparison of Product Reviews</p>
 <ul>
@@ -514,8 +646,8 @@ Figure&nbsp;2.6: Tukey Tests for Star Rating, Polarity, and Subjectivity, by-Sit
 </ul>
 </section>
 </section>
-<section id="data-before-after" class="level2" data-number="2.5">
-<h2 data-number="2.5" class="anchored" data-anchor-id="data-before-after"><span class="header-section-number">2.5</span> Data Before / After</h2>
+<section id="data-before-after" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="data-before-after"><span class="header-section-number">2.6</span> Data Before / After</h2>
 <p>Much of our data cleaning occured during the collection process. Our team took specific steps to pursue cleaning during collection to simplify the process of bringing all information together:</p>
 <ul>
 <li><p>Using regular expressions to extract key values from text blocks</p></li>
@@ -528,14 +660,14 @@ Figure&nbsp;2.6: Tukey Tests for Star Rating, Polarity, and Subjectivity, by-Sit
 <li><p>Handling of missing values (i.e.&nbsp;no ratings, no star ratings, no cost listed)</p></li>
 </ul>
 <p>A particular challenge we came across during the data cleaning process was the handling foreign language reviews, highly repetitive reviews, and misspelled reviews. To better support our calculated measures for subjectivity and polarity, we leveraged the langdetect library to attempt to classify the languages of each of our 45,000+ reviews collected.</p>
-<div class="cell" data-execution_count="12">
-<div id="tbl-foreign-lang-reviews" class="cell quarto-float anchored" data-execution_count="12">
+<div class="cell" data-execution_count="20">
+<div id="tbl-foreign-lang-reviews" class="cell quarto-float anchored" data-execution_count="20">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-foreign-lang-reviews-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;2.1: Examples of reviews written in foreign languages
+Table&nbsp;2.3: Examples of reviews written in foreign languages
 </figcaption>
 <div aria-describedby="tbl-foreign-lang-reviews-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="cell-output cell-output-display" data-execution_count="12">
+<div class="cell-output cell-output-display" data-execution_count="20">
 <div>
 
 
@@ -550,64 +682,94 @@ Table&nbsp;2.1: Examples of reviews written in foreign languages
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">495</td>
+<td data-quarto-table-cell-role="th">11</td>
 <td>Amazon</td>
-<td>Kiti🌸</td>
-<td>Muy oratuca y fácil de instalar</td>
+<td>Moldea muy bien, me gustó mucho! Es cómodo de ...</td>
+<td>En perfectas condiciones, 100% el estado de la...</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">525</td>
+<td data-quarto-table-cell-role="th">13</td>
 <td>Amazon</td>
-<td>julia</td>
-<td>Impossible to set up so far</td>
+<td>Diego Sanchez</td>
+<td>Todo estuvo muy bien</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">552</td>
+<td data-quarto-table-cell-role="th">22</td>
 <td>Amazon</td>
-<td>Liuska Noda</td>
-<td>Me está dando problemas para conectarla me dic...</td>
+<td>Daniel831</td>
+<td>Llevo un da usndolo y aparecer funciona bien y...</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">689</td>
+<td data-quarto-table-cell-role="th">29</td>
 <td>Amazon</td>
-<td>Arturo</td>
-<td>Me compre la impresora para imprimir en la may...</td>
+<td>Carlos Tocto</td>
+<td>Excelente producto y llego bien embalado</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">721</td>
+<td data-quarto-table-cell-role="th">46</td>
 <td>Amazon</td>
-<td>Hbolivar</td>
-<td>funciono para 4 hojas .. problemas con wi-fi -...</td>
+<td>Rocio castrellon</td>
+<td>Me encanto llego en muy buen estado\nLa vida d...</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">872</td>
-<td>Amazon</td>
-<td>Suena muy bien me encantó ❤️🥰</td>
-<td>Muy buena elección me encantó 🥰 suena bien</td>
+<td data-quarto-table-cell-role="th">20063</td>
+<td>BestBuy</td>
+<td>Iris</td>
+<td>I love Apple, amazing calidad camera and perfe...</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">895</td>
-<td>Amazon</td>
-<td>Clara James</td>
-<td>Love it!</td>
+<td data-quarto-table-cell-role="th">20087</td>
+<td>BestBuy</td>
+<td>ErickL</td>
+<td>Amazing phone:.::::::::::::::..</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">901</td>
-<td>Amazon</td>
-<td>humberto a.</td>
-<td>Excelente aparato para tan bajo precio, sonido...</td>
+<td data-quarto-table-cell-role="th">20458</td>
+<td>BestBuy</td>
+<td>senti</td>
+<td>great............................................</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">904</td>
-<td>Amazon</td>
-<td>Betty Maronsky</td>
-<td>El Bluetooth muy bueno escucho mi música</td>
+<td data-quarto-table-cell-role="th">20569</td>
+<td>BestBuy</td>
+<td>Jaimerecios25</td>
+<td>Very Good Printer yessssssssssssssssssssssssss...</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">906</td>
-<td>Amazon</td>
-<td>Melissa Cannon</td>
-<td>I love it</td>
+<td data-quarto-table-cell-role="th">20709</td>
+<td>BestBuy</td>
+<td>SilviaC</td>
+<td>Excellent product. Excellent price. Will recom...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">5482</td>
+<td>Target</td>
+<td>Do it</td>
+<td>Great upgrade for my teens</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7284</td>
+<td>Target</td>
+<td>daisy78228</td>
+<td>good for now.....................................</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">7303</td>
+<td>Target</td>
+<td>Put Jesus first</td>
+<td>I don't want to say anything, thank you. I don...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9575</td>
+<td>Target</td>
+<td>yuenkai</td>
+<td>use it all the time, kind of simple to me.aaaa...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">11164</td>
+<td>Target</td>
+<td>A</td>
+<td>I just got it it is awesome</td>
 </tr>
 </tbody>
 </table>
@@ -619,12 +781,90 @@ Table&nbsp;2.1: Examples of reviews written in foreign languages
 </div>
 </div>
 <p>In some cases, the language classification by langdetect was a false negative (i.e.&nbsp;classified as a language other than english, when it was indeed English). In our data exploration, we found that many of these false positives were outliers in other categories (whether for review length, review subjectivity, review polarity, or star rating). As such, we find it prudent to exclude these reviews from our dataset when pursuing model development.</p>
-<p>In total, langdetect classified fewer than X reviews (accounting for X.XX% of our collected reviews) as being non-English. Excluding these reviews should have minimal impact on the pursuit of model development.</p>
+<p>In total, langdetect classified fewer than 440 reviews (accounting for less than 1% of our collected reviews) as being non-English, or being repeated words or gibberish. Excluding these reviews should have minimal impact on the pursuit of model development.</p>
+<p>TextBlob also offers us the ability to attempt to correct the spelling of reviews. Due to the amount of time it would take us to pursue spelling corre</p>
+<p>Here are some additional examples of gibberish or non-contributional text that impact calculations for review subjectivity and polarity. While some of these could potentially provide value with deeper analysis, we find that these will not contribute significantly to our research.</p>
+<div id="fe170493" class="cell" data-execution_count="21">
+<div class="cell-output cell-output-display" data-execution_count="21">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">site</th>
+<th data-quarto-table-cell-role="th">reviewer_name</th>
+<th data-quarto-table-cell-role="th">review_content</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">962</td>
+<td>Amazon</td>
+<td>Kiran Kumar</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">980</td>
+<td>Amazon</td>
+<td>Ervey Gomez</td>
+<td>'s s s s ! s s s !</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1907</td>
+<td>Amazon</td>
+<td>Kathya De Alvarenga</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2691</td>
+<td>Amazon</td>
+<td>Cristopher Leyva</td>
+<td>10/10</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2892</td>
+<td>Amazon</td>
+<td>Amazon Customer</td>
+<td>10/10</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2997</td>
+<td>Amazon</td>
+<td>Joe Zuppardo</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">3567</td>
+<td>Amazon</td>
+<td>HAMZAH ALGHAMDI</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">21293</td>
+<td>BestBuy</td>
+<td>Andy</td>
+<td>: ) : ) : ) : ) ...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">23207</td>
+<td>BestBuy</td>
+<td>Andy</td>
+<td>: ) : ) : ) : ) ...</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>We are retaining the totality of the data we’ve collected, and will filter the data based upon our findings here so as to keep the most relevant and supportive data in building our models.</p>
 </section>
-<section id="insights-from-collection-and-eda" class="level2" data-number="2.6">
-<h2 data-number="2.6" class="anchored" data-anchor-id="insights-from-collection-and-eda"><span class="header-section-number">2.6</span> Insights from Collection and EDA</h2>
+<section id="insights-from-collection-and-eda" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="insights-from-collection-and-eda"><span class="header-section-number">2.7</span> Insights from Collection and EDA</h2>
 <ul>
-<li><p>Statistically significant differences for review star rating, subjectivity, polarity across each of the three websites.</p></li>
+<li><p>Statistically significant differences for review subjectivity, polarity across each of the three websites.</p></li>
 <li><p>Exclusion of outliers for one or more categories could result in excluding lower star rating reviews, which could impact model</p></li>
 </ul>
 <!-- ```{r TryBothOnePaper}
