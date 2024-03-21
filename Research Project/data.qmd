@@ -7,6 +7,8 @@ import seaborn as sns
 import pingouin as pg
 from statsmodels.stats.multicomp import pairwise_tukeyhsd
 import statsmodels.api as sm
+from wordcloud import WordCloud
+import pingouin as pg 
 
 product_data = pd.read_csv('../data/master_product_list.csv')
 #review_data = pd.read_csv('../data/combined_review_table.csv')
@@ -21,11 +23,6 @@ review_data = pd.DataFrame(
    
 review_metrics = pd.read_csv('../data/combined_review_metrics.csv')
 ```
-
-```{python}
-review_data_base['prodSiteID'].unique()
-```
-
 
 ## Data Collection Overview
 
@@ -91,6 +88,22 @@ We have also established a master listing of all products for which we collected
 
 For instance - exploring the impact of review subjectivity, polarity, length, and usefulness, based upon which site the product was listed.
 
+## Data Collection Procedures
+
+We wrote code to allow us to gather information from each website.  The general process for each e-commerce platform is similar.  To alleviate any unnecessary burden for any of these websites, we manually identified URLs to the specific products we sought out to gather, and wrote our code to iterate through those URLs and pull the necessary data and features we sought.  This manual identification also allowed us to ensure, in most cases, that we were getting the *exact* same product during data capture.  This hybrid approach enabled higher certainty in getting the same product while also accelerating collection, structuring, and cleaning of product review information.
+
+* Gathering from Amazon (All Products)
+
+    * Product & Review data was scraped from Amazon's website using Python and Selenium. A Selenium WebDriver was utilized to automate web browser interactions. After navigating to product categories like electronics, home appliances, furniture, books, and grocery, Selenium's functions were employed to locate review elements. These elements were then parsed and collected, storing the data in a structured format i.e. a CSV file. Pagination handling was implemented to scrape reviews from multiple pages. 
+
+* Gathering from BestBuy (Electronic Products, Furniture Item(s)? - no grocery or clothing)
+
+    * Just like Target and Amazon, even BestBuy has dynamic content on its web page. We employed Python with Selenium to automate the exploration of product pages, unveiling hidden content, and harvesting essential data. Employing Selenium's functionalities, we initiated the traversal process, enabling the program to automatically expand pertinent sections to uncover additional information. By targeting elements such as product details and reviews, we orchestrated the seamless extraction of critical fields from each product's page. This automated approach allowed us to efficiently parse through an extensive array of reviews, ensuring a comprehensive analysis of user feedback for the products under scrutiny. We systematically stored the extracted data in our records tables for further analysis and reference.
+
+* Gathering from Target (All products)
+
+    * Target has dynamic content on their webpages.  We used Python Selenium to navigate to product pages and automate the selection of items needed to expand sections to reveal additional data.  We also automated the process of expanding out all reviews so as to iterate through and parse the content of every review for each product in question. 
+
 ## Data Exploration
 
 After collection and cleaning, we plan to explore our data via visualization, seeking to answer key research questions.
@@ -113,25 +126,20 @@ After collection and cleaning, we plan to explore our data via visualization, se
 
 Structuring our data properly during the collection process will enable us to explore and answer these questions.
 
-## Collection Procedures?
-
-We wrote code to allow us to gather information from each website.  The general process for each e-commerce platform is similar.  To alleviate any unnecessary burden for any of these websites, we manually identified URLs to the specific products we sought out to gather, and wrote our code to iterate through those URLs and pull the necessary data and features we sought.  This manual identification also allowed us to ensure, in most cases, that we were getting the *exact* same product during data capture.  This hybrid approach enabled higher certainty in getting the same product while also accelerating collection, structuring, and cleaning of product review information.
-
-* Gathering from Amazon (All Products)
-
-    * Product & Review data was scraped from Amazon's website using Python and Selenium. A Selenium WebDriver was utilized to automate web browser interactions. After navigating to product categories like electronics, home appliances, furniture, books, and grocery, Selenium's functions were employed to locate review elements. These elements were then parsed and collected, storing the data in a structured format i.e. a CSV file. Pagination handling was implemented to scrape reviews from multiple pages. 
-
-* Gathering from BestBuy (Electronic Products, Furniture Item(s)? - no grocery or clothing)
-
-    * Just like Target and Amazon, even BestBuy has dynamic content on its web page. We employed Python with Selenium to automate the exploration of product pages, unveiling hidden content, and harvesting essential data. Employing Selenium's functionalities, we initiated the traversal process, enabling the program to automatically expand pertinent sections to uncover additional information. By targeting elements such as product details and reviews, we orchestrated the seamless extraction of critical fields from each product's page. This automated approach allowed us to efficiently parse through an extensive array of reviews, ensuring a comprehensive analysis of user feedback for the products under scrutiny. We systematically stored the extracted data in our records tables for further analysis and reference.
-
-* Gathering from Target (All products)
-
-    * Target has dynamic content on their webpages.  We used Python Selenium to navigate to product pages and automate the selection of items needed to expand sections to reveal additional data.  We also automated the process of expanding out all reviews so as to iterate through and parse the content of every review for each product in question. 
-
 ## Data Exploration and Visualization
 
 For our data exploration, we plan to examine solely the reviews for which we have data from all of our websites.  Due to the nature of the vendors, not all offer the same products online.  We've included some unique products from each site (and may even gather more), but will exclude them from initial analysis. 
+
+The common items between all 3 websites include the following:
+
+```{python}
+# pd.DataFrame(product_data[product_data['productID'].isin(
+#     [1,2,3,5,6,8,9,11,12,13,14,15]
+# )]['product_title'].unique()).style.hide(axis='index')
+pd.DataFrame(
+    product_data.loc[[1,2,3,5,6,8,9,11,12,13,14,15],'product_title']
+).style.hide(axis='index')
+```
 
 The reason for only examining common products is to check for comparability and similarity of the products associated variables (e.g. product subjectivity, review subjectivity, review polarity, star rating, and so forth) between the websites.  If they are similar or comparable, it may mean that we could use single models to make predictions on the usefulness of customer feedback.  If they are substantially dissimilar, it may mean that modifiers are needed based upon the e-commerce platform in which the product is listed.
 
@@ -139,10 +147,33 @@ We'll start by looking at distributions of some of these key variables, and chec
 
 ### Univariate Plots and Distributions
 
-```{python fig-qq-plots-rating}
-#| label: fig-hist-plots
+First, we want to examine the review content across all websites in a single, simple visual - a Wordcloud.  Seeing common words and phrases can prime us for what we might expect to see in more detailed statistical plots.
+
+```{python fig-wordcloud}
+#| label: fig-wordcloud
+#| fig-cap: Wordcloud of review content
+
+#1 plot type
+#1 total plot
+all_text = ' '.join(review_data['review_content'])
+
+wordcloud = WordCloud(width=800, height=400, background_color='white', max_words=300).generate(all_text)
+
+plt.figure(figsize=(10, 5))
+plt.imshow(wordcloud, interpolation='bilinear')
+plt.title('Word Cloud of Review Content')
+plt.axis('off')
+plt.show()
+```
+
+Examining the Wordcloud, some larger words stick out ("easy", "good", "love", "need" and "great").  There don't seem to be very many negative singular words here as it pertains to these reviews.  This may suggest that the content of reviews, generally, gravitates toward positivity in reviews.  We will proceed to examine this with appropriate statistical plots.
+
+```{python fig-hist-plots-rating}
+#| label: fig-hist-plots-rating
 #| fig-cap: Histogram Plot (star-rating, by-site)
 
+#2 plot types
+#4 total plots
 fig,ax = plt.subplots(nrows=1,ncols=3)
 sites = ['Amazon','Target','BestBuy']
 for i in range(len(sites)):
@@ -159,13 +190,17 @@ plt.tight_layout()
 plt.show()
 ```
 
-Examining the histogram plots for star-rating by website, we can see that, generally, reviews tend to provide positive feedback for the selected products.
+Examining the histogram plots for star-rating by website, we can see that, generally, reviews tend to provide more positive than negative feedback for the selected products, supporting what we see coming out of @fig-wordcloud
 
 ```{python fig-qq-plots-subj}
 #| label: fig-qq-plots-subj
 #| fig-cap: Q-Q plots (star-rating, by-site)
 
+#3 plot types
+#7 total plots
 fig,ax = plt.subplots(nrows=1,ncols=3)
+fig.set_figheight(4)
+fig.set_figwidth(8)
 sites = ['Amazon','Target','BestBuy']
 for i in range(len(sites)):
     x = review_data[review_data['site']==sites[i]]['review_subjectivity']
@@ -184,16 +219,112 @@ plt.show()
 
 Across all three websites, there appears to be consistency with adherence to, and issues with, the normal distribution for subjectivity.  These charts suggest sufficient normal distribution of review subjectivity (degree of inclusion of word modifiers such as adverbs and adjectives).  
 
-Therre seems to be slight skewness in the tails of these Q-Q distributions.  Filtering off some of the outliers may grant us reasonable relevance and assurance to perform hypothesis testing and evaluation of these variables across sites (e.g. ANOVA, F-Testing, etc)
+Therre seems to be slight skewness in the tails of these Q-Q distributions.  Filtering off some of the outliers may grant us reasonable relevance and assurance to perform hypothesis testing and evaluation of these variables across sites (e.g. ANOVA, F-Testing, etc).
+
+We'll try plotting the same Q-Q plot with outliers removed.  To remove outliers, initially, we leveraged the inter-quartile range of each variable and excluded any records for which the variable was more than $1.5\cdot \text{IQR}$ away from the 1st and 3rd quartiles.
+
+Before we proceed to re-examining the Q-Q plot with outliers removed, we'll examine boxplots for these variables to examine the prevalence of outliers.
+
+```{python fig-outliers-star-rating}
+#| label: fig-outliers-star-rating
+#| fig-cap: "Boxplots - Review Star Rating"
+
+
+#4 plot types
+#10 total plots
+boxplot_star_rating = sns.FacetGrid(
+    data=review_data,
+    col='site'
+)
+boxplot_star_rating.map_dataframe(
+    sns.boxplot,
+    y='review_star_rating'
+)
+```
+
+Boxplots for star ratings on both Target and Amazon are generally higher with outliers on the lower-end of the 1 to 5 scale.  Amazon, however, seems to have a wider spread of information
+
+```{python fig-outliers-polarity}
+#| label: fig-outliers-polarity
+#| fig-cap: "Boxplots - Review Polarity"
+
+#4 plot types
+#13 total plots
+boxplot_polarity = sns.FacetGrid(
+    data=review_data,
+    col='site'
+)
+boxplot_polarity.map_dataframe(
+    sns.boxplot,
+    y='review_polarity'
+)
+```
+
+Boxplots for reviewe polarity suggest common threads between BestBuy and Target in terms of the number summary (min, max, quartiles, and outliers at the lower end).  More notably, the polarity (or how positive or negative the content of the reviews are) generally tends toward positive.  Amazon, on the otherhand, seems to show a lower center of mass and a narrower spread, with outliers to both extremes for positive and negative polarity.
+
+Next, we'll examine subjectivity in the same fashion.
+
+```{python fig-outliers-subjectivity}
+#| label: fig-outliers-subjectivity
+#| fig-cap: "Boxplots - Review Subjectivity"
+
+#4 plot types
+#16 total plots
+boxplot_star_rating = sns.FacetGrid(
+    data=review_data,
+    col='site'
+)
+boxplot_star_rating.map_dataframe(
+    sns.boxplot,
+    y='review_subjectivity'
+)
+```
+
+Subjectivity, generally, seems to follow the same trends as review polarity.  This suggests that these reviews could come from similar or the same population in terms of polarity and subjectivity.  Further statistical analysis would be needed to make a definitive determination here.
+
+Now that we've examined the centers and spread for these variables and understand where some of their outliers may exist, we'll examine filtering those outliers from their Q-Q plots.
+
+First - Subjectivity.
+
+```{python fig-qq-plot-subj-no-out}
+#| label: fig-qq-plot-subj-no-out
+#| fig-cap: Q-Q plots (star-rating, by-site, outliers removed)
+
+#4 plot types
+#19 total plots
+fig,ax = plt.subplots(nrows=1,ncols=3)
+fig.set_figheight(4)
+fig.set_figwidth(8)
+sites = ['Amazon','Target','BestBuy']
+for i in range(len(sites)):
+    x = review_data[(review_data['site']==sites[i])&(review_data['site_outlier']==0)]['review_subjectivity']
+    mu = x.mean()
+    sig = x.std()
+    norm = (x-mu)/sig
+    sm.qqplot(norm,ax=ax[i])
+    ax[i].axline((0,0),slope=1,color='black')
+    ax[i].set_title("{}".format(sites[i]))
+    if i > 0:
+        ax[i].set_ylabel("")
+#plt.tight_layout()
+plt.suptitle("Q-Q Plots for Review Subjectivity (outliers removed)")
+plt.show()
+```
+
+It seems that our adjustment for outliers sufficiently made corrections for normality across the sites to better adhere to the normal distribution on the lower tail. We may need to make further adjustments on the upper tail to further refine data selection for our training dataset.  Amongst the over 34K reviews in the common dataset, approximately 25.4K reviews remain after removing these outliers using this method.  
+
+After identifying additional means to filter the data, these methods should suffice in support of using review subjectivity as a feature within various models.
 
 ```{python fig-qq-plots-pol}
 #| label: fig-qq-plots-pol
 #| fig-cap: Q-Q plots (star-rating, by-site)
 
+#4 plot types
+#22 total plots
 fig,ax = plt.subplots(nrows=1,ncols=3)
+fig.set_figheight(4)
+fig.set_figwidth(8)
 sites = ['Amazon','Target','BestBuy']
-fig,ax = plt.subplots(nrows=1,ncols=3)
-
 for i in range(len(sites)):
     x = review_data[review_data['site']==sites[i]]['review_polarity']
     mu = x.mean()
@@ -209,30 +340,79 @@ plt.suptitle("Q-Q Plots for Review Polarity")
 plt.show()
 ```
 
-Similar to review subjectivity, review polarity has good adherence to the normal distribution (particularly on the quantile interval of \[-2,2\]).  There are similar issues in the tails of these distributions as exist for review subjectivity.  As such, reduction in outliers may enable us to perform hypothesis testing during our model design and implementation.
+Similar to review subjectivity, review polarity has good adherence to the normal distribution (particularly on the quantile interval of \[-2,2\]).  There are similar issues in the tails of these distributions as exist for review subjectivity.
 
+As such, reduction in outliers may enable us to perform hypothesis testing during our model design and implementation.  We'll examine the same methods of outlier removal as we did for review subjectivity.
+
+```{python fig-qq-plots-pol-no-out}
+#| label: fig-qq-plots-pol-no-out
+#| fig-cap: Q-Q plots (polarity, by-site, oultiers removed)
+
+
+#4 plot types
+#25 total plots
+fig,ax = plt.subplots(nrows=1,ncols=3)
+fig.set_figheight(4)
+fig.set_figwidth(8)
+sites = ['Amazon','Target','BestBuy']
+for i in range(len(sites)):
+    x = review_data[(review_data['site']==sites[i])&(review_data['site_outlier']==0)]['review_polarity']
+    mu = x.mean()
+    sig = x.std()
+    norm = (x-mu)/sig
+    sm.qqplot(norm,ax=ax[i])
+    ax[i].axline((0,0),slope=1,color='black')
+    ax[i].set_title("{}".format(sites[i]))
+    if i > 0:
+        ax[i].set_ylabel("")
+plt.suptitle("Q-Q Plots for Review Polarity (Outliers Removed)")
+#plt.tight_layout()
+plt.show()
+```
+
+This method of removal seems to mirror that of review subjectivity, and as such, additional fitration of the dataset will be necessary to enable this feature's use within various models.
+
+Another key distribution we must understand is that of our targeted response variable - how useful a review is, as voted by other customers.  We'll plot the response as a pure density plot to explore it's shape.
 
 ```{python fig-helpful-vote-dist}
 #| label: fig-helpful-vote-dist
 #| fig-cap: "Distribution of Review Helpful Votes"
+
+#5 plot types
+#28 total plots
 fig,ax = plt.subplots(nrows=1,ncols=3)
+fig.set_figheight(4)
+fig.set_figwidth(8)
 sites = ['Amazon','Target','BestBuy']
+u_lims = [25,2,2]
 for i in range(len(sites)):
     sns.kdeplot(
         data=review_data[review_data['site']==sites[i]],
         x='review_helpful_votes',ax=ax[i],color='green'
     )
+    mu = review_data[review_data['site']==sites[i]]['review_helpful_votes'].mean()
+    sns.kdeplot(
+        np.random.exponential(size=1000,scale=mu*1.9),
+        ax=ax[i],color='black'
+    )
     ax[i].set_title('site = '+sites[i])
-plt.xlim(0,10)
+    ax[i].set_xlim(0,u_lims[i])
+
 plt.tight_layout()
 plt.show()
 ```
 
+The black lines represent random samples from the exponential distribution (with $E[X] = 1.9\cdot\bar{V}$ with $\bar{V}$ being the mean for helpful votes within the distribution), and the green lines represent the distribution of helpful votes.  It seems that, roughly, the distribution of helpful votes does follow the exponential distribution in the case of Amazon and Target.
+
+<!--
 ```{python fig-rand-exp-dist}
 #| label: fig-rand-exp-dist
 #| fig-cap: "Random Exponential Distributions with Means by Site"
 
 fig,ax = plt.subplots(nrows=1,ncols=3)
+fig.set_figheight(4)
+fig.set_figwidth(8)
+u_lims = [25,2,2]
 for i in range(len(sites)):
     mu = review_data[review_data['site']==sites[i]]['review_helpful_votes'].mean()
     sns.kdeplot(
@@ -240,67 +420,27 @@ for i in range(len(sites)):
         ax=ax[i],color='black'
     )
     ax[i].set_title("RExp("+str(round(mu,3))+")")
-plt.xlim(0,10)
+    ax[i].set_xlim(0,u_lims[i])
+
 plt.tight_layout()
 plt.show()
-```
+``` 
+-->
 
-Examining the plots of @fig-helpful-vote-dist and @fig-rand-exp-dist, the distribution of helpful votes, per website, appears to be exponentially distributed, with many reviews having an expected total count of helpful votes centered fairly low.  Namely, for amazon, the expected value is approximately 3.69 helpful votes, for Target 0.18 helpful votes, and BestBuy with 0.15 helpful votes.  
+Examining the plot of @fig-helpful-vote-dist, the distribution of helpful votes appears to be exponentially distributed on a per-website basis, with many reviews having an expected total count of helpful votes centered fairly low.
 
-Knowing the distribution of these predictions will assist us in the modeling process and may require us to perform variable transformations (e.g. if we pursue a multiple linear regression model).
+Knowing the distribution of our selected response variable will assist us in the modeling process.  The nature of the response variable's distribution may require us to perform transformations on features and responses (e.g. if we pursue a multiple linear regression model).
 
 
-```{python fig-outliers-star-rating}
-#| label: fig-outliers-star-rating
-#| fig-cap: "Outliers for Review Star Rating"
-
-boxplot_star_rating = sns.FacetGrid(
-    data=review_data,
-    col='site'
-)
-boxplot_star_rating.map_dataframe(
-    sns.boxplot,
-    y='review_star_rating'
-)
-```
-
-```{python fig-outliers-polarity}
-#| label: fig-outliers-polarity
-#| fig-cap: "Outliers for Review Polarity"
-
-boxplot_polarity = sns.FacetGrid(
-    data=review_data,
-    col='site'
-)
-boxplot_polarity.map_dataframe(
-    sns.boxplot,
-    y='review_polarity'
-)
-```
-
-```{python fig-outliers-subjectivity}
-#| label: fig-outliers-subjectivity
-#| fig-cap: "Outliers for Review Subjectivity"
-
-boxplot_star_rating = sns.FacetGrid(
-    data=review_data,
-    col='site'
-)
-boxplot_star_rating.map_dataframe(
-    sns.boxplot,
-    y='review_subjectivity'
-)
-```
-
-    * Violin Plots
-
-* Bar Plots 
 
 ### Bi/Multivariate Plots
 
 ```{python fig-bivar-plot}
 #| label: fig-bivar-plot
-#| fig-cap: "Bivariate Plot for Sensitivity and Polarity, by Site"
+#| fig-cap: "Bivariate Plot for Sensitivity and Polarity, by Site (all purchases)"
+
+#6 plot types
+#28 total plots
 
 bivar_subj_pol = sns.FacetGrid(
     data=review_data,
@@ -315,22 +455,28 @@ bivar_subj_pol.map_dataframe(
 
 ```{python fig-bivar-plot2}
 #| label: fig-bivar-plot2
-#| fig-cap: "Bivariate Plot for Sensitivity and Polarity, by Site"
+#| fig-cap: "Bivariate Plot for Sensitivity and Polarity, by Site (verified purchases)"
 
-# bivar_subj_pol2 = sns.FacetGrid(
-#     data=review_data[review_data['verified_purchase']==1],
-#     col='site'
-# )
-# bivar_subj_pol2.map_dataframe(
-#     sns.kdeplot,
-#     x='review_subjectivity',y='review_polarity'
-# )
+
+#6 plot types
+#32 total plots
+bivar_subj_pol2 = sns.FacetGrid(
+    data=review_data[review_data['verified_purchase']==1],
+    col='site'
+)
+bivar_subj_pol2.map_dataframe(
+    sns.kdeplot,
+    x='review_subjectivity',y='review_polarity'
+)
 ```
 
     * Box Plots
 ```{python fig-violin-plots1}
 #| label:    fig-violin-plots1
 #| fig-cap:  "Violin Plots of Review Star-Rating vs. Subjectivity, by Site"
+
+#7 plot types
+#35 total plots
 
 vplot_polarity_stars = sns.FacetGrid(
     data = review_data,
@@ -348,6 +494,8 @@ plt.show()
 #| label: fig-violin-plots2
 #| fig-cap: "Violin Plots for Star Rating vs. Polarity, by Site"
 
+#7 plot types
+#38 total plots
 vplot_polarity_stars = sns.FacetGrid(
     data = review_data,
     col='site'
@@ -368,9 +516,61 @@ Since both median subjectivity and polarity seem to increase with respect to sta
 
 Some key features we plan to explore in our modeling include review subjectivity and review polarity.  Knowing whether or not there is a significant difference for these features between the websites on which they're hosted will inform us during model selection, design, and implementation.  As such, we'll perform ANOVA and Tukey Honest Significant Difference Tests on these variables between each site.
 
-
 #### ANOVA Testing
 
+To perform our ANOVA testing, we'll evaluate each dataset's review polarity and subjectivity as the mean measure, and the website on which the review was posted as the treatment variable.  Prior to performing our one-way ANOVA, we'll filter the datasets down to eliminate outliers, such that the data may represent the outcomes depicted in @fig-qq-plot-subj-no-out and @fig-qq-plots-pol-no-out.  An assumption of ANOVA testing is that the source data (and its respective groups) adhere to the normal distribution.  
+
+We are leveraging Welch ANOVA and operating under an assumption that the variances between the groups are not equal, as visually evidenced in @fig-outliers-polarity and @fig-outliers-subjectivity.
+
+Hypotheses:
+
+* Test 1: 
+    * $H_0: \mu_{\text{Subj,Amazon}}=\mu_{\text{Subj,BestBuy}}=\mu_{\text{Subj,Target}}$
+
+    * $H_1:$ at least one mean for review subjectivity is different.
+
+* Test 2: 
+    * $H_0: \mu_{\text{Polr,Amazon}}=\mu_{\text{Polr,BestBuy}}=\mu_{\text{Polr,Target}}$
+
+    * $H_1:$ at least one mean for review polarity is different.
+
+* For both tests, $\alpha=0.003$
+
+```{python tbl-welch-anova-polarity}
+#| label: tbl-welch-anova-polarity
+#| tbl-cap: Welch ANOVA Results (Polarity)
+
+#conducting a welch_anova test for 
+#difference of treatment (e.g. website vs. score)
+#import pingouin as pg 
+#welch_anova
+#pg.welch_anova(data=df, between='company',dv=star_rating|sentiment|polarity|total_star_rating)
+
+filtered_data = pd.DataFrame(review_data[review_data['site_outlier']==0])
+
+display(
+    pg.welch_anova(data=filtered_data,between='site',dv='review_polarity').style.hide(axis='index')
+)
+```
+
+```{python tbl-welch-anova-subjectivity}
+#| label: tbl-welch-anova-subjectivity
+#| tbl-cap: Welch ANOVA Results (Subjectivity)
+
+#conducting a welch_anova test for 
+#difference of treatment (e.g. website vs. score)
+#import pingouin as pg 
+#welch_anova
+#pg.welch_anova(data=df, between='company',dv=star_rating|sentiment|polarity|total_star_rating)
+
+filtered_data = pd.DataFrame(review_data[review_data['site_outlier']==0])
+
+display(
+    pg.welch_anova(data=filtered_data,between='site',dv='review_subjectivity').style.hide(axis='index')
+)
+```
+
+The output of both Welch ANOVA tests suggests that the means for review subjectivity and review polarity, given the website on which it was posted, have a statistically significant difference.  We'll seek to visualize these differences using a plot of the Tukey Honest Significance Test.
 
 #### Tukey Tests with E-Commerce Platform as Treatment
 
@@ -381,25 +581,33 @@ Some key features we plan to explore in our modeling include review subjectivity
 # star = pairwise_tukeyhsd(
 #     endog=review_data['review_star_rating'],
 #     groups=review_data['site'],
-#     alpha=0.5
+#     alpha=0.003
 # )
+
+#8 plot types
+#40 total plots
+
+filtered_data = pd.DataFrame(review_data[review_data['site_outlier']==0])
+
 pol = pairwise_tukeyhsd(
-    endog=review_data['review_polarity'],
-    groups=review_data['site'],
-    alpha=0.5
+    endog=filtered_data['review_polarity'],
+    groups=filtered_data['site'],
+    alpha=0.003
 )
 subj = pairwise_tukeyhsd(
-    endog=review_data['review_subjectivity'],
-    groups=review_data['site'],
-    alpha=0.5
+    endog=filtered_data['review_subjectivity'],
+    groups=filtered_data['site'],
+    alpha=0.003
 )
 
-fig,axes=plt.subplots(nrows=3,ncols=1)
+fig,axes=plt.subplots(nrows=2,ncols=1)
+fig.set_figwidth(7)
+fig.set_figheight(6)
 
 tests = [
     #(star,"Tukey Test - Star Rating (95%)"),
-    (pol,"Tukey Test - Polarity (95%)"),
-    (subj,"Tukey Test - Subjectivity (95%)")
+    (pol,"Tukey Test - Polarity (99.7%)"),
+    (subj,"Tukey Test - Subjectivity (99.7%)")
 ]
 
 for i in range(len(tests)):
@@ -411,38 +619,12 @@ plt.show()
 
 ```
 
-The Tukey honest significance tests, depicted in @fig-tukey-tests suggest some interesting patterns between the three websites.  Namely, target and best buy seem to have (across the board) higher star ratings, polarity, and subjectivity than the same variables for Amazon!  Additionally, for each variable and each website, it seems there is no overlap in the variables at the 95% confidence level.  The only exception here is for subjectivity between Target and BestBuy holding no statistically significant difference.  
+The Tukey honest significance tests, depicted in @fig-tukey-tests suggest some interesting patterns between the three websites.  Namely, target and best buy seem to have higher polarity, and subjectivity than the same variables for Amazon!  Additionally, for each variable and each website, it seems there is no overlap in the variables at the 99.7% confidence level.
 
-```{python exampleCode}
+These statistically significant differences between the reviews, treated by website, indicate to us that we should proceed with caution in our modeling phase.  Namely, it may be necessary to include an explicit variable or feature accounting for the source website in our modeling process as a predictor for the response variable.
 
-#conducting a welch_anova test for 
-#difference of treatment (e.g. website vs. score)
-#import pingouin as pg 
-#welch_anova
-#pg.welch_anova(data=df, between='company',dv=star_rating|sentiment|polarity|total_star_rating)
-
-
-#tukey test 
-
-#from statsmodels.stats.multicomp import pairwise_tukeyhsd
-# tukey_test = pairwise_tukey_hsd(
-#     endog=df[col],
-#     groups=df[col2],
-#     alpha=sig_level
-# )
-# tukey_test.plot_simultaneous()
-# plt.title('Tukey test results A vs. B')
-# plt.xlabel('tested variable')
-# plt.ylabel('treatments (e.g. website)')
-# print(tukey_test.summary())
-
-```
-
+<!-- 
 ### Exploring Sentiments - Star Rating vs. Sentiment Variables
-
-```{python}
-
-```
 
 * Inter-Website Comparison of Product Reviews
 
@@ -475,6 +657,8 @@ The Tukey honest significance tests, depicted in @fig-tukey-tests suggest some i
         * Inspection of Data and / or Scoring using Kansei method.
 
 * Will need to take note on if / how these variables conform to some form of statistical distribution (uniform, normal, exponential, etc)
+
+-->
 
 ## Data Before / After
 
@@ -539,10 +723,8 @@ We are retaining the totality of the data we've collected, and will filter the d
 
 ## Insights from Collection and EDA 
 
+* As in @percUse, online reviews across multiple websites tend toward positivity (reference polarity and star ratings here).
+
 * Statistically significant differences for review subjectivity, polarity across each of the three websites.
 
-* Exclusion of outliers for one or more categories could result in excluding lower star rating reviews, which could impact model
-
-<!-- ```{r TryBothOnePaper}
-print("Hello,world!")
-``` -->
+* Exclusion of outliers for one or more categories could result in excluding lower star rating reviews, which could impact model.
