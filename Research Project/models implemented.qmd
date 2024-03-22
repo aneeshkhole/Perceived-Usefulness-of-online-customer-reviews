@@ -1,5 +1,28 @@
 # Models Implemented {#sec-models-implemented}
 
+```{python importsBlock}
+import pandas as pd, numpy as np, matplotlib.pyplot as plt
+import seaborn as sns
+import pingouin as pg
+from statsmodels.stats.multicomp import pairwise_tukeyhsd
+import statsmodels.api as sm
+from wordcloud import WordCloud
+import pingouin as pg 
+
+product_data = pd.read_csv('../data/master_product_list.csv')
+#review_data = pd.read_csv('../data/combined_review_table.csv')
+review_data = pd.read_csv('../data/all_reviews_without_unicode.csv')
+review_data_base = pd.DataFrame(review_data)
+review_data = pd.DataFrame(
+    review_data[
+        (review_data['productID'].isin([1,2,3,5,6,8,9,11,12,13,14,15])) &
+        (review_data['review_lang']=='en')
+    ]
+)
+   
+review_metrics = pd.read_csv('../data/combined_review_metrics.csv')
+```
+
 Here's where we'll list out our models
 
 ## Examined Model - Multiple Linear Regression
