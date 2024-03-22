@@ -95,6 +95,10 @@ We wrote code to allow us to gather information from each website.  The general 
 * Gathering from Amazon (All Products)
 
     * Product & Review data was scraped from Amazon's website using Python and Selenium. A Selenium WebDriver was utilized to automate web browser interactions. After navigating to product categories like electronics, home appliances, furniture, books, and grocery, Selenium's functions were employed to locate review elements. These elements were then parsed and collected, storing the data in a structured format i.e. a CSV file. Pagination handling was implemented to scrape reviews from multiple pages. 
+    
+        * Challenge: Amazon’s product “All Reviews” webpage HTML structure had 10 reviews per page with a “Next Page” navigation button that was clickable only up-to 10 review pages. This restricted our scope of the number of reviews being scraped per product to a maximum of 100. 
+
+        * Solution: Instead of scraping based on the “All Reviews” webpage, we decided to scrape reviews based on “star-rating” thereby, increasing our scope from a total of 100 reviews per product to having a maximum of 100 reviews per star rating i.e. 5*100 = 500 reviews per product.
 
 * Gathering from BestBuy (Electronic Products, Furniture Item(s)? - no grocery or clothing)
 
@@ -469,6 +473,14 @@ bivar_subj_pol2.map_dataframe(
     x='review_subjectivity',y='review_polarity'
 )
 ```
+
+
+In @fig-bivar-plot and @fig-bivar-plot2, we observe the comparison of multiple features like review polarity, review subjectivity and verified purchases in the form of a Kernel Densoty Plot. The 2 different visuals depict the difference between the whole dataset and after the filter of `verified_purchase` = 1 is applied. This difference may lead to variations in the distribution and relationship between subjectivity and polarity of reviews across different sites, particularly if there are differences in the characteristics of verified and non-verified purchases.
+
+We can see 2 major clusters at (0,0) which are mostly outliers where a review is very short in length. The second cluster around the area where subjectivity is about 0.5 suggests that as the review increases in subjectivity, i.e. the higher an opinionated a review is, the polarity also increases. 
+
+The isolated data points or "islands" outside of the main clusters suggest outliers or unique instances within the dataset. These isolated points may represent reviews that deviate significantly from the overall patterns observed in the data. They could indicate rare or extreme cases that warrant further investigation. For instance, these outliers might correspond to highly subjective or polarized reviews that are not typical of the majority of reviews.
+
 
     * Box Plots
 ```{python fig-violin-plots1}
