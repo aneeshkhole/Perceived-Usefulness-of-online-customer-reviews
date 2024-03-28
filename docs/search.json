@@ -164,7 +164,7 @@
     "href": "models implemented.html",
     "title": "3  Models Implemented",
     "section": "",
-    "text": "3.1 Examined Model - Multiple Linear Regression",
+    "text": "3.1 Decision Tree\nModel\nAccuracy\nF1\nPrecision\nRecall\n\n\n\n\n0\nDecision Tree\n0.918998\n0.333618\n0.6\n0.231043",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Models Implemented</span>"
     ]
@@ -173,8 +173,8 @@
     "objectID": "models implemented.html#examined-model---multiple-linear-regression",
     "href": "models implemented.html#examined-model---multiple-linear-regression",
     "title": "3  Models Implemented",
-    "section": "",
-    "text": "3.1.1 Base Model\n\n\n3.1.2 Model Modifications",
+    "section": "3.5 Examined Model - Multiple Linear Regression",
+    "text": "3.5 Examined Model - Multiple Linear Regression\n\n3.5.1 Base Model\n\n\n3.5.2 Model Modifications",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Models Implemented</span>"
     ]
@@ -183,8 +183,8 @@
     "objectID": "models implemented.html#examined-model---decision-tree",
     "href": "models implemented.html#examined-model---decision-tree",
     "title": "3  Models Implemented",
-    "section": "3.2 Examined Model - Decision Tree",
-    "text": "3.2 Examined Model - Decision Tree",
+    "section": "3.6 Examined Model - Decision Tree",
+    "text": "3.6 Examined Model - Decision Tree",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Models Implemented</span>"
     ]
@@ -193,8 +193,8 @@
     "objectID": "models implemented.html#examined-model---naive-bayes",
     "href": "models implemented.html#examined-model---naive-bayes",
     "title": "3  Models Implemented",
-    "section": "3.3 Examined Model - Naive Bayes",
-    "text": "3.3 Examined Model - Naive Bayes",
+    "section": "3.7 Examined Model - Naive Bayes",
+    "text": "3.7 Examined Model - Naive Bayes",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Models Implemented</span>"
     ]
@@ -203,8 +203,8 @@
     "objectID": "models implemented.html#examined-model--",
     "href": "models implemented.html#examined-model--",
     "title": "3  Models Implemented",
-    "section": "3.4 Examined Model - ?",
-    "text": "3.4 Examined Model - ?",
+    "section": "3.8 Examined Model - ?",
+    "text": "3.8 Examined Model - ?",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Models Implemented</span>"
     ]
@@ -213,8 +213,8 @@
     "objectID": "models implemented.html#model-comparison",
     "href": "models implemented.html#model-comparison",
     "title": "3  Models Implemented",
-    "section": "3.5 Model Comparison",
-    "text": "3.5 Model Comparison\n\n\n\n\nGuha Majumder, Madhumita, Sangita Dutta Gupta, and Justin Paul. 2022. “Perceived Usefulness of Online Customer Reviews: A Review Mining Approach Using Machine Learning & Exploratory Data Analysis.” Journal of Business Research 150 (November): 147–64. https://doi.org/10.1016/j.jbusres.2022.06.012.\n\n\nHu, Weishu, Zhiguo Gong, and Jingzhi Guo. 2010. “Mining Product Features from Online Reviews.” 2010 IEEE 7th International Conference on E-Business Engineering, November. https://doi.org/10.1109/icebe.2010.51.\n\n\nRajeev, P Venkata, and V Smrithi Rekha. 2015. “Recommending Products to Customers Using Opinion Mining of Online Product Reviews and Features.” 2015 International Conference on Circuits, Power and Computing Technologies [ICCPCT-2015], March. https://doi.org/10.1109/iccpct.2015.7159433.\n\n\nWang, W. M., Z. Li, Z. G. Tian, J. W. Wang, and M. N. Cheng. 2018. “Extracting and Summarizing Affective Features and Responses from Online Product Descriptions and Reviews: A Kansei Text Mining Approach.” Engineering Applications of Artificial Intelligence 73 (August): 149–62. https://doi.org/10.1016/j.engappai.2018.05.005.",
+    "section": "3.9 Model Comparison",
+    "text": "3.9 Model Comparison\n\n\n\n\nGuha Majumder, Madhumita, Sangita Dutta Gupta, and Justin Paul. 2022. “Perceived Usefulness of Online Customer Reviews: A Review Mining Approach Using Machine Learning & Exploratory Data Analysis.” Journal of Business Research 150 (November): 147–64. https://doi.org/10.1016/j.jbusres.2022.06.012.\n\n\nHu, Weishu, Zhiguo Gong, and Jingzhi Guo. 2010. “Mining Product Features from Online Reviews.” 2010 IEEE 7th International Conference on E-Business Engineering, November. https://doi.org/10.1109/icebe.2010.51.\n\n\nRajeev, P Venkata, and V Smrithi Rekha. 2015. “Recommending Products to Customers Using Opinion Mining of Online Product Reviews and Features.” 2015 International Conference on Circuits, Power and Computing Technologies [ICCPCT-2015], March. https://doi.org/10.1109/iccpct.2015.7159433.\n\n\nWang, W. M., Z. Li, Z. G. Tian, J. W. Wang, and M. N. Cheng. 2018. “Extracting and Summarizing Affective Features and Responses from Online Product Descriptions and Reviews: A Kansei Text Mining Approach.” Engineering Applications of Artificial Intelligence 73 (August): 149–62. https://doi.org/10.1016/j.engappai.2018.05.005.",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Models Implemented</span>"
     ]
@@ -237,6 +237,36 @@
     "text": "Guha Majumder, Madhumita, Sangita Dutta Gupta, and Justin Paul. 2022.\n“Perceived Usefulness of Online Customer Reviews: A Review Mining\nApproach Using Machine Learning & Exploratory Data Analysis.”\nJournal of Business Research 150 (November): 147–64. https://doi.org/10.1016/j.jbusres.2022.06.012.\n\n\nHu, Weishu, Zhiguo Gong, and Jingzhi Guo. 2010. “Mining Product\nFeatures from Online Reviews.” 2010 IEEE 7th International\nConference on E-Business Engineering, November. https://doi.org/10.1109/icebe.2010.51.\n\n\nRajeev, P Venkata, and V Smrithi Rekha. 2015. “Recommending\nProducts to Customers Using Opinion Mining of Online Product Reviews and\nFeatures.” 2015 International Conference on Circuits, Power\nand Computing Technologies [ICCPCT-2015], March. https://doi.org/10.1109/iccpct.2015.7159433.\n\n\nWang, W. M., Z. Li, Z. G. Tian, J. W. Wang, and M. N. Cheng. 2018.\n“Extracting and Summarizing Affective Features and Responses from\nOnline Product Descriptions and Reviews: A Kansei Text Mining\nApproach.” Engineering Applications of Artificial\nIntelligence 73 (August): 149–62. https://doi.org/10.1016/j.engappai.2018.05.005.",
     "crumbs": [
       "References"
+    ]
+  },
+  {
+    "objectID": "models implemented.html#logistic-regression",
+    "href": "models implemented.html#logistic-regression",
+    "title": "3  Models Implemented",
+    "section": "3.2 Logistic Regression",
+    "text": "3.2 Logistic Regression\n\n\n\n\n\n\n\n\n\nModel\nAccuracy\nF1\nPrecision\nRecall\n\n\n\n\n0\nDecision Tree\n0.918998\n0.333618\n0.600000\n0.231043\n\n\n1\nLogistic Regression\n0.971967\n0.624852\n0.739496\n0.540984",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Models Implemented</span>"
+    ]
+  },
+  {
+    "objectID": "models implemented.html#knn",
+    "href": "models implemented.html#knn",
+    "title": "3  Models Implemented",
+    "section": "3.3 KNN?",
+    "text": "3.3 KNN?\n\n\n\n\n\n\n\n\n\nModel\nAccuracy\nF1\nPrecision\nRecall\n\n\n\n\n0\nDecision Tree\n0.918998\n0.333618\n0.600000\n0.231043\n\n\n1\nLogistic Regression\n0.971967\n0.624852\n0.739496\n0.540984\n\n\n2\nK-Nearest Neighbors\n0.959763\n0.188948\n0.726027\n0.108607",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Models Implemented</span>"
+    ]
+  },
+  {
+    "objectID": "models implemented.html#svm-analysis",
+    "href": "models implemented.html#svm-analysis",
+    "title": "3  Models Implemented",
+    "section": "3.4 SVM Analysis",
+    "text": "3.4 SVM Analysis\n\n\n\n\n\n\n\n\n\nModel\nAccuracy\nF1\nPrecision\nRecall\n\n\n\n\n0\nDecision Tree\n0.918998\n0.333618\n0.600000\n0.231043\n\n\n1\nLogistic Regression\n0.971967\n0.624852\n0.739496\n0.540984\n\n\n2\nK-Nearest Neighbors\n0.959763\n0.188948\n0.726027\n0.108607\n\n\n3\nSupport Vector Machine\n0.972940\n0.656180\n0.726368\n0.598361\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n12730\n\n\n\n\n\n\n\n\n\nModel\nAccuracy\nF1\nPrecision\nRecall\n\n\n\n\n0\nDecision Tree\n0.918998\n0.333618\n0.600000\n0.231043\n\n\n1\nLogistic Regression\n0.971967\n0.624852\n0.739496\n0.540984\n\n\n2\nK-Nearest Neighbors\n0.959763\n0.188948\n0.726027\n0.108607\n\n\n3\nSupport Vector Machine\n0.972940\n0.656180\n0.726368\n0.598361\n\n\n4\nSupport Vector Machine2\n0.393716\n0.243482\n0.142627\n0.831325",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Models Implemented</span>"
     ]
   }
 ]
