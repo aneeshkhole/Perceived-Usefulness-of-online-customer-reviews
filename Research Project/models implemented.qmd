@@ -1,14 +1,11 @@
 # Models Implemented {#sec-models-implemented}
 
 ```{python importsBlock}
+
+#module imports 
 import pandas as pd, numpy as np, matplotlib.pyplot as plt
 import seaborn as sns
-# import pingouin as pg
-# from statsmodels.stats.multicomp import pairwise_tukeyhsd
-# import statsmodels.api as sm
-# from wordcloud import WordCloud
-# import pingouin as pg 
-from sklearn import tree
+# from sklearn import tree
 from sklearn.metrics import (
     accuracy_score,f1_score,
     precision_score,recall_score, 
@@ -17,23 +14,74 @@ from sklearn.metrics import (
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn import svm
-import graphviz
+# from sklearn import svm
+# import graphviz
 
-
+#read in all of our product data
 product_data = pd.read_csv('../data/master_product_list.csv')
-#review_data = pd.read_csv('../data/combined_review_table.csv')
+#make it so that the IDs match up for joins
+product_data['prodSiteID'] = product_data['prodSiteID'].str.upper()
+
+#read in all of our review data
 review_data = pd.read_csv('../data/all_reviews_without_unicode.csv')
+#make it so that the IDs match up for joins
+review_data['prodSiteID'] = review_data['prodSiteID'].str.upper()
+
+#merge some key variables from the products dataframe
+#into the review dataframe for supporting model building and 
+#analysis
+review_data = review_data.merge(
+    right=pd.DataFrame(
+      product_data[
+        [
+            'product_price','prodSiteID',
+            'prod_subjectivity','total_star_rating','site'
+        ]
+      ]
+    ),
+    on='prodSiteID',
+    how='left'
+)
+
+#add a boolean/binary value for whether or not the review
+#is "helpful" to other customers.
+#we can also explore adjusting the setting for "helpful"
+#in this binary based off of the distribution of the helpful votes
+#e.g. if it has more than the median number of votes, it's helpful.
+review_data['is_helpful'] = np.select(
+    [
+        review_data['review_helpful_votes'] > 0,
+        review_data['review_helpful_votes'] == 0 | review_data['review_helpful_votes'].isna(),
+    ],
+    [
+        1,
+        0
+    ]
+)
+
+#this will contain all the review information
+#plus product data
 review_data_base = pd.DataFrame(review_data)
+
+#this dataframe can be used for training and testing initially.
+#there may still be outliers within this dataset, and as such,
+#we may need to filter them down prior to training and testing
+#our models.
 review_data = pd.DataFrame(
     review_data[
         (review_data['productID'].isin([1,2,3,5,6,8,9,11,12,13,14,15])) &
         (review_data['review_lang']=='en')
     ]
 )
-   
+
+#not sure if this is needed, but it's available to help support
+# filtering data when/where needed.   
 review_metrics = pd.read_csv('../data/combined_review_metrics.csv')
 
+#this is a dataframe where we can capture our metrics for each
+#run of each model as we seek to optimize.
+#there is example code in the blocks below to help us 
+#add the metrics to this frame progressively.
 test_metrics = pd.DataFrame(
     {
         'Model':[],
@@ -81,9 +129,10 @@ Each of these models may also need some data modifications to include new variab
 
  -->
 
-## Decision Tree
+## Decision Tree - Remove
 ```{python data}
-review_data_base.head()
+# review_data_base.head()
+
 review_data_base['is_helpful'] = review_data_base['review_helpful_votes'] > 0
 X,y = [review_data_base[
     ['review_star_rating','verified_purchase','review_subjectivity',
@@ -97,33 +146,37 @@ t = pd.DataFrame(review_data_base.dropna())
 
 ```{python dTreeClassifier}
 
+#we should omit this from our project, I think - PC
+
+
+
 
 ## research how to replace tree headers with
 ## names and values
 
-X_train,X_test,y_train,y_test = train_test_split(
-    X,y,test_size=0.2,random_state=1337
-)
-#clf = tree.DecisionTreeClassifier(criterion=)
-clf = tree.DecisionTreeClassifier(criterion = 'entropy',max_depth=6)
-clf=clf.fit(X_train,y_train)
-#tree.plot_tree(clf)
-dot_data = tree.export_graphviz(clf,out_file=None)
-#graph = graphviz.Source(dot_data)
-#display(graph)
+# X_train,X_test,y_train,y_test = train_test_split(
+#     X,y,test_size=0.2,random_state=1337
+# )
+# #clf = tree.DecisionTreeClassifier(criterion=)
+# clf = tree.DecisionTreeClassifier(criterion = 'entropy',max_depth=6)
+# clf=clf.fit(X_train,y_train)
+# #tree.plot_tree(clf)
+# dot_data = tree.export_graphviz(clf,out_file=None)
+# #graph = graphviz.Source(dot_data)
+# #display(graph)
 
-y_pred = clf.predict(X_test)
-test_metrics.loc[len(test_metrics)] = {
-    'Model':'Decision Tree',
-    'Accuracy':accuracy_score(y_test,y_pred),
-    'F1':f1_score(y_test,y_pred),
-    'Precision':precision_score(y_test,y_pred),
-    'Recall':recall_score(y_test,y_pred)
-}
+# y_pred = clf.predict(X_test)
+# test_metrics.loc[len(test_metrics)] = {
+#     'Model':'Decision Tree',
+#     'Accuracy':accuracy_score(y_test,y_pred),
+#     'F1':f1_score(y_test,y_pred),
+#     'Precision':precision_score(y_test,y_pred),
+#     'Recall':recall_score(y_test,y_pred)
+# }
 
-ConfusionMatrixDisplay(confusion_matrix(y_test,y_pred)).plot()
+# ConfusionMatrixDisplay(confusion_matrix(y_test,y_pred)).plot()
 
-display(test_metrics)
+# display(test_metrics)
 
 ```
 
@@ -132,15 +185,17 @@ display(test_metrics)
 ```{python LogisitcRegressionClassifier}
 ### extract parameters...
 
-mod = LogisticRegression()
+mod = LogisticRegression(penalty='l2',max_iter = 150,class_weight={0:.2,1:.8})
 
 #reduce the sample size to examine reduction in 
 #overfit
 
-
+# we don't have to use t here - it may be stronger (initially) for us 
+# to use the "review data" dataframe.  I just worked with t as a
+# temporary frame to look at all reviews.
 X,y = [t[
     ['review_star_rating','verified_purchase','review_subjectivity',
-    'review_polarity','review_length']
+    'review_polarity']
 ],t['is_helpful']]
 
 X_train,X_test,y_train,y_test = train_test_split(
@@ -151,8 +206,9 @@ X_train,X_test,y_train,y_test = train_test_split(
 )
 
 log_reg = mod.fit(X_train,y_train)
-y_pred = mod.predict(X_test)
-
+y_pred = (mod.predict_proba(X_test)[:,1] > .11)
+#mod.predict(X_test)
+#y_pred = (mod.predict_proba(X_test)[:,1] > 0.5)
 test_metrics.loc[len(test_metrics)] = {
     'Model':'Logistic Regression',
     'Accuracy':accuracy_score(y_test,y_pred),
@@ -166,10 +222,17 @@ ConfusionMatrixDisplay(confusion_matrix(y_test,y_pred)).plot()
 display(test_metrics)
 ```
 
+```{python}
+#can't remember what I was doing here - commenting out for now.
+# X_test['prob'] = y_pred 
+# (X_test[X_test['prob'] == 1]).index
+# t.loc[(X_test[X_test['prob'] == 1]).index]
+```
 
 ## KNN?
 
 ```{python KNearestNeighborsClassifier}
+
 # X,y = [review_data_base[
 #     ['review_star_rating','verified_purchase','review_subjectivity',
 #     'review_polarity','review_length']
@@ -197,50 +260,61 @@ display(test_metrics)
 
 ```
 
-## SVM Analysis
+## SVM Analysis - Remove
 
 ```{python SVMClassifier}
-spt_vector = svm.SVC(kernel='linear').fit(X_train,y_train)
 
-y_pred = spt_vector.predict(X_test)
+#we're not going to do this one for our project.
+#we can examine this or other models if we have substantial issues with KNN, MLR, or Log Reg.
 
-test_metrics.loc[len(test_metrics)] = {
-    'Model':'Support Vector Machine',
-    'Accuracy':accuracy_score(y_test,y_pred),
-    'F1':f1_score(y_test,y_pred),
-    'Precision':precision_score(y_test,y_pred),
-    'Recall':recall_score(y_test,y_pred)
-}
+# spt_vector = svm.SVC(kernel='linear').fit(X_train,y_train)
 
-ConfusionMatrixDisplay(confusion_matrix(y_test,y_pred)).plot()
+# y_pred = spt_vector.predict(X_test)
 
-display(test_metrics)
+# test_metrics.loc[len(test_metrics)] = {
+#     'Model':'Support Vector Machine',
+#     'Accuracy':accuracy_score(y_test,y_pred),
+#     'F1':f1_score(y_test,y_pred),
+#     'Precision':precision_score(y_test,y_pred),
+#     'Recall':recall_score(y_test,y_pred)
+# }
+
+# ConfusionMatrixDisplay(confusion_matrix(y_test,y_pred)).plot()
+
+# display(test_metrics)
 ```
 
 ```{python SVMC2}
-other_data = pd.DataFrame(review_data_base[(~review_data_base['productID'].isin([1,2,3,5,6,8,9,11,12,13,14,15]))&(review_data_base['review_lang']=='en')])
-print(len(other_data))
-X = other_data[
-    ['review_star_rating','verified_purchase','review_subjectivity',
-     'review_polarity','review_length']
-]
-y_test = other_data['is_helpful']
-y_pred = spt_vector.predict(X)
+#to be removed unless absolutely needed
 
-test_metrics.loc[len(test_metrics)] = {
-    'Model':'Support Vector Machine2',
-    'Accuracy':accuracy_score(y_test,y_pred),
-    'F1':f1_score(y_test,y_pred),
-    'Precision':precision_score(y_test,y_pred),
-    'Recall':recall_score(y_test,y_pred)
-}
 
-ConfusionMatrixDisplay(confusion_matrix(y_test,y_pred)).plot()
+# other_data = pd.DataFrame(review_data_base[(~review_data_base['productID'].isin([1,2,3,5,6,8,9,11,12,13,14,15]))&(review_data_base['review_lang']=='en')])
+# print(len(other_data))
+# X = other_data[
+#     ['review_star_rating','verified_purchase','review_subjectivity',
+#      'review_polarity','review_length']
+# ]
+# y_test = other_data['is_helpful']
+# y_pred = spt_vector.predict(X)
 
-display(test_metrics)
+# test_metrics.loc[len(test_metrics)] = {
+#     'Model':'Support Vector Machine2',
+#     'Accuracy':accuracy_score(y_test,y_pred),
+#     'F1':f1_score(y_test,y_pred),
+#     'Precision':precision_score(y_test,y_pred),
+#     'Recall':recall_score(y_test,y_pred)
+# }
+
+# ConfusionMatrixDisplay(confusion_matrix(y_test,y_pred)).plot()
+
+# display(test_metrics)
 ```
 
 ## Examined Model - Multiple Linear Regression
+
+```{python}
+
+```
 
 ### Base Model 
 
