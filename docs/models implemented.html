@@ -174,10 +174,10 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#decision-tree" id="toc-decision-tree" class="nav-link active" data-scroll-target="#decision-tree"><span class="header-section-number">3.1</span> Decision Tree</a></li>
+  <li><a href="#decision-tree---remove" id="toc-decision-tree---remove" class="nav-link active" data-scroll-target="#decision-tree---remove"><span class="header-section-number">3.1</span> Decision Tree - Remove</a></li>
   <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression"><span class="header-section-number">3.2</span> Logistic Regression</a></li>
   <li><a href="#knn" id="toc-knn" class="nav-link" data-scroll-target="#knn"><span class="header-section-number">3.3</span> KNN?</a></li>
-  <li><a href="#svm-analysis" id="toc-svm-analysis" class="nav-link" data-scroll-target="#svm-analysis"><span class="header-section-number">3.4</span> SVM Analysis</a></li>
+  <li><a href="#svm-analysis---remove" id="toc-svm-analysis---remove" class="nav-link" data-scroll-target="#svm-analysis---remove"><span class="header-section-number">3.4</span> SVM Analysis - Remove</a></li>
   <li><a href="#examined-model---multiple-linear-regression" id="toc-examined-model---multiple-linear-regression" class="nav-link" data-scroll-target="#examined-model---multiple-linear-regression"><span class="header-section-number">3.5</span> Examined Model - Multiple Linear Regression</a>
   <ul class="collapse">
   <li><a href="#base-model" id="toc-base-model" class="nav-link" data-scroll-target="#base-model"><span class="header-section-number">3.5.1</span> Base Model</a></li>
@@ -245,50 +245,12 @@ Each of these models runs may need to be modified such that they're also run aga
 Each of these models may also need some data modifications to include new variables, and to seek ways and means to avoid overfitting.
 
  -->
-<section id="decision-tree" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="decision-tree"><span class="header-section-number">3.1</span> Decision Tree</h2>
-<div id="ee947347" class="cell" data-execution_count="3">
-<div class="cell-output cell-output-display">
-<div>
-
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">Model</th>
-<th data-quarto-table-cell-role="th">Accuracy</th>
-<th data-quarto-table-cell-role="th">F1</th>
-<th data-quarto-table-cell-role="th">Precision</th>
-<th data-quarto-table-cell-role="th">Recall</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>Decision Tree</td>
-<td>0.918998</td>
-<td>0.333618</td>
-<td>0.6</td>
-<td>0.231043</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="models implemented_files/figure-html/cell-4-output-2.png" width="513" height="429" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
+<section id="decision-tree---remove" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="decision-tree---remove"><span class="header-section-number">3.1</span> Decision Tree - Remove</h2>
 </section>
 <section id="logistic-regression" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="logistic-regression"><span class="header-section-number">3.2</span> Logistic Regression</h2>
-<div id="1a7357d4" class="cell" data-execution_count="4">
+<div id="b2bf8309" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 
@@ -307,19 +269,11 @@ Each of these models may also need some data modifications to include new variab
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
-<td>Decision Tree</td>
-<td>0.918998</td>
-<td>0.333618</td>
-<td>0.600000</td>
-<td>0.231043</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
 <td>Logistic Regression</td>
-<td>0.971967</td>
-<td>0.624852</td>
-<td>0.739496</td>
-<td>0.540984</td>
+<td>0.814025</td>
+<td>0.253991</td>
+<td>0.153582</td>
+<td>0.733607</td>
 </tr>
 </tbody>
 </table>
@@ -329,7 +283,7 @@ Each of these models may also need some data modifications to include new variab
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="models implemented_files/figure-html/cell-5-output-2.png" width="521" height="429" class="figure-img"></p>
+<p><img src="models implemented_files/figure-html/cell-5-output-2.png" width="513" height="429" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -337,7 +291,7 @@ Each of these models may also need some data modifications to include new variab
 </section>
 <section id="knn" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="knn"><span class="header-section-number">3.3</span> KNN?</h2>
-<div id="f51f22f4" class="cell" data-execution_count="5">
+<div id="d76d50a7" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display">
 <div>
 
@@ -356,92 +310,19 @@ Each of these models may also need some data modifications to include new variab
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
-<td>Decision Tree</td>
-<td>0.918998</td>
-<td>0.333618</td>
-<td>0.600000</td>
-<td>0.231043</td>
+<td>Logistic Regression</td>
+<td>0.814025</td>
+<td>0.253991</td>
+<td>0.153582</td>
+<td>0.733607</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
-<td>Logistic Regression</td>
-<td>0.971967</td>
-<td>0.624852</td>
-<td>0.739496</td>
-<td>0.540984</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
 <td>K-Nearest Neighbors</td>
-<td>0.959763</td>
-<td>0.188948</td>
-<td>0.726027</td>
-<td>0.108607</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="models implemented_files/figure-html/cell-6-output-2.png" width="521" height="429" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="svm-analysis" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="svm-analysis"><span class="header-section-number">3.4</span> SVM Analysis</h2>
-<div id="5bfeba99" class="cell" data-execution_count="6">
-<div class="cell-output cell-output-display">
-<div>
-
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">Model</th>
-<th data-quarto-table-cell-role="th">Accuracy</th>
-<th data-quarto-table-cell-role="th">F1</th>
-<th data-quarto-table-cell-role="th">Precision</th>
-<th data-quarto-table-cell-role="th">Recall</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>Decision Tree</td>
-<td>0.918998</td>
-<td>0.333618</td>
-<td>0.600000</td>
-<td>0.231043</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>Logistic Regression</td>
-<td>0.971967</td>
-<td>0.624852</td>
-<td>0.739496</td>
-<td>0.540984</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>K-Nearest Neighbors</td>
-<td>0.959763</td>
-<td>0.188948</td>
-<td>0.726027</td>
-<td>0.108607</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>Support Vector Machine</td>
-<td>0.972940</td>
-<td>0.656180</td>
-<td>0.726368</td>
-<td>0.598361</td>
+<td>0.968518</td>
+<td>0.565854</td>
+<td>0.698795</td>
+<td>0.475410</td>
 </tr>
 </tbody>
 </table>
@@ -456,79 +337,9 @@ Each of these models may also need some data modifications to include new variab
 </div>
 </div>
 </div>
-<div id="03dc2f39" class="cell" data-execution_count="7">
-<div class="cell-output cell-output-stdout">
-<pre><code>12730</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">Model</th>
-<th data-quarto-table-cell-role="th">Accuracy</th>
-<th data-quarto-table-cell-role="th">F1</th>
-<th data-quarto-table-cell-role="th">Precision</th>
-<th data-quarto-table-cell-role="th">Recall</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>Decision Tree</td>
-<td>0.918998</td>
-<td>0.333618</td>
-<td>0.600000</td>
-<td>0.231043</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>Logistic Regression</td>
-<td>0.971967</td>
-<td>0.624852</td>
-<td>0.739496</td>
-<td>0.540984</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>K-Nearest Neighbors</td>
-<td>0.959763</td>
-<td>0.188948</td>
-<td>0.726027</td>
-<td>0.108607</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>Support Vector Machine</td>
-<td>0.972940</td>
-<td>0.656180</td>
-<td>0.726368</td>
-<td>0.598361</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>Support Vector Machine2</td>
-<td>0.393716</td>
-<td>0.243482</td>
-<td>0.142627</td>
-<td>0.831325</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="models implemented_files/figure-html/cell-8-output-3.png" width="513" height="429" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
+</section>
+<section id="svm-analysis---remove" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="svm-analysis---remove"><span class="header-section-number">3.4</span> SVM Analysis - Remove</h2>
 </section>
 <section id="examined-model---multiple-linear-regression" class="level2" data-number="3.5">
 <h2 data-number="3.5" class="anchored" data-anchor-id="examined-model---multiple-linear-regression"><span class="header-section-number">3.5</span> Examined Model - Multiple Linear Regression</h2>

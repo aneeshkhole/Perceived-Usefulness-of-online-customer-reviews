@@ -164,7 +164,7 @@
     "href": "models implemented.html",
     "title": "3  Models Implemented",
     "section": "",
-    "text": "3.1 Decision Tree\nModel\nAccuracy\nF1\nPrecision\nRecall\n\n\n\n\n0\nDecision Tree\n0.918998\n0.333618\n0.6\n0.231043",
+    "text": "3.1 Decision Tree - Remove",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Models Implemented</span>"
     ]
@@ -244,7 +244,7 @@
     "href": "models implemented.html#logistic-regression",
     "title": "3  Models Implemented",
     "section": "3.2 Logistic Regression",
-    "text": "3.2 Logistic Regression\n\n\n\n\n\n\n\n\n\nModel\nAccuracy\nF1\nPrecision\nRecall\n\n\n\n\n0\nDecision Tree\n0.918998\n0.333618\n0.600000\n0.231043\n\n\n1\nLogistic Regression\n0.971967\n0.624852\n0.739496\n0.540984",
+    "text": "3.2 Logistic Regression\n\n\n\n\n\n\n\n\n\nModel\nAccuracy\nF1\nPrecision\nRecall\n\n\n\n\n0\nLogistic Regression\n0.814025\n0.253991\n0.153582\n0.733607",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Models Implemented</span>"
     ]
@@ -254,7 +254,7 @@
     "href": "models implemented.html#knn",
     "title": "3  Models Implemented",
     "section": "3.3 KNN?",
-    "text": "3.3 KNN?\n\n\n\n\n\n\n\n\n\nModel\nAccuracy\nF1\nPrecision\nRecall\n\n\n\n\n0\nDecision Tree\n0.918998\n0.333618\n0.600000\n0.231043\n\n\n1\nLogistic Regression\n0.971967\n0.624852\n0.739496\n0.540984\n\n\n2\nK-Nearest Neighbors\n0.959763\n0.188948\n0.726027\n0.108607",
+    "text": "3.3 KNN?\n\n\n\n\n\n\n\n\n\nModel\nAccuracy\nF1\nPrecision\nRecall\n\n\n\n\n0\nLogistic Regression\n0.814025\n0.253991\n0.153582\n0.733607\n\n\n1\nK-Nearest Neighbors\n0.968518\n0.565854\n0.698795\n0.475410",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Models Implemented</span>"
     ]
@@ -265,6 +265,16 @@
     "title": "3  Models Implemented",
     "section": "3.4 SVM Analysis",
     "text": "3.4 SVM Analysis\n\n\n\n\n\n\n\n\n\nModel\nAccuracy\nF1\nPrecision\nRecall\n\n\n\n\n0\nDecision Tree\n0.918998\n0.333618\n0.600000\n0.231043\n\n\n1\nLogistic Regression\n0.971967\n0.624852\n0.739496\n0.540984\n\n\n2\nK-Nearest Neighbors\n0.959763\n0.188948\n0.726027\n0.108607\n\n\n3\nSupport Vector Machine\n0.972940\n0.656180\n0.726368\n0.598361\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n12730\n\n\n\n\n\n\n\n\n\nModel\nAccuracy\nF1\nPrecision\nRecall\n\n\n\n\n0\nDecision Tree\n0.918998\n0.333618\n0.600000\n0.231043\n\n\n1\nLogistic Regression\n0.971967\n0.624852\n0.739496\n0.540984\n\n\n2\nK-Nearest Neighbors\n0.959763\n0.188948\n0.726027\n0.108607\n\n\n3\nSupport Vector Machine\n0.972940\n0.656180\n0.726368\n0.598361\n\n\n4\nSupport Vector Machine2\n0.393716\n0.243482\n0.142627\n0.831325",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Models Implemented</span>"
+    ]
+  },
+  {
+    "objectID": "models implemented.html#svm-analysis---remove",
+    "href": "models implemented.html#svm-analysis---remove",
+    "title": "3  Models Implemented",
+    "section": "3.4 SVM Analysis - Remove",
+    "text": "3.4 SVM Analysis - Remove",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Models Implemented</span>"
     ]
