@@ -164,7 +164,7 @@
     "href": "models implemented.html",
     "title": "3  Models Implemented",
     "section": "",
-    "text": "3.1 Decision Tree - Remove",
+    "text": "3.1 Data Adjustments\nAs noted in our exploratory data analysis, each individual site has statistically significant differences in key variables we’re considering in our modeling. To mitigate the potential for under or overfitting, and misrepresentation due to variable scale we perform the following transformations to our data:\nHere is a sample of our data prior to the transformation:\nAnd here is a sample of our data after the applied transformations:",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Models Implemented</span>"
     ]
@@ -213,8 +213,8 @@
     "objectID": "models implemented.html#model-comparison",
     "href": "models implemented.html#model-comparison",
     "title": "3  Models Implemented",
-    "section": "3.9 Model Comparison",
-    "text": "3.9 Model Comparison\n\n\n\n\nGuha Majumder, Madhumita, Sangita Dutta Gupta, and Justin Paul. 2022. “Perceived Usefulness of Online Customer Reviews: A Review Mining Approach Using Machine Learning & Exploratory Data Analysis.” Journal of Business Research 150 (November): 147–64. https://doi.org/10.1016/j.jbusres.2022.06.012.\n\n\nHu, Weishu, Zhiguo Gong, and Jingzhi Guo. 2010. “Mining Product Features from Online Reviews.” 2010 IEEE 7th International Conference on E-Business Engineering, November. https://doi.org/10.1109/icebe.2010.51.\n\n\nRajeev, P Venkata, and V Smrithi Rekha. 2015. “Recommending Products to Customers Using Opinion Mining of Online Product Reviews and Features.” 2015 International Conference on Circuits, Power and Computing Technologies [ICCPCT-2015], March. https://doi.org/10.1109/iccpct.2015.7159433.\n\n\nWang, W. M., Z. Li, Z. G. Tian, J. W. Wang, and M. N. Cheng. 2018. “Extracting and Summarizing Affective Features and Responses from Online Product Descriptions and Reviews: A Kansei Text Mining Approach.” Engineering Applications of Artificial Intelligence 73 (August): 149–62. https://doi.org/10.1016/j.engappai.2018.05.005.",
+    "section": "3.6 Model Comparison",
+    "text": "3.6 Model Comparison\nWe examine the following table to compare and contrast our implemented models on our collected data, containing…:\n\n\n\n\n\n\n\n\n\nModel\nUseful Level\nAccuracy\nF1\nPrecision\nRecall\n\n\n\n\n0\nLogistic Regression\nabove 0\n0.986275\n0.810916\n1.000000\n0.681967\n\n\n1\nKNN\nabove 0\n0.983516\n0.764884\n0.994751\n0.621311\n\n\n2\nSVM-PCA\nabove 0\n0.986275\n0.810916\n1.000000\n0.681967\n\n\n\n\n\n\n\n\n\n\n\nGuha Majumder, Madhumita, Sangita Dutta Gupta, and Justin Paul. 2022. “Perceived Usefulness of Online Customer Reviews: A Review Mining Approach Using Machine Learning & Exploratory Data Analysis.” Journal of Business Research 150 (November): 147–64. https://doi.org/10.1016/j.jbusres.2022.06.012.\n\n\nHu, Weishu, Zhiguo Gong, and Jingzhi Guo. 2010. “Mining Product Features from Online Reviews.” 2010 IEEE 7th International Conference on E-Business Engineering, November. https://doi.org/10.1109/icebe.2010.51.\n\n\nRajeev, P Venkata, and V Smrithi Rekha. 2015. “Recommending Products to Customers Using Opinion Mining of Online Product Reviews and Features.” 2015 International Conference on Circuits, Power and Computing Technologies [ICCPCT-2015], March. https://doi.org/10.1109/iccpct.2015.7159433.\n\n\nWang, W. M., Z. Li, Z. G. Tian, J. W. Wang, and M. N. Cheng. 2018. “Extracting and Summarizing Affective Features and Responses from Online Product Descriptions and Reviews: A Kansei Text Mining Approach.” Engineering Applications of Artificial Intelligence 73 (August): 149–62. https://doi.org/10.1016/j.engappai.2018.05.005.",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Models Implemented</span>"
     ]
@@ -243,8 +243,8 @@
     "objectID": "models implemented.html#logistic-regression",
     "href": "models implemented.html#logistic-regression",
     "title": "3  Models Implemented",
-    "section": "3.2 Logistic Regression",
-    "text": "3.2 Logistic Regression\n\n\n\n\n\n\n\n\n\nModel\nAccuracy\nF1\nPrecision\nRecall\n\n\n\n\n0\nLogistic Regression\n0.814025\n0.253991\n0.153582\n0.733607",
+    "section": "3.3 Logistic Regression",
+    "text": "3.3 Logistic Regression\nWith the challenges of meeting and replicating the outcomes from Guha Majumder, Dutta Gupta, and Paul (2022) for a MLR model, we proceeded onward to other options. Our next choice for examination was logistic regression. The MLR called for use of only numeric or continuous variables. Logisitic regression enables us to examine the inclusion of additional categorical variables as part of the regression consideration.\n\n\n3.3.1 Model Training and Test Results\n\n\n\n\n\n\n\n\n\nModel\nUseful Level\nAccuracy\nF1\nPrecision\nRecall\n\n\n\n\n0\nLogistic Regression\nabove 0\n0.986275\n0.810916\n1.0\n0.681967",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Models Implemented</span>"
     ]
@@ -275,6 +275,46 @@
     "title": "3  Models Implemented",
     "section": "3.4 SVM Analysis - Remove",
     "text": "3.4 SVM Analysis - Remove",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Models Implemented</span>"
+    ]
+  },
+  {
+    "objectID": "models implemented.html#examination-of-the-original-multiple-linear-regression",
+    "href": "models implemented.html#examination-of-the-original-multiple-linear-regression",
+    "title": "3  Models Implemented",
+    "section": "3.2 Examination of the Original Multiple Linear Regression",
+    "text": "3.2 Examination of the Original Multiple Linear Regression\n\\(\\hat{y} = \\beta_0 + \\beta_{polarity} + \\beta_{} +\\)\n\n3.2.1 Violations of Linear Model Assumptions\n\n3.2.1.1 Lack of Linear Correlation\n\n\n3.2.1.2 Absence of Homoscedasticity on Normalized Data\n\n\n3.2.1.3 Absence of Normality in Residuals\n\n\n3.2.1.4 Lack of Confidence in t- and F-test results, \\(\\beta\\) inference\n\n\n3.2.1.5 Conclusion on MLR model\nOn the above bases, the model fails to meet the required assumptions for a linear regression. As such, our team rejects the multiple linear regression model as an effective means of predicting the perceived usefulness of review feedback on e-commerce websites for generalization.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Models Implemented</span>"
+    ]
+  },
+  {
+    "objectID": "models implemented.html#k-nearest-neighbors-classification",
+    "href": "models implemented.html#k-nearest-neighbors-classification",
+    "title": "3  Models Implemented",
+    "section": "3.4 K-Nearest Neighbors Classification",
+    "text": "3.4 K-Nearest Neighbors Classification\n\n\n\n\n\n\n\n\n\n\nModel\nUseful Level\nAccuracy\nF1\nPrecision\nRecall\n\n\n\n\n0\nLogistic Regression\nabove 0\n0.986275\n0.810916\n1.000000\n0.681967\n\n\n1\nKNN\nabove 0\n0.983516\n0.764884\n0.994751\n0.621311",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Models Implemented</span>"
+    ]
+  },
+  {
+    "objectID": "models implemented.html#support-vector-machine",
+    "href": "models implemented.html#support-vector-machine",
+    "title": "3  Models Implemented",
+    "section": "3.5 Support Vector Machine",
+    "text": "3.5 Support Vector Machine\n\n\n\n\n\n\n\n\n\nModel\nUseful Level\nAccuracy\nF1\nPrecision\nRecall\n\n\n\n\n0\nLogistic Regression\nabove 0\n0.986275\n0.810916\n1.000000\n0.681967\n\n\n1\nKNN\nabove 0\n0.983516\n0.764884\n0.994751\n0.621311\n\n\n2\nSVM-PCA\nabove 0\n0.986275\n0.810916\n1.000000\n0.681967",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Models Implemented</span>"
+    ]
+  },
+  {
+    "objectID": "models implemented.html#data-adjustments",
+    "href": "models implemented.html#data-adjustments",
+    "title": "3  Models Implemented",
+    "section": "",
+    "text": "Variable outlier adjustment. We noted in our EDA that each of the e-commerce platforms had high volumes of outliers with respect to the inter-quartile range. We applied a transformation to our data to map any outlier variable value on a per-website basis from its value to \\(\\mu+3\\cdot sd(\\text{variable})\\) for high-end outliers, and \\(\\mu-3\\cdot sd(\\text{variable})\\) for low-end outliers. In the event that either of these values exceeded the minimum or maximum value of the dataset, we mapped the value to the minimum or maximum accordingly.\nStandard scaling of variables. After adjusting outliers, we re-mapped all of our feature variables to be on the scale from 0 to 1.\nResponse variable transformation to binary value. We denoted a single useful vote as meaning that the review was useful to customers, and mapped the value to True/1, and False/0 otherwise.\nDimensionality Reduction via Principal Component Analysis. To accelerate training and evaluation by our models, we…",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Models Implemented</span>"
     ]
