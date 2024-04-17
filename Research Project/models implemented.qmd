@@ -40,7 +40,6 @@ reviews = reviews.merge(
     how='left'
 )
 
-
 review_orig = review_orig.merge(
     right=pd.DataFrame(
       product_data[
@@ -53,7 +52,6 @@ review_orig = review_orig.merge(
     on='prodSiteID',
     how='left'
 )
-
 
 reviews['is_helpful'] = np.select(
     [
@@ -94,7 +92,6 @@ review_orig = review_orig.dropna()
 tmp = pd.DataFrame(
     reviews[reviews['productID'].isin(list(range(1,16)))]
 )
-
 
 train_frame = pd.DataFrame(
     tmp.sample(n=int(.8*len(tmp)))
@@ -144,7 +141,7 @@ X_test_pca=pca.transform(X_test)
 
 In our modeling of the collected data, we seek to investigate several models for the generalization of the work performed by @percUse.
 
-We will examine, compare, and contrast the use of multiple models: 
+We will examine, compare, and contrast the use of the following models: 
 
 * Multiple Linear Regression Prediction
 
@@ -180,6 +177,14 @@ And here is a sample of our data after the applied transformations:
 
 ```
 
+### Training Data
+
+To train our dataset, we leveraged the data post-transformation to train each of our models, including the adjustments of outlier datapoints to being within 3 standard deviations of the mean of each variable.  We selected an 80% sample of this data and leveraged the same dataset to train each model.
+
+### Testing Data
+
+For testing, we evaluated each model against transformed data, omitting the transformation of outliers to being within 3 standard deviations of the mean.  We performed this action to enable a fair comparison of each model against one another when working with real-world data.
+
 ## Examination of the Original Multiple Linear Regression
 
 $\hat{y} = \beta_0 + \beta_{polarity} + \beta_{} +$
@@ -198,12 +203,14 @@ $\hat{y} = \beta_0 + \beta_{polarity} + \beta_{} +$
 
 On the above bases, the model fails to meet the required assumptions for a linear regression.  As such, our team rejects the multiple linear regression model as an effective means of predicting the perceived usefulness of review feedback on e-commerce websites for generalization.
 
-## Logistic Regression
+## Logistic Regression Classification
 
 With the challenges of meeting and replicating the outcomes from @percUse for a MLR model, we proceeded onward to other options.  Our next choice for examination was logistic regression.  The MLR called for use of only numeric or continuous variables.  Logisitic regression enables us to examine the inclusion of additional categorical variables as part of the regression consideration.
 
+### Hyperparameter Tuning
+
 <!--try to tweak and tune this model for better performance--> 
-### Model Training and Test Results
+### Logistic Regression Test Results
 ```{python LogRegBlock}
 LogMod = LogisticRegression(class_weight={0:.3,1:.7})
 
@@ -224,6 +231,10 @@ display(test_metrics)
 ```
 
 ## K-Nearest Neighbors Classification
+
+### Hyperparameter Tuning
+
+### KNN Test Results
 <!--try to tweak and tune this model for better performance--> 
 ```{python KnnBlock}
 knn = KNeighborsClassifier(n_neighbors=3)
@@ -241,8 +252,12 @@ ConfusionMatrixDisplay(confusion_matrix(y_test,y_pred)).plot()
 display(test_metrics)
 ```
 
+## Support Vector Machine Classification
 
-## Support Vector Machine
+### Hyperparameter Tuning
+
+### KNN Test Results
+
 ```{python SVMBlock}
 spt_vector = svm.SVC(
     kernel='poly',degree=1,probability=True,class_weight={0:.1,1:.9}
@@ -263,9 +278,14 @@ display(test_metrics)
 
 ## Model Comparison
 
-We examine the following table to compare and contrast our implemented models on our collected data, containing...:
+We examine the following table to compare and contrast our implemented models on our collected data.
 
 ```{python FinalResultsTable}
 test_metrics
 ```
 
+Each of these models had similar performance in terms of accuracy and precision. A key consideration for us is within the realm of recall in that false positives are potentially beneficial to the generalization of this model to identify reviews that are useful, but currently possess no helpful votes.  None of the models delivered any false positives, but having high recall may support identification of new, useful comments.
+
+The top 2 performing models were our Support Vector Machine and Logistic Regression implementations.  Between the two, SVM had higher recall, which is preferable in our use case.  That being said, on every metric between the two models, there was near equivalent performance.
+
+SVM was a more challenging implementation, ...
