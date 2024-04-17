@@ -14,6 +14,8 @@ from sklearn.metrics import (
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.preprocessing import StandardScaler
+from imblearn.over_sampling import RandomOverSampler
 # from sklearn import svm
 # import graphviz
 
@@ -59,6 +61,7 @@ review_data['is_helpful'] = np.select(
     ]
 )
 
+
 #this will contain all the review information
 #plus product data
 review_data_base = pd.DataFrame(review_data)
@@ -74,6 +77,12 @@ review_data = pd.DataFrame(
     ]
 )
 
+# az_votes,bb_votes,tg_votes = [
+#     review_data[review_data['site_y']=='amazon']['review_helpful_votes'].quantile([0.25,0.5]),
+#     review_data[review_data['site_y']=='bestbuy']['review_helpful_votes'].quantile([0.25,0.5]),
+#     review_data[review_data['site_y']=='target']['review_helpful_votes'].quantile([0.25,0.5]),
+# ]
+
 #not sure if this is needed, but it's available to help support
 # filtering data when/where needed.   
 review_metrics = pd.read_csv('../data/combined_review_metrics.csv')
@@ -85,6 +94,7 @@ review_metrics = pd.read_csv('../data/combined_review_metrics.csv')
 test_metrics = pd.DataFrame(
     {
         'Model':[],
+        'Useful Level':[],
         'Accuracy':[],
         'F1':[],
         'Precision':[],
@@ -92,82 +102,109 @@ test_metrics = pd.DataFrame(
     }
 )
 
+t = review_data[
+        (review_data['productID'].isin([1,2,3,5,6,8,9,11,12,13,14,15])) &
+        (review_data['review_lang']=='en')
+    ].copy()
 ```
 
-Here's where we'll list out our models
+In our modeling of the collected data, we seek to investigate several models for the generalization of the work performed by @percUse.
 
-<!--Note from Patrick: 
+We will examine, compare, and contrast the use of multiple models: 
+
+* Multiple Linear Regression Prediction
+
+* Logistic Regression Classification
+
+* K-Nearest Neighbors Classification
+
+* Support Vector Machine with Principal Component Analysis for Dimensionality Reduction
+
+To support the other models outside of the MLR, we also examine the transformation of useful votes from an integer to a simple binary response on one or more cases:
+
+* 1 if the review has at least one vote for being useful, 0 otherwise
+
+<!-- * 1 if the review has a number of votes greater or equal to the 25th percentile of useful votes for a given website, 0 otherwise.
+
+* 1 if the review has a number of votes greater or equal to the 50th percentile of number of useful votes for a given website, 0 otherwise. -->
+
+The adjustment of the response variable in this manner should assist us in identifying an appropriate general model for identifying the utility of a review or feedback comment from e-commerce customers.
+
+## Examination of the Original Multiple Linear Regression
+
+$\hat{y} = \beta_0 + \beta_{polarity} + \beta_{} +$ $
 
 
-Started building some models based upon what's been taught in class.
 
-The below are simple classification models, examining whether a review comment is or is not useful (added a boolean to say it's useful if it has one or more votes for being useful). 
+### Violations of Linear Model Assumptions
 
-May still need to look at MLR, haven't built or run it yet.  May be good to look at this in conjunction with the Logistic Regression.
+#### Lack of Linear Correlation
 
-Ran a decision tree
+#### Absence of Homoscedasticity on Normalized Data
 
-    * most impactful factors (in order) appear to be review star rating, review length, polarity
+#### Absence of Normality in Residuals
 
-    * may need to include product subjectivity as well
+#### Lack of Confidence in t- and F-statistics
 
-Ran Logistic Regression (performs well)
+#### Conclusion on MLR model
 
+On the above bases, the model fails to meet the required assumptions for a linear regression.  As such, our team rejects the multiple linear regression model as an effective means of predicting the perceived usefulness of review feedback on e-commerce websites for generalization.
 
+## Logistic Regression
 
-Ran K-Nearest neighbors
+With the challenges of meeting and replicating the outcomes from @percUse for a MLR model, we proceeded onward to other options.  Our next choice for examination was logistic regression.  The MLR called for use of only numeric or continuous variables.  Logisitic regression enables us to examine the inclusion of additional categorical variables as part of the regression consideration.  Especially considering the statistically significant differences for various features between each e-commerce website, the inclusion of "site" should be incorporated here.  We took the following variables under considration in the building of our regression:
 
-Ran Support Vector Machine
-
-
-
-Current modeling examines doing each of these algorithms against the items that match across all websites.
-
-Each of these models runs may need to be modified such that they're also run against the external item(s).
-
-Each of these models may also need some data modifications to include new variables, and to seek ways and means to avoid overfitting.
-
- -->
-
-## Decision Tree - Remove
-```{python data}
-# review_data_base.head()
-
-review_data_base['is_helpful'] = review_data_base['review_helpful_votes'] > 0
-X,y = [review_data_base[
-    ['review_star_rating','verified_purchase','review_subjectivity',
-    'review_polarity','review_length']
-],review_data_base['is_helpful'].astype(int)]
-
-t = pd.DataFrame(review_data_base.dropna())
-
+```{python}
+pd.DataFrame({
+    'Variable':[],
+    'Reasons for Inclusion':[]
+})
 ```
 
+### Feature Selection
 
-```{python dTreeClassifier}
+On initial selection of the above variables, we examined performing the regression on subsets thereof to potentially enhance model performance.
 
-#we should omit this from our project, I think - PC
+* (what do we / did we do to trim down on features?)
 
+### Hyperparameter Tuning
 
+### Oversampling
 
+### Training on Normalized Data Subset
 
-## research how to replace tree headers with
-## names and values
+### Testing on Normalized Data
+
+### Testing on Non-Normalized Data 
+
+```{python LogisitcRegressionClassifier}
+### extract parameters...
+
+# mod = LogisticRegression(penalty='l2',max_iter = 150,class_weight={0:.21,1:.79})
+
+# #reduce the sample size to examine reduction in 
+# #overfit
+
+# # we don't have to use t here - it may be stronger (initially) for us 
+# # to use the "review data" dataframe.  I just worked with t as a
+# # temporary frame to look at all reviews.
+# X,y = [t[
+#     ['review_star_rating','verified_purchase','review_subjectivity',
+#     'review_polarity']
+# ],t['is_helpful']]
 
 # X_train,X_test,y_train,y_test = train_test_split(
-#     X,y,test_size=0.2,random_state=1337
+#     X,
+#     y,
+#     test_size=0.8,
+#     random_state=1337
 # )
-# #clf = tree.DecisionTreeClassifier(criterion=)
-# clf = tree.DecisionTreeClassifier(criterion = 'entropy',max_depth=6)
-# clf=clf.fit(X_train,y_train)
-# #tree.plot_tree(clf)
-# dot_data = tree.export_graphviz(clf,out_file=None)
-# #graph = graphviz.Source(dot_data)
-# #display(graph)
 
-# y_pred = clf.predict(X_test)
+# log_reg = mod.fit(X_train,y_train)
+# y_pred = (mod.predict_proba(X_test)[:,1] > .11)
 # test_metrics.loc[len(test_metrics)] = {
-#     'Model':'Decision Tree',
+#     'Model':'Logistic Regression',
+#     'Useful Level':">=1",
 #     'Accuracy':accuracy_score(y_test,y_pred),
 #     'F1':f1_score(y_test,y_pred),
 #     'Precision':precision_score(y_test,y_pred),
@@ -177,38 +214,30 @@ t = pd.DataFrame(review_data_base.dropna())
 # ConfusionMatrixDisplay(confusion_matrix(y_test,y_pred)).plot()
 
 # display(test_metrics)
-
 ```
 
-## Logistic Regression
+```{python LogReg-Normalized}
 
-```{python LogisitcRegressionClassifier}
-### extract parameters...
+### Code from AK
+oversample = RandomOverSampler(sampling_strategy='minority')
 
-mod = LogisticRegression(penalty='l2',max_iter = 150,class_weight={0:.2,1:.8})
-
-#reduce the sample size to examine reduction in 
-#overfit
-
-# we don't have to use t here - it may be stronger (initially) for us 
-# to use the "review data" dataframe.  I just worked with t as a
-# temporary frame to look at all reviews.
 X,y = [t[
     ['review_star_rating','verified_purchase','review_subjectivity',
-    'review_polarity']
+    'review_polarity', 'review_length','product_price', 'prod_subjectivity', 'total_star_rating']
 ],t['is_helpful']]
 
-X_train,X_test,y_train,y_test = train_test_split(
-    X,
-    y,
-    test_size=0.8,
-    random_state=1337
-)
+X_resampled, y_resampled = oversample.fit_resample(X, y)
+
+X_train, X_test, y_train, y_test = train_test_split(X_resampled, y_resampled, test_size=0.2, random_state=42)
+
+
+mod = LogisticRegression(penalty='l2')
 
 log_reg = mod.fit(X_train,y_train)
-y_pred = (mod.predict_proba(X_test)[:,1] > .11)
+#y_pred = (mod.predict_proba(X_test)[:,1] > .11)
 #mod.predict(X_test)
 #y_pred = (mod.predict_proba(X_test)[:,1] > 0.5)
+y_pred = mod.predict(X_test)
 test_metrics.loc[len(test_metrics)] = {
     'Model':'Logistic Regression',
     'Accuracy':accuracy_score(y_test,y_pred),
@@ -220,188 +249,197 @@ test_metrics.loc[len(test_metrics)] = {
 ConfusionMatrixDisplay(confusion_matrix(y_test,y_pred)).plot()
 
 display(test_metrics)
+
 ```
 
-```{python}
-#can't remember what I was doing here - commenting out for now.
-# X_test['prob'] = y_pred 
-# (X_test[X_test['prob'] == 1]).index
-# t.loc[(X_test[X_test['prob'] == 1]).index]
-```
+```{python LogReg-NonNormalizedTest}
 
-## KNN?
+ext_data = review_data_base[(~review_data_base.index.isin(review_data.index))].copy().dropna()
 
-```{python KNearestNeighborsClassifier}
+X,y_test = [ext_data[
+    ['review_star_rating','verified_purchase','review_subjectivity',
+    'review_polarity', 'review_length','product_price', 'prod_subjectivity', 'total_star_rating']
+],ext_data['is_helpful']]
 
-# X,y = [review_data_base[
-#     ['review_star_rating','verified_purchase','review_subjectivity',
-#     'review_polarity','review_length']
-# ],review_data_base['is_helpful'].astype(int)]
+y_pred = mod.predict(X)
 
-# X_train,X_test,y_train,y_test = train_test_split(
-#     X,
-#     y,
-#     test_size=0.8,
-#     random_state=1337
-# )
-knn = KNeighborsClassifier(n_neighbors=5)
-knn.fit(X_train,y_train)
-y_pred = knn.predict(X_test)
 test_metrics.loc[len(test_metrics)] = {
-    'Model':'K-Nearest Neighbors',
+    'Model':'Logistic Regression (Non-normalized Data)',
     'Accuracy':accuracy_score(y_test,y_pred),
     'F1':f1_score(y_test,y_pred),
     'Precision':precision_score(y_test,y_pred),
     'Recall':recall_score(y_test,y_pred)
 }
 ConfusionMatrixDisplay(confusion_matrix(y_test,y_pred)).plot()
+```
 
+## K-Nearest Neighbors Classification
+
+```{python KNNClassifier}
+##todo - fix oversampling, fix train and test
+##
+oversampled_data = (review_data[review_data['is_helpful'] == 1]).sample(n=len(review_data[review_data['is_helpful'] == 0]), replace=True, random_state=42)
+balanced_data = pd.concat([review_data[review_data['is_helpful'] == 0], oversampled_data])
+review_data_new = balanced_data.sample(frac=1, random_state=42).reset_index(drop=True)
+
+review_data_new = pd.DataFrame(
+    review_data_new[
+        (review_data_new['productID'].isin([1,2,3,5,6,8,9,11,12,13,14,15])) &
+        (review_data_new['review_lang']=='en')
+    ]
+)
+
+X,y = [review_data_new[
+    ['review_star_rating','verified_purchase','review_subjectivity',
+    'review_polarity', 'review_length','product_price', 'prod_subjectivity', 'total_star_rating']
+],review_data_new['is_helpful']]
+
+scaler = StandardScaler()
+X = scaler.fit_transform(X)
+
+X_train,X_test,y_train,y_test = train_test_split(
+    X,
+    y,
+    test_size=0.2,
+    random_state=123
+)
+
+knn = KNeighborsClassifier(n_neighbors=3)
+knn.fit(X_train,y_train)
+y_pred = knn.predict(X_test)
+test_metrics.loc[len(test_metrics)] = {
+    'Model':'K-Nearest Neighbors (Normalized Data)',
+    'Accuracy':accuracy_score(y_test,y_pred),
+    'F1':f1_score(y_test,y_pred),
+    'Precision':precision_score(y_test,y_pred),
+    'Recall':recall_score(y_test,y_pred)
+}
+ConfusionMatrixDisplay(confusion_matrix(y_test,y_pred)).plot()
+```
+
+
+```{python KNN-NonNormalizedTest}
+
+X,y_test = [ext_data[
+    ['review_star_rating','verified_purchase','review_subjectivity',
+    'review_polarity', 'review_length','product_price', 'prod_subjectivity', 'total_star_rating']
+],ext_data['is_helpful']]
+
+y_pred = knn.predict(X)
+
+test_metrics.loc[len(test_metrics)] = {
+    'Model':'K-Nearest Neighbors (Non-normalized Data)',
+    'Accuracy':accuracy_score(y_test,y_pred),
+    'F1':f1_score(y_test,y_pred),
+    'Precision':precision_score(y_test,y_pred),
+    'Recall':recall_score(y_test,y_pred)
+}
+ConfusionMatrixDisplay(confusion_matrix(y_test,y_pred)).plot()
+```
+
+```{python}
+review_data_base.columns
+```
+```{python SVM-PCA-init}
+## probably do SVM and look at dimensionality reduction with PCA
+# account for 1 levels @ 1, at 25th percentile, at 50th percentile
+
+from sklearn.decomposition import PCA
+
+X1,y1 = [StandardScaler().fit_transform(t[[
+    'review_star_rating', 'verified_purchase', 'review_subjectivity', 'review_polarity','review_length','product_price', 'prod_subjectivity', 'total_star_rating'
+]]),t['is_helpful']]
+
+#t['is_helpful'] = 0#update here...
+
+X_train1,X_test1,y_train1,y_test1 = train_test_split(
+    X1,y1,test_size = 0.2,random_state=8007    
+)
+
+pca = PCA()
+
+pcs = pca.fit_transform(X_train1)
+
+pr_df = pd.DataFrame(data=pcs)
+
+pr_df.columns = ["PC{}".format(i) for i in range(1,len(pca.components_)+1)]
+
+exp_var = pca.explained_variance_ratio_
+
+cum_var = np.cumsum(exp_var)
+
+cum_var_df = pd.DataFrame({
+    'Principal Component':[f'PC{i+1}' for i in range(len(cum_var))],
+    'Cumulative Variance':cum_var,
+    'Explained Variance':exp_var
+})
+cum_var_df
+```
+
+```{python SVM-PCA-Trimmed}
+from sklearn import svm
+pca2 = PCA(n_components=6)
+
+w = pca2.fit(X_train1)
+r = pca2.transform(X_train1)
+
+spt_vector = svm.SVC(
+    kernel='linear'
+).fit(r,y_train1)
+
+X_test1_xform = pca2.transform(X_test1)
+
+y_pred = spt_vector.predict(X_test1_xform)
+
+test_metrics.loc[len(test_metrics)] = {
+    'Model':'SVM-PCA (Normalized Data)',
+    'Accuracy':accuracy_score(y_test1,y_pred),
+    'F1':f1_score(y_test1,y_pred),
+    'Precision':precision_score(y_test1,y_pred),
+    'Recall':recall_score(y_test1,y_pred)
+}
+
+ConfusionMatrixDisplay(confusion_matrix(y_test1,y_pred)).plot()
 display(test_metrics)
 
 ```
 
-## SVM Analysis - Remove
+```{python SVM-PCA-NonNormalized}
+## probably do SVM and look at dimensionality reduction with PCA
+# account for 1 levels @ 1, at 25th percentile, at 50th percentile
 
-```{python SVMClassifier}
+ext_data = review_data_base[(~review_data_base.index.isin(review_data.index))].copy().dropna()
 
-#we're not going to do this one for our project.
-#we can examine this or other models if we have substantial issues with KNN, MLR, or Log Reg.
+X,y_test = [StandardScaler().fit_transform(ext_data[[
+    'review_star_rating', 'verified_purchase', 'review_subjectivity', 'review_polarity','review_length','product_price', 'prod_subjectivity', 'total_star_rating'
+]]),ext_data['is_helpful']]
 
-# spt_vector = svm.SVC(kernel='linear').fit(X_train,y_train)
+display(len(X),len(y_test))
+X_test = pca2.transform(X)
 
-# y_pred = spt_vector.predict(X_test)
+y_pred = spt_vector.predict(X_test)
 
-# test_metrics.loc[len(test_metrics)] = {
-#     'Model':'Support Vector Machine',
-#     'Accuracy':accuracy_score(y_test,y_pred),
-#     'F1':f1_score(y_test,y_pred),
-#     'Precision':precision_score(y_test,y_pred),
-#     'Recall':recall_score(y_test,y_pred)
-# }
-
-# ConfusionMatrixDisplay(confusion_matrix(y_test,y_pred)).plot()
-
-# display(test_metrics)
+test_metrics.loc[len(test_metrics)] = {
+    'Model':'SVM-PCA (Non-normalized Data)',
+    'Accuracy':accuracy_score(y_test,y_pred),
+    'F1':f1_score(y_test,y_pred),
+    'Precision':precision_score(y_test,y_pred),
+    'Recall':recall_score(y_test,y_pred)
+}
+ConfusionMatrixDisplay(confusion_matrix(y_test,y_pred)).plot()
+display(test_metrics)
+ext_data['prediction'] = y_pred
+ext_data[
+    (ext_data['prediction']==True)&(ext_data['review_helpful_votes']==0)
+]['review_content']
 ```
-
-```{python SVMC2}
-#to be removed unless absolutely needed
-
-
-# other_data = pd.DataFrame(review_data_base[(~review_data_base['productID'].isin([1,2,3,5,6,8,9,11,12,13,14,15]))&(review_data_base['review_lang']=='en')])
-# print(len(other_data))
-# X = other_data[
-#     ['review_star_rating','verified_purchase','review_subjectivity',
-#      'review_polarity','review_length']
-# ]
-# y_test = other_data['is_helpful']
-# y_pred = spt_vector.predict(X)
-
-# test_metrics.loc[len(test_metrics)] = {
-#     'Model':'Support Vector Machine2',
-#     'Accuracy':accuracy_score(y_test,y_pred),
-#     'F1':f1_score(y_test,y_pred),
-#     'Precision':precision_score(y_test,y_pred),
-#     'Recall':recall_score(y_test,y_pred)
-# }
-
-# ConfusionMatrixDisplay(confusion_matrix(y_test,y_pred)).plot()
-
-# display(test_metrics)
-```
-
-## Examined Model - Multiple Linear Regression
-
-```{python}
-
-```
-
-### Base Model 
-
-### Model Modifications
-
-## Examined Model - Decision Tree
-
-## Examined Model - Naive Bayes
-
-## Examined Model - ?
-
-<!--* Perceived Usefulness of Product Reviews
-
-    - Modeling for search vs. experience goods as "mitigations" on reviews, examining their impact on perceived review usefulness
-
-* Wealth of Data Paper on Customer Evaulation
-
-    - Examination of 'Vine' customers from Amazon
-
-    - Don't think that BestBuy or Target have the same.
-
-    - Scope of this would be limited to Amazon, combining research from Perceived Usefulness paper (i.e. their modeling) with a customer "trustworthiness" score for Amazon Vine customers
-
-        - May have challenges identifying products with Vine customers
-
-        - Should also have a look at "verified purchase" customers, too.
-
-    - Weaknesses (from authors)
-
-        - Their NLP instance wasn't well trained for fully accurate
-
-        - Their weighting system was manually (i.e. arbitrarily) set as opposed to having a labeled dataset
-
-        - Can we fix these problems? If so - what data is needed?
-
-    
-
-## Potential Model for Search vs. Experience Weight (scale of 0-1)
-
-### Jaccard Similarity Measure
-
-https://www.sciencedirect.com/science/article/pii/S1567422318300450
-
-* Can be used to produce a similarity between two items on a scale of 0 to 1
-
-* May be able to use this for evaluation of a novel item against a pure-search good vs. a pure-experience good.
-
-    * May require additional calculation / computation between these two values - maybe its arithmetic or harmonic mean between search and experience
-
-    * Using that, we could potentially produce a weight.
-
-    * Authors models
-
-        * Model 1: $\text{Perceived Usefulness} = \beta_0 + \beta_1 \cdot \text{Review Content} + \beta_2 \cdot \text{Review Length} + \beta_3\cdot \text{Star Rating} + \beta_4 \cdot \text{Total Votes Received} + \epsilon_1$
-
-        * Model 2 (product type as a moderator): $\text{Perceived Usefulness} = \beta_0 + \beta_1 \cdot \text{Review Content} + \beta_2 \cdot \text{Review Length} + \beta_3\cdot \text{Star Rating} + \beta_4 \cdot \text{Total Votes Received} + \beta_5 \cdot \text{Digital Music} + \beta_6 \cdot \text{Video Game} + \beta_7 \cdot \text{Review Content}\cdot \text{ Digital Music} + \beta_8\cdot\text{Review Content}\cdot\text{ Video Game} + \epsilon_2$
-
-        * Our proposition #1 (may require some modification)
-$$
-\text{Perceived Usefulness} = \beta_0 + \beta_1 \cdot \text{Review Content} + \beta_2 \cdot \text{Review Length} + \beta_3\cdot \text{Star Rating} + \beta_4 \cdot \text{Total Votes Received} + \gamma\cdot\text{Review Content}
-$$
-
-or
-
-$$
-\text{Perceived Usefulness} = \beta_0 + \gamma\cdot\beta_1\cdot\text{Review Content} + \beta_2 \cdot \text{Review Length} + \beta_3\cdot \text{Star Rating} + \beta_4 \cdot \text{Total Votes Received}
-$$
-
-* Where $\gamma$ is the Jaccard Similarity Score between a given product and elements we are identifying as "pure" experience and "pure" search good.
-
-* Operationalizaton of Jaccard Similarity score Variable (i.e. inputs)
-
-    * Search good: those with attributes that can be evaluated prior to purchase or consumption. Consumers rely on prior experience, direct product inspection and other information search activities to locate information that assists in the evaluation process. Most products fall into the search goods category (e.g. clothing, office stationery, home furnishings).
-
-    * Number of measurement specifications?
-
-    * comment/review information?
-
-    * What else could we gather that could be considered a "universal" tangible or intangible feature from a product online?  They need to be applicable to both search and experience goods.
-
-* Experience good: those that can be accurately evaluated only after the product has been purchased and experienced. Many personal services fall into this category (e.g. restaurant, hairdresser, beauty salon, theme park, travel, holiday).
-
-    * subjective descriptiveness vs. 
-
-    * comment/review information?
-
-* Are there other methods aside from Jaccard Similarity? -->
 
 ## Model Comparison
 
+We examine the following table to compare and contrast our implemented models on our collected data, containing...:
+
+```{python FinalResultsTable}
+test_metrics
+```
+
+It 
