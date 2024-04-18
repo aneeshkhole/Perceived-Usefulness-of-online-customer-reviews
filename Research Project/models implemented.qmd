@@ -17,6 +17,10 @@ from sklearn.decomposition import PCA
 from sklearn import svm
 from imblearn.over_sampling import ADASYN, SMOTE
 import random
+
+
+import statsmodels.api as sm
+
 ```
 
 ```{python DataImports}
@@ -151,6 +155,19 @@ We will examine, compare, and contrast the use of the following models:
 
 * Support Vector Machine Classification
 
+## Included Variables
+
+```{python}
+pd.DataFrame({
+    'Variable':['review_star_rating', 'review_helpful_votes',
+        'review_subjectivity', 'review_polarity',
+        'review_length','prod_subjectivity','total_star_rating'],
+    'Pre-Transformation Type':['int','int','float','float','int','float','float'],
+    'Post-Transformation Type':['PCA scaled float','PCA scaled float','PCA scaled float','PCA scaled float','PCA scaled float','PCA scaled float','PCA scaled float'],
+    'Reason for Inclusion':['research survey','research survey','intuition','intuition','research survey','intuition','research survey']
+})
+```
+
 ## Data Adjustments
 
 As noted in our exploratory data analysis, each individual site has statistically significant differences in key variables we're considering in our modeling.  To mitigate the potential for under or overfitting, and misrepresentation due to variable scale we perform the following transformations to our data:
@@ -159,7 +176,7 @@ As noted in our exploratory data analysis, each individual site has statisticall
 
 1. Variable outlier adjustment.  We noted in our EDA that each of the e-commerce platforms had high volumes of outliers with respect to the inter-quartile range.  We applied a transformation to our data to map any outlier variable value on a per-website basis from its value to $\mu+3\cdot sd(\text{variable})$ for high-end outliers, and $\mu-3\cdot sd(\text{variable})$ for low-end outliers.  In the event that either of these values exceeded the minimum or maximum value of the dataset, we mapped the value to the minimum or maximum accordingly.
 
-2. Standard scaling of variables.  After adjusting outliers, we re-mapped all of our feature variables to be on the scale from 0 to 1.
+2. Standard scaling of variables.  After adjusting outliers, we re-mapped all of our feature variables to be on the scale of the standard normal distribution $N\sim(0,1)$
 
 3. Response variable transformation to binary value.  We denoted a single useful vote as meaning that the review was useful to customers, and mapped the value to True/1, and False/0 otherwise.
 
@@ -168,7 +185,11 @@ As noted in our exploratory data analysis, each individual site has statisticall
 Here is a sample (first 10 observations) of our data prior to the transformation:
 
 ```{python}
-review_orig.head(10)
+#Let's look at this from the perspective of
+#key variables we're exploring...
+reviews[['review_star_rating', 'review_helpful_votes',
+        'review_subjectivity', 'review_polarity',
+        'review_length','prod_subjectivity','total_star_rating']].head(10)
 ```
 
 And here is a sample of our data after the applied transformations:
@@ -183,9 +204,11 @@ pd.DataFrame(X_train, columns=['review_star_rating', 'review_helpful_votes',
 
 ```
 
-* Classes in y_train set were mapped as follows:
-    * 0: if the review had no helful votes
-    * 1: if the review had one or more than 1 helpful votes
+Classes in y_train set were mapped as follows for all non-linear models:
+
+* 0: if the review had no helful votes
+
+* 1: if the review had one or more than 1 helpful votes
 
 ### Training Data
 
@@ -197,25 +220,135 @@ For testing, we evaluated each model against transformed data, omitting the tran
 
 ## Examination of the Original Multiple Linear Regression
 
-$\hat{y} = \beta_0 + \beta_{polarity} + \beta_{} +$
+```{python MLR}
+##train - test
 
-### Violations of Linear Model Assumptions
+y_train_mlr,y_test_mlr = [np.array(train_frame['review_helpful_votes']),
+    np.array(test_frame['review_helpful_votes'])]
 
-#### Lack of Linear Correlation
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import r2_score
+#from sklearn.linear_model import LassoLarsIC
 
-#### Absence of Homoscedasticity on Normalized Data
+mlr = LinearRegression()
 
-#### Absence of Normality in Residuals
+mlr.fit(X_train,y_train_mlr)
 
-#### Lack of Confidence in t- and F-test results, $\beta$ inference
+y_hat_base = mlr.predict(X_test)
+
+beta_base = mlr.coef_
+beta0_base = mlr.intercept_
+R2_base = r2_score(y_hat_base,y_test_mlr)
+MSPE_base = np.mean((y_hat_base - y_test_mlr)**2)
+
+
+plt.scatter(
+    y_hat_base,y_test_mlr    
+)
+plt.show()
+
+# mlr.fit(X_train_pca,y_train_mlr)
+# y_hat_pca = mlr.predict(X_test_pca)
+# beta_pca = mlr.coef_
+# beta0_pca = mlr.intercept_
+# R2_pca = r2_score(y_hat_pca,y_test_mlr)
+# MSPE_pca = np.mean((y_hat_pca - y_test_mlr)**2)
+
+
+# plt.scatter(y_hat_pca,y_test_mlr)
+# plt.show()
+```
+
+### Inspection of Linear Model Assumptions
+
+Generally, on examining the plot of fitted vs. observed values for the linear model, we feel our methods have produced similar outcomes as for @percUse.  The predicted values appear to have a slightly lesser scale and range than that of the observed values. 
+
+#### Linearity of the Model
+
+Our version of the linear model is designed as follows:
+$\hat{y} = \beta_0+\beta_1X_{rsr}+\beta_2X_{rs}+\beta_3X_{rp}+\beta_4X_{rl}+\beta_5X_{ps}+\beta_6X{tsr}$
+
+Where each of the following variables have been standard-scaled to a range between 0 and 1 for the input data:
+
+* $X_{rsr}$ corresponds to the individual review's star rating
+
+* $X_{rs}$ corresponds to the review's subjectivity score
+
+* $X_{rp}$ corresponds to the review's polarity score
+
+* $X_{rl}$ corresponds to the review's length (in words)
+
+* $X_{ps}$ corresponds to the product description subjectivity score (replacement for the binary settings for search, experience, or mixed goods from @percUse's model).
+
+* $X_{tsr}$ is the overall star rating for the product.
+
+Our testing produced the following coefficients:
+
+$\beta_0$: `{python} round(mlr.intercept_,3)`, $\beta_1$: `{python} round(mlr.coef_[0],3)`,$\beta_2$: `{python} round(mlr.coef_[1],3)`,$\beta_3$: `{python} round(mlr.coef_[2],3)`,$\beta_4$: `{python} round(mlr.coef_[3],3)`,$\beta_5$: `{python} round(mlr.coef_[4],3)`,$\beta_6$: `{python} round(mlr.coef_[5],3)`
+
+These coefficients, trained on standard-scaled data, enabled us to produce the following plot of fitted vs. observed values: 
+
+```{python mlrPlot}
+
+```
+
+On new training data, the model appears to underpredict the output value, across the board, for the new data.  That being said, there is still a strong linear trend between the predictors and the response.  The intent of this model is not to predict the actual number of votes that a review might have, but whether or not that review would be considered useful to customers.  Generally examining this result, we would conclude that there is a linear trend between these features, their coefficients, and their corresponding response.
+
+#### Homoscedasticity on Normalized Data
+
+This model has substantial challenges with heteroscedasticity.  Let's examine a plot of fitted vs. residuals in the model:
+
+```{python heteroscedasticity1}
+plt.scatter(
+    y_hat_base,y_hat_base - y_test_mlr
+)
+plt.show()
+```
+
+There is a clear linear pattern in the residuals of this plot.  It seems that the test data may have other linear factors associated with it.  If we adjust the output to this additional linear factor, we can examine for heteroscedasticity in the adjusted plot. 
+
+Performing a further linear regression on the fitted vs. observed values, we identified a slope $\beta_{1^*}$ of approximately 1.44 and intercept of $\beta_{0^*}$ of approximately 0.003.  Adjusting the predictions and plotting the re-fitted vs. observed values, we see the following:
+
+```{python heteroscedasticity2}
+mlr2 = LinearRegression()
+x_points = y_hat_base*1.43811313 - 0.0030281865303148914
+plt.scatter(
+    x_points,x_points-y_test_mlr
+)
+plt.show()
+```
+
+This plot also appears to have issues with non-constant variance in the residuals.  As we traverse from left to right on this plot, the magnitude of the residuals appears to shrink or reduce.
+
+Once again, the output of this model is not necessarily to predict the precise value of the number of votes a review comment will have, but instead to project how useful this vote would be perceived by new customers.  Although the issues with heteroscedasticity do exist for this model, we still find that the output of this model is potentially useful.
+
+#### Normality in Residuals
+```{python qq-plot-mlr}
+# mu = np.mean(y_hat)
+# sd = np.std(y_hat)
+# norm = (y_hat-mu) / sd
+# sm.qqplot(norm)
+fig,ax = plt.subplots()
+mu = x_points.mean()
+sd = x_points.std()
+norm = (x_points-mu) / sd
+sm.qqplot(norm,ax=ax)
+ax.axline((0,0),slope=1,color='black')
+```
+
+From the above plot, it is clear that this model fails to adhere to the multiple linear regression requirement for residual normality.
 
 #### Conclusion on MLR model
 
-On the above bases, the model fails to meet the required assumptions for a linear regression.  As such, our team rejects the multiple linear regression model as an effective means of predicting the perceived usefulness of review feedback on e-commerce websites for generalization.
+We conclude that the MLR model is *not* a statistically well-performing model for the purpose of *predicting* the number of *helpful votes* a review comment will receive.
+
+That being said, in spite of its violations of the assumptions of multiple linear regression, we *do* find that the model is useful in predicting a relative usefulness score for a given review comment.  If all comments in a thread for a specific product were run against this model, we believe that the model will reflect the relative usefulness of a comment with respect to other comments in the same thread.  Sorting and organizing comments based on the maximum output value could bring the most useful comments to the top of the queue for review by potential shoppers.
+
+Having pursued the suggested research of @percUse and producing similar results, we will proceed to evaluate other models for detecting useful comments.
 
 ## Logistic Regression Classification
 
-With the challenges of meeting and replicating the outcomes from @percUse for a MLR model, we proceeded onward to other options.  Our next choice for examination was logistic regression.  The MLR called for use of only numeric or continuous variables.  Logisitic regression enables us to examine the inclusion of additional categorical variables as part of the regression consideration.
+ Our next choice for examination was logistic regression.  The MLR called for use of only numeric or continuous variables.  Logisitic regression enables us to examine the inclusion of additional categorical variables as part of the regression consideration.
 
 ### Hyperparameter Tuning
 
@@ -225,8 +358,7 @@ Logistic regression is one of the best performing models in the project after SV
 
 Additionally, 2 more logistic regression models are trained using two oversampling techniques, namely ADASYN and SMOTE. ADASYN, which generates synthetic samples for the minority class based on their difficulty in learning regions, and SMOTE, which creates synthetic samples by interpolating between existing minority class samples, were used to address the class imbalance problem. These techniques help to provide the model with more balanced training data, allowing it to learn the characteristics of both classes more effectively.
  
-It is a well know fact that oversampling techniques are employed if there a severe class imbalance if hyperparameter tuning does not improve the model performance. However, despite the heavy class imbalance, the tuned model and the SMOTE model achieve great result with 98% accuracy indicating that it is proficient at making correct predictions. 68% recall is decent but indicates that the model maybe classifying the positive instances from minority class incorrectly. 
-
+It is a well know fact that oversampling techniques are employed if there a severe class imbalance if hyperparameter tuning does not improve the model performance. However, despite the heavy class imbalance, the tuned model and the SMOTE model achieve great result with 98% accuracy indicating that it is proficient at making correct predictions. 68% recall is decent, but indicates that the model maybe classifying the positive instances from minority class incorrectly. 
 
 <!--try to tweak and tune this model for better performance--> 
 ### Logistic Regression Test Results
@@ -300,7 +432,7 @@ test_metrics_df = pd.DataFrame(test_metrics)
 display(test_metrics_df[:3])
 
 
-fig, axes = plt.subplots(1, 3, figsize=(18, 6))
+fig, axes = plt.subplots(3, 1, figsize=(18, 6))
 
 ConfusionMatrixDisplay(confusion_matrix(y_test,y_pred)).plot(ax=axes[0])
 axes[0].set_title('Tuned Model')
@@ -314,6 +446,14 @@ axes[2].set_title('SMOTE')
 plt.tight_layout()
 plt.show()
 
+```
+
+```{python UsefulComments}
+review_orig['pred_useful'] = y_pred_adasyn
+x = list(review_orig[(review_orig['is_helpful']==0) &(review_orig['pred_useful']==1)]['review_content'])#[['reviewer_name','verified_purchase','review_content','review_star_rating']]
+for i in x:
+    print(i)
+#print(len(x))
 ```
 
 ## K-Nearest Neighbors Classification
@@ -395,7 +535,7 @@ test_metrics.loc[len(test_metrics)] = {
 test_metrics_df = pd.DataFrame(test_metrics)
 display(test_metrics_df[3:7])
 
-fig, axes = plt.subplots(1, 4, figsize=(18, 6))
+fig, axes = plt.subplots(4, 1, figsize=(11, 10))
 
 ConfusionMatrixDisplay(confusion_matrix(y_test,y_pred_3)).plot(ax=axes[0])
 axes[0].set_title('KNN Model (k=3)')
@@ -413,6 +553,14 @@ plt.tight_layout()
 plt.show()
 ```
 
+```{python UsefulComments}
+review_orig['pred_useful'] = y_pred_3
+x = list(review_orig[(review_orig['is_helpful']==0) &(review_orig['pred_useful']==1)]['review_content'])#[['reviewer_name','verified_purchase','review_content','review_star_rating']]
+for i in x:
+    print(i)
+#print(len(x))
+```
+
 ## Support Vector Machine Classification
 
 Support Vector Machines work on classification problems by finding an optimal hyperplane that best classifies the target classes in the given feature space. Because of its flexibility of moving the hyperplane and adapting to the intricacies of the data, SVM proves to be a powerful algorithm.
@@ -421,15 +569,7 @@ Support Vector Machines work on classification problems by finding an optimal hy
 
 The complexity of a SVM model is determined by the choice of kernel function that allows to capture all nuances of the data. Below are the implmentation results of the performance metrics of Support Vector Machine (SVM) models trained with different kernel functions: polynomial (SVM-Poly), radial basis function (SVM-RBF), and sigmoid (SVM-Sigmoid). 
 
-Looking the results shown below we can say that:
-
-1. SVM with a polynomial kernel (SVM-Poly) achieves the highest F1 score of approximately 81.09%. This model also exhibits perfect precision, indicating that it classifies all positive instances correctly.
-
-2. SVM with a radial basis function kernel (SVM-RBF) follows closely with an F1 score of approximately 78.15%. Although it has slightly lower precision compared to SVM-Poly, it demonstrates a balanced trade-off between precision and recall. 
-
-3. SVM with a sigmoid kernel (SVM-Sigmoid) exhibits the lowest F1 score of approximately 59.24%, indicating comparatively lower performance in capturing both precision and recall.
-
-While all SVM models exhibit high accuracy, SVM with a polynomial kernel (SVM-Poly) emerges as the most favorable choice based on its highest F1 score and perfect precision.
+To tune each version of this model, we leveraged a reduced set of principal components, and adjusted class weighting, as having useful votes for a product is a relative rarity across each of the e-commerce platforms.  To boost our recall, we elected to assign weights of 0.1 to class 0 (not useful) and 0.9 to class 1 (useful).
 
 ### KNN Test Results
 
@@ -439,7 +579,7 @@ While all SVM models exhibit high accuracy, SVM with a polynomial kernel (SVM-Po
 random.seed(123)
 
 spt_vector = svm.SVC(
-    kernel='poly',degree=1,probability=True,class_weight={0:0.1,1:0.9}
+    kernel='poly',degree=1,probability=True,class_weight={0:0.2,1:0.8}
 ).fit(X_train_pca,y_train)
 
 y_pred_poly = spt_vector.predict(X_test_pca)
@@ -453,11 +593,11 @@ test_metrics.loc[len(test_metrics)] = {
 }
 
 # SVM RBF
-spt_vector = svm.SVC(
-    kernel='rbf',degree=1,probability=True,class_weight={0:0.1,1:0.9}
+spt_vector_rbf = svm.SVC(
+    kernel='rbf',degree=1,probability=True,class_weight={0:0.2,1:0.8}
 ).fit(X_train_pca,y_train)
 
-y_pred_rbf = spt_vector.predict(X_test_pca)
+y_pred_rbf = spt_vector_rbf.predict(X_test_pca)
 test_metrics.loc[len(test_metrics)] = {
     'Model':'SVM-RBF',
     'Useful Level':"above 0",
@@ -468,11 +608,11 @@ test_metrics.loc[len(test_metrics)] = {
 }
 
 # SVM Sigmoid
-spt_vector = svm.SVC(
-    kernel='sigmoid',degree=1,probability=True,class_weight={0:0.1,1:0.9}
+spt_vector_sigmoid = svm.SVC(
+    kernel='sigmoid',degree=1,probability=True,class_weight={0:0.2,1:0.8}
 ).fit(X_train_pca,y_train)
 
-y_pred_sigmoid = spt_vector.predict(X_test_pca)
+y_pred_sigmoid = spt_vector_sigmoid.predict(X_test_pca)
 test_metrics.loc[len(test_metrics)] = {
     'Model':'SVM-Sigmoid',
     'Useful Level':"above 0",
@@ -486,7 +626,7 @@ test_metrics.loc[len(test_metrics)] = {
 test_metrics_df = pd.DataFrame(test_metrics)
 display(test_metrics_df[7:])
 
-fig, axes = plt.subplots(1, 3, figsize=(18, 6))
+fig, axes = plt.subplots(3, 1, figsize=(18, 6))
 
 ConfusionMatrixDisplay(confusion_matrix(y_test,y_pred_poly)).plot(ax=axes[0])
 axes[0].set_title('SVM Poly Model')
@@ -501,6 +641,57 @@ plt.tight_layout()
 plt.show()
 ```
 
+Looking the results shown below we can say that:
+
+1. SVM with a polynomial kernel (SVM-Poly) achieves the highest F1 score of approximately 81.09%. This model also exhibits perfect precision, indicating that it classifies all positive instances correctly.
+
+2. SVM with a radial basis function kernel (SVM-RBF) follows closely with an F1 score of approximately 78.15%. Although it has slightly lower precision compared to SVM-Poly, it demonstrates a balanced trade-off between precision and recall. 
+
+3. SVM with a sigmoid kernel (SVM-Sigmoid) exhibits the lowest F1 score of approximately 59.24%, indicating comparatively lower performance in capturing both precision and recall.
+
+While all SVM models exhibit high accuracy, SVM with a polynomial kernel (SVM-Poly) emerges as the most favorable choice based on its highest F1 score and perfect precision. 
+<!-- 
+Is this what we want to say? if our goals are to instead identify potentially useful comments, not just predict whether or not it will have any votes against it, I think that the RBF or the sigmoid model may be best for our application
+
+Here's an example - 
+
+Here, the resuts of the sigmoid model are most promising for our outcomes, as the recall is high, and the model is predicting instances of potentially useful customer feedback comments that have no votes marking them as favorable.
+
+Let's have a look at some of those predictions.
+
+-->
+
+```{python UsefulComments}
+review_orig['pred_useful_prob'] = spt_vector_rbf.predict_proba(
+    X_test_pca
+)[:,1]
+review_orig['pred_useful'] = y_pred_rbf
+x = pd.DataFrame(review_orig[(review_orig['is_helpful']==0) &(review_orig['pred_useful']==1)].sort_values(by='pred_useful_prob',ascending=False)['review_content'])
+display(
+    x.head(10)
+)
+```
+
+RBF, unexpectedly, seems to associate being part of a promotion with a comment being useful. It's possible that other comments in this group have similar features and qualities to promotional review comments.  These results are sorted by the probability that they would be classified has having votes flagging them as being useful.  The highest 
+
+What about sigmoid?
+```{python UsefulComments}
+review_orig['pred_useful_prob'] = spt_vector_sigmoid.predict_proba(
+    X_test_pca
+)[:,1]
+review_orig['pred_useful'] = spt_vector_sigmoid.predict(
+    X_test_pca
+)
+x = pd.DataFrame(review_orig[(review_orig['is_helpful']==0) &(review_orig['pred_useful']==1)].sort_values(by='pred_useful_prob',ascending=False)['review_content'])
+
+display(
+    x.head(10)
+)
+##include product name?
+```
+
+Sigmoid seems to identify a wider variety of comments, some (subjectively) useful, some not, and identifies fewer items that were part of a promotion.
+
 ## Model Comparison
 
 We examine the following table to compare and contrast our implemented models on our collected data.
@@ -512,3 +703,11 @@ test_metrics
 Each of these models had similar performance in terms of accuracy and precision. A key consideration for us is within the realm of recall in that false positives are potentially beneficial to the generalization of this model to identify reviews that are useful, but currently possess no helpful votes.  None of the models delivered any false positives, but having high recall may support identification of new, useful comments.
 
 The top 2 performing models were our Support Vector Machine and Logistic Regression implementations.  Between the two, SVM had higher recall, which is preferable in our use case.  That being said, on every metric between the two models, there was near equivalent performance.
+
+With our preferences toward higher recall, the implementation of the SVM-Sigmoid and SVM-RBF models delivered best on our objectives, identifying the highest volume of true positives, minimizing false negatives, and providing a limited number of true positives that could identify comments with no votes that are useful to customers. 
+
+From a stakeholder standpoint, these two models can both be beneficial, whether looking from the standpoint of the customer or the e-commerce platform.
+
+The RBF model, with more exploration and examination, could be very beneficial to e-commerce platforms.  If the model could be modified and updated to identify comments that are closer in proximity to promotional comments (which potentially come at a cost to these platforms), it may allow them to present comments similar in quality to a paid promotional review without the platform having to pay for it.
+
+The Sigmoid model, with additional training and tuning, could be of greater benefit to customers.  This model is less inclined to capture promomtional feedback comments and provide potentially useful feedback absent other outside influence.  At a subjective level, not all of the content contained in these classified reviews are useful, though many are. <!-- any additional writeup comments here-->
