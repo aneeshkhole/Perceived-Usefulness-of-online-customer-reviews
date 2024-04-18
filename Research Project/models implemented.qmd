@@ -15,6 +15,8 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 from sklearn import svm
+from imblearn.over_sampling import ADASYN, SMOTE
+
 
 
 ```
@@ -209,26 +211,107 @@ With the challenges of meeting and replicating the outcomes from @percUse for a 
 
 ### Hyperparameter Tuning
 
+Logistic regression is one of the best performing models in the project after SVM. There are 3 logistic regression models - one was tuned using the class weight hyperparameter to address the class imbalance present in the dataset. By assigning a higher weight to the minority class (useful level 1) and a lower weight to the majority class (useful level 0), the model was able to better capture the patterns associated with the minority class, leading to improved performance metrics.
+
+### Oversampling techniques
+
+Additionally, 2 more logistic regression models are trained using two oversampling techniques, namely ADASYN and SMOTE. ADASYN, which generates synthetic samples for the minority class based on their difficulty in learning regions, and SMOTE, which creates synthetic samples by interpolating between existing minority class samples, were used to address the class imbalance problem. These techniques help to provide the model with more balanced training data, allowing it to learn the characteristics of both classes more effectively.
+ 
+It is a well know fact that oversampling techniques are employed if there a severe class imbalance if hyperparameter tuning does not improve the model performance. However, despite the heavy class imbalance, the tuned model and the SMOTE model achieve great result with 98% accuracy indicating that it is proficient at making correct predictions. 68% recall is decent but indicates that the model maybe classifying the positive instances from minority class incorrectly. 
+
+
 <!--try to tweak and tune this model for better performance--> 
 ### Logistic Regression Test Results
 ```{python LogRegBlock}
+
+#Logmod hyperparameter
+
 LogMod = LogisticRegression(class_weight={0:.3,1:.7})
-
 LogMod.fit(X_train_pca,y_train)
-
 y_pred = (LogMod.predict_proba(X_test_pca)[:,1]>0.25)
 
 test_metrics.loc[len(test_metrics)] = {
-    'Model':'Logistic Regression',
+    'Model':'Logistic Regression (TUNED)',
     'Useful Level': "above 0",
     'Accuracy':accuracy_score(y_test,y_pred),
     'F1':f1_score(y_test,y_pred),
     'Precision':precision_score(y_test,y_pred),
     'Recall':recall_score(y_test,y_pred)
 }
-ConfusionMatrixDisplay(confusion_matrix(y_test,y_pred)).plot()
-display(test_metrics)
+# ConfusionMatrixDisplay(confusion_matrix(y_test,y_pred)).plot()
+# display(test_metrics)
+
+
+
+
+
+#### Logmod ADASYN
+
+adasyn = ADASYN()
+X_train_adasyn, y_train_adasyn = adasyn.fit_resample(X_train_pca, y_train)
+logmod_adasyn = LogisticRegression()
+logmod_adasyn.fit(X_train_adasyn, y_train_adasyn)
+y_pred_adasyn = logmod_adasyn.predict(X_test_pca)
+
+
+test_metrics.loc[len(test_metrics)] = {
+    'Model': 'Logistic Regression (ADASYN)',
+    'Useful Level': "above 0",
+    'Accuracy': accuracy_score(y_test, y_pred_adasyn),
+    'F1': f1_score(y_test, y_pred_adasyn),
+    'Precision': precision_score(y_test, y_pred_adasyn),
+    'Recall': recall_score(y_test, y_pred_adasyn)
+}
+
+# ConfusionMatrixDisplay(confusion_matrix(y_test, y_pred_adasyn)).plot()
+# display(test_metrics)
+
+X_test_scaled = StandardScaler().fit_transform(X_test)
+X_test_pca = pca.transform(X_test_scaled)
+
+#### Logmod SMOTE
+
+smote = SMOTE()
+X_train_smote, y_train_smote = smote.fit_resample(X_train_pca, y_train)
+logmod_smote = LogisticRegression()
+logmod_smote.fit(X_train_smote, y_train_smote)
+
+y_pred_smote = logmod_smote.predict(X_test_pca)
+
+test_metrics.loc[len(test_metrics)] = {
+    'Model': 'Logistic Regression (SMOTE)',
+    'Useful Level': "above 0",
+    'Accuracy': accuracy_score(y_test, y_pred_smote),
+    'F1': f1_score(y_test, y_pred_smote),
+    'Precision': precision_score(y_test, y_pred_smote),
+    'Recall': recall_score(y_test, y_pred_smote)
+}
+
+
+# ConfusionMatrixDisplay(confusion_matrix(y_test, y_pred_smote)).plot()
+# display(test_metrics)
+
+test_metrics_df = pd.DataFrame(test_metrics)
+display(test_metrics_df)
+
+
+fig, axes = plt.subplots(1, 3, figsize=(18, 6))
+
+ConfusionMatrixDisplay(confusion_matrix(y_test,y_pred)).plot(ax=axes[0])
+axes[0].set_title('Tuned Model')
+
+ConfusionMatrixDisplay(confusion_matrix(y_test, y_pred_adasyn)).plot(ax=axes[1])
+axes[1].set_title('ADASYN')
+
+ConfusionMatrixDisplay(confusion_matrix(y_test, y_pred_smote)).plot(ax=axes[2])
+axes[2].set_title('SMOTE')
+
+plt.tight_layout()
+plt.show()
+
 ```
+
+
 
 ## K-Nearest Neighbors Classification
 
@@ -260,7 +343,7 @@ display(test_metrics)
 
 ```{python SVMBlock}
 spt_vector = svm.SVC(
-    kernel='poly',degree=1,probability=True,class_weight={0:.1,1:.9}
+    kernel='poly',degree=1,probability=True,class_weight={0:0.1,1:0.9}
 ).fit(X_train_pca,y_train)
 
 y_pred = spt_vector.predict(X_test_pca)

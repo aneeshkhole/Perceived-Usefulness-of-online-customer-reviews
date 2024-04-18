@@ -215,7 +215,8 @@ window.Quarto = {
   <li><a href="#logistic-regression-classification" id="toc-logistic-regression-classification" class="nav-link" data-scroll-target="#logistic-regression-classification"><span class="header-section-number">3.3</span> Logistic Regression Classification</a>
   <ul class="collapse">
   <li><a href="#hyperparameter-tuning" id="toc-hyperparameter-tuning" class="nav-link" data-scroll-target="#hyperparameter-tuning"><span class="header-section-number">3.3.1</span> Hyperparameter Tuning</a></li>
-  <li><a href="#logistic-regression-test-results" id="toc-logistic-regression-test-results" class="nav-link" data-scroll-target="#logistic-regression-test-results"><span class="header-section-number">3.3.2</span> Logistic Regression Test Results</a></li>
+  <li><a href="#oversampling-techniques" id="toc-oversampling-techniques" class="nav-link" data-scroll-target="#oversampling-techniques"><span class="header-section-number">3.3.2</span> Oversampling techniques</a></li>
+  <li><a href="#logistic-regression-test-results" id="toc-logistic-regression-test-results" class="nav-link" data-scroll-target="#logistic-regression-test-results"><span class="header-section-number">3.3.3</span> Logistic Regression Test Results</a></li>
   </ul></li>
   <li><a href="#k-nearest-neighbors-classification" id="toc-k-nearest-neighbors-classification" class="nav-link" data-scroll-target="#k-nearest-neighbors-classification"><span class="header-section-number">3.4</span> K-Nearest Neighbors Classification</a>
   <ul class="collapse">
@@ -310,11 +311,17 @@ window.Quarto = {
 <p>With the challenges of meeting and replicating the outcomes from <span class="citation" data-cites="percUse">Guha Majumder, Dutta Gupta, and Paul (<a href="references.html#ref-percUse" role="doc-biblioref">2022</a>)</span> for a MLR model, we proceeded onward to other options. Our next choice for examination was logistic regression. The MLR called for use of only numeric or continuous variables. Logisitic regression enables us to examine the inclusion of additional categorical variables as part of the regression consideration.</p>
 <section id="hyperparameter-tuning" class="level3" data-number="3.3.1">
 <h3 data-number="3.3.1" class="anchored" data-anchor-id="hyperparameter-tuning"><span class="header-section-number">3.3.1</span> Hyperparameter Tuning</h3>
+<p>Logistic regression is one of the best performing models in the project after SVM. There are 3 logistic regression models - one was tuned using the class weight hyperparameter to address the class imbalance present in the dataset. By assigning a higher weight to the minority class (useful level 1) and a lower weight to the majority class (useful level 0), the model was able to better capture the patterns associated with the minority class, leading to improved performance metrics.</p>
+</section>
+<section id="oversampling-techniques" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="oversampling-techniques"><span class="header-section-number">3.3.2</span> Oversampling techniques</h3>
+<p>Additionally, 2 more logistic regression models are trained using two oversampling techniques, namely ADASYN and SMOTE. ADASYN, which generates synthetic samples for the minority class based on their difficulty in learning regions, and SMOTE, which creates synthetic samples by interpolating between existing minority class samples, were used to address the class imbalance problem. These techniques help to provide the model with more balanced training data, allowing it to learn the characteristics of both classes more effectively.</p>
+<p>It is a well know fact that oversampling techniques are employed if there a severe class imbalance if hyperparameter tuning does not improve the model performance. However, despite the heavy class imbalance, the tuned model and the SMOTE model achieve great result with 98% accuracy indicating that it is proficient at making correct predictions. 68% recall is decent but indicates that the model maybe classifying the positive instances from minority class incorrectly.</p>
 <!--try to tweak and tune this model for better performance-->
 </section>
-<section id="logistic-regression-test-results" class="level3" data-number="3.3.2">
-<h3 data-number="3.3.2" class="anchored" data-anchor-id="logistic-regression-test-results"><span class="header-section-number">3.3.2</span> Logistic Regression Test Results</h3>
-<div id="1d4c384b" class="cell" data-execution_count="5">
+<section id="logistic-regression-test-results" class="level3" data-number="3.3.3">
+<h3 data-number="3.3.3" class="anchored" data-anchor-id="logistic-regression-test-results"><span class="header-section-number">3.3.3</span> Logistic Regression Test Results</h3>
+<div id="82466d72" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div>
 
@@ -334,12 +341,30 @@ window.Quarto = {
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
-<td>Logistic Regression</td>
+<td>Logistic Regression (TUNED)</td>
 <td>above 0</td>
-<td>0.986204</td>
-<td>0.809756</td>
+<td>0.986275</td>
+<td>0.810916</td>
 <td>1.0</td>
-<td>0.680328</td>
+<td>0.681967</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Logistic Regression (ADASYN)</td>
+<td>above 0</td>
+<td>0.985143</td>
+<td>0.792079</td>
+<td>1.0</td>
+<td>0.655738</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Logistic Regression (SMOTE)</td>
+<td>above 0</td>
+<td>0.986275</td>
+<td>0.810916</td>
+<td>1.0</td>
+<td>0.681967</td>
 </tr>
 </tbody>
 </table>
@@ -349,7 +374,7 @@ window.Quarto = {
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="models implemented_files/figure-html/cell-6-output-2.png" width="521" height="429" class="figure-img"></p>
+<p><img src="models implemented_files/figure-html/cell-6-output-2.png" width="1706" height="566" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -364,7 +389,7 @@ window.Quarto = {
 <section id="knn-test-results" class="level3" data-number="3.4.2">
 <h3 data-number="3.4.2" class="anchored" data-anchor-id="knn-test-results"><span class="header-section-number">3.4.2</span> KNN Test Results</h3>
 <!--try to tweak and tune this model for better performance-->
-<div id="ada040bf" class="cell" data-execution_count="6">
+<div id="79b9cdc5" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display">
 <div>
 
@@ -384,21 +409,39 @@ window.Quarto = {
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
-<td>Logistic Regression</td>
+<td>Logistic Regression (TUNED)</td>
 <td>above 0</td>
-<td>0.986204</td>
-<td>0.809756</td>
+<td>0.986275</td>
+<td>0.810916</td>
 <td>1.000000</td>
-<td>0.680328</td>
+<td>0.681967</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
+<td>Logistic Regression (ADASYN)</td>
+<td>above 0</td>
+<td>0.985143</td>
+<td>0.792079</td>
+<td>1.000000</td>
+<td>0.655738</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Logistic Regression (SMOTE)</td>
+<td>above 0</td>
+<td>0.986275</td>
+<td>0.810916</td>
+<td>1.000000</td>
+<td>0.681967</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
 <td>KNN</td>
 <td>above 0</td>
-<td>0.982879</td>
-<td>0.753564</td>
-<td>0.994624</td>
-<td>0.606557</td>
+<td>0.983941</td>
+<td>0.772317</td>
+<td>0.994832</td>
+<td>0.631148</td>
 </tr>
 </tbody>
 </table>
@@ -422,7 +465,7 @@ window.Quarto = {
 </section>
 <section id="knn-test-results-1" class="level3" data-number="3.5.2">
 <h3 data-number="3.5.2" class="anchored" data-anchor-id="knn-test-results-1"><span class="header-section-number">3.5.2</span> KNN Test Results</h3>
-<div id="f82863a9" class="cell" data-execution_count="7">
+<div id="d1b32f51" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-display">
 <div>
 
@@ -442,24 +485,42 @@ window.Quarto = {
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
-<td>Logistic Regression</td>
+<td>Logistic Regression (TUNED)</td>
 <td>above 0</td>
-<td>0.986204</td>
-<td>0.809756</td>
+<td>0.986275</td>
+<td>0.810916</td>
 <td>1.000000</td>
-<td>0.680328</td>
+<td>0.681967</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
-<td>KNN</td>
+<td>Logistic Regression (ADASYN)</td>
 <td>above 0</td>
-<td>0.982879</td>
-<td>0.753564</td>
-<td>0.994624</td>
-<td>0.606557</td>
+<td>0.985143</td>
+<td>0.792079</td>
+<td>1.000000</td>
+<td>0.655738</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
+<td>Logistic Regression (SMOTE)</td>
+<td>above 0</td>
+<td>0.986275</td>
+<td>0.810916</td>
+<td>1.000000</td>
+<td>0.681967</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>KNN</td>
+<td>above 0</td>
+<td>0.983941</td>
+<td>0.772317</td>
+<td>0.994832</td>
+<td>0.631148</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
 <td>SVM-PCA</td>
 <td>above 0</td>
 <td>0.986275</td>
@@ -485,7 +546,7 @@ window.Quarto = {
 <section id="model-comparison" class="level2" data-number="3.6">
 <h2 data-number="3.6" class="anchored" data-anchor-id="model-comparison"><span class="header-section-number">3.6</span> Model Comparison</h2>
 <p>We examine the following table to compare and contrast our implemented models on our collected data.</p>
-<div id="f9b1e9d3" class="cell" data-execution_count="8">
+<div id="cb304701" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display" data-execution_count="8">
 <div>
 
@@ -505,24 +566,42 @@ window.Quarto = {
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
-<td>Logistic Regression</td>
+<td>Logistic Regression (TUNED)</td>
 <td>above 0</td>
-<td>0.986204</td>
-<td>0.809756</td>
+<td>0.986275</td>
+<td>0.810916</td>
 <td>1.000000</td>
-<td>0.680328</td>
+<td>0.681967</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
-<td>KNN</td>
+<td>Logistic Regression (ADASYN)</td>
 <td>above 0</td>
-<td>0.982879</td>
-<td>0.753564</td>
-<td>0.994624</td>
-<td>0.606557</td>
+<td>0.985143</td>
+<td>0.792079</td>
+<td>1.000000</td>
+<td>0.655738</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
+<td>Logistic Regression (SMOTE)</td>
+<td>above 0</td>
+<td>0.986275</td>
+<td>0.810916</td>
+<td>1.000000</td>
+<td>0.681967</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>KNN</td>
+<td>above 0</td>
+<td>0.983941</td>
+<td>0.772317</td>
+<td>0.994832</td>
+<td>0.631148</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
 <td>SVM-PCA</td>
 <td>above 0</td>
 <td>0.986275</td>
