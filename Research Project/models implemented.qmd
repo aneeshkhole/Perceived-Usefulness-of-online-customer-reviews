@@ -16,9 +16,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 from sklearn import svm
 from imblearn.over_sampling import ADASYN, SMOTE
-
-
-
+import random
 ```
 
 ```{python DataImports}
@@ -167,17 +165,27 @@ As noted in our exploratory data analysis, each individual site has statisticall
 
 4. Dimensionality Reduction via Principal Component Analysis.  To accelerate training and evaluation by our models, we...
 
-Here is a sample of our data prior to the transformation:
+Here is a sample (first 10 observations) of our data prior to the transformation:
 
 ```{python}
-
+review_orig.head(10)
 ```
 
 And here is a sample of our data after the applied transformations:
 
+* Snippet of first 10 observations in the X_train set:
+
 ```{python}
 
+pd.DataFrame(X_train, columns=['review_star_rating', 'review_helpful_votes',
+        'review_subjectivity', 'review_polarity',
+        'review_length','prod_subjectivity','total_star_rating']).head(10)
+
 ```
+
+* Classes in y_train set were mapped as follows:
+    * 0: if the review had no helful votes
+    * 1: if the review had one or more than 1 helpful votes
 
 ### Training Data
 
@@ -225,6 +233,7 @@ It is a well know fact that oversampling techniques are employed if there a seve
 ```{python LogRegBlock}
 
 #Logmod hyperparameter
+random.seed(123)
 
 LogMod = LogisticRegression(class_weight={0:.3,1:.7})
 LogMod.fit(X_train_pca,y_train)
@@ -240,10 +249,6 @@ test_metrics.loc[len(test_metrics)] = {
 }
 # ConfusionMatrixDisplay(confusion_matrix(y_test,y_pred)).plot()
 # display(test_metrics)
-
-
-
-
 
 #### Logmod ADASYN
 
@@ -292,7 +297,7 @@ test_metrics.loc[len(test_metrics)] = {
 # display(test_metrics)
 
 test_metrics_df = pd.DataFrame(test_metrics)
-display(test_metrics_df)
+display(test_metrics_df[:3])
 
 
 fig, axes = plt.subplots(1, 3, figsize=(18, 6))
@@ -311,52 +316,189 @@ plt.show()
 
 ```
 
-
-
 ## K-Nearest Neighbors Classification
 
+K-Nearest Neighbors is used to learn and identify the target class instances. It makes predictions by calculating distance (usually, Euclidean distance) between a given instance and all other instances in the dataset in feature space. 
+
 ### Hyperparameter Tuning
+
+The value of k is the most critial hyperparameter in the KNN Calssification algorithm. It determines the performance of the model. Usually a small k value leads to overly complex understanding of the data that might result into overfitting, however, a higher k values can lead to underfitting. 
+
+We have looked at multiple values of k for our given data and compared a set of model metrics - accuracy, F1 score, precision, and recall to find the most optimal model to be the model with `k = 3`.
+
+Looking the results shown below we can say that:
+
+1. Just by looking at the accuracy for any given value of k, it ranges between 98-99% indicating that KNN might be a good model for the given data.
+
+2. Among the evaluated models, KNN with `k = 3` achieves the highest F1 score of approximately 78.2%, indicating a balanced trade-off between precision and recall.
+
+3. While all models have high precision and recall rates, KNN with higher k values (5, 7, and 9) demonstrate slightly lower F1 scores.
 
 ### KNN Test Results
 <!--try to tweak and tune this model for better performance--> 
 ```{python KnnBlock}
+# 3 Neighbors
+random.seed(123)
+
 knn = KNeighborsClassifier(n_neighbors=3)
 knn.fit(X_train_pca,y_train)
-y_pred = knn.predict(X_test_pca)
+y_pred_3 = knn.predict(X_test_pca)
 test_metrics.loc[len(test_metrics)] = {
-    'Model':'KNN',
+    'Model':'KNN (k=3)',
     'Useful Level':"above 0",
-    'Accuracy':accuracy_score(y_test,y_pred),
-    'F1':f1_score(y_test,y_pred),
-    'Precision':precision_score(y_test,y_pred),
-    'Recall':recall_score(y_test,y_pred)
+    'Accuracy':accuracy_score(y_test,y_pred_3),
+    'F1':f1_score(y_test,y_pred_3),
+    'Precision':precision_score(y_test,y_pred_3),
+    'Recall':recall_score(y_test,y_pred_3)
 }
-ConfusionMatrixDisplay(confusion_matrix(y_test,y_pred)).plot()
-display(test_metrics)
+
+# 5 Neighbors
+knn = KNeighborsClassifier(n_neighbors=5)
+knn.fit(X_train_pca,y_train)
+y_pred_5 = knn.predict(X_test_pca)
+test_metrics.loc[len(test_metrics)] = {
+    'Model':'KNN (k=5)',
+    'Useful Level':"above 0",
+    'Accuracy':accuracy_score(y_test,y_pred_5),
+    'F1':f1_score(y_test,y_pred_5),
+    'Precision':precision_score(y_test,y_pred_5),
+    'Recall':recall_score(y_test,y_pred_5)
+}
+
+# 7 Neighbors
+knn = KNeighborsClassifier(n_neighbors=7)
+knn.fit(X_train_pca,y_train)
+y_pred_7 = knn.predict(X_test_pca)
+test_metrics.loc[len(test_metrics)] = {
+    'Model':'KNN (k=7)',
+    'Useful Level':"above 0",
+    'Accuracy':accuracy_score(y_test,y_pred_7),
+    'F1':f1_score(y_test,y_pred_7),
+    'Precision':precision_score(y_test,y_pred_7),
+    'Recall':recall_score(y_test,y_pred_7)
+}
+
+# 9 Neighbors
+knn = KNeighborsClassifier(n_neighbors=9)
+knn.fit(X_train_pca,y_train)
+y_pred_9 = knn.predict(X_test_pca)
+test_metrics.loc[len(test_metrics)] = {
+    'Model':'KNN (k=9)',
+    'Useful Level':"above 0",
+    'Accuracy':accuracy_score(y_test,y_pred_9),
+    'F1':f1_score(y_test,y_pred_9),
+    'Precision':precision_score(y_test,y_pred_9),
+    'Recall':recall_score(y_test,y_pred_9)
+}
+
+# Display results
+test_metrics_df = pd.DataFrame(test_metrics)
+display(test_metrics_df[3:7])
+
+fig, axes = plt.subplots(1, 4, figsize=(18, 6))
+
+ConfusionMatrixDisplay(confusion_matrix(y_test,y_pred_3)).plot(ax=axes[0])
+axes[0].set_title('KNN Model (k=3)')
+
+ConfusionMatrixDisplay(confusion_matrix(y_test, y_pred_5)).plot(ax=axes[1])
+axes[1].set_title('KNN Model (k=5)')
+
+ConfusionMatrixDisplay(confusion_matrix(y_test, y_pred_7)).plot(ax=axes[2])
+axes[2].set_title('KNN Model (k=7)')
+
+ConfusionMatrixDisplay(confusion_matrix(y_test, y_pred_9)).plot(ax=axes[3])
+axes[3].set_title('KNN Model (k=9)')
+
+plt.tight_layout()
+plt.show()
 ```
 
 ## Support Vector Machine Classification
 
+Support Vector Machines work on classification problems by finding an optimal hyperplane that best classifies the target classes in the given feature space. Because of its flexibility of moving the hyperplane and adapting to the intricacies of the data, SVM proves to be a powerful algorithm.
+
 ### Hyperparameter Tuning
+
+The complexity of a SVM model is determined by the choice of kernel function that allows to capture all nuances of the data. Below are the implmentation results of the performance metrics of Support Vector Machine (SVM) models trained with different kernel functions: polynomial (SVM-Poly), radial basis function (SVM-RBF), and sigmoid (SVM-Sigmoid). 
+
+Looking the results shown below we can say that:
+
+1. SVM with a polynomial kernel (SVM-Poly) achieves the highest F1 score of approximately 81.09%. This model also exhibits perfect precision, indicating that it classifies all positive instances correctly.
+
+2. SVM with a radial basis function kernel (SVM-RBF) follows closely with an F1 score of approximately 78.15%. Although it has slightly lower precision compared to SVM-Poly, it demonstrates a balanced trade-off between precision and recall. 
+
+3. SVM with a sigmoid kernel (SVM-Sigmoid) exhibits the lowest F1 score of approximately 59.24%, indicating comparatively lower performance in capturing both precision and recall.
+
+While all SVM models exhibit high accuracy, SVM with a polynomial kernel (SVM-Poly) emerges as the most favorable choice based on its highest F1 score and perfect precision.
 
 ### KNN Test Results
 
 ```{python SVMBlock}
+
+# SVM Poly
+random.seed(123)
+
 spt_vector = svm.SVC(
     kernel='poly',degree=1,probability=True,class_weight={0:0.1,1:0.9}
 ).fit(X_train_pca,y_train)
 
-y_pred = spt_vector.predict(X_test_pca)
+y_pred_poly = spt_vector.predict(X_test_pca)
 test_metrics.loc[len(test_metrics)] = {
-    'Model':'SVM-PCA',
+    'Model':'SVM-Poly',
     'Useful Level':"above 0",
-    'Accuracy':accuracy_score(y_test,y_pred),
-    'F1':f1_score(y_test,y_pred),
-    'Precision':precision_score(y_test,y_pred),
-    'Recall':recall_score(y_test,y_pred)
+    'Accuracy':accuracy_score(y_test,y_pred_poly),
+    'F1':f1_score(y_test,y_pred_poly),
+    'Precision':precision_score(y_test,y_pred_poly),
+    'Recall':recall_score(y_test,y_pred_poly)
 }
-ConfusionMatrixDisplay(confusion_matrix(y_test,y_pred)).plot()
-display(test_metrics)
+
+# SVM RBF
+spt_vector = svm.SVC(
+    kernel='rbf',degree=1,probability=True,class_weight={0:0.1,1:0.9}
+).fit(X_train_pca,y_train)
+
+y_pred_rbf = spt_vector.predict(X_test_pca)
+test_metrics.loc[len(test_metrics)] = {
+    'Model':'SVM-RBF',
+    'Useful Level':"above 0",
+    'Accuracy':accuracy_score(y_test,y_pred_rbf),
+    'F1':f1_score(y_test,y_pred_rbf),
+    'Precision':precision_score(y_test,y_pred_rbf),
+    'Recall':recall_score(y_test,y_pred_rbf)
+}
+
+# SVM Sigmoid
+spt_vector = svm.SVC(
+    kernel='sigmoid',degree=1,probability=True,class_weight={0:0.1,1:0.9}
+).fit(X_train_pca,y_train)
+
+y_pred_sigmoid = spt_vector.predict(X_test_pca)
+test_metrics.loc[len(test_metrics)] = {
+    'Model':'SVM-Sigmoid',
+    'Useful Level':"above 0",
+    'Accuracy':accuracy_score(y_test,y_pred_sigmoid),
+    'F1':f1_score(y_test,y_pred_sigmoid),
+    'Precision':precision_score(y_test,y_pred_sigmoid),
+    'Recall':recall_score(y_test,y_pred_sigmoid)
+}
+
+# Display results
+test_metrics_df = pd.DataFrame(test_metrics)
+display(test_metrics_df[7:])
+
+fig, axes = plt.subplots(1, 3, figsize=(18, 6))
+
+ConfusionMatrixDisplay(confusion_matrix(y_test,y_pred_poly)).plot(ax=axes[0])
+axes[0].set_title('SVM Poly Model')
+
+ConfusionMatrixDisplay(confusion_matrix(y_test, y_pred_rbf)).plot(ax=axes[1])
+axes[1].set_title('SVM RBF Model')
+
+ConfusionMatrixDisplay(confusion_matrix(y_test, y_pred_sigmoid)).plot(ax=axes[2])
+axes[2].set_title('SVM Sigmoid Model')
+
+plt.tight_layout()
+plt.show()
 ```
 
 ## Model Comparison
@@ -370,5 +512,3 @@ test_metrics
 Each of these models had similar performance in terms of accuracy and precision. A key consideration for us is within the realm of recall in that false positives are potentially beneficial to the generalization of this model to identify reviews that are useful, but currently possess no helpful votes.  None of the models delivered any false positives, but having high recall may support identification of new, useful comments.
 
 The top 2 performing models were our Support Vector Machine and Logistic Regression implementations.  Between the two, SVM had higher recall, which is preferable in our use case.  That being said, on every metric between the two models, there was near equivalent performance.
-
-SVM was a more challenging implementation, ...

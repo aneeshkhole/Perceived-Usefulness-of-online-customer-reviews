@@ -272,8 +272,423 @@ window.Quarto = {
 <li><p>Response variable transformation to binary value. We denoted a single useful vote as meaning that the review was useful to customers, and mapped the value to True/1, and False/0 otherwise.</p></li>
 <li><p>Dimensionality Reduction via Principal Component Analysis. To accelerate training and evaluation by our models, we…</p></li>
 </ol>
-<p>Here is a sample of our data prior to the transformation:</p>
+<p>Here is a sample (first 10 observations) of our data prior to the transformation:</p>
+<div id="dfc681f6" class="cell" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Unnamed: 0</th>
+<th data-quarto-table-cell-role="th">productID</th>
+<th data-quarto-table-cell-role="th">prodSiteID</th>
+<th data-quarto-table-cell-role="th">review_header</th>
+<th data-quarto-table-cell-role="th">reviewer_name</th>
+<th data-quarto-table-cell-role="th">review_content</th>
+<th data-quarto-table-cell-role="th">review_star_rating</th>
+<th data-quarto-table-cell-role="th">review_helpful_votes</th>
+<th data-quarto-table-cell-role="th">verified_purchase</th>
+<th data-quarto-table-cell-role="th">review_subjectivity</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">review_polarity_std</th>
+<th data-quarto-table-cell-role="th">review_polarity_outlier</th>
+<th data-quarto-table-cell-role="th">review_length_mean</th>
+<th data-quarto-table-cell-role="th">review_length_std</th>
+<th data-quarto-table-cell-role="th">review_length_outlier</th>
+<th data-quarto-table-cell-role="th">product_price</th>
+<th data-quarto-table-cell-role="th">prod_subjectivity</th>
+<th data-quarto-table-cell-role="th">total_star_rating</th>
+<th data-quarto-table-cell-role="th">site_y</th>
+<th data-quarto-table-cell-role="th">is_helpful</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">5353</td>
+<td>5353</td>
+<td>1</td>
+<td>TARGET1</td>
+<td>Help with the nightmare situation.</td>
+<td>J Fosko</td>
+<td>When I got the phone we did not want the phone...</td>
+<td>3</td>
+<td>0</td>
+<td>False</td>
+<td>0.750000</td>
+<td>...</td>
+<td>0.274004</td>
+<td>False</td>
+<td>33.226935</td>
+<td>33.387977</td>
+<td>False</td>
+<td>0.0</td>
+<td>0.413448</td>
+<td>4.4</td>
+<td>Target</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5354</td>
+<td>5354</td>
+<td>1</td>
+<td>TARGET1</td>
+<td>Loving it!</td>
+<td>Nanner74</td>
+<td>I am new to iPhones but I am loving the easy u...</td>
+<td>5</td>
+<td>0</td>
+<td>False</td>
+<td>0.714646</td>
+<td>...</td>
+<td>0.274004</td>
+<td>False</td>
+<td>33.226935</td>
+<td>33.387977</td>
+<td>False</td>
+<td>0.0</td>
+<td>0.413448</td>
+<td>4.4</td>
+<td>Target</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">5355</td>
+<td>5355</td>
+<td>1</td>
+<td>TARGET1</td>
+<td>Nice phone</td>
+<td>Brandi R</td>
+<td>My daughter really likes her new phone.</td>
+<td>5</td>
+<td>0</td>
+<td>False</td>
+<td>0.551515</td>
+<td>...</td>
+<td>0.274004</td>
+<td>False</td>
+<td>33.226935</td>
+<td>33.387977</td>
+<td>False</td>
+<td>0.0</td>
+<td>0.413448</td>
+<td>4.4</td>
+<td>Target</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5356</td>
+<td>5356</td>
+<td>1</td>
+<td>TARGET1</td>
+<td>Apple Iphone 14 purchase</td>
+<td>Larry Justin</td>
+<td>The Apple Iphone 14 is well worth the price. E...</td>
+<td>5</td>
+<td>0</td>
+<td>False</td>
+<td>0.396970</td>
+<td>...</td>
+<td>0.274004</td>
+<td>False</td>
+<td>33.226935</td>
+<td>33.387977</td>
+<td>False</td>
+<td>0.0</td>
+<td>0.413448</td>
+<td>4.4</td>
+<td>Target</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">5357</td>
+<td>5357</td>
+<td>1</td>
+<td>TARGET1</td>
+<td>Happy</td>
+<td>Momo3boys</td>
+<td>Its pretty good no different then the 13</td>
+<td>5</td>
+<td>0</td>
+<td>False</td>
+<td>0.800000</td>
+<td>...</td>
+<td>0.274004</td>
+<td>False</td>
+<td>33.226935</td>
+<td>33.387977</td>
+<td>False</td>
+<td>0.0</td>
+<td>0.413448</td>
+<td>4.4</td>
+<td>Target</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5358</td>
+<td>5358</td>
+<td>1</td>
+<td>TARGET1</td>
+<td>Best mobile phone!</td>
+<td>Jo M</td>
+<td>Love this phone! I bought it in a light blue c...</td>
+<td>5</td>
+<td>0</td>
+<td>False</td>
+<td>0.645000</td>
+<td>...</td>
+<td>0.274004</td>
+<td>False</td>
+<td>33.226935</td>
+<td>33.387977</td>
+<td>True</td>
+<td>0.0</td>
+<td>0.413448</td>
+<td>4.4</td>
+<td>Target</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">5359</td>
+<td>5359</td>
+<td>1</td>
+<td>TARGET1</td>
+<td>iPhone 14</td>
+<td>Tmann0692</td>
+<td>Love it!!! Great product!</td>
+<td>5</td>
+<td>0</td>
+<td>False</td>
+<td>0.675000</td>
+<td>...</td>
+<td>0.274004</td>
+<td>False</td>
+<td>33.226935</td>
+<td>33.387977</td>
+<td>False</td>
+<td>0.0</td>
+<td>0.413448</td>
+<td>4.4</td>
+<td>Target</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5360</td>
+<td>5360</td>
+<td>1</td>
+<td>TARGET1</td>
+<td>iPhone 14</td>
+<td>Chermart</td>
+<td>I like my new iPhone 14 , its easy to use and ...</td>
+<td>5</td>
+<td>0</td>
+<td>False</td>
+<td>0.580808</td>
+<td>...</td>
+<td>0.274004</td>
+<td>False</td>
+<td>33.226935</td>
+<td>33.387977</td>
+<td>False</td>
+<td>0.0</td>
+<td>0.413448</td>
+<td>4.4</td>
+<td>Target</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">5361</td>
+<td>5361</td>
+<td>1</td>
+<td>TARGET1</td>
+<td>iPhone 14</td>
+<td>RobertA2</td>
+<td>Nice phone. Sized well - slightly smaller than...</td>
+<td>5</td>
+<td>0</td>
+<td>False</td>
+<td>0.507500</td>
+<td>...</td>
+<td>0.274004</td>
+<td>False</td>
+<td>33.226935</td>
+<td>33.387977</td>
+<td>False</td>
+<td>0.0</td>
+<td>0.413448</td>
+<td>4.4</td>
+<td>Target</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5362</td>
+<td>5362</td>
+<td>1</td>
+<td>TARGET1</td>
+<td>good deal</td>
+<td>eugeniab</td>
+<td>good deal special by att on this iphone 14-was...</td>
+<td>5</td>
+<td>0</td>
+<td>False</td>
+<td>0.692857</td>
+<td>...</td>
+<td>0.274004</td>
+<td>False</td>
+<td>33.226935</td>
+<td>33.387977</td>
+<td>False</td>
+<td>0.0</td>
+<td>0.413448</td>
+<td>4.4</td>
+<td>Target</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+
+<p>10 rows × 39 columns</p>
+</div>
+</div>
+</div>
 <p>And here is a sample of our data after the applied transformations:</p>
+<ul>
+<li>Snippet of first 10 observations in the X_train set:</li>
+</ul>
+<div id="c1621177" class="cell" data-execution_count="6">
+<div class="cell-output cell-output-display" data-execution_count="6">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">review_star_rating</th>
+<th data-quarto-table-cell-role="th">review_helpful_votes</th>
+<th data-quarto-table-cell-role="th">review_subjectivity</th>
+<th data-quarto-table-cell-role="th">review_polarity</th>
+<th data-quarto-table-cell-role="th">review_length</th>
+<th data-quarto-table-cell-role="th">prod_subjectivity</th>
+<th data-quarto-table-cell-role="th">total_star_rating</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>0.527937</td>
+<td>-0.156479</td>
+<td>-0.462909</td>
+<td>-0.073990</td>
+<td>-0.668567</td>
+<td>0.956692</td>
+<td>-0.835462</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>-3.278850</td>
+<td>8.064835</td>
+<td>-0.762347</td>
+<td>-1.099330</td>
+<td>-0.546154</td>
+<td>-0.931458</td>
+<td>-1.767748</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>0.527937</td>
+<td>-0.156479</td>
+<td>0.905952</td>
+<td>0.329931</td>
+<td>-0.382937</td>
+<td>0.587019</td>
+<td>1.029109</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>-1.609933</td>
+<td>4.275223</td>
+<td>-0.591240</td>
+<td>-0.866298</td>
+<td>-0.138112</td>
+<td>-0.931458</td>
+<td>-1.767748</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>0.527937</td>
+<td>-0.156479</td>
+<td>-0.136990</td>
+<td>0.008865</td>
+<td>-0.913393</td>
+<td>0.956692</td>
+<td>-0.835462</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>-3.278850</td>
+<td>-0.156479</td>
+<td>1.847044</td>
+<td>-3.081933</td>
+<td>-0.790980</td>
+<td>-1.049254</td>
+<td>1.029109</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>-0.540998</td>
+<td>-0.156479</td>
+<td>-1.004750</td>
+<td>-0.332914</td>
+<td>0.065909</td>
+<td>-1.417458</td>
+<td>-0.369319</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>0.527937</td>
+<td>-0.156479</td>
+<td>0.392629</td>
+<td>0.454215</td>
+<td>-0.872588</td>
+<td>0.956692</td>
+<td>-0.835462</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>0.527937</td>
+<td>-0.156479</td>
+<td>-0.394466</td>
+<td>0.416930</td>
+<td>0.433147</td>
+<td>-0.742112</td>
+<td>0.562967</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>-0.540998</td>
+<td>-0.156479</td>
+<td>-0.505686</td>
+<td>0.050293</td>
+<td>-0.872588</td>
+<td>-1.417458</td>
+<td>-0.369319</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<ul>
+<li>Classes in y_train set were mapped as follows:
+<ul>
+<li>0: if the review had no helful votes</li>
+<li>1: if the review had one or more than 1 helpful votes</li>
+</ul></li>
+</ul>
 <section id="training-data" class="level3" data-number="3.1.1">
 <h3 data-number="3.1.1" class="anchored" data-anchor-id="training-data"><span class="header-section-number">3.1.1</span> Training Data</h3>
 <p>To train our dataset, we leveraged the data post-transformation to train each of our models, including the adjustments of outlier datapoints to being within 3 standard deviations of the mean of each variable. We selected an 80% sample of this data and leveraged the same dataset to train each model.</p>
@@ -321,7 +736,7 @@ window.Quarto = {
 </section>
 <section id="logistic-regression-test-results" class="level3" data-number="3.3.3">
 <h3 data-number="3.3.3" class="anchored" data-anchor-id="logistic-regression-test-results"><span class="header-section-number">3.3.3</span> Logistic Regression Test Results</h3>
-<div id="82466d72" class="cell" data-execution_count="5">
+<div id="c73c194d" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-display">
 <div>
 
@@ -343,28 +758,28 @@ window.Quarto = {
 <td data-quarto-table-cell-role="th">0</td>
 <td>Logistic Regression (TUNED)</td>
 <td>above 0</td>
-<td>0.986275</td>
-<td>0.810916</td>
-<td>1.0</td>
-<td>0.681967</td>
+<td>0.985214</td>
+<td>0.793274</td>
+<td>1.000000</td>
+<td>0.657377</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
 <td>Logistic Regression (ADASYN)</td>
 <td>above 0</td>
-<td>0.985143</td>
-<td>0.792079</td>
-<td>1.0</td>
-<td>0.655738</td>
+<td>0.983445</td>
+<td>0.763158</td>
+<td>0.997354</td>
+<td>0.618033</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
 <td>Logistic Regression (SMOTE)</td>
 <td>above 0</td>
-<td>0.986275</td>
-<td>0.810916</td>
-<td>1.0</td>
-<td>0.681967</td>
+<td>0.986204</td>
+<td>0.809756</td>
+<td>1.000000</td>
+<td>0.680328</td>
 </tr>
 </tbody>
 </table>
@@ -374,7 +789,7 @@ window.Quarto = {
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="models implemented_files/figure-html/cell-6-output-2.png" width="1706" height="566" class="figure-img"></p>
+<p><img src="models implemented_files/figure-html/cell-8-output-2.png" width="1706" height="566" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -383,13 +798,22 @@ window.Quarto = {
 </section>
 <section id="k-nearest-neighbors-classification" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="k-nearest-neighbors-classification"><span class="header-section-number">3.4</span> K-Nearest Neighbors Classification</h2>
+<p>K-Nearest Neighbors is used to learn and identify the target class instances. It makes predictions by calculating distance (usually, Euclidean distance) between a given instance and all other instances in the dataset in feature space.</p>
 <section id="hyperparameter-tuning-1" class="level3" data-number="3.4.1">
 <h3 data-number="3.4.1" class="anchored" data-anchor-id="hyperparameter-tuning-1"><span class="header-section-number">3.4.1</span> Hyperparameter Tuning</h3>
+<p>The value of k is the most critial hyperparameter in the KNN Calssification algorithm. It determines the performance of the model. Usually a small k value leads to overly complex understanding of the data that might result into overfitting, however, a higher k values can lead to underfitting.</p>
+<p>We have looked at multiple values of k for our given data and compared a set of model metrics - accuracy, F1 score, precision, and recall to find the most optimal model to be the model with <code>k = 3</code>.</p>
+<p>Looking the results shown below we can say that:</p>
+<ol type="1">
+<li><p>Just by looking at the accuracy for any given value of k, it ranges between 98-99% indicating that KNN might be a good model for the given data.</p></li>
+<li><p>Among the evaluated models, KNN with <code>k = 3</code> achieves the highest F1 score of approximately 78.2%, indicating a balanced trade-off between precision and recall.</p></li>
+<li><p>While all models have high precision and recall rates, KNN with higher k values (5, 7, and 9) demonstrate slightly lower F1 scores.</p></li>
+</ol>
 </section>
 <section id="knn-test-results" class="level3" data-number="3.4.2">
 <h3 data-number="3.4.2" class="anchored" data-anchor-id="knn-test-results"><span class="header-section-number">3.4.2</span> KNN Test Results</h3>
 <!--try to tweak and tune this model for better performance-->
-<div id="79b9cdc5" class="cell" data-execution_count="6">
+<div id="4e9e75cc" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <div>
 
@@ -408,40 +832,40 @@ window.Quarto = {
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>Logistic Regression (TUNED)</td>
+<td data-quarto-table-cell-role="th">3</td>
+<td>KNN (k=3)</td>
 <td>above 0</td>
-<td>0.986275</td>
-<td>0.810916</td>
-<td>1.000000</td>
-<td>0.681967</td>
+<td>0.983870</td>
+<td>0.771084</td>
+<td>0.994819</td>
+<td>0.629508</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>Logistic Regression (ADASYN)</td>
+<td data-quarto-table-cell-role="th">4</td>
+<td>KNN (k=5)</td>
 <td>above 0</td>
-<td>0.985143</td>
-<td>0.792079</td>
-<td>1.000000</td>
-<td>0.655738</td>
+<td>0.982313</td>
+<td>0.743326</td>
+<td>0.994505</td>
+<td>0.593443</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>Logistic Regression (SMOTE)</td>
+<td data-quarto-table-cell-role="th">5</td>
+<td>KNN (k=7)</td>
 <td>above 0</td>
-<td>0.986275</td>
-<td>0.810916</td>
-<td>1.000000</td>
-<td>0.681967</td>
+<td>0.981818</td>
+<td>0.734230</td>
+<td>0.994398</td>
+<td>0.581967</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>KNN</td>
+<td data-quarto-table-cell-role="th">6</td>
+<td>KNN (k=9)</td>
 <td>above 0</td>
-<td>0.983941</td>
-<td>0.772317</td>
-<td>0.994832</td>
-<td>0.631148</td>
+<td>0.981323</td>
+<td>0.725000</td>
+<td>0.994286</td>
+<td>0.570492</td>
 </tr>
 </tbody>
 </table>
@@ -451,7 +875,7 @@ window.Quarto = {
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="models implemented_files/figure-html/cell-7-output-2.png" width="521" height="429" class="figure-img"></p>
+<p><img src="models implemented_files/figure-html/cell-9-output-2.png" width="1715" height="566" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -460,12 +884,21 @@ window.Quarto = {
 </section>
 <section id="support-vector-machine-classification" class="level2" data-number="3.5">
 <h2 data-number="3.5" class="anchored" data-anchor-id="support-vector-machine-classification"><span class="header-section-number">3.5</span> Support Vector Machine Classification</h2>
+<p>Support Vector Machines work on classification problems by finding an optimal hyperplane that best classifies the target classes in the given feature space. Because of its flexibility of moving the hyperplane and adapting to the intricacies of the data, SVM proves to be a powerful algorithm.</p>
 <section id="hyperparameter-tuning-2" class="level3" data-number="3.5.1">
 <h3 data-number="3.5.1" class="anchored" data-anchor-id="hyperparameter-tuning-2"><span class="header-section-number">3.5.1</span> Hyperparameter Tuning</h3>
+<p>The complexity of a SVM model is determined by the choice of kernel function that allows to capture all nuances of the data. Below are the implmentation results of the performance metrics of Support Vector Machine (SVM) models trained with different kernel functions: polynomial (SVM-Poly), radial basis function (SVM-RBF), and sigmoid (SVM-Sigmoid).</p>
+<p>Looking the results shown below we can say that:</p>
+<ol type="1">
+<li><p>SVM with a polynomial kernel (SVM-Poly) achieves the highest F1 score of approximately 81.09%. This model also exhibits perfect precision, indicating that it classifies all positive instances correctly.</p></li>
+<li><p>SVM with a radial basis function kernel (SVM-RBF) follows closely with an F1 score of approximately 78.15%. Although it has slightly lower precision compared to SVM-Poly, it demonstrates a balanced trade-off between precision and recall.</p></li>
+<li><p>SVM with a sigmoid kernel (SVM-Sigmoid) exhibits the lowest F1 score of approximately 59.24%, indicating comparatively lower performance in capturing both precision and recall.</p></li>
+</ol>
+<p>While all SVM models exhibit high accuracy, SVM with a polynomial kernel (SVM-Poly) emerges as the most favorable choice based on its highest F1 score and perfect precision.</p>
 </section>
 <section id="knn-test-results-1" class="level3" data-number="3.5.2">
 <h3 data-number="3.5.2" class="anchored" data-anchor-id="knn-test-results-1"><span class="header-section-number">3.5.2</span> KNN Test Results</h3>
-<div id="d1b32f51" class="cell" data-execution_count="7">
+<div id="4163d9fa" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
 <div>
 
@@ -484,8 +917,8 @@ window.Quarto = {
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>Logistic Regression (TUNED)</td>
+<td data-quarto-table-cell-role="th">7</td>
+<td>SVM-Poly</td>
 <td>above 0</td>
 <td>0.986275</td>
 <td>0.810916</td>
@@ -493,40 +926,22 @@ window.Quarto = {
 <td>0.681967</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>Logistic Regression (ADASYN)</td>
+<td data-quarto-table-cell-role="th">8</td>
+<td>SVM-RBF</td>
 <td>above 0</td>
-<td>0.985143</td>
-<td>0.792079</td>
-<td>1.000000</td>
-<td>0.655738</td>
+<td>0.982809</td>
+<td>0.773532</td>
+<td>0.896328</td>
+<td>0.680328</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>Logistic Regression (SMOTE)</td>
+<td data-quarto-table-cell-role="th">9</td>
+<td>SVM-Sigmoid</td>
 <td>above 0</td>
-<td>0.986275</td>
-<td>0.810916</td>
-<td>1.000000</td>
-<td>0.681967</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>KNN</td>
-<td>above 0</td>
-<td>0.983941</td>
-<td>0.772317</td>
-<td>0.994832</td>
-<td>0.631148</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>SVM-PCA</td>
-<td>above 0</td>
-<td>0.986275</td>
-<td>0.810916</td>
-<td>1.000000</td>
-<td>0.681967</td>
+<td>0.969650</td>
+<td>0.681987</td>
+<td>0.622463</td>
+<td>0.754098</td>
 </tr>
 </tbody>
 </table>
@@ -536,7 +951,7 @@ window.Quarto = {
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="models implemented_files/figure-html/cell-8-output-2.png" width="521" height="429" class="figure-img"></p>
+<p><img src="models implemented_files/figure-html/cell-10-output-2.png" width="1706" height="566" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -546,8 +961,8 @@ window.Quarto = {
 <section id="model-comparison" class="level2" data-number="3.6">
 <h2 data-number="3.6" class="anchored" data-anchor-id="model-comparison"><span class="header-section-number">3.6</span> Model Comparison</h2>
 <p>We examine the following table to compare and contrast our implemented models on our collected data.</p>
-<div id="cb304701" class="cell" data-execution_count="8">
-<div class="cell-output cell-output-display" data-execution_count="8">
+<div id="10f4c63b" class="cell" data-execution_count="10">
+<div class="cell-output cell-output-display" data-execution_count="10">
 <div>
 
 
@@ -568,46 +983,91 @@ window.Quarto = {
 <td data-quarto-table-cell-role="th">0</td>
 <td>Logistic Regression (TUNED)</td>
 <td>above 0</td>
-<td>0.986275</td>
-<td>0.810916</td>
+<td>0.985214</td>
+<td>0.793274</td>
 <td>1.000000</td>
-<td>0.681967</td>
+<td>0.657377</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
 <td>Logistic Regression (ADASYN)</td>
 <td>above 0</td>
-<td>0.985143</td>
-<td>0.792079</td>
-<td>1.000000</td>
-<td>0.655738</td>
+<td>0.983445</td>
+<td>0.763158</td>
+<td>0.997354</td>
+<td>0.618033</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
 <td>Logistic Regression (SMOTE)</td>
 <td>above 0</td>
-<td>0.986275</td>
-<td>0.810916</td>
+<td>0.986204</td>
+<td>0.809756</td>
 <td>1.000000</td>
-<td>0.681967</td>
+<td>0.680328</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
-<td>KNN</td>
+<td>KNN (k=3)</td>
 <td>above 0</td>
-<td>0.983941</td>
-<td>0.772317</td>
-<td>0.994832</td>
-<td>0.631148</td>
+<td>0.983870</td>
+<td>0.771084</td>
+<td>0.994819</td>
+<td>0.629508</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
-<td>SVM-PCA</td>
+<td>KNN (k=5)</td>
+<td>above 0</td>
+<td>0.982313</td>
+<td>0.743326</td>
+<td>0.994505</td>
+<td>0.593443</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>KNN (k=7)</td>
+<td>above 0</td>
+<td>0.981818</td>
+<td>0.734230</td>
+<td>0.994398</td>
+<td>0.581967</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>KNN (k=9)</td>
+<td>above 0</td>
+<td>0.981323</td>
+<td>0.725000</td>
+<td>0.994286</td>
+<td>0.570492</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>SVM-Poly</td>
 <td>above 0</td>
 <td>0.986275</td>
 <td>0.810916</td>
 <td>1.000000</td>
 <td>0.681967</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>SVM-RBF</td>
+<td>above 0</td>
+<td>0.982809</td>
+<td>0.773532</td>
+<td>0.896328</td>
+<td>0.680328</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>SVM-Sigmoid</td>
+<td>above 0</td>
+<td>0.969650</td>
+<td>0.681987</td>
+<td>0.622463</td>
+<td>0.754098</td>
 </tr>
 </tbody>
 </table>
@@ -617,7 +1077,6 @@ window.Quarto = {
 </div>
 <p>Each of these models had similar performance in terms of accuracy and precision. A key consideration for us is within the realm of recall in that false positives are potentially beneficial to the generalization of this model to identify reviews that are useful, but currently possess no helpful votes. None of the models delivered any false positives, but having high recall may support identification of new, useful comments.</p>
 <p>The top 2 performing models were our Support Vector Machine and Logistic Regression implementations. Between the two, SVM had higher recall, which is preferable in our use case. That being said, on every metric between the two models, there was near equivalent performance.</p>
-<p>SVM was a more challenging implementation, …</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
