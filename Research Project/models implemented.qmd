@@ -90,19 +90,33 @@ test_metrics = pd.DataFrame(
     }
 )
 
-reviews = reviews.dropna()
-review_orig = review_orig.dropna()
+reviews = reviews.dropna(subset=[
+    'review_star_rating_adjusted', 'review_helpful_votes_adjusted',
+    'review_subjectivity_adjusted', 'review_polarity_adjusted',
+    'review_length_adjusted','prod_subjectivity','total_star_rating'
+],axis=0)
+review_orig = review_orig.dropna(subset=[
+    'review_star_rating', 'review_helpful_votes',
+    'review_subjectivity', 'review_polarity',
+    'review_length','prod_subjectivity','total_star_rating'
+],axis=0)
 
-tmp = pd.DataFrame(
-    reviews[reviews['productID'].isin(list(range(1,16)))]
-)
+# tmp = pd.DataFrame(
+#     reviews[reviews['productID'].isin(list(range(1,16)))]
+# )
+
+tmp = reviews[reviews['productID'].isin(list(range(1,16)))].copy()
 
 train_frame = pd.DataFrame(
     tmp.sample(n=int(.8*len(tmp)))
 )
 
 test_frame = pd.DataFrame(
-    review_orig.loc[~review_orig.index.isin(train_frame)]
+    review_orig.loc[~review_orig.index.isin(train_frame.index)]
+)
+
+test_frame = pd.DataFrame(
+    review_orig[~review_orig['prodSiteID'].isin(train_frame['prodSiteID'].unique())]
 )
 ```
 
@@ -157,15 +171,18 @@ We will examine, compare, and contrast the use of the following models:
 
 ## Included Variables
 
-```{python}
+```{python tbl-var-selection}
+#| label: tbl-var-selection
+#| tbl-cap: Selected Variables for Model Training
+
 pd.DataFrame({
     'Variable':['review_star_rating', 'review_helpful_votes',
         'review_subjectivity', 'review_polarity',
         'review_length','prod_subjectivity','total_star_rating'],
     'Pre-Transformation Type':['int','int','float','float','int','float','float'],
     'Post-Transformation Type':['PCA scaled float','PCA scaled float','PCA scaled float','PCA scaled float','PCA scaled float','PCA scaled float','PCA scaled float'],
-    'Reason for Inclusion':['research survey','research survey','intuition','intuition','research survey','intuition','research survey']
-})
+    'Reason for Inclusion':['literature survey','literature survey','intuition','intuition','literature survey','intuition','literature survey']
+}).style.hide(axis='index')
 ```
 
 ## Data Adjustments
@@ -184,23 +201,28 @@ As noted in our exploratory data analysis, each individual site has statisticall
 
 Here is a sample (first 10 observations) of our data prior to the transformation:
 
-```{python}
+```{python tbl-pre-xform-data}
+#| label: tbl-pre-xform-data
+#| tbl-cap: Data (pre-transformation)
+
 #Let's look at this from the perspective of
 #key variables we're exploring...
 reviews[['review_star_rating', 'review_helpful_votes',
         'review_subjectivity', 'review_polarity',
-        'review_length','prod_subjectivity','total_star_rating']].head(10)
+        'review_length','prod_subjectivity','total_star_rating']].head(10).style.hide(axis='index')
 ```
 
 And here is a sample of our data after the applied transformations:
 
 * Snippet of first 10 observations in the X_train set:
 
-```{python}
+```{python tbl-post-xform-data}
+#| label: tbl-post-xform-data
+#| tbl-cap: Data (pre-transformation)
 
 pd.DataFrame(X_train, columns=['review_star_rating', 'review_helpful_votes',
         'review_subjectivity', 'review_polarity',
-        'review_length','prod_subjectivity','total_star_rating']).head(10)
+        'review_length','prod_subjectivity','total_star_rating']).head(10).style.hide(axis='index')
 
 ```
 
@@ -220,44 +242,6 @@ For testing, we evaluated each model against transformed data, omitting the tran
 
 ## Examination of the Original Multiple Linear Regression
 
-```{python MLR}
-##train - test
-
-y_train_mlr,y_test_mlr = [np.array(train_frame['review_helpful_votes']),
-    np.array(test_frame['review_helpful_votes'])]
-
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import r2_score
-#from sklearn.linear_model import LassoLarsIC
-
-mlr = LinearRegression()
-
-mlr.fit(X_train,y_train_mlr)
-
-y_hat_base = mlr.predict(X_test)
-
-beta_base = mlr.coef_
-beta0_base = mlr.intercept_
-R2_base = r2_score(y_hat_base,y_test_mlr)
-MSPE_base = np.mean((y_hat_base - y_test_mlr)**2)
-
-
-plt.scatter(
-    y_hat_base,y_test_mlr    
-)
-plt.show()
-
-# mlr.fit(X_train_pca,y_train_mlr)
-# y_hat_pca = mlr.predict(X_test_pca)
-# beta_pca = mlr.coef_
-# beta0_pca = mlr.intercept_
-# R2_pca = r2_score(y_hat_pca,y_test_mlr)
-# MSPE_pca = np.mean((y_hat_pca - y_test_mlr)**2)
-
-
-# plt.scatter(y_hat_pca,y_test_mlr)
-# plt.show()
-```
 
 ### Inspection of Linear Model Assumptions
 
@@ -282,26 +266,64 @@ Where each of the following variables have been standard-scaled to a range betwe
 
 * $X_{tsr}$ is the overall star rating for the product.
 
+With this construct, we proceeded to generate a linear model trained on our standard scaled data. 
+
+```{python fig-mlr-results}
+#| label: fig-mlr-resultss
+#| fig-cap: Linear Relationship Between Predictors and Response
+
+##train - test
+
+y_train_mlr,y_test_mlr = [np.array(train_frame['review_helpful_votes']),
+    np.array(test_frame['review_helpful_votes'])]
+
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import r2_score
+#from sklearn.linear_model import LassoLarsIC
+
+mlr = LinearRegression()
+
+mlr.fit(X_train,y_train_mlr)
+
+y_hat_base = mlr.predict(X_test)
+
+beta_base = mlr.coef_
+beta0_base = mlr.intercept_
+R2_base = r2_score(y_hat_base,y_test_mlr)
+MSPE_base = np.mean((y_hat_base - y_test_mlr)**2)
+
+
+plt.title('Multiple Linear Regression')
+plt.xlabel('Predicted Values')
+plt.ylabel('Observed Values')
+plt.scatter(
+    y_hat_base,y_test_mlr    
+)
+plt.show()
+```
+
 Our testing produced the following coefficients:
 
 $\beta_0$: `{python} round(mlr.intercept_,3)`, $\beta_1$: `{python} round(mlr.coef_[0],3)`,$\beta_2$: `{python} round(mlr.coef_[1],3)`,$\beta_3$: `{python} round(mlr.coef_[2],3)`,$\beta_4$: `{python} round(mlr.coef_[3],3)`,$\beta_5$: `{python} round(mlr.coef_[4],3)`,$\beta_6$: `{python} round(mlr.coef_[5],3)`
 
-These coefficients, trained on standard-scaled data, enabled us to produce the following plot of fitted vs. observed values: 
+On new training data, the model appears to underpredict the output value, across the board, for the new data.  That being said, there is still a strong linear trend between the predictors and the response.  The intent of this model is not to predict the actual number of votes that a review might have, but whether or not that review would be considered useful to customers.  
 
-```{python mlrPlot}
-
-```
-
-On new training data, the model appears to underpredict the output value, across the board, for the new data.  That being said, there is still a strong linear trend between the predictors and the response.  The intent of this model is not to predict the actual number of votes that a review might have, but whether or not that review would be considered useful to customers.  Generally examining this result, we would conclude that there is a linear trend between these features, their coefficients, and their corresponding response.
+Generally examining this result, we would conclude that there is a linear trend between these features, their coefficients, and their corresponding response.
 
 #### Homoscedasticity on Normalized Data
 
 This model has substantial challenges with heteroscedasticity.  Let's examine a plot of fitted vs. residuals in the model:
 
-```{python heteroscedasticity1}
+```{python fig-non-constant-var-1}
+#| label: fig-non-constant-var-1
+#| fig-cap: Heteroscedasticity in Model
+
 plt.scatter(
     y_hat_base,y_hat_base - y_test_mlr
 )
+plt.xlabel('Predicted Value')
+plt.ylabel('Model Residuals')
+plt.title('Evaluating Constant Variance - Predicted vs. Residual Values')
 plt.show()
 ```
 
@@ -309,7 +331,10 @@ There is a clear linear pattern in the residuals of this plot.  It seems that th
 
 Performing a further linear regression on the fitted vs. observed values, we identified a slope $\beta_{1^*}$ of approximately 1.44 and intercept of $\beta_{0^*}$ of approximately 0.003.  Adjusting the predictions and plotting the re-fitted vs. observed values, we see the following:
 
-```{python heteroscedasticity2}
+```{python fig-non-constant-var-2}
+#| label: fig-non-constant-var-2
+#| fig-cap: Heteroscedasticity in Adjusted Model
+
 mlr2 = LinearRegression()
 x_points = y_hat_base*1.43811313 - 0.0030281865303148914
 plt.scatter(
@@ -323,17 +348,18 @@ This plot also appears to have issues with non-constant variance in the residual
 Once again, the output of this model is not necessarily to predict the precise value of the number of votes a review comment will have, but instead to project how useful this vote would be perceived by new customers.  Although the issues with heteroscedasticity do exist for this model, we still find that the output of this model is potentially useful.
 
 #### Normality in Residuals
-```{python qq-plot-mlr}
-# mu = np.mean(y_hat)
-# sd = np.std(y_hat)
-# norm = (y_hat-mu) / sd
-# sm.qqplot(norm)
+```{python fig-qq-resid}
+#| label: fig-qq-resid
+#| fig-cap: Model Residuals are Abnormal
+
 fig,ax = plt.subplots()
 mu = x_points.mean()
 sd = x_points.std()
 norm = (x_points-mu) / sd
 sm.qqplot(norm,ax=ax)
 ax.axline((0,0),slope=1,color='black')
+fig.suptitle('Q-Q Plot of Residuals')
+plt.show()
 ```
 
 From the above plot, it is clear that this model fails to adhere to the multiple linear regression requirement for residual normality.
@@ -343,6 +369,49 @@ From the above plot, it is clear that this model fails to adhere to the multiple
 We conclude that the MLR model is *not* a statistically well-performing model for the purpose of *predicting* the number of *helpful votes* a review comment will receive.
 
 That being said, in spite of its violations of the assumptions of multiple linear regression, we *do* find that the model is useful in predicting a relative usefulness score for a given review comment.  If all comments in a thread for a specific product were run against this model, we believe that the model will reflect the relative usefulness of a comment with respect to other comments in the same thread.  Sorting and organizing comments based on the maximum output value could bring the most useful comments to the top of the queue for review by potential shoppers.
+
+We'll examine the per-product correlation next:
+
+```{python MLR-per-product}
+y_train_mlr,y_test_mlr = [np.array(train_frame['review_helpful_votes']),
+    np.array(test_frame['review_helpful_votes'])]
+
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import r2_score
+#from sklearn.linear_model import LassoLarsIC
+
+mlr = LinearRegression()
+
+mlr.fit(X_train,y_train_mlr)
+
+y_hat_base = mlr.predict(X_test)
+
+beta_base = mlr.coef_
+beta0_base = mlr.intercept_
+R2_base = r2_score(y_hat_base,y_test_mlr)
+MSPE_base = np.mean((y_hat_base - y_test_mlr)**2)
+
+
+
+test_frame['MLR_prediction'] = mlr.predict(X_test)
+
+import seaborn as sns
+
+sns.scatterplot(
+    data=test_frame,
+    x='MLR_prediction',
+    y='review_helpful_votes',
+    hue='prodSiteID'
+)
+
+# plt.title('Multiple Linear Regression')
+# plt.xlabel('Predicted Values')
+# plt.ylabel('Observed Values')
+# plt.scatter(
+#     y_hat_base,y_test_mlr    
+# )
+# plt.show()
+```
 
 Having pursued the suggested research of @percUse and producing similar results, we will proceed to evaluate other models for detecting useful comments.
 
@@ -362,12 +431,17 @@ It is a well know fact that oversampling techniques are employed if there a seve
 
 <!--try to tweak and tune this model for better performance--> 
 ### Logistic Regression Test Results
-```{python LogRegBlock}
 
+```
+
+```
+
+```{python LogRegBlock}
+# need to divide into pieces to add figures / labels for each.
 #Logmod hyperparameter
 random.seed(123)
 
-LogMod = LogisticRegression(class_weight={0:.3,1:.7})
+LogMod = LogisticRegression(class_weight={0:.2,1:.8})
 LogMod.fit(X_train_pca,y_train)
 y_pred = (LogMod.predict_proba(X_test_pca)[:,1]>0.25)
 
@@ -429,7 +503,7 @@ test_metrics.loc[len(test_metrics)] = {
 # display(test_metrics)
 
 test_metrics_df = pd.DataFrame(test_metrics)
-display(test_metrics_df[:3])
+display(test_metrics_df[:3].style.hide(axis='index'))
 
 
 fig, axes = plt.subplots(3, 1, figsize=(18, 6))
@@ -445,14 +519,14 @@ axes[2].set_title('SMOTE')
 
 plt.tight_layout()
 plt.show()
-
+ 
 ```
 
-```{python UsefulComments}
-review_orig['pred_useful'] = y_pred_adasyn
-x = list(review_orig[(review_orig['is_helpful']==0) &(review_orig['pred_useful']==1)]['review_content'])#[['reviewer_name','verified_purchase','review_content','review_star_rating']]
-for i in x:
-    print(i)
+```{python UsefulComments-logreg}
+# review_orig['pred_useful'] = y_pred_adasyn
+# x = list(review_orig[(review_orig['is_helpful']==0) &(review_orig['pred_useful']==1)]['review_content'])#[['reviewer_name','verified_purchase','review_content','review_star_rating']]
+# for i in x:
+#     print(i)
 #print(len(x))
 ```
 
@@ -477,7 +551,8 @@ Looking the results shown below we can say that:
 ### KNN Test Results
 <!--try to tweak and tune this model for better performance--> 
 ```{python KnnBlock}
-# 3 Neighbors
+# 3 Neighbors is best performing
+# need to divide this into pieces to add figure labels.
 random.seed(123)
 
 knn = KNeighborsClassifier(n_neighbors=3)
@@ -533,7 +608,7 @@ test_metrics.loc[len(test_metrics)] = {
 
 # Display results
 test_metrics_df = pd.DataFrame(test_metrics)
-display(test_metrics_df[3:7])
+display(test_metrics_df[3:7].style.hide(axis='index'))
 
 fig, axes = plt.subplots(4, 1, figsize=(11, 10))
 
@@ -553,11 +628,11 @@ plt.tight_layout()
 plt.show()
 ```
 
-```{python UsefulComments}
-review_orig['pred_useful'] = y_pred_3
-x = list(review_orig[(review_orig['is_helpful']==0) &(review_orig['pred_useful']==1)]['review_content'])#[['reviewer_name','verified_purchase','review_content','review_star_rating']]
-for i in x:
-    print(i)
+```{python UsefulComments-knn}
+# review_orig['pred_useful'] = y_pred_3
+# x = list(review_orig[(review_orig['is_helpful']==0) &(review_orig['pred_useful']==1)]['review_content'])#[['reviewer_name','verified_purchase','review_content','review_star_rating']]
+# for i in x:
+#     print(i)
 #print(len(x))
 ```
 
@@ -571,10 +646,10 @@ The complexity of a SVM model is determined by the choice of kernel function tha
 
 To tune each version of this model, we leveraged a reduced set of principal components, and adjusted class weighting, as having useful votes for a product is a relative rarity across each of the e-commerce platforms.  To boost our recall, we elected to assign weights of 0.1 to class 0 (not useful) and 0.9 to class 1 (useful).
 
-### KNN Test Results
+### SVM Test Results
 
 ```{python SVMBlock}
-
+## need to divide this into pieces to add figure labels
 # SVM Poly
 random.seed(123)
 
@@ -624,7 +699,7 @@ test_metrics.loc[len(test_metrics)] = {
 
 # Display results
 test_metrics_df = pd.DataFrame(test_metrics)
-display(test_metrics_df[7:])
+display(test_metrics_df[7:].style.hide(axis='index'))
 
 fig, axes = plt.subplots(3, 1, figsize=(18, 6))
 
@@ -650,6 +725,7 @@ Looking the results shown below we can say that:
 3. SVM with a sigmoid kernel (SVM-Sigmoid) exhibits the lowest F1 score of approximately 59.24%, indicating comparatively lower performance in capturing both precision and recall.
 
 While all SVM models exhibit high accuracy, SVM with a polynomial kernel (SVM-Poly) emerges as the most favorable choice based on its highest F1 score and perfect precision. 
+
 <!-- 
 Is this what we want to say? if our goals are to instead identify potentially useful comments, not just predict whether or not it will have any votes against it, I think that the RBF or the sigmoid model may be best for our application
 
@@ -661,33 +737,33 @@ Let's have a look at some of those predictions.
 
 -->
 
-```{python UsefulComments}
-review_orig['pred_useful_prob'] = spt_vector_rbf.predict_proba(
-    X_test_pca
-)[:,1]
-review_orig['pred_useful'] = y_pred_rbf
-x = pd.DataFrame(review_orig[(review_orig['is_helpful']==0) &(review_orig['pred_useful']==1)].sort_values(by='pred_useful_prob',ascending=False)['review_content'])
-display(
-    x.head(10)
-)
+```{python UsefulComments-svm-rbf}
+# review_orig['pred_useful_prob'] = spt_vector_rbf.predict_proba(
+#     X_test_pca
+# )[:,1]
+# review_orig['pred_useful'] = y_pred_rbf
+# x = pd.DataFrame(review_orig[(review_orig['is_helpful']==0) &(review_orig['pred_useful']==1)].sort_values(by='pred_useful_prob',ascending=False)['review_content'])
+# display(
+#     x.head(10).style.hide(axis='index')
+# )
 ```
 
 RBF, unexpectedly, seems to associate being part of a promotion with a comment being useful. It's possible that other comments in this group have similar features and qualities to promotional review comments.  These results are sorted by the probability that they would be classified has having votes flagging them as being useful.  The highest 
 
 What about sigmoid?
-```{python UsefulComments}
-review_orig['pred_useful_prob'] = spt_vector_sigmoid.predict_proba(
-    X_test_pca
-)[:,1]
-review_orig['pred_useful'] = spt_vector_sigmoid.predict(
-    X_test_pca
-)
-x = pd.DataFrame(review_orig[(review_orig['is_helpful']==0) &(review_orig['pred_useful']==1)].sort_values(by='pred_useful_prob',ascending=False)['review_content'])
+```{python UsefulComments-svm-sigmoid}
+# review_orig['pred_useful_prob'] = spt_vector_sigmoid.predict_proba(
+#     X_test_pca
+# )[:,1]
+# review_orig['pred_useful'] = spt_vector_sigmoid.predict(
+#     X_test_pca
+# )
+# x = pd.DataFrame(review_orig[(review_orig['is_helpful']==0) &(review_orig['pred_useful']==1)].sort_values(by='pred_useful_prob',ascending=False)['review_content'])
 
-display(
-    x.head(10)
-)
-##include product name?
+# display(
+#     x.head(10)
+# )
+# ##include product name?
 ```
 
 Sigmoid seems to identify a wider variety of comments, some (subjectively) useful, some not, and identifies fewer items that were part of a promotion.
@@ -696,8 +772,10 @@ Sigmoid seems to identify a wider variety of comments, some (subjectively) usefu
 
 We examine the following table to compare and contrast our implemented models on our collected data.
 
-```{python FinalResultsTable}
-test_metrics
+```{python tbl-final-results}
+#| label: tbl-final-results
+#| tbl-cap: Summary Metrics (all evaluated models)
+test_metrics.style.hide(axis='index')
 ```
 
 Each of these models had similar performance in terms of accuracy and precision. A key consideration for us is within the realm of recall in that false positives are potentially beneficial to the generalization of this model to identify reviews that are useful, but currently possess no helpful votes.  None of the models delivered any false positives, but having high recall may support identification of new, useful comments.

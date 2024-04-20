@@ -227,7 +227,7 @@ window.Quarto = {
   <li><a href="#support-vector-machine-classification" id="toc-support-vector-machine-classification" class="nav-link" data-scroll-target="#support-vector-machine-classification"><span class="header-section-number">3.6</span> Support Vector Machine Classification</a>
   <ul class="collapse">
   <li><a href="#hyperparameter-tuning-2" id="toc-hyperparameter-tuning-2" class="nav-link" data-scroll-target="#hyperparameter-tuning-2"><span class="header-section-number">3.6.1</span> Hyperparameter Tuning</a></li>
-  <li><a href="#knn-test-results-1" id="toc-knn-test-results-1" class="nav-link" data-scroll-target="#knn-test-results-1"><span class="header-section-number">3.6.2</span> KNN Test Results</a></li>
+  <li><a href="#svm-test-results" id="toc-svm-test-results" class="nav-link" data-scroll-target="#svm-test-results"><span class="header-section-number">3.6.2</span> SVM Test Results</a></li>
   </ul></li>
   <li><a href="#model-comparison" id="toc-model-comparison" class="nav-link" data-scroll-target="#model-comparison"><span class="header-section-number">3.7</span> Model Comparison</a></li>
   </ul>
@@ -265,75 +265,74 @@ window.Quarto = {
 </ul>
 <section id="included-variables" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="included-variables"><span class="header-section-number">3.1</span> Included Variables</h2>
-<div id="824a3767" class="cell" data-execution_count="5">
+<div class="cell" data-execution_count="5">
+<div id="tbl-var-selection" class="cell quarto-float anchored" data-execution_count="5">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-var-selection-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.1: Selected Variables for Model Training
+</figcaption>
+<div aria-describedby="tbl-var-selection-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output cell-output-display" data-execution_count="5">
-<div>
+<style type="text/css">
+</style>
 
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table id="T_4d058" class="do-not-create-environment cell table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">Variable</th>
-<th data-quarto-table-cell-role="th">Pre-Transformation Type</th>
-<th data-quarto-table-cell-role="th">Post-Transformation Type</th>
-<th data-quarto-table-cell-role="th">Reason for Inclusion</th>
+<th id="T_4d058_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Variable</th>
+<th id="T_4d058_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Pre-Transformation Type</th>
+<th id="T_4d058_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Post-Transformation Type</th>
+<th id="T_4d058_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Reason for Inclusion</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>review_star_rating</td>
-<td>int</td>
-<td>PCA scaled float</td>
-<td>research survey</td>
+<td id="T_4d058_row0_col0" class="data row0 col0">review_star_rating</td>
+<td id="T_4d058_row0_col1" class="data row0 col1">int</td>
+<td id="T_4d058_row0_col2" class="data row0 col2">PCA scaled float</td>
+<td id="T_4d058_row0_col3" class="data row0 col3">literature survey</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>review_helpful_votes</td>
-<td>int</td>
-<td>PCA scaled float</td>
-<td>research survey</td>
+<td id="T_4d058_row1_col0" class="data row1 col0">review_helpful_votes</td>
+<td id="T_4d058_row1_col1" class="data row1 col1">int</td>
+<td id="T_4d058_row1_col2" class="data row1 col2">PCA scaled float</td>
+<td id="T_4d058_row1_col3" class="data row1 col3">literature survey</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>review_subjectivity</td>
-<td>float</td>
-<td>PCA scaled float</td>
-<td>intuition</td>
+<td id="T_4d058_row2_col0" class="data row2 col0">review_subjectivity</td>
+<td id="T_4d058_row2_col1" class="data row2 col1">float</td>
+<td id="T_4d058_row2_col2" class="data row2 col2">PCA scaled float</td>
+<td id="T_4d058_row2_col3" class="data row2 col3">intuition</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>review_polarity</td>
-<td>float</td>
-<td>PCA scaled float</td>
-<td>intuition</td>
+<td id="T_4d058_row3_col0" class="data row3 col0">review_polarity</td>
+<td id="T_4d058_row3_col1" class="data row3 col1">float</td>
+<td id="T_4d058_row3_col2" class="data row3 col2">PCA scaled float</td>
+<td id="T_4d058_row3_col3" class="data row3 col3">intuition</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>review_length</td>
-<td>int</td>
-<td>PCA scaled float</td>
-<td>research survey</td>
+<td id="T_4d058_row4_col0" class="data row4 col0">review_length</td>
+<td id="T_4d058_row4_col1" class="data row4 col1">int</td>
+<td id="T_4d058_row4_col2" class="data row4 col2">PCA scaled float</td>
+<td id="T_4d058_row4_col3" class="data row4 col3">literature survey</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">5</td>
-<td>prod_subjectivity</td>
-<td>float</td>
-<td>PCA scaled float</td>
-<td>intuition</td>
+<td id="T_4d058_row5_col0" class="data row5 col0">prod_subjectivity</td>
+<td id="T_4d058_row5_col1" class="data row5 col1">float</td>
+<td id="T_4d058_row5_col2" class="data row5 col2">PCA scaled float</td>
+<td id="T_4d058_row5_col3" class="data row5 col3">intuition</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">6</td>
-<td>total_star_rating</td>
-<td>float</td>
-<td>PCA scaled float</td>
-<td>research survey</td>
+<td id="T_4d058_row6_col0" class="data row6 col0">total_star_rating</td>
+<td id="T_4d058_row6_col1" class="data row6 col1">float</td>
+<td id="T_4d058_row6_col2" class="data row6 col2">PCA scaled float</td>
+<td id="T_4d058_row6_col3" class="data row6 col3">literature survey</td>
 </tr>
 </tbody>
 </table>
-
 </div>
+</div>
+</figure>
 </div>
 </div>
 </section>
@@ -348,258 +347,250 @@ window.Quarto = {
 <li><p>Dimensionality Reduction via Principal Component Analysis. To accelerate training and evaluation by our models, we…</p></li>
 </ol>
 <p>Here is a sample (first 10 observations) of our data prior to the transformation:</p>
-<div id="22232b2c" class="cell" data-execution_count="6">
+<div class="cell" data-execution_count="6">
+<div id="tbl-pre-xform-data" class="cell quarto-float anchored" data-execution_count="6">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-pre-xform-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.2: Data (pre-transformation)
+</figcaption>
+<div aria-describedby="tbl-pre-xform-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output cell-output-display" data-execution_count="6">
-<div>
+<style type="text/css">
+</style>
 
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table id="T_182e1" class="do-not-create-environment cell table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">review_star_rating</th>
-<th data-quarto-table-cell-role="th">review_helpful_votes</th>
-<th data-quarto-table-cell-role="th">review_subjectivity</th>
-<th data-quarto-table-cell-role="th">review_polarity</th>
-<th data-quarto-table-cell-role="th">review_length</th>
-<th data-quarto-table-cell-role="th">prod_subjectivity</th>
-<th data-quarto-table-cell-role="th">total_star_rating</th>
+<th id="T_182e1_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">review_star_rating</th>
+<th id="T_182e1_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">review_helpful_votes</th>
+<th id="T_182e1_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">review_subjectivity</th>
+<th id="T_182e1_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">review_polarity</th>
+<th id="T_182e1_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">review_length</th>
+<th id="T_182e1_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">prod_subjectivity</th>
+<th id="T_182e1_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">total_star_rating</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">5353</td>
-<td>3</td>
-<td>0</td>
-<td>0.750000</td>
-<td>0.375000</td>
-<td>20.0</td>
-<td>0.413448</td>
-<td>4.4</td>
+<td id="T_182e1_row0_col0" class="data row0 col0">5</td>
+<td id="T_182e1_row0_col1" class="data row0 col1">1</td>
+<td id="T_182e1_row0_col2" class="data row0 col2">0.588232</td>
+<td id="T_182e1_row0_col3" class="data row0 col3">0.258266</td>
+<td id="T_182e1_row0_col4" class="data row0 col4">49.000000</td>
+<td id="T_182e1_row0_col5" class="data row0 col5">0.497845</td>
+<td id="T_182e1_row0_col6" class="data row0 col6">4.200000</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">5354</td>
-<td>5</td>
-<td>0</td>
-<td>0.714646</td>
-<td>0.403283</td>
-<td>49.0</td>
-<td>0.413448</td>
-<td>4.4</td>
+<td id="T_182e1_row1_col0" class="data row1 col0">5</td>
+<td id="T_182e1_row1_col1" class="data row1 col1">2</td>
+<td id="T_182e1_row1_col2" class="data row1 col2">0.430909</td>
+<td id="T_182e1_row1_col3" class="data row1 col3">0.447273</td>
+<td id="T_182e1_row1_col4" class="data row1 col4">24.000000</td>
+<td id="T_182e1_row1_col5" class="data row1 col5">0.497845</td>
+<td id="T_182e1_row1_col6" class="data row1 col6">4.200000</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">5355</td>
-<td>5</td>
-<td>0</td>
-<td>0.551515</td>
-<td>0.312121</td>
-<td>7.0</td>
-<td>0.413448</td>
-<td>4.4</td>
+<td id="T_182e1_row2_col0" class="data row2 col0">5</td>
+<td id="T_182e1_row2_col1" class="data row2 col1">2</td>
+<td id="T_182e1_row2_col2" class="data row2 col2">0.554959</td>
+<td id="T_182e1_row2_col3" class="data row2 col3">0.394215</td>
+<td id="T_182e1_row2_col4" class="data row2 col4">66.000000</td>
+<td id="T_182e1_row2_col5" class="data row2 col5">0.497845</td>
+<td id="T_182e1_row2_col6" class="data row2 col6">4.200000</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">5356</td>
-<td>5</td>
-<td>0</td>
-<td>0.396970</td>
-<td>0.242424</td>
-<td>17.0</td>
-<td>0.413448</td>
-<td>4.4</td>
+<td id="T_182e1_row3_col0" class="data row3 col0">5</td>
+<td id="T_182e1_row3_col1" class="data row3 col1">0</td>
+<td id="T_182e1_row3_col2" class="data row3 col2">1.000000</td>
+<td id="T_182e1_row3_col3" class="data row3 col3">1.000000</td>
+<td id="T_182e1_row3_col4" class="data row3 col4">14.000000</td>
+<td id="T_182e1_row3_col5" class="data row3 col5">0.497845</td>
+<td id="T_182e1_row3_col6" class="data row3 col6">4.200000</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">5357</td>
-<td>5</td>
-<td>0</td>
-<td>0.800000</td>
-<td>0.437500</td>
-<td>8.0</td>
-<td>0.413448</td>
-<td>4.4</td>
+<td id="T_182e1_row4_col0" class="data row4 col0">5</td>
+<td id="T_182e1_row4_col1" class="data row4 col1">0</td>
+<td id="T_182e1_row4_col2" class="data row4 col2">0.636364</td>
+<td id="T_182e1_row4_col3" class="data row4 col3">0.424242</td>
+<td id="T_182e1_row4_col4" class="data row4 col4">31.000000</td>
+<td id="T_182e1_row4_col5" class="data row4 col5">0.497845</td>
+<td id="T_182e1_row4_col6" class="data row4 col6">4.200000</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">5358</td>
-<td>5</td>
-<td>0</td>
-<td>0.645000</td>
-<td>0.461875</td>
-<td>105.0</td>
-<td>0.413448</td>
-<td>4.4</td>
+<td id="T_182e1_row5_col0" class="data row5 col0">5</td>
+<td id="T_182e1_row5_col1" class="data row5 col1">0</td>
+<td id="T_182e1_row5_col2" class="data row5 col2">0.613068</td>
+<td id="T_182e1_row5_col3" class="data row5 col3">0.402557</td>
+<td id="T_182e1_row5_col4" class="data row5 col4">54.000000</td>
+<td id="T_182e1_row5_col5" class="data row5 col5">0.497845</td>
+<td id="T_182e1_row5_col6" class="data row5 col6">4.200000</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">5359</td>
-<td>5</td>
-<td>0</td>
-<td>0.675000</td>
-<td>0.988281</td>
-<td>4.0</td>
-<td>0.413448</td>
-<td>4.4</td>
+<td id="T_182e1_row6_col0" class="data row6 col0">5</td>
+<td id="T_182e1_row6_col1" class="data row6 col1">0</td>
+<td id="T_182e1_row6_col2" class="data row6 col2">0.601705</td>
+<td id="T_182e1_row6_col3" class="data row6 col3">0.407582</td>
+<td id="T_182e1_row6_col4" class="data row6 col4">42.000000</td>
+<td id="T_182e1_row6_col5" class="data row6 col5">0.497845</td>
+<td id="T_182e1_row6_col6" class="data row6 col6">4.200000</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">5360</td>
-<td>5</td>
-<td>0</td>
-<td>0.580808</td>
-<td>0.246717</td>
-<td>33.0</td>
-<td>0.413448</td>
-<td>4.4</td>
+<td id="T_182e1_row7_col0" class="data row7 col0">5</td>
+<td id="T_182e1_row7_col1" class="data row7 col1">0</td>
+<td id="T_182e1_row7_col2" class="data row7 col2">0.458333</td>
+<td id="T_182e1_row7_col3" class="data row7 col3">0.591667</td>
+<td id="T_182e1_row7_col4" class="data row7 col4">38.000000</td>
+<td id="T_182e1_row7_col5" class="data row7 col5">0.497845</td>
+<td id="T_182e1_row7_col6" class="data row7 col6">4.200000</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">5361</td>
-<td>5</td>
-<td>0</td>
-<td>0.507500</td>
-<td>0.287500</td>
-<td>35.0</td>
-<td>0.413448</td>
-<td>4.4</td>
+<td id="T_182e1_row8_col0" class="data row8 col0">5</td>
+<td id="T_182e1_row8_col1" class="data row8 col1">0</td>
+<td id="T_182e1_row8_col2" class="data row8 col2">0.801136</td>
+<td id="T_182e1_row8_col3" class="data row8 col3">0.734091</td>
+<td id="T_182e1_row8_col4" class="data row8 col4">24.000000</td>
+<td id="T_182e1_row8_col5" class="data row8 col5">0.497845</td>
+<td id="T_182e1_row8_col6" class="data row8 col6">4.200000</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">5362</td>
-<td>5</td>
-<td>0</td>
-<td>0.692857</td>
-<td>0.564286</td>
-<td>18.0</td>
-<td>0.413448</td>
-<td>4.4</td>
+<td id="T_182e1_row9_col0" class="data row9 col0">5</td>
+<td id="T_182e1_row9_col1" class="data row9 col1">0</td>
+<td id="T_182e1_row9_col2" class="data row9 col2">0.801136</td>
+<td id="T_182e1_row9_col3" class="data row9 col3">0.734091</td>
+<td id="T_182e1_row9_col4" class="data row9 col4">24.000000</td>
+<td id="T_182e1_row9_col5" class="data row9 col5">0.497845</td>
+<td id="T_182e1_row9_col6" class="data row9 col6">4.200000</td>
 </tr>
 </tbody>
 </table>
-
 </div>
+</div>
+</figure>
 </div>
 </div>
 <p>And here is a sample of our data after the applied transformations:</p>
 <ul>
 <li>Snippet of first 10 observations in the X_train set:</li>
 </ul>
-<div id="b3f2d1a8" class="cell" data-execution_count="7">
+<div class="cell" data-execution_count="7">
+<div id="tbl-post-xform-data" class="cell quarto-float anchored" data-execution_count="7">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-post-xform-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.3: Data (pre-transformation)
+</figcaption>
+<div aria-describedby="tbl-post-xform-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output cell-output-display" data-execution_count="7">
-<div>
+<style type="text/css">
+</style>
 
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table id="T_9f93e" class="do-not-create-environment cell table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">review_star_rating</th>
-<th data-quarto-table-cell-role="th">review_helpful_votes</th>
-<th data-quarto-table-cell-role="th">review_subjectivity</th>
-<th data-quarto-table-cell-role="th">review_polarity</th>
-<th data-quarto-table-cell-role="th">review_length</th>
-<th data-quarto-table-cell-role="th">prod_subjectivity</th>
-<th data-quarto-table-cell-role="th">total_star_rating</th>
+<th id="T_9f93e_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">review_star_rating</th>
+<th id="T_9f93e_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">review_helpful_votes</th>
+<th id="T_9f93e_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">review_subjectivity</th>
+<th id="T_9f93e_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">review_polarity</th>
+<th id="T_9f93e_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">review_length</th>
+<th id="T_9f93e_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">prod_subjectivity</th>
+<th id="T_9f93e_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">total_star_rating</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>-0.541867</td>
-<td>-0.163948</td>
-<td>-0.202096</td>
-<td>-0.332976</td>
-<td>-0.588460</td>
-<td>0.587934</td>
-<td>0.986359</td>
+<td id="T_9f93e_row0_col0" class="data row0 col0">0.526690</td>
+<td id="T_9f93e_row0_col1" class="data row0 col1">0.721349</td>
+<td id="T_9f93e_row0_col2" class="data row0 col2">1.237916</td>
+<td id="T_9f93e_row0_col3" class="data row0 col3">1.198281</td>
+<td id="T_9f93e_row0_col4" class="data row0 col4">-0.807675</td>
+<td id="T_9f93e_row0_col5" class="data row0 col5">2.094938</td>
+<td id="T_9f93e_row0_col6" class="data row0 col6">1.087520</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>0.528132</td>
-<td>-0.163948</td>
-<td>0.882819</td>
-<td>0.741552</td>
-<td>0.214898</td>
-<td>0.587934</td>
-<td>0.986359</td>
+<td id="T_9f93e_row1_col0" class="data row1 col0">0.526690</td>
+<td id="T_9f93e_row1_col1" class="data row1 col1">-0.124310</td>
+<td id="T_9f93e_row1_col2" class="data row1 col2">-0.063466</td>
+<td id="T_9f93e_row1_col3" class="data row1 col3">-0.605781</td>
+<td id="T_9f93e_row1_col4" class="data row1 col4">-0.580250</td>
+<td id="T_9f93e_row1_col5" class="data row1 col5">0.033623</td>
+<td id="T_9f93e_row1_col6" class="data row1 col6">1.087520</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>0.528132</td>
-<td>-0.163948</td>
-<td>1.461846</td>
-<td>1.409950</td>
-<td>-0.708963</td>
-<td>-1.416116</td>
-<td>-0.351325</td>
+<td id="T_9f93e_row2_col0" class="data row2 col0">-2.504599</td>
+<td id="T_9f93e_row2_col1" class="data row2 col1">-0.124310</td>
+<td id="T_9f93e_row2_col2" class="data row2 col2">-0.453881</td>
+<td id="T_9f93e_row2_col3" class="data row2 col3">0.657062</td>
+<td id="T_9f93e_row2_col4" class="data row2 col4">-0.287845</td>
+<td id="T_9f93e_row2_col5" class="data row2 col5">-1.352533</td>
+<td id="T_9f93e_row2_col6" class="data row2 col6">1.087520</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>0.528132</td>
-<td>-0.163948</td>
-<td>-0.059879</td>
-<td>-1.347747</td>
-<td>-0.307285</td>
-<td>0.957528</td>
-<td>-0.797219</td>
+<td id="T_9f93e_row3_col0" class="data row3 col0">0.526690</td>
+<td id="T_9f93e_row3_col1" class="data row3 col1">-0.124310</td>
+<td id="T_9f93e_row3_col2" class="data row3 col2">0.587225</td>
+<td id="T_9f93e_row3_col3" class="data row3 col3">0.927672</td>
+<td id="T_9f93e_row3_col4" class="data row3 col4">-0.547760</td>
+<td id="T_9f93e_row3_col5" class="data row3 col5">-0.213700</td>
+<td id="T_9f93e_row3_col6" class="data row3 col6">-0.031746</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>-2.681865</td>
-<td>-0.163948</td>
-<td>-1.339834</td>
-<td>-1.278030</td>
-<td>-0.186781</td>
-<td>0.957528</td>
-<td>-0.797219</td>
+<td id="T_9f93e_row4_col0" class="data row4 col0">0.526690</td>
+<td id="T_9f93e_row4_col1" class="data row4 col1">-0.124310</td>
+<td id="T_9f93e_row4_col2" class="data row4 col2">0.587225</td>
+<td id="T_9f93e_row4_col3" class="data row4 col3">1.030761</td>
+<td id="T_9f93e_row4_col4" class="data row4 col4">-0.092909</td>
+<td id="T_9f93e_row4_col5" class="data row4 col5">-0.005865</td>
+<td id="T_9f93e_row4_col6" class="data row4 col6">-1.524099</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">5</td>
-<td>0.528132</td>
-<td>-0.163948</td>
-<td>1.248520</td>
-<td>0.960662</td>
-<td>-0.226949</td>
-<td>0.587934</td>
-<td>0.986359</td>
+<td id="T_9f93e_row5_col0" class="data row5 col0">0.526690</td>
+<td id="T_9f93e_row5_col1" class="data row5 col1">-0.124310</td>
+<td id="T_9f93e_row5_col2" class="data row5 col2">-0.311912</td>
+<td id="T_9f93e_row5_col3" class="data row5 col3">-1.442210</td>
+<td id="T_9f93e_row5_col4" class="data row5 col4">-0.385313</td>
+<td id="T_9f93e_row5_col5" class="data row5 col5">-0.791592</td>
+<td id="T_9f93e_row5_col6" class="data row5 col6">1.087520</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">6</td>
-<td>0.528132</td>
-<td>-0.163948</td>
-<td>1.760502</td>
-<td>-0.790010</td>
-<td>-0.307285</td>
-<td>0.587934</td>
-<td>0.986359</td>
+<td id="T_9f93e_row6_col0" class="data row6 col0">0.526690</td>
+<td id="T_9f93e_row6_col1" class="data row6 col1">-0.124310</td>
+<td id="T_9f93e_row6_col2" class="data row6 col2">0.066672</td>
+<td id="T_9f93e_row6_col3" class="data row6 col3">-0.109664</td>
+<td id="T_9f93e_row6_col4" class="data row6 col4">0.394431</td>
+<td id="T_9f93e_row6_col5" class="data row6 col5">-1.352533</td>
+<td id="T_9f93e_row6_col6" class="data row6 col6">1.087520</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">7</td>
-<td>0.528132</td>
-<td>2.643268</td>
-<td>2.101824</td>
-<td>2.316272</td>
-<td>-0.990139</td>
-<td>1.170548</td>
-<td>1.432253</td>
+<td id="T_9f93e_row7_col0" class="data row7 col0">0.526690</td>
+<td id="T_9f93e_row7_col1" class="data row7 col1">-0.124310</td>
+<td id="T_9f93e_row7_col2" class="data row7 col2">-0.948406</td>
+<td id="T_9f93e_row7_col3" class="data row7 col3">-0.244969</td>
+<td id="T_9f93e_row7_col4" class="data row7 col4">-0.255356</td>
+<td id="T_9f93e_row7_col5" class="data row7 col5">-0.897774</td>
+<td id="T_9f93e_row7_col6" class="data row7 col6">-0.404834</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">8</td>
-<td>0.528132</td>
-<td>-0.163948</td>
-<td>1.385049</td>
-<td>-1.062681</td>
-<td>-0.467956</td>
-<td>0.957528</td>
-<td>-0.797219</td>
+<td id="T_9f93e_row8_col0" class="data row8 col0">0.526690</td>
+<td id="T_9f93e_row8_col1" class="data row8 col1">-0.124310</td>
+<td id="T_9f93e_row8_col2" class="data row8 col2">0.379004</td>
+<td id="T_9f93e_row8_col3" class="data row8 col3">1.450850</td>
+<td id="T_9f93e_row8_col4" class="data row8 col4">-0.580250</td>
+<td id="T_9f93e_row8_col5" class="data row8 col5">-0.524541</td>
+<td id="T_9f93e_row8_col6" class="data row8 col6">1.087520</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">9</td>
-<td>-0.541867</td>
-<td>-0.163948</td>
-<td>-0.650080</td>
-<td>1.142701</td>
-<td>0.014058</td>
-<td>0.587934</td>
-<td>0.986359</td>
+<td id="T_9f93e_row9_col0" class="data row9 col0">0.526690</td>
+<td id="T_9f93e_row9_col1" class="data row9 col1">-0.124310</td>
+<td id="T_9f93e_row9_col2" class="data row9 col2">0.577103</td>
+<td id="T_9f93e_row9_col3" class="data row9 col3">0.889836</td>
+<td id="T_9f93e_row9_col4" class="data row9 col4">0.264473</td>
+<td id="T_9f93e_row9_col5" class="data row9 col5">-0.005865</td>
+<td id="T_9f93e_row9_col6" class="data row9 col6">-1.524099</td>
 </tr>
 </tbody>
 </table>
-
 </div>
+</div>
+</figure>
 </div>
 </div>
 <p>Classes in y_train set were mapped as follows for all non-linear models:</p>
@@ -618,15 +609,6 @@ window.Quarto = {
 </section>
 <section id="examination-of-the-original-multiple-linear-regression" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="examination-of-the-original-multiple-linear-regression"><span class="header-section-number">3.3</span> Examination of the Original Multiple Linear Regression</h2>
-<div id="83ee9940" class="cell" data-execution_count="8">
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="models implemented_files/figure-html/cell-9-output-1.png" width="566" height="411" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
 <section id="inspection-of-linear-model-assumptions" class="level3" data-number="3.3.1">
 <h3 data-number="3.3.1" class="anchored" data-anchor-id="inspection-of-linear-model-assumptions"><span class="header-section-number">3.3.1</span> Inspection of Linear Model Assumptions</h3>
 <p>Generally, on examining the plot of fitted vs.&nbsp;observed values for the linear model, we feel our methods have produced similar outcomes as for <span class="citation" data-cites="percUse">Guha Majumder, Dutta Gupta, and Paul (<a href="references.html#ref-percUse" role="doc-biblioref">2022</a>)</span>. The predicted values appear to have a slightly lesser scale and range than that of the observed values.</p>
@@ -642,30 +624,55 @@ window.Quarto = {
 <li><p><span class="math inline">\(X_{ps}\)</span> corresponds to the product description subjectivity score (replacement for the binary settings for search, experience, or mixed goods from <span class="citation" data-cites="percUse">Guha Majumder, Dutta Gupta, and Paul (<a href="references.html#ref-percUse" role="doc-biblioref">2022</a>)</span>’s model).</p></li>
 <li><p><span class="math inline">\(X_{tsr}\)</span> is the overall star rating for the product.</p></li>
 </ul>
+<p>With this construct, we proceeded to generate a linear model trained on our standard scaled data.</p>
+<div id="cell-fig-mlr-resultss" class="cell" data-execution_count="8">
+<div class="cell-output cell-output-display">
+<div id="fig-mlr-resultss" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mlr-resultss-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="models implemented_files/figure-html/fig-mlr-resultss-output-1.png" width="593" height="449" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mlr-resultss-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.1: Linear Relationship Between Predictors and Response
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 <p>Our testing produced the following coefficients:</p>
-<p><span class="math inline">\(\beta_0\)</span>: 0.18, <span class="math inline">\(\beta_1\)</span>: 0.016,<span class="math inline">\(\beta_2\)</span>: 1.196,<span class="math inline">\(\beta_3\)</span>: 0.008,<span class="math inline">\(\beta_4\)</span>: 0.002,<span class="math inline">\(\beta_5\)</span>: 0.021,<span class="math inline">\(\beta_6\)</span>: -0.005</p>
-<p>These coefficients, trained on standard-scaled data, enabled us to produce the following plot of fitted vs.&nbsp;observed values:</p>
-<p>On new training data, the model appears to underpredict the output value, across the board, for the new data. That being said, there is still a strong linear trend between the predictors and the response. The intent of this model is not to predict the actual number of votes that a review might have, but whether or not that review would be considered useful to customers. Generally examining this result, we would conclude that there is a linear trend between these features, their coefficients, and their corresponding response.</p>
+<p><span class="math inline">\(\beta_0\)</span>: 0.449, <span class="math inline">\(\beta_1\)</span>: 0.219,<span class="math inline">\(\beta_2\)</span>: 4.497,<span class="math inline">\(\beta_3\)</span>: -0.018,<span class="math inline">\(\beta_4\)</span>: 0.002,<span class="math inline">\(\beta_5\)</span>: -0.001,<span class="math inline">\(\beta_6\)</span>: -0.006</p>
+<p>On new training data, the model appears to underpredict the output value, across the board, for the new data. That being said, there is still a strong linear trend between the predictors and the response. The intent of this model is not to predict the actual number of votes that a review might have, but whether or not that review would be considered useful to customers.</p>
+<p>Generally examining this result, we would conclude that there is a linear trend between these features, their coefficients, and their corresponding response.</p>
 </section>
 <section id="homoscedasticity-on-normalized-data" class="level4" data-number="3.3.1.2">
 <h4 data-number="3.3.1.2" class="anchored" data-anchor-id="homoscedasticity-on-normalized-data"><span class="header-section-number">3.3.1.2</span> Homoscedasticity on Normalized Data</h4>
 <p>This model has substantial challenges with heteroscedasticity. Let’s examine a plot of fitted vs.&nbsp;residuals in the model:</p>
-<div id="0a8a7670" class="cell" data-execution_count="9">
+<div id="cell-fig-non-constant-var-1" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="models implemented_files/figure-html/cell-10-output-1.png" width="590" height="411" class="figure-img"></p>
+<div id="fig-non-constant-var-1" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-non-constant-var-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="models implemented_files/figure-html/fig-non-constant-var-1-output-1.png" width="596" height="449" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-non-constant-var-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.2: Heteroscedasticity in Model
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>There is a clear linear pattern in the residuals of this plot. It seems that the test data may have other linear factors associated with it. If we adjust the output to this additional linear factor, we can examine for heteroscedasticity in the adjusted plot.</p>
 <p>Performing a further linear regression on the fitted vs.&nbsp;observed values, we identified a slope <span class="math inline">\(\beta_{1^*}\)</span> of approximately 1.44 and intercept of <span class="math inline">\(\beta_{0^*}\)</span> of approximately 0.003. Adjusting the predictions and plotting the re-fitted vs.&nbsp;observed values, we see the following:</p>
-<div id="337e86bf" class="cell" data-execution_count="10">
+<div id="cell-fig-non-constant-var-2" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="models implemented_files/figure-html/cell-11-output-1.png" width="590" height="411" class="figure-img"></p>
+<div id="fig-non-constant-var-2" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-non-constant-var-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="models implemented_files/figure-html/fig-non-constant-var-2-output-1.png" width="569" height="411" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-non-constant-var-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.3: Heteroscedasticity in Adjusted Model
+</figcaption>
 </figure>
 </div>
 </div>
@@ -675,11 +682,16 @@ window.Quarto = {
 </section>
 <section id="normality-in-residuals" class="level4" data-number="3.3.1.3">
 <h4 data-number="3.3.1.3" class="anchored" data-anchor-id="normality-in-residuals"><span class="header-section-number">3.3.1.3</span> Normality in Residuals</h4>
-<div id="784d1351" class="cell" data-execution_count="11">
+<div id="cell-fig-qq-resid" class="cell" data-execution_count="11">
 <div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="models implemented_files/figure-html/cell-12-output-1.png" width="585" height="429" class="figure-img"></p>
+<div id="fig-qq-resid" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-qq-resid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="models implemented_files/figure-html/fig-qq-resid-output-1.png" width="597" height="477" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-qq-resid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.4: Model Residuals are Abnormal
+</figcaption>
 </figure>
 </div>
 </div>
@@ -690,6 +702,16 @@ window.Quarto = {
 <h4 data-number="3.3.1.4" class="anchored" data-anchor-id="conclusion-on-mlr-model"><span class="header-section-number">3.3.1.4</span> Conclusion on MLR model</h4>
 <p>We conclude that the MLR model is <em>not</em> a statistically well-performing model for the purpose of <em>predicting</em> the number of <em>helpful votes</em> a review comment will receive.</p>
 <p>That being said, in spite of its violations of the assumptions of multiple linear regression, we <em>do</em> find that the model is useful in predicting a relative usefulness score for a given review comment. If all comments in a thread for a specific product were run against this model, we believe that the model will reflect the relative usefulness of a comment with respect to other comments in the same thread. Sorting and organizing comments based on the maximum output value could bring the most useful comments to the top of the queue for review by potential shoppers.</p>
+<p>We’ll examine the per-product correlation next:</p>
+<div id="6670ebff" class="cell" data-execution_count="12">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="models implemented_files/figure-html/cell-13-output-1.png" width="593" height="429" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
 <p>Having pursued the suggested research of <span class="citation" data-cites="percUse">Guha Majumder, Dutta Gupta, and Paul (<a href="references.html#ref-percUse" role="doc-biblioref">2022</a>)</span> and producing similar results, we will proceed to evaluate other models for detecting useful comments.</p>
 </section>
 </section>
@@ -709,60 +731,55 @@ window.Quarto = {
 </section>
 <section id="logistic-regression-test-results" class="level3" data-number="3.4.3">
 <h3 data-number="3.4.3" class="anchored" data-anchor-id="logistic-regression-test-results"><span class="header-section-number">3.4.3</span> Logistic Regression Test Results</h3>
-<div id="72617daa" class="cell" data-execution_count="12">
+<pre><code></code></pre>
+<div id="2d16e4b7" class="cell" data-execution_count="13">
 <div class="cell-output cell-output-display">
-<div>
+<style type="text/css">
+</style>
 
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table id="T_27f53" data-quarto-postprocess="true" class="table table-sm table-striped small">
 <thead>
 <tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">Model</th>
-<th data-quarto-table-cell-role="th">Useful Level</th>
-<th data-quarto-table-cell-role="th">Accuracy</th>
-<th data-quarto-table-cell-role="th">F1</th>
-<th data-quarto-table-cell-role="th">Precision</th>
-<th data-quarto-table-cell-role="th">Recall</th>
+<th id="T_27f53_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Model</th>
+<th id="T_27f53_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Useful Level</th>
+<th id="T_27f53_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Accuracy</th>
+<th id="T_27f53_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">F1</th>
+<th id="T_27f53_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Precision</th>
+<th id="T_27f53_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">Recall</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>Logistic Regression (TUNED)</td>
-<td>above 0</td>
-<td>0.986275</td>
-<td>0.810916</td>
-<td>1.0</td>
-<td>0.681967</td>
+<td id="T_27f53_row0_col0" class="data row0 col0">Logistic Regression (TUNED)</td>
+<td id="T_27f53_row0_col1" class="data row0 col1">above 0</td>
+<td id="T_27f53_row0_col2" class="data row0 col2">0.795551</td>
+<td id="T_27f53_row0_col3" class="data row0 col3">0.643692</td>
+<td id="T_27f53_row0_col4" class="data row0 col4">1.000000</td>
+<td id="T_27f53_row0_col5" class="data row0 col5">0.474592</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>Logistic Regression (ADASYN)</td>
-<td>above 0</td>
-<td>0.985426</td>
-<td>0.796844</td>
-<td>1.0</td>
-<td>0.662295</td>
+<td id="T_27f53_row1_col0" class="data row1 col0">Logistic Regression (ADASYN)</td>
+<td id="T_27f53_row1_col1" class="data row1 col1">above 0</td>
+<td id="T_27f53_row1_col2" class="data row1 col2">0.794138</td>
+<td id="T_27f53_row1_col3" class="data row1 col3">0.640345</td>
+<td id="T_27f53_row1_col4" class="data row1 col4">1.000000</td>
+<td id="T_27f53_row1_col5" class="data row1 col5">0.470962</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>Logistic Regression (SMOTE)</td>
-<td>above 0</td>
-<td>0.986275</td>
-<td>0.810916</td>
-<td>1.0</td>
-<td>0.681967</td>
+<td id="T_27f53_row2_col0" class="data row2 col0">Logistic Regression (SMOTE)</td>
+<td id="T_27f53_row2_col1" class="data row2 col1">above 0</td>
+<td id="T_27f53_row2_col2" class="data row2 col2">0.790254</td>
+<td id="T_27f53_row2_col3" class="data row2 col3">0.631056</td>
+<td id="T_27f53_row2_col4" class="data row2 col4">1.000000</td>
+<td id="T_27f53_row2_col5" class="data row2 col5">0.460980</td>
 </tr>
 </tbody>
 </table>
-
-</div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="models implemented_files/figure-html/cell-13-output-2.png" width="310" height="566" class="figure-img"></p>
+<p><img src="models implemented_files/figure-html/cell-14-output-2.png" width="301" height="566" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -786,77 +803,64 @@ window.Quarto = {
 <section id="knn-test-results" class="level3" data-number="3.5.2">
 <h3 data-number="3.5.2" class="anchored" data-anchor-id="knn-test-results"><span class="header-section-number">3.5.2</span> KNN Test Results</h3>
 <!--try to tweak and tune this model for better performance-->
-<div id="7e538f7c" class="cell" data-execution_count="14">
+<div id="67b9e511" class="cell" data-execution_count="15">
 <div class="cell-output cell-output-display">
-<div>
+<style type="text/css">
+</style>
 
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table id="T_cadd5" data-quarto-postprocess="true" class="table table-sm table-striped small">
 <thead>
 <tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">Model</th>
-<th data-quarto-table-cell-role="th">Useful Level</th>
-<th data-quarto-table-cell-role="th">Accuracy</th>
-<th data-quarto-table-cell-role="th">F1</th>
-<th data-quarto-table-cell-role="th">Precision</th>
-<th data-quarto-table-cell-role="th">Recall</th>
+<th id="T_cadd5_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Model</th>
+<th id="T_cadd5_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Useful Level</th>
+<th id="T_cadd5_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Accuracy</th>
+<th id="T_cadd5_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">F1</th>
+<th id="T_cadd5_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Precision</th>
+<th id="T_cadd5_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">Recall</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">3</td>
-<td>KNN (k=3)</td>
-<td>above 0</td>
-<td>0.984719</td>
-<td>0.785714</td>
-<td>0.994975</td>
-<td>0.649180</td>
+<td id="T_cadd5_row0_col0" class="data row0 col0">KNN (k=3)</td>
+<td id="T_cadd5_row0_col1" class="data row0 col1">above 0</td>
+<td id="T_cadd5_row0_col2" class="data row0 col2">0.731992</td>
+<td id="T_cadd5_row0_col3" class="data row0 col3">0.480493</td>
+<td id="T_cadd5_row0_col4" class="data row0 col4">0.977716</td>
+<td id="T_cadd5_row0_col5" class="data row0 col5">0.318512</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">4</td>
-<td>KNN (k=5)</td>
-<td>above 0</td>
-<td>0.983799</td>
-<td>0.769849</td>
-<td>0.994805</td>
-<td>0.627869</td>
+<td id="T_cadd5_row1_col0" class="data row1 col0">KNN (k=5)</td>
+<td id="T_cadd5_row1_col1" class="data row1 col1">above 0</td>
+<td id="T_cadd5_row1_col2" class="data row1 col2">0.727048</td>
+<td id="T_cadd5_row1_col3" class="data row1 col3">0.462821</td>
+<td id="T_cadd5_row1_col4" class="data row1 col4">0.988131</td>
+<td id="T_cadd5_row1_col5" class="data row1 col5">0.302178</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">5</td>
-<td>KNN (k=7)</td>
-<td>above 0</td>
-<td>0.983021</td>
-<td>0.756098</td>
-<td>0.994652</td>
-<td>0.609836</td>
+<td id="T_cadd5_row2_col0" class="data row2 col0">KNN (k=7)</td>
+<td id="T_cadd5_row2_col1" class="data row2 col1">above 0</td>
+<td id="T_cadd5_row2_col2" class="data row2 col2">0.720339</td>
+<td id="T_cadd5_row2_col3" class="data row2 col3">0.443038</td>
+<td id="T_cadd5_row2_col4" class="data row2 col4">0.984375</td>
+<td id="T_cadd5_row2_col5" class="data row2 col5">0.285844</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">6</td>
-<td>KNN (k=9)</td>
-<td>above 0</td>
-<td>0.982596</td>
-<td>0.748466</td>
-<td>0.994565</td>
-<td>0.600000</td>
+<td id="T_cadd5_row3_col0" class="data row3 col0">KNN (k=9)</td>
+<td id="T_cadd5_row3_col1" class="data row3 col1">above 0</td>
+<td id="T_cadd5_row3_col2" class="data row3 col2">0.714689</td>
+<td id="T_cadd5_row3_col3" class="data row3 col3">0.424501</td>
+<td id="T_cadd5_row3_col4" class="data row3 col4">0.986755</td>
+<td id="T_cadd5_row3_col5" class="data row3 col5">0.270417</td>
 </tr>
 </tbody>
 </table>
-
-</div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="models implemented_files/figure-html/cell-15-output-2.png" width="328" height="950" class="figure-img"></p>
+<p><img src="models implemented_files/figure-html/cell-16-output-2.png" width="319" height="950" class="figure-img"></p>
 </figure>
 </div>
-</div>
-</div>
-<div id="3137e402" class="cell" data-execution_count="15">
-<div class="cell-output cell-output-stdout">
-<pre><code>Very good a lot of missions to do I got it for my 8 year old son
-Runs very poorly on ps5, slow frame rate &amp; stuttering. I would not pay more than $20 for this garbage.</code></pre>
 </div>
 </div>
 </section>
@@ -869,62 +873,56 @@ Runs very poorly on ps5, slow frame rate &amp; stuttering. I would not pay more 
 <p>The complexity of a SVM model is determined by the choice of kernel function that allows to capture all nuances of the data. Below are the implmentation results of the performance metrics of Support Vector Machine (SVM) models trained with different kernel functions: polynomial (SVM-Poly), radial basis function (SVM-RBF), and sigmoid (SVM-Sigmoid).</p>
 <p>To tune each version of this model, we leveraged a reduced set of principal components, and adjusted class weighting, as having useful votes for a product is a relative rarity across each of the e-commerce platforms. To boost our recall, we elected to assign weights of 0.1 to class 0 (not useful) and 0.9 to class 1 (useful).</p>
 </section>
-<section id="knn-test-results-1" class="level3" data-number="3.6.2">
-<h3 data-number="3.6.2" class="anchored" data-anchor-id="knn-test-results-1"><span class="header-section-number">3.6.2</span> KNN Test Results</h3>
-<div id="f7d70912" class="cell" data-execution_count="16">
+<section id="svm-test-results" class="level3" data-number="3.6.2">
+<h3 data-number="3.6.2" class="anchored" data-anchor-id="svm-test-results"><span class="header-section-number">3.6.2</span> SVM Test Results</h3>
+<div id="f4752587" class="cell" data-execution_count="17">
 <div class="cell-output cell-output-display">
-<div>
+<style type="text/css">
+</style>
 
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table id="T_37e61" data-quarto-postprocess="true" class="table table-sm table-striped small">
 <thead>
 <tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">Model</th>
-<th data-quarto-table-cell-role="th">Useful Level</th>
-<th data-quarto-table-cell-role="th">Accuracy</th>
-<th data-quarto-table-cell-role="th">F1</th>
-<th data-quarto-table-cell-role="th">Precision</th>
-<th data-quarto-table-cell-role="th">Recall</th>
+<th id="T_37e61_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Model</th>
+<th id="T_37e61_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Useful Level</th>
+<th id="T_37e61_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Accuracy</th>
+<th id="T_37e61_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">F1</th>
+<th id="T_37e61_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Precision</th>
+<th id="T_37e61_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">Recall</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">7</td>
-<td>SVM-Poly</td>
-<td>above 0</td>
-<td>0.986275</td>
-<td>0.810916</td>
-<td>1.000000</td>
-<td>0.681967</td>
+<td id="T_37e61_row0_col0" class="data row0 col0">SVM-Poly</td>
+<td id="T_37e61_row0_col1" class="data row0 col1">above 0</td>
+<td id="T_37e61_row0_col2" class="data row0 col2">0.785664</td>
+<td id="T_37e61_row0_col3" class="data row0 col3">0.619912</td>
+<td id="T_37e61_row0_col4" class="data row0 col4">1.000000</td>
+<td id="T_37e61_row0_col5" class="data row0 col5">0.449183</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">8</td>
-<td>SVM-RBF</td>
-<td>above 0</td>
-<td>0.983162</td>
-<td>0.777570</td>
-<td>0.904348</td>
-<td>0.681967</td>
+<td id="T_37e61_row1_col0" class="data row1 col0">SVM-RBF</td>
+<td id="T_37e61_row1_col1" class="data row1 col1">above 0</td>
+<td id="T_37e61_row1_col2" class="data row1 col2">0.781780</td>
+<td id="T_37e61_row1_col3" class="data row1 col3">0.612782</td>
+<td id="T_37e61_row1_col4" class="data row1 col4">0.989879</td>
+<td id="T_37e61_row1_col5" class="data row1 col5">0.443739</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">9</td>
-<td>SVM-Sigmoid</td>
-<td>above 0</td>
-<td>0.976866</td>
-<td>0.729529</td>
-<td>0.736227</td>
-<td>0.722951</td>
+<td id="T_37e61_row2_col0" class="data row2 col0">SVM-Sigmoid</td>
+<td id="T_37e61_row2_col1" class="data row2 col1">above 0</td>
+<td id="T_37e61_row2_col2" class="data row2 col2">0.737288</td>
+<td id="T_37e61_row2_col3" class="data row2 col3">0.583893</td>
+<td id="T_37e61_row2_col4" class="data row2 col4">0.760933</td>
+<td id="T_37e61_row2_col5" class="data row2 col5">0.473684</td>
 </tr>
 </tbody>
 </table>
-
-</div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="models implemented_files/figure-html/cell-17-output-2.png" width="310" height="566" class="figure-img"></p>
+<p><img src="models implemented_files/figure-html/cell-18-output-2.png" width="301" height="566" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -935,7 +933,8 @@ Runs very poorly on ps5, slow frame rate &amp; stuttering. I would not pay more 
 <li><p>SVM with a radial basis function kernel (SVM-RBF) follows closely with an F1 score of approximately 78.15%. Although it has slightly lower precision compared to SVM-Poly, it demonstrates a balanced trade-off between precision and recall.</p></li>
 <li><p>SVM with a sigmoid kernel (SVM-Sigmoid) exhibits the lowest F1 score of approximately 59.24%, indicating comparatively lower performance in capturing both precision and recall.</p></li>
 </ol>
-<p>While all SVM models exhibit high accuracy, SVM with a polynomial kernel (SVM-Poly) emerges as the most favorable choice based on its highest F1 score and perfect precision. <!-- 
+<p>While all SVM models exhibit high accuracy, SVM with a polynomial kernel (SVM-Poly) emerges as the most favorable choice based on its highest F1 score and perfect precision.</p>
+<!-- 
 Is this what we want to say? if our goals are to instead identify potentially useful comments, not just predict whether or not it will have any votes against it, I think that the RBF or the sigmoid model may be best for our application
 
 Here's an example - 
@@ -944,245 +943,123 @@ Here, the resuts of the sigmoid model are most promising for our outcomes, as th
 
 Let's have a look at some of those predictions.
 
---></p>
-<div id="2a61a96a" class="cell" data-execution_count="17">
-<div class="cell-output cell-output-display">
-<div>
-
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">review_content</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">19198</td>
-<td>Runs very poorly on ps5, slow frame rate &amp; stu...</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">19193</td>
-<td>Very good a lot of missions to do I got it for...</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">6784</td>
-<td>Our last vacuum was a DC-07. Used it for 18 ye...</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">8320</td>
-<td>Ive found TurboTax for 2023 is dumbed down res...</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">11911</td>
-<td>[This review was collected as part of a promot...</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">11764</td>
-<td>[This review was collected as part of a promot...</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">11979</td>
-<td>[This review was collected as part of a promot...</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">14715</td>
-<td>I purchased this particular unit because my mo...</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">11646</td>
-<td>I recently upgraded my home entertainment syst...</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">11836</td>
-<td>[This review was collected as part of a promot...</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
+-->
 <p>RBF, unexpectedly, seems to associate being part of a promotion with a comment being useful. It’s possible that other comments in this group have similar features and qualities to promotional review comments. These results are sorted by the probability that they would be classified has having votes flagging them as being useful. The highest</p>
 <p>What about sigmoid?</p>
-<div id="30cba599" class="cell" data-execution_count="18">
-<div class="cell-output cell-output-display">
-<div>
-
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">review_content</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">6784</td>
-<td>Our last vacuum was a DC-07. Used it for 18 ye...</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">7749</td>
-<td>I was not able to complete my attempt to file ...</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">7327</td>
-<td>Downloading the desktop version these last sev...</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">9098</td>
-<td>I've been a TurboTax user for many years, and ...</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">8950</td>
-<td>It took 3 days and 2 phone calls to Tech Suppo...</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">7333</td>
-<td>I had 1 major problem. 1099-DIV and the Foreig...</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">8320</td>
-<td>Ive found TurboTax for 2023 is dumbed down res...</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">8471</td>
-<td>O K in using turbo tax, used for 10 years grea...</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">6881</td>
-<td>Easy to buy process, notification emails about...</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">11275</td>
-<td>DOES the tires have a air fild tires</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
 <p>Sigmoid seems to identify a wider variety of comments, some (subjectively) useful, some not, and identifies fewer items that were part of a promotion.</p>
 </section>
 </section>
 <section id="model-comparison" class="level2" data-number="3.7">
 <h2 data-number="3.7" class="anchored" data-anchor-id="model-comparison"><span class="header-section-number">3.7</span> Model Comparison</h2>
 <p>We examine the following table to compare and contrast our implemented models on our collected data.</p>
-<div id="e8f62e31" class="cell" data-execution_count="19">
-<div class="cell-output cell-output-display" data-execution_count="19">
-<div>
+<div class="cell" data-execution_count="20">
+<div id="tbl-final-results" class="cell quarto-float anchored" data-execution_count="20">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-final-results-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.4: Summary Metrics (all evaluated models)
+</figcaption>
+<div aria-describedby="tbl-final-results-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="20">
+<style type="text/css">
+</style>
 
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table id="T_71a7d" class="do-not-create-environment cell table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">Model</th>
-<th data-quarto-table-cell-role="th">Useful Level</th>
-<th data-quarto-table-cell-role="th">Accuracy</th>
-<th data-quarto-table-cell-role="th">F1</th>
-<th data-quarto-table-cell-role="th">Precision</th>
-<th data-quarto-table-cell-role="th">Recall</th>
+<th id="T_71a7d_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Model</th>
+<th id="T_71a7d_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Useful Level</th>
+<th id="T_71a7d_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Accuracy</th>
+<th id="T_71a7d_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">F1</th>
+<th id="T_71a7d_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Precision</th>
+<th id="T_71a7d_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">Recall</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>Logistic Regression (TUNED)</td>
-<td>above 0</td>
-<td>0.986275</td>
-<td>0.810916</td>
-<td>1.000000</td>
-<td>0.681967</td>
+<td id="T_71a7d_row0_col0" class="data row0 col0">Logistic Regression (TUNED)</td>
+<td id="T_71a7d_row0_col1" class="data row0 col1">above 0</td>
+<td id="T_71a7d_row0_col2" class="data row0 col2">0.795551</td>
+<td id="T_71a7d_row0_col3" class="data row0 col3">0.643692</td>
+<td id="T_71a7d_row0_col4" class="data row0 col4">1.000000</td>
+<td id="T_71a7d_row0_col5" class="data row0 col5">0.474592</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>Logistic Regression (ADASYN)</td>
-<td>above 0</td>
-<td>0.985426</td>
-<td>0.796844</td>
-<td>1.000000</td>
-<td>0.662295</td>
+<td id="T_71a7d_row1_col0" class="data row1 col0">Logistic Regression (ADASYN)</td>
+<td id="T_71a7d_row1_col1" class="data row1 col1">above 0</td>
+<td id="T_71a7d_row1_col2" class="data row1 col2">0.794138</td>
+<td id="T_71a7d_row1_col3" class="data row1 col3">0.640345</td>
+<td id="T_71a7d_row1_col4" class="data row1 col4">1.000000</td>
+<td id="T_71a7d_row1_col5" class="data row1 col5">0.470962</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>Logistic Regression (SMOTE)</td>
-<td>above 0</td>
-<td>0.986275</td>
-<td>0.810916</td>
-<td>1.000000</td>
-<td>0.681967</td>
+<td id="T_71a7d_row2_col0" class="data row2 col0">Logistic Regression (SMOTE)</td>
+<td id="T_71a7d_row2_col1" class="data row2 col1">above 0</td>
+<td id="T_71a7d_row2_col2" class="data row2 col2">0.790254</td>
+<td id="T_71a7d_row2_col3" class="data row2 col3">0.631056</td>
+<td id="T_71a7d_row2_col4" class="data row2 col4">1.000000</td>
+<td id="T_71a7d_row2_col5" class="data row2 col5">0.460980</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>KNN (k=3)</td>
-<td>above 0</td>
-<td>0.984719</td>
-<td>0.785714</td>
-<td>0.994975</td>
-<td>0.649180</td>
+<td id="T_71a7d_row3_col0" class="data row3 col0">KNN (k=3)</td>
+<td id="T_71a7d_row3_col1" class="data row3 col1">above 0</td>
+<td id="T_71a7d_row3_col2" class="data row3 col2">0.731992</td>
+<td id="T_71a7d_row3_col3" class="data row3 col3">0.480493</td>
+<td id="T_71a7d_row3_col4" class="data row3 col4">0.977716</td>
+<td id="T_71a7d_row3_col5" class="data row3 col5">0.318512</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>KNN (k=5)</td>
-<td>above 0</td>
-<td>0.983799</td>
-<td>0.769849</td>
-<td>0.994805</td>
-<td>0.627869</td>
+<td id="T_71a7d_row4_col0" class="data row4 col0">KNN (k=5)</td>
+<td id="T_71a7d_row4_col1" class="data row4 col1">above 0</td>
+<td id="T_71a7d_row4_col2" class="data row4 col2">0.727048</td>
+<td id="T_71a7d_row4_col3" class="data row4 col3">0.462821</td>
+<td id="T_71a7d_row4_col4" class="data row4 col4">0.988131</td>
+<td id="T_71a7d_row4_col5" class="data row4 col5">0.302178</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">5</td>
-<td>KNN (k=7)</td>
-<td>above 0</td>
-<td>0.983021</td>
-<td>0.756098</td>
-<td>0.994652</td>
-<td>0.609836</td>
+<td id="T_71a7d_row5_col0" class="data row5 col0">KNN (k=7)</td>
+<td id="T_71a7d_row5_col1" class="data row5 col1">above 0</td>
+<td id="T_71a7d_row5_col2" class="data row5 col2">0.720339</td>
+<td id="T_71a7d_row5_col3" class="data row5 col3">0.443038</td>
+<td id="T_71a7d_row5_col4" class="data row5 col4">0.984375</td>
+<td id="T_71a7d_row5_col5" class="data row5 col5">0.285844</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">6</td>
-<td>KNN (k=9)</td>
-<td>above 0</td>
-<td>0.982596</td>
-<td>0.748466</td>
-<td>0.994565</td>
-<td>0.600000</td>
+<td id="T_71a7d_row6_col0" class="data row6 col0">KNN (k=9)</td>
+<td id="T_71a7d_row6_col1" class="data row6 col1">above 0</td>
+<td id="T_71a7d_row6_col2" class="data row6 col2">0.714689</td>
+<td id="T_71a7d_row6_col3" class="data row6 col3">0.424501</td>
+<td id="T_71a7d_row6_col4" class="data row6 col4">0.986755</td>
+<td id="T_71a7d_row6_col5" class="data row6 col5">0.270417</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">7</td>
-<td>SVM-Poly</td>
-<td>above 0</td>
-<td>0.986275</td>
-<td>0.810916</td>
-<td>1.000000</td>
-<td>0.681967</td>
+<td id="T_71a7d_row7_col0" class="data row7 col0">SVM-Poly</td>
+<td id="T_71a7d_row7_col1" class="data row7 col1">above 0</td>
+<td id="T_71a7d_row7_col2" class="data row7 col2">0.785664</td>
+<td id="T_71a7d_row7_col3" class="data row7 col3">0.619912</td>
+<td id="T_71a7d_row7_col4" class="data row7 col4">1.000000</td>
+<td id="T_71a7d_row7_col5" class="data row7 col5">0.449183</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">8</td>
-<td>SVM-RBF</td>
-<td>above 0</td>
-<td>0.983162</td>
-<td>0.777570</td>
-<td>0.904348</td>
-<td>0.681967</td>
+<td id="T_71a7d_row8_col0" class="data row8 col0">SVM-RBF</td>
+<td id="T_71a7d_row8_col1" class="data row8 col1">above 0</td>
+<td id="T_71a7d_row8_col2" class="data row8 col2">0.781780</td>
+<td id="T_71a7d_row8_col3" class="data row8 col3">0.612782</td>
+<td id="T_71a7d_row8_col4" class="data row8 col4">0.989879</td>
+<td id="T_71a7d_row8_col5" class="data row8 col5">0.443739</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">9</td>
-<td>SVM-Sigmoid</td>
-<td>above 0</td>
-<td>0.976866</td>
-<td>0.729529</td>
-<td>0.736227</td>
-<td>0.722951</td>
+<td id="T_71a7d_row9_col0" class="data row9 col0">SVM-Sigmoid</td>
+<td id="T_71a7d_row9_col1" class="data row9 col1">above 0</td>
+<td id="T_71a7d_row9_col2" class="data row9 col2">0.737288</td>
+<td id="T_71a7d_row9_col3" class="data row9 col3">0.583893</td>
+<td id="T_71a7d_row9_col4" class="data row9 col4">0.760933</td>
+<td id="T_71a7d_row9_col5" class="data row9 col5">0.473684</td>
 </tr>
 </tbody>
 </table>
-
 </div>
+</div>
+</figure>
 </div>
 </div>
 <p>Each of these models had similar performance in terms of accuracy and precision. A key consideration for us is within the realm of recall in that false positives are potentially beneficial to the generalization of this model to identify reviews that are useful, but currently possess no helpful votes. None of the models delivered any false positives, but having high recall may support identification of new, useful comments.</p>
