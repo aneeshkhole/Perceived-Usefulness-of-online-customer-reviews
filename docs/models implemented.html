@@ -206,12 +206,15 @@ window.Quarto = {
   <li><a href="#included-variables" id="toc-included-variables" class="nav-link active" data-scroll-target="#included-variables"><span class="header-section-number">3.1</span> Included Variables</a></li>
   <li><a href="#data-adjustments" id="toc-data-adjustments" class="nav-link" data-scroll-target="#data-adjustments"><span class="header-section-number">3.2</span> Data Adjustments</a>
   <ul class="collapse">
-  <li><a href="#training-data" id="toc-training-data" class="nav-link" data-scroll-target="#training-data"><span class="header-section-number">3.2.1</span> Training Data</a></li>
-  <li><a href="#testing-data" id="toc-testing-data" class="nav-link" data-scroll-target="#testing-data"><span class="header-section-number">3.2.2</span> Testing Data</a></li>
+  <li><a href="#dimensionality-reduction" id="toc-dimensionality-reduction" class="nav-link" data-scroll-target="#dimensionality-reduction"><span class="header-section-number">3.2.1</span> Dimensionality Reduction</a></li>
+  <li><a href="#training-data" id="toc-training-data" class="nav-link" data-scroll-target="#training-data"><span class="header-section-number">3.2.2</span> Training Data</a></li>
+  <li><a href="#testing-data" id="toc-testing-data" class="nav-link" data-scroll-target="#testing-data"><span class="header-section-number">3.2.3</span> Testing Data</a></li>
+  <li><a href="#desired-outcomes-and-objectives" id="toc-desired-outcomes-and-objectives" class="nav-link" data-scroll-target="#desired-outcomes-and-objectives"><span class="header-section-number">3.2.4</span> Desired Outcomes and Objectives</a></li>
   </ul></li>
   <li><a href="#examination-of-the-original-multiple-linear-regression" id="toc-examination-of-the-original-multiple-linear-regression" class="nav-link" data-scroll-target="#examination-of-the-original-multiple-linear-regression"><span class="header-section-number">3.3</span> Examination of the Original Multiple Linear Regression</a>
   <ul class="collapse">
-  <li><a href="#inspection-of-linear-model-assumptions" id="toc-inspection-of-linear-model-assumptions" class="nav-link" data-scroll-target="#inspection-of-linear-model-assumptions"><span class="header-section-number">3.3.1</span> Inspection of Linear Model Assumptions</a></li>
+  <li><a href="#linear-model-construction" id="toc-linear-model-construction" class="nav-link" data-scroll-target="#linear-model-construction"><span class="header-section-number">3.3.1</span> Linear Model Construction</a></li>
+  <li><a href="#inspection-of-linear-model-assumptions" id="toc-inspection-of-linear-model-assumptions" class="nav-link" data-scroll-target="#inspection-of-linear-model-assumptions"><span class="header-section-number">3.3.2</span> Inspection of Linear Model Assumptions</a></li>
   </ul></li>
   <li><a href="#logistic-regression-classification" id="toc-logistic-regression-classification" class="nav-link" data-scroll-target="#logistic-regression-classification"><span class="header-section-number">3.4</span> Logistic Regression Classification</a>
   <ul class="collapse">
@@ -265,68 +268,83 @@ window.Quarto = {
 </ul>
 <section id="included-variables" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="included-variables"><span class="header-section-number">3.1</span> Included Variables</h2>
-<div class="cell" data-execution_count="5">
-<div id="tbl-var-selection" class="cell quarto-float anchored" data-execution_count="5">
+<div class="cell" data-execution_count="6">
+<div id="tbl-var-selection" class="cell quarto-float anchored" data-execution_count="6">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-var-selection-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;3.1: Selected Variables for Model Training
 </figcaption>
 <div aria-describedby="tbl-var-selection-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="6">
 <style type="text/css">
 </style>
 
-<table id="T_4d058" class="do-not-create-environment cell table table-sm table-striped small" data-quarto-postprocess="true">
+<table id="T_333d8" class="do-not-create-environment cell table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
-<th id="T_4d058_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Variable</th>
-<th id="T_4d058_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Pre-Transformation Type</th>
-<th id="T_4d058_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Post-Transformation Type</th>
-<th id="T_4d058_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Reason for Inclusion</th>
+<th id="T_333d8_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Variable</th>
+<th id="T_333d8_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Pre-Transformation Type</th>
+<th id="T_333d8_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Post-Transformation Type</th>
+<th id="T_333d8_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Purpose</th>
+<th id="T_333d8_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Reason for Inclusion</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_4d058_row0_col0" class="data row0 col0">review_star_rating</td>
-<td id="T_4d058_row0_col1" class="data row0 col1">int</td>
-<td id="T_4d058_row0_col2" class="data row0 col2">PCA scaled float</td>
-<td id="T_4d058_row0_col3" class="data row0 col3">literature survey</td>
+<td id="T_333d8_row0_col0" class="data row0 col0">review_star_rating</td>
+<td id="T_333d8_row0_col1" class="data row0 col1">int</td>
+<td id="T_333d8_row0_col2" class="data row0 col2">PCA scaled float</td>
+<td id="T_333d8_row0_col3" class="data row0 col3">feature</td>
+<td id="T_333d8_row0_col4" class="data row0 col4">literature survey</td>
 </tr>
 <tr class="even">
-<td id="T_4d058_row1_col0" class="data row1 col0">review_helpful_votes</td>
-<td id="T_4d058_row1_col1" class="data row1 col1">int</td>
-<td id="T_4d058_row1_col2" class="data row1 col2">PCA scaled float</td>
-<td id="T_4d058_row1_col3" class="data row1 col3">literature survey</td>
+<td id="T_333d8_row1_col0" class="data row1 col0">review_subjectivity</td>
+<td id="T_333d8_row1_col1" class="data row1 col1">float</td>
+<td id="T_333d8_row1_col2" class="data row1 col2">PCA scaled float</td>
+<td id="T_333d8_row1_col3" class="data row1 col3">feature</td>
+<td id="T_333d8_row1_col4" class="data row1 col4">literature survey</td>
 </tr>
 <tr class="odd">
-<td id="T_4d058_row2_col0" class="data row2 col0">review_subjectivity</td>
-<td id="T_4d058_row2_col1" class="data row2 col1">float</td>
-<td id="T_4d058_row2_col2" class="data row2 col2">PCA scaled float</td>
-<td id="T_4d058_row2_col3" class="data row2 col3">intuition</td>
+<td id="T_333d8_row2_col0" class="data row2 col0">review_polarity</td>
+<td id="T_333d8_row2_col1" class="data row2 col1">float</td>
+<td id="T_333d8_row2_col2" class="data row2 col2">PCA scaled float</td>
+<td id="T_333d8_row2_col3" class="data row2 col3">feature</td>
+<td id="T_333d8_row2_col4" class="data row2 col4">literature survey</td>
 </tr>
 <tr class="even">
-<td id="T_4d058_row3_col0" class="data row3 col0">review_polarity</td>
-<td id="T_4d058_row3_col1" class="data row3 col1">float</td>
-<td id="T_4d058_row3_col2" class="data row3 col2">PCA scaled float</td>
-<td id="T_4d058_row3_col3" class="data row3 col3">intuition</td>
+<td id="T_333d8_row3_col0" class="data row3 col0">review_length</td>
+<td id="T_333d8_row3_col1" class="data row3 col1">int</td>
+<td id="T_333d8_row3_col2" class="data row3 col2">PCA scaled float</td>
+<td id="T_333d8_row3_col3" class="data row3 col3">feature</td>
+<td id="T_333d8_row3_col4" class="data row3 col4">literature survey</td>
 </tr>
 <tr class="odd">
-<td id="T_4d058_row4_col0" class="data row4 col0">review_length</td>
-<td id="T_4d058_row4_col1" class="data row4 col1">int</td>
-<td id="T_4d058_row4_col2" class="data row4 col2">PCA scaled float</td>
-<td id="T_4d058_row4_col3" class="data row4 col3">literature survey</td>
+<td id="T_333d8_row4_col0" class="data row4 col0">prod_subjectivity</td>
+<td id="T_333d8_row4_col1" class="data row4 col1">float</td>
+<td id="T_333d8_row4_col2" class="data row4 col2">PCA scaled float</td>
+<td id="T_333d8_row4_col3" class="data row4 col3">feature</td>
+<td id="T_333d8_row4_col4" class="data row4 col4">intuition</td>
 </tr>
 <tr class="even">
-<td id="T_4d058_row5_col0" class="data row5 col0">prod_subjectivity</td>
-<td id="T_4d058_row5_col1" class="data row5 col1">float</td>
-<td id="T_4d058_row5_col2" class="data row5 col2">PCA scaled float</td>
-<td id="T_4d058_row5_col3" class="data row5 col3">intuition</td>
+<td id="T_333d8_row5_col0" class="data row5 col0">total_star_rating</td>
+<td id="T_333d8_row5_col1" class="data row5 col1">float</td>
+<td id="T_333d8_row5_col2" class="data row5 col2">PCA scaled float</td>
+<td id="T_333d8_row5_col3" class="data row5 col3">feature</td>
+<td id="T_333d8_row5_col4" class="data row5 col4">literature survey</td>
 </tr>
 <tr class="odd">
-<td id="T_4d058_row6_col0" class="data row6 col0">total_star_rating</td>
-<td id="T_4d058_row6_col1" class="data row6 col1">float</td>
-<td id="T_4d058_row6_col2" class="data row6 col2">PCA scaled float</td>
-<td id="T_4d058_row6_col3" class="data row6 col3">literature survey</td>
+<td id="T_333d8_row6_col0" class="data row6 col0">site</td>
+<td id="T_333d8_row6_col1" class="data row6 col1">dummy float</td>
+<td id="T_333d8_row6_col2" class="data row6 col2">PCA scaled float</td>
+<td id="T_333d8_row6_col3" class="data row6 col3">feature</td>
+<td id="T_333d8_row6_col4" class="data row6 col4">intuition from EDA</td>
+</tr>
+<tr class="even">
+<td id="T_333d8_row7_col0" class="data row7 col0">review_helpful_votes</td>
+<td id="T_333d8_row7_col1" class="data row7 col1">int</td>
+<td id="T_333d8_row7_col2" class="data row7 col2">PCA scaled float</td>
+<td id="T_333d8_row7_col3" class="data row7 col3">response</td>
+<td id="T_333d8_row7_col4" class="data row7 col4">literature survey</td>
 </tr>
 </tbody>
 </table>
@@ -344,122 +362,121 @@ Table&nbsp;3.1: Selected Variables for Model Training
 <li><p>Variable outlier adjustment. We noted in our EDA that each of the e-commerce platforms had high volumes of outliers with respect to the inter-quartile range. We applied a transformation to our data to map any outlier variable value on a per-website basis from its value to <span class="math inline">\(\mu+3\cdot sd(\text{variable})\)</span> for high-end outliers, and <span class="math inline">\(\mu-3\cdot sd(\text{variable})\)</span> for low-end outliers. In the event that either of these values exceeded the minimum or maximum value of the dataset, we mapped the value to the minimum or maximum accordingly.</p></li>
 <li><p>Standard scaling of variables. After adjusting outliers, we re-mapped all of our feature variables to be on the scale of the standard normal distribution <span class="math inline">\(N\sim(0,1)\)</span></p></li>
 <li><p>Response variable transformation to binary value. We denoted a single useful vote as meaning that the review was useful to customers, and mapped the value to True/1, and False/0 otherwise.</p></li>
-<li><p>Dimensionality Reduction via Principal Component Analysis. To accelerate training and evaluation by our models, we…</p></li>
 </ol>
 <p>Here is a sample (first 10 observations) of our data prior to the transformation:</p>
-<div class="cell" data-execution_count="6">
-<div id="tbl-pre-xform-data" class="cell quarto-float anchored" data-execution_count="6">
+<div class="cell" data-execution_count="7">
+<div id="tbl-pre-xform-data" class="cell quarto-float anchored" data-execution_count="7">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-pre-xform-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;3.2: Data (pre-transformation)
 </figcaption>
 <div aria-describedby="tbl-pre-xform-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="cell-output cell-output-display" data-execution_count="6">
+<div class="cell-output cell-output-display" data-execution_count="7">
 <style type="text/css">
 </style>
 
-<table id="T_182e1" class="do-not-create-environment cell table table-sm table-striped small" data-quarto-postprocess="true">
+<table id="T_2eee4" class="do-not-create-environment cell table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
-<th id="T_182e1_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">review_star_rating</th>
-<th id="T_182e1_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">review_helpful_votes</th>
-<th id="T_182e1_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">review_subjectivity</th>
-<th id="T_182e1_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">review_polarity</th>
-<th id="T_182e1_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">review_length</th>
-<th id="T_182e1_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">prod_subjectivity</th>
-<th id="T_182e1_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">total_star_rating</th>
+<th id="T_2eee4_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">review_star_rating</th>
+<th id="T_2eee4_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">review_subjectivity</th>
+<th id="T_2eee4_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">review_polarity</th>
+<th id="T_2eee4_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">review_length</th>
+<th id="T_2eee4_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">prod_subjectivity</th>
+<th id="T_2eee4_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">total_star_rating</th>
+<th id="T_2eee4_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">site</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_182e1_row0_col0" class="data row0 col0">5</td>
-<td id="T_182e1_row0_col1" class="data row0 col1">1</td>
-<td id="T_182e1_row0_col2" class="data row0 col2">0.588232</td>
-<td id="T_182e1_row0_col3" class="data row0 col3">0.258266</td>
-<td id="T_182e1_row0_col4" class="data row0 col4">49.000000</td>
-<td id="T_182e1_row0_col5" class="data row0 col5">0.497845</td>
-<td id="T_182e1_row0_col6" class="data row0 col6">4.200000</td>
+<td id="T_2eee4_row0_col0" class="data row0 col0">5</td>
+<td id="T_2eee4_row0_col1" class="data row0 col1">0.588232</td>
+<td id="T_2eee4_row0_col2" class="data row0 col2">0.258266</td>
+<td id="T_2eee4_row0_col3" class="data row0 col3">49.000000</td>
+<td id="T_2eee4_row0_col4" class="data row0 col4">0.497845</td>
+<td id="T_2eee4_row0_col5" class="data row0 col5">4.200000</td>
+<td id="T_2eee4_row0_col6" class="data row0 col6">0.333333</td>
 </tr>
 <tr class="even">
-<td id="T_182e1_row1_col0" class="data row1 col0">5</td>
-<td id="T_182e1_row1_col1" class="data row1 col1">2</td>
-<td id="T_182e1_row1_col2" class="data row1 col2">0.430909</td>
-<td id="T_182e1_row1_col3" class="data row1 col3">0.447273</td>
-<td id="T_182e1_row1_col4" class="data row1 col4">24.000000</td>
-<td id="T_182e1_row1_col5" class="data row1 col5">0.497845</td>
-<td id="T_182e1_row1_col6" class="data row1 col6">4.200000</td>
+<td id="T_2eee4_row1_col0" class="data row1 col0">5</td>
+<td id="T_2eee4_row1_col1" class="data row1 col1">0.430909</td>
+<td id="T_2eee4_row1_col2" class="data row1 col2">0.447273</td>
+<td id="T_2eee4_row1_col3" class="data row1 col3">24.000000</td>
+<td id="T_2eee4_row1_col4" class="data row1 col4">0.497845</td>
+<td id="T_2eee4_row1_col5" class="data row1 col5">4.200000</td>
+<td id="T_2eee4_row1_col6" class="data row1 col6">0.333333</td>
 </tr>
 <tr class="odd">
-<td id="T_182e1_row2_col0" class="data row2 col0">5</td>
-<td id="T_182e1_row2_col1" class="data row2 col1">2</td>
-<td id="T_182e1_row2_col2" class="data row2 col2">0.554959</td>
-<td id="T_182e1_row2_col3" class="data row2 col3">0.394215</td>
-<td id="T_182e1_row2_col4" class="data row2 col4">66.000000</td>
-<td id="T_182e1_row2_col5" class="data row2 col5">0.497845</td>
-<td id="T_182e1_row2_col6" class="data row2 col6">4.200000</td>
+<td id="T_2eee4_row2_col0" class="data row2 col0">5</td>
+<td id="T_2eee4_row2_col1" class="data row2 col1">0.554959</td>
+<td id="T_2eee4_row2_col2" class="data row2 col2">0.394215</td>
+<td id="T_2eee4_row2_col3" class="data row2 col3">66.000000</td>
+<td id="T_2eee4_row2_col4" class="data row2 col4">0.497845</td>
+<td id="T_2eee4_row2_col5" class="data row2 col5">4.200000</td>
+<td id="T_2eee4_row2_col6" class="data row2 col6">0.333333</td>
 </tr>
 <tr class="even">
-<td id="T_182e1_row3_col0" class="data row3 col0">5</td>
-<td id="T_182e1_row3_col1" class="data row3 col1">0</td>
-<td id="T_182e1_row3_col2" class="data row3 col2">1.000000</td>
-<td id="T_182e1_row3_col3" class="data row3 col3">1.000000</td>
-<td id="T_182e1_row3_col4" class="data row3 col4">14.000000</td>
-<td id="T_182e1_row3_col5" class="data row3 col5">0.497845</td>
-<td id="T_182e1_row3_col6" class="data row3 col6">4.200000</td>
+<td id="T_2eee4_row3_col0" class="data row3 col0">5</td>
+<td id="T_2eee4_row3_col1" class="data row3 col1">1.000000</td>
+<td id="T_2eee4_row3_col2" class="data row3 col2">1.000000</td>
+<td id="T_2eee4_row3_col3" class="data row3 col3">14.000000</td>
+<td id="T_2eee4_row3_col4" class="data row3 col4">0.497845</td>
+<td id="T_2eee4_row3_col5" class="data row3 col5">4.200000</td>
+<td id="T_2eee4_row3_col6" class="data row3 col6">0.333333</td>
 </tr>
 <tr class="odd">
-<td id="T_182e1_row4_col0" class="data row4 col0">5</td>
-<td id="T_182e1_row4_col1" class="data row4 col1">0</td>
-<td id="T_182e1_row4_col2" class="data row4 col2">0.636364</td>
-<td id="T_182e1_row4_col3" class="data row4 col3">0.424242</td>
-<td id="T_182e1_row4_col4" class="data row4 col4">31.000000</td>
-<td id="T_182e1_row4_col5" class="data row4 col5">0.497845</td>
-<td id="T_182e1_row4_col6" class="data row4 col6">4.200000</td>
+<td id="T_2eee4_row4_col0" class="data row4 col0">5</td>
+<td id="T_2eee4_row4_col1" class="data row4 col1">0.636364</td>
+<td id="T_2eee4_row4_col2" class="data row4 col2">0.424242</td>
+<td id="T_2eee4_row4_col3" class="data row4 col3">31.000000</td>
+<td id="T_2eee4_row4_col4" class="data row4 col4">0.497845</td>
+<td id="T_2eee4_row4_col5" class="data row4 col5">4.200000</td>
+<td id="T_2eee4_row4_col6" class="data row4 col6">0.333333</td>
 </tr>
 <tr class="even">
-<td id="T_182e1_row5_col0" class="data row5 col0">5</td>
-<td id="T_182e1_row5_col1" class="data row5 col1">0</td>
-<td id="T_182e1_row5_col2" class="data row5 col2">0.613068</td>
-<td id="T_182e1_row5_col3" class="data row5 col3">0.402557</td>
-<td id="T_182e1_row5_col4" class="data row5 col4">54.000000</td>
-<td id="T_182e1_row5_col5" class="data row5 col5">0.497845</td>
-<td id="T_182e1_row5_col6" class="data row5 col6">4.200000</td>
+<td id="T_2eee4_row5_col0" class="data row5 col0">5</td>
+<td id="T_2eee4_row5_col1" class="data row5 col1">0.613068</td>
+<td id="T_2eee4_row5_col2" class="data row5 col2">0.402557</td>
+<td id="T_2eee4_row5_col3" class="data row5 col3">54.000000</td>
+<td id="T_2eee4_row5_col4" class="data row5 col4">0.497845</td>
+<td id="T_2eee4_row5_col5" class="data row5 col5">4.200000</td>
+<td id="T_2eee4_row5_col6" class="data row5 col6">0.333333</td>
 </tr>
 <tr class="odd">
-<td id="T_182e1_row6_col0" class="data row6 col0">5</td>
-<td id="T_182e1_row6_col1" class="data row6 col1">0</td>
-<td id="T_182e1_row6_col2" class="data row6 col2">0.601705</td>
-<td id="T_182e1_row6_col3" class="data row6 col3">0.407582</td>
-<td id="T_182e1_row6_col4" class="data row6 col4">42.000000</td>
-<td id="T_182e1_row6_col5" class="data row6 col5">0.497845</td>
-<td id="T_182e1_row6_col6" class="data row6 col6">4.200000</td>
+<td id="T_2eee4_row6_col0" class="data row6 col0">5</td>
+<td id="T_2eee4_row6_col1" class="data row6 col1">0.601705</td>
+<td id="T_2eee4_row6_col2" class="data row6 col2">0.407582</td>
+<td id="T_2eee4_row6_col3" class="data row6 col3">42.000000</td>
+<td id="T_2eee4_row6_col4" class="data row6 col4">0.497845</td>
+<td id="T_2eee4_row6_col5" class="data row6 col5">4.200000</td>
+<td id="T_2eee4_row6_col6" class="data row6 col6">0.333333</td>
 </tr>
 <tr class="even">
-<td id="T_182e1_row7_col0" class="data row7 col0">5</td>
-<td id="T_182e1_row7_col1" class="data row7 col1">0</td>
-<td id="T_182e1_row7_col2" class="data row7 col2">0.458333</td>
-<td id="T_182e1_row7_col3" class="data row7 col3">0.591667</td>
-<td id="T_182e1_row7_col4" class="data row7 col4">38.000000</td>
-<td id="T_182e1_row7_col5" class="data row7 col5">0.497845</td>
-<td id="T_182e1_row7_col6" class="data row7 col6">4.200000</td>
+<td id="T_2eee4_row7_col0" class="data row7 col0">5</td>
+<td id="T_2eee4_row7_col1" class="data row7 col1">0.458333</td>
+<td id="T_2eee4_row7_col2" class="data row7 col2">0.591667</td>
+<td id="T_2eee4_row7_col3" class="data row7 col3">38.000000</td>
+<td id="T_2eee4_row7_col4" class="data row7 col4">0.497845</td>
+<td id="T_2eee4_row7_col5" class="data row7 col5">4.200000</td>
+<td id="T_2eee4_row7_col6" class="data row7 col6">0.333333</td>
 </tr>
 <tr class="odd">
-<td id="T_182e1_row8_col0" class="data row8 col0">5</td>
-<td id="T_182e1_row8_col1" class="data row8 col1">0</td>
-<td id="T_182e1_row8_col2" class="data row8 col2">0.801136</td>
-<td id="T_182e1_row8_col3" class="data row8 col3">0.734091</td>
-<td id="T_182e1_row8_col4" class="data row8 col4">24.000000</td>
-<td id="T_182e1_row8_col5" class="data row8 col5">0.497845</td>
-<td id="T_182e1_row8_col6" class="data row8 col6">4.200000</td>
+<td id="T_2eee4_row8_col0" class="data row8 col0">5</td>
+<td id="T_2eee4_row8_col1" class="data row8 col1">0.801136</td>
+<td id="T_2eee4_row8_col2" class="data row8 col2">0.734091</td>
+<td id="T_2eee4_row8_col3" class="data row8 col3">24.000000</td>
+<td id="T_2eee4_row8_col4" class="data row8 col4">0.497845</td>
+<td id="T_2eee4_row8_col5" class="data row8 col5">4.200000</td>
+<td id="T_2eee4_row8_col6" class="data row8 col6">0.333333</td>
 </tr>
 <tr class="even">
-<td id="T_182e1_row9_col0" class="data row9 col0">5</td>
-<td id="T_182e1_row9_col1" class="data row9 col1">0</td>
-<td id="T_182e1_row9_col2" class="data row9 col2">0.801136</td>
-<td id="T_182e1_row9_col3" class="data row9 col3">0.734091</td>
-<td id="T_182e1_row9_col4" class="data row9 col4">24.000000</td>
-<td id="T_182e1_row9_col5" class="data row9 col5">0.497845</td>
-<td id="T_182e1_row9_col6" class="data row9 col6">4.200000</td>
+<td id="T_2eee4_row9_col0" class="data row9 col0">5</td>
+<td id="T_2eee4_row9_col1" class="data row9 col1">0.801136</td>
+<td id="T_2eee4_row9_col2" class="data row9 col2">0.734091</td>
+<td id="T_2eee4_row9_col3" class="data row9 col3">24.000000</td>
+<td id="T_2eee4_row9_col4" class="data row9 col4">0.497845</td>
+<td id="T_2eee4_row9_col5" class="data row9 col5">4.200000</td>
+<td id="T_2eee4_row9_col6" class="data row9 col6">0.333333</td>
 </tr>
 </tbody>
 </table>
@@ -470,121 +487,121 @@ Table&nbsp;3.2: Data (pre-transformation)
 </div>
 <p>And here is a sample of our data after the applied transformations:</p>
 <ul>
-<li>Snippet of first 10 observations in the X_train set:</li>
+<li>Snippet of first 10 observations in our training dataset, post-transformation:</li>
 </ul>
-<div class="cell" data-execution_count="7">
-<div id="tbl-post-xform-data" class="cell quarto-float anchored" data-execution_count="7">
+<div class="cell" data-execution_count="8">
+<div id="tbl-post-xform-data" class="cell quarto-float anchored" data-execution_count="8">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-post-xform-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;3.3: Data (pre-transformation)
+Table&nbsp;3.3: Data (post-transformation)
 </figcaption>
 <div aria-describedby="tbl-post-xform-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="cell-output cell-output-display" data-execution_count="7">
+<div class="cell-output cell-output-display" data-execution_count="8">
 <style type="text/css">
 </style>
 
-<table id="T_9f93e" class="do-not-create-environment cell table table-sm table-striped small" data-quarto-postprocess="true">
+<table id="T_497fb" class="do-not-create-environment cell table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
-<th id="T_9f93e_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">review_star_rating</th>
-<th id="T_9f93e_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">review_helpful_votes</th>
-<th id="T_9f93e_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">review_subjectivity</th>
-<th id="T_9f93e_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">review_polarity</th>
-<th id="T_9f93e_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">review_length</th>
-<th id="T_9f93e_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">prod_subjectivity</th>
-<th id="T_9f93e_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">total_star_rating</th>
+<th id="T_497fb_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">review_star_rating</th>
+<th id="T_497fb_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">review_subjectivity</th>
+<th id="T_497fb_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">review_polarity</th>
+<th id="T_497fb_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">review_length</th>
+<th id="T_497fb_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">prod_subjectivity</th>
+<th id="T_497fb_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">total_star_rating</th>
+<th id="T_497fb_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">site</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_9f93e_row0_col0" class="data row0 col0">0.526690</td>
-<td id="T_9f93e_row0_col1" class="data row0 col1">0.721349</td>
-<td id="T_9f93e_row0_col2" class="data row0 col2">1.237916</td>
-<td id="T_9f93e_row0_col3" class="data row0 col3">1.198281</td>
-<td id="T_9f93e_row0_col4" class="data row0 col4">-0.807675</td>
-<td id="T_9f93e_row0_col5" class="data row0 col5">2.094938</td>
-<td id="T_9f93e_row0_col6" class="data row0 col6">1.087520</td>
+<td id="T_497fb_row0_col0" class="data row0 col0">0.527771</td>
+<td id="T_497fb_row0_col1" class="data row0 col1">0.264387</td>
+<td id="T_497fb_row0_col2" class="data row0 col2">0.336418</td>
+<td id="T_497fb_row0_col3" class="data row0 col3">-0.347482</td>
+<td id="T_497fb_row0_col4" class="data row0 col4">-1.353087</td>
+<td id="T_497fb_row0_col5" class="data row0 col5">1.088999</td>
+<td id="T_497fb_row0_col6" class="data row0 col6">0.722595</td>
 </tr>
 <tr class="even">
-<td id="T_9f93e_row1_col0" class="data row1 col0">0.526690</td>
-<td id="T_9f93e_row1_col1" class="data row1 col1">-0.124310</td>
-<td id="T_9f93e_row1_col2" class="data row1 col2">-0.063466</td>
-<td id="T_9f93e_row1_col3" class="data row1 col3">-0.605781</td>
-<td id="T_9f93e_row1_col4" class="data row1 col4">-0.580250</td>
-<td id="T_9f93e_row1_col5" class="data row1 col5">0.033623</td>
-<td id="T_9f93e_row1_col6" class="data row1 col6">1.087520</td>
+<td id="T_497fb_row1_col0" class="data row1 col0">0.527771</td>
+<td id="T_497fb_row1_col1" class="data row1 col1">0.240213</td>
+<td id="T_497fb_row1_col2" class="data row1 col2">-0.563168</td>
+<td id="T_497fb_row1_col3" class="data row1 col3">0.998209</td>
+<td id="T_497fb_row1_col4" class="data row1 col4">1.428196</td>
+<td id="T_497fb_row1_col5" class="data row1 col5">0.716223</td>
+<td id="T_497fb_row1_col6" class="data row1 col6">-0.867221</td>
 </tr>
 <tr class="odd">
-<td id="T_9f93e_row2_col0" class="data row2 col0">-2.504599</td>
-<td id="T_9f93e_row2_col1" class="data row2 col1">-0.124310</td>
-<td id="T_9f93e_row2_col2" class="data row2 col2">-0.453881</td>
-<td id="T_9f93e_row2_col3" class="data row2 col3">0.657062</td>
-<td id="T_9f93e_row2_col4" class="data row2 col4">-0.287845</td>
-<td id="T_9f93e_row2_col5" class="data row2 col5">-1.352533</td>
-<td id="T_9f93e_row2_col6" class="data row2 col6">1.087520</td>
+<td id="T_497fb_row2_col0" class="data row2 col0">0.527771</td>
+<td id="T_497fb_row2_col1" class="data row2 col1">1.707921</td>
+<td id="T_497fb_row2_col2" class="data row2 col2">1.512800</td>
+<td id="T_497fb_row2_col3" class="data row2 col3">-0.544412</td>
+<td id="T_497fb_row2_col4" class="data row2 col4">-0.002591</td>
+<td id="T_497fb_row2_col5" class="data row2 col5">-1.520431</td>
+<td id="T_497fb_row2_col6" class="data row2 col6">0.722595</td>
 </tr>
 <tr class="even">
-<td id="T_9f93e_row3_col0" class="data row3 col0">0.526690</td>
-<td id="T_9f93e_row3_col1" class="data row3 col1">-0.124310</td>
-<td id="T_9f93e_row3_col2" class="data row3 col2">0.587225</td>
-<td id="T_9f93e_row3_col3" class="data row3 col3">0.927672</td>
-<td id="T_9f93e_row3_col4" class="data row3 col4">-0.547760</td>
-<td id="T_9f93e_row3_col5" class="data row3 col5">-0.213700</td>
-<td id="T_9f93e_row3_col6" class="data row3 col6">-0.031746</td>
+<td id="T_497fb_row3_col0" class="data row3 col0">0.527771</td>
+<td id="T_497fb_row3_col1" class="data row3 col1">0.110709</td>
+<td id="T_497fb_row3_col2" class="data row3 col2">-0.363171</td>
+<td id="T_497fb_row3_col3" class="data row3 col3">-0.478769</td>
+<td id="T_497fb_row3_col4" class="data row3 col4">1.857024</td>
+<td id="T_497fb_row3_col5" class="data row3 col5">-0.774879</td>
+<td id="T_497fb_row3_col6" class="data row3 col6">-0.867221</td>
 </tr>
 <tr class="odd">
-<td id="T_9f93e_row4_col0" class="data row4 col0">0.526690</td>
-<td id="T_9f93e_row4_col1" class="data row4 col1">-0.124310</td>
-<td id="T_9f93e_row4_col2" class="data row4 col2">0.587225</td>
-<td id="T_9f93e_row4_col3" class="data row4 col3">1.030761</td>
-<td id="T_9f93e_row4_col4" class="data row4 col4">-0.092909</td>
-<td id="T_9f93e_row4_col5" class="data row4 col5">-0.005865</td>
-<td id="T_9f93e_row4_col6" class="data row4 col6">-1.524099</td>
+<td id="T_497fb_row4_col0" class="data row4 col0">0.527771</td>
+<td id="T_497fb_row4_col1" class="data row4 col1">-0.968488</td>
+<td id="T_497fb_row4_col2" class="data row4 col2">-0.675166</td>
+<td id="T_497fb_row4_col3" class="data row4 col3">-0.052086</td>
+<td id="T_497fb_row4_col4" class="data row4 col4">1.857024</td>
+<td id="T_497fb_row4_col5" class="data row4 col5">-0.774879</td>
+<td id="T_497fb_row4_col6" class="data row4 col6">-0.867221</td>
 </tr>
 <tr class="even">
-<td id="T_9f93e_row5_col0" class="data row5 col0">0.526690</td>
-<td id="T_9f93e_row5_col1" class="data row5 col1">-0.124310</td>
-<td id="T_9f93e_row5_col2" class="data row5 col2">-0.311912</td>
-<td id="T_9f93e_row5_col3" class="data row5 col3">-1.442210</td>
-<td id="T_9f93e_row5_col4" class="data row5 col4">-0.385313</td>
-<td id="T_9f93e_row5_col5" class="data row5 col5">-0.791592</td>
-<td id="T_9f93e_row5_col6" class="data row5 col6">1.087520</td>
+<td id="T_497fb_row5_col0" class="data row5 col0">-0.481349</td>
+<td id="T_497fb_row5_col1" class="data row5 col1">0.326548</td>
+<td id="T_497fb_row5_col2" class="data row5 col2">0.236820</td>
+<td id="T_497fb_row5_col3" class="data row5 col3">-0.281839</td>
+<td id="T_497fb_row5_col4" class="data row5 col4">1.428196</td>
+<td id="T_497fb_row5_col5" class="data row5 col5">0.716223</td>
+<td id="T_497fb_row5_col6" class="data row5 col6">-0.867221</td>
 </tr>
 <tr class="odd">
-<td id="T_9f93e_row6_col0" class="data row6 col0">0.526690</td>
-<td id="T_9f93e_row6_col1" class="data row6 col1">-0.124310</td>
-<td id="T_9f93e_row6_col2" class="data row6 col2">0.066672</td>
-<td id="T_9f93e_row6_col3" class="data row6 col3">-0.109664</td>
-<td id="T_9f93e_row6_col4" class="data row6 col4">0.394431</td>
-<td id="T_9f93e_row6_col5" class="data row6 col5">-1.352533</td>
-<td id="T_9f93e_row6_col6" class="data row6 col6">1.087520</td>
+<td id="T_497fb_row6_col0" class="data row6 col0">0.527771</td>
+<td id="T_497fb_row6_col1" class="data row6 col1">0.499220</td>
+<td id="T_497fb_row6_col2" class="data row6 col2">-0.243173</td>
+<td id="T_497fb_row6_col3" class="data row6 col3">-0.019265</td>
+<td id="T_497fb_row6_col4" class="data row6 col4">-1.353087</td>
+<td id="T_497fb_row6_col5" class="data row6 col5">1.088999</td>
+<td id="T_497fb_row6_col6" class="data row6 col6">0.722595</td>
 </tr>
 <tr class="even">
-<td id="T_9f93e_row7_col0" class="data row7 col0">0.526690</td>
-<td id="T_9f93e_row7_col1" class="data row7 col1">-0.124310</td>
-<td id="T_9f93e_row7_col2" class="data row7 col2">-0.948406</td>
-<td id="T_9f93e_row7_col3" class="data row7 col3">-0.244969</td>
-<td id="T_9f93e_row7_col4" class="data row7 col4">-0.255356</td>
-<td id="T_9f93e_row7_col5" class="data row7 col5">-0.897774</td>
-<td id="T_9f93e_row7_col6" class="data row7 col6">-0.404834</td>
+<td id="T_497fb_row7_col0" class="data row7 col0">0.527771</td>
+<td id="T_497fb_row7_col1" class="data row7 col1">-1.486502</td>
+<td id="T_497fb_row7_col2" class="data row7 col2">1.376802</td>
+<td id="T_497fb_row7_col3" class="data row7 col3">-0.544412</td>
+<td id="T_497fb_row7_col4" class="data row7 col4">-0.211017</td>
+<td id="T_497fb_row7_col5" class="data row7 col5">-0.029328</td>
+<td id="T_497fb_row7_col6" class="data row7 col6">0.722595</td>
 </tr>
 <tr class="odd">
-<td id="T_9f93e_row8_col0" class="data row8 col0">0.526690</td>
-<td id="T_9f93e_row8_col1" class="data row8 col1">-0.124310</td>
-<td id="T_9f93e_row8_col2" class="data row8 col2">0.379004</td>
-<td id="T_9f93e_row8_col3" class="data row8 col3">1.450850</td>
-<td id="T_9f93e_row8_col4" class="data row8 col4">-0.580250</td>
-<td id="T_9f93e_row8_col5" class="data row8 col5">-0.524541</td>
-<td id="T_9f93e_row8_col6" class="data row8 col6">1.087520</td>
+<td id="T_497fb_row8_col0" class="data row8 col0">0.527771</td>
+<td id="T_497fb_row8_col1" class="data row8 col1">0.251005</td>
+<td id="T_497fb_row8_col2" class="data row8 col2">0.535315</td>
+<td id="T_497fb_row8_col3" class="data row8 col3">-0.314660</td>
+<td id="T_497fb_row8_col4" class="data row8 col4">-1.353087</td>
+<td id="T_497fb_row8_col5" class="data row8 col5">1.088999</td>
+<td id="T_497fb_row8_col6" class="data row8 col6">0.722595</td>
 </tr>
 <tr class="even">
-<td id="T_9f93e_row9_col0" class="data row9 col0">0.526690</td>
-<td id="T_9f93e_row9_col1" class="data row9 col1">-0.124310</td>
-<td id="T_9f93e_row9_col2" class="data row9 col2">0.577103</td>
-<td id="T_9f93e_row9_col3" class="data row9 col3">0.889836</td>
-<td id="T_9f93e_row9_col4" class="data row9 col4">0.264473</td>
-<td id="T_9f93e_row9_col5" class="data row9 col5">-0.005865</td>
-<td id="T_9f93e_row9_col6" class="data row9 col6">-1.524099</td>
+<td id="T_497fb_row9_col0" class="data row9 col0">0.527771</td>
+<td id="T_497fb_row9_col1" class="data row9 col1">0.823259</td>
+<td id="T_497fb_row9_col2" class="data row9 col2">0.370697</td>
+<td id="T_497fb_row9_col3" class="data row9 col3">-0.052086</td>
+<td id="T_497fb_row9_col4" class="data row9 col4">-0.469912</td>
+<td id="T_497fb_row9_col5" class="data row9 col5">0.716223</td>
+<td id="T_497fb_row9_col6" class="data row9 col6">-0.867221</td>
 </tr>
 </tbody>
 </table>
@@ -593,39 +610,124 @@ Table&nbsp;3.3: Data (pre-transformation)
 </figure>
 </div>
 </div>
-<p>Classes in y_train set were mapped as follows for all non-linear models:</p>
+<p>Classes in the response variable (the number of helpful votes a review received) set were mapped as follows for all non-linear models:</p>
 <ul>
 <li><p>0: if the review had no helful votes</p></li>
 <li><p>1: if the review had one or more than 1 helpful votes</p></li>
 </ul>
-<section id="training-data" class="level3" data-number="3.2.1">
-<h3 data-number="3.2.1" class="anchored" data-anchor-id="training-data"><span class="header-section-number">3.2.1</span> Training Data</h3>
-<p>To train our dataset, we leveraged the data post-transformation to train each of our models, including the adjustments of outlier datapoints to being within 3 standard deviations of the mean of each variable. We selected an 80% sample of this data and leveraged the same dataset to train each model.</p>
+<p>Our reasoning for this transformation is that, across the totality of our data, a comment receiving a vote as being useful is exceedingly rare, as uncovered during our exploratory data analysis. As such, even a single vote for being useful should put the comment in the running for being considered useful.</p>
+<section id="dimensionality-reduction" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="dimensionality-reduction"><span class="header-section-number">3.2.1</span> Dimensionality Reduction</h3>
+<p>For all models outside of the multiple linear regression, we performed a principal component analysis on the scaled data.</p>
+<div class="cell" data-execution_count="9">
+<div id="tbl-pca-info" class="cell quarto-float anchored" data-execution_count="9">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-pca-info-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.4: Cumulative Variance of Principal Components (selected features)
+</figcaption>
+<div aria-describedby="tbl-pca-info-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display">
+<style type="text/css">
+</style>
+
+<table id="T_2ea1a" class="do-not-create-environment cell table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th id="T_2ea1a_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Principal Component</th>
+<th id="T_2ea1a_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Cumulative Variance</th>
+<th id="T_2ea1a_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Explained Variance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td id="T_2ea1a_row0_col0" class="data row0 col0">PC1</td>
+<td id="T_2ea1a_row0_col1" class="data row0 col1">0.350576</td>
+<td id="T_2ea1a_row0_col2" class="data row0 col2">0.350576</td>
+</tr>
+<tr class="even">
+<td id="T_2ea1a_row1_col0" class="data row1 col0">PC2</td>
+<td id="T_2ea1a_row1_col1" class="data row1 col1">0.548099</td>
+<td id="T_2ea1a_row1_col2" class="data row1 col2">0.197523</td>
+</tr>
+<tr class="odd">
+<td id="T_2ea1a_row2_col0" class="data row2 col0">PC3</td>
+<td id="T_2ea1a_row2_col1" class="data row2 col1">0.673668</td>
+<td id="T_2ea1a_row2_col2" class="data row2 col2">0.125569</td>
+</tr>
+<tr class="even">
+<td id="T_2ea1a_row3_col0" class="data row3 col0">PC4</td>
+<td id="T_2ea1a_row3_col1" class="data row3 col1">0.788246</td>
+<td id="T_2ea1a_row3_col2" class="data row3 col2">0.114578</td>
+</tr>
+<tr class="odd">
+<td id="T_2ea1a_row4_col0" class="data row4 col0">PC5</td>
+<td id="T_2ea1a_row4_col1" class="data row4 col1">0.878823</td>
+<td id="T_2ea1a_row4_col2" class="data row4 col2">0.090576</td>
+</tr>
+<tr class="even">
+<td id="T_2ea1a_row5_col0" class="data row5 col0">PC6</td>
+<td id="T_2ea1a_row5_col1" class="data row5 col1">0.945954</td>
+<td id="T_2ea1a_row5_col2" class="data row5 col2">0.067131</td>
+</tr>
+<tr class="odd">
+<td id="T_2ea1a_row6_col0" class="data row6 col0">PC7</td>
+<td id="T_2ea1a_row6_col1" class="data row6 col1">1.000000</td>
+<td id="T_2ea1a_row6_col2" class="data row6 col2">0.054046</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>To reduce dimensionality for Logistic Regression, Support Vector Machine, and K-Nearest Neighbor models, we elected to reduce from 7 principal commponents to 6. From the above table, we see that these 6 components explain approximately 95% of the variation within the training data. We projected our training and testing data from their 7-dimensional feature space to a reduced 6-dimensional principal component vector space.</p>
 </section>
-<section id="testing-data" class="level3" data-number="3.2.2">
-<h3 data-number="3.2.2" class="anchored" data-anchor-id="testing-data"><span class="header-section-number">3.2.2</span> Testing Data</h3>
+<section id="training-data" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="training-data"><span class="header-section-number">3.2.2</span> Training Data</h3>
+<p>To train our dataset, we leveraged the data post-transformation to train each of our models, including the adjustments of outlier datapoints to being within 3 standard deviations of the mean of each variable. We selected an 80% sample of this data and leveraged the same dataset to train each model.</p>
+<p>In the interest of generalization, we sought to take our training dataset solely from products that were common across all three e-commerce platforms. By working with common data from each site, the data and the models may be able to formulate a more generalized construct of how certain variables behave within the different contexts of each platforms, and assist in better prediction and classification of comments as being useful or not.</p>
+</section>
+<section id="testing-data" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="testing-data"><span class="header-section-number">3.2.3</span> Testing Data</h3>
 <p>For testing, we evaluated each model against transformed data, omitting the transformation of outliers to being within 3 standard deviations of the mean. We performed this action to enable a fair comparison of each model against one another when working with real-world data.</p>
+</section>
+<section id="desired-outcomes-and-objectives" class="level3" data-number="3.2.4">
+<h3 data-number="3.2.4" class="anchored" data-anchor-id="desired-outcomes-and-objectives"><span class="header-section-number">3.2.4</span> Desired Outcomes and Objectives</h3>
+<p>Predictive modeling for the usefulness of a user comment on a product, in and of itself, cannot be conducted 100% objectively. We are interested in the exploration of misclassifications - particularly of false positives.</p>
+<p>Our data exploration revealed that having even a single vote for a comment as being useful was exceedingly rare, with a median and mean number of votes hovering at or about 0 regardless of the website on which the comment was posted.</p>
+<p>Additionally, from a technological perspective, the ability of a web user interface programmer or designer to simply filter or arrange comments by the number of votes they received is trivial.</p>
+<p>With the above considerations in mind, we are interested in a model that provides reasonable accuracy while also having an apprpriate amount of recall and a reasonable F1 score. Having a model that perfectly maps predictions to actual outcomes is not useful to this research. Having a number of classified false positives for exploration and subjective evaluation is what interests us.</p>
 </section>
 </section>
 <section id="examination-of-the-original-multiple-linear-regression" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="examination-of-the-original-multiple-linear-regression"><span class="header-section-number">3.3</span> Examination of the Original Multiple Linear Regression</h2>
-<section id="inspection-of-linear-model-assumptions" class="level3" data-number="3.3.1">
-<h3 data-number="3.3.1" class="anchored" data-anchor-id="inspection-of-linear-model-assumptions"><span class="header-section-number">3.3.1</span> Inspection of Linear Model Assumptions</h3>
-<p>Generally, on examining the plot of fitted vs.&nbsp;observed values for the linear model, we feel our methods have produced similar outcomes as for <span class="citation" data-cites="percUse">Guha Majumder, Dutta Gupta, and Paul (<a href="references.html#ref-percUse" role="doc-biblioref">2022</a>)</span>. The predicted values appear to have a slightly lesser scale and range than that of the observed values.</p>
-<section id="linearity-of-the-model" class="level4" data-number="3.3.1.1">
-<h4 data-number="3.3.1.1" class="anchored" data-anchor-id="linearity-of-the-model"><span class="header-section-number">3.3.1.1</span> Linearity of the Model</h4>
-<p>Our version of the linear model is designed as follows: <span class="math inline">\(\hat{y} = \beta_0+\beta_1X_{rsr}+\beta_2X_{rs}+\beta_3X_{rp}+\beta_4X_{rl}+\beta_5X_{ps}+\beta_6X{tsr}\)</span></p>
+<section id="linear-model-construction" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="linear-model-construction"><span class="header-section-number">3.3.1</span> Linear Model Construction</h3>
+<p>We leveraged a similar formulation to that which was used within the research of <span class="citation" data-cites="percUse">Guha Majumder, Dutta Gupta, and Paul (<a href="references.html#ref-percUse" role="doc-biblioref">2022</a>)</span>.</p>
+<p>Our version of the linear model is designed as follows: <span class="math inline">\(\hat{y} = \beta_0+\beta_1X_{rsr}+\beta_2X_{rs}+\beta_3X_{rp}+\beta_4X_{rl}+\beta_5X_{ps}\)</span> <span class="math inline">\(+\beta_6X_{tsr}+\beta_7X_{s}\)</span></p>
 <p>Where each of the following variables have been standard-scaled to a range between 0 and 1 for the input data:</p>
 <ul>
 <li><p><span class="math inline">\(X_{rsr}\)</span> corresponds to the individual review’s star rating</p></li>
 <li><p><span class="math inline">\(X_{rs}\)</span> corresponds to the review’s subjectivity score</p></li>
 <li><p><span class="math inline">\(X_{rp}\)</span> corresponds to the review’s polarity score</p></li>
 <li><p><span class="math inline">\(X_{rl}\)</span> corresponds to the review’s length (in words)</p></li>
-<li><p><span class="math inline">\(X_{ps}\)</span> corresponds to the product description subjectivity score (replacement for the binary settings for search, experience, or mixed goods from <span class="citation" data-cites="percUse">Guha Majumder, Dutta Gupta, and Paul (<a href="references.html#ref-percUse" role="doc-biblioref">2022</a>)</span>’s model).</p></li>
+<li><p><span class="math inline">\(X_{ps}\)</span> corresponds to the product description subjectivity score</p></li>
 <li><p><span class="math inline">\(X_{tsr}\)</span> is the overall star rating for the product.</p></li>
+<li><p><span class="math inline">\(X_{s}\)</span> is the site on which the comment was found (converted to a dummy variable for each website).</p></li>
 </ul>
-<p>With this construct, we proceeded to generate a linear model trained on our standard scaled data.</p>
-<div id="cell-fig-mlr-resultss" class="cell" data-execution_count="8">
+<p>We leveraged <span class="math inline">\(X_{ps}\)</span> as a proxy for the previous model’s binary attribute for whether or not a good was search-based or experienced based. <span class="citation" data-cites="percUse">Guha Majumder, Dutta Gupta, and Paul (<a href="references.html#ref-percUse" role="doc-biblioref">2022</a>)</span> leveraged a set of binary variables to classify a good as being search, experience, or mixed products. Our intuition was that, given the subjectivity of a product’s description and/or specifications, a higher subjectivity score would correspond to an experience-based good, a lower subjectivity would correspond to a search-based good, and everything in-between would be a mixed product. This construction allows for any product to have a continuous potential range, and for most products to be mixed products (some tending more toward experience or search).</p>
+<!-- 
+The methods of @percUse leveraged a binary class feature to denote whether a product was a search good, an experience good, or a mixed good.  Our exploration leveraged a continuous scale variable from 0 to 1, being the subjectivity of the product description and specifications.  Our intent was to examine whether their model could be simplified using this single continuous variable.  In theory, a product within an e-commerce platform could be considered a search good if it has more specificity (thus less subjectivity), and an experience good if it has greater subjectivity, and any product could lie anywhere within that spectrum of being a degree of search and a degree of experience. 
+-->
+</section>
+<section id="inspection-of-linear-model-assumptions" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="inspection-of-linear-model-assumptions"><span class="header-section-number">3.3.2</span> Inspection of Linear Model Assumptions</h3>
+<p>Generally, our examination of the multiple linear regression performed by <span class="citation" data-cites="percUse">Guha Majumder, Dutta Gupta, and Paul (<a href="references.html#ref-percUse" role="doc-biblioref">2022</a>)</span> failed to meet the assumptions of linear regression (normality of residuals, linear pattern in fitted vs.&nbsp;observed values, and constant variance of residuals).</p>
+<section id="linearity-of-the-model" class="level4" data-number="3.3.2.1">
+<h4 data-number="3.3.2.1" class="anchored" data-anchor-id="linearity-of-the-model"><span class="header-section-number">3.3.2.1</span> Linearity of the Model</h4>
+<p>Our model failed to achieve any clear form of linearity between fitted and observed values.</p>
+<div id="cell-fig-mlr-resultss" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display">
 <div id="fig-mlr-resultss" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -639,20 +741,29 @@ Figure&nbsp;3.1: Linear Relationship Between Predictors and Response
 </div>
 </div>
 </div>
-<p>Our testing produced the following coefficients:</p>
-<p><span class="math inline">\(\beta_0\)</span>: 0.449, <span class="math inline">\(\beta_1\)</span>: 0.219,<span class="math inline">\(\beta_2\)</span>: 4.497,<span class="math inline">\(\beta_3\)</span>: -0.018,<span class="math inline">\(\beta_4\)</span>: 0.002,<span class="math inline">\(\beta_5\)</span>: -0.001,<span class="math inline">\(\beta_6\)</span>: -0.006</p>
-<p>On new training data, the model appears to underpredict the output value, across the board, for the new data. That being said, there is still a strong linear trend between the predictors and the response. The intent of this model is not to predict the actual number of votes that a review might have, but whether or not that review would be considered useful to customers.</p>
-<p>Generally examining this result, we would conclude that there is a linear trend between these features, their coefficients, and their corresponding response.</p>
+<p>The fitted vs.&nbsp;observed values for this plot are not indicative of a linear pattern between the feature and response variables. It provides a high mean square prediction error of 28.4055, an <span class="math inline">\(R^2\)</span> of 0.0884 and adjusted <span class="math inline">\(R^2\)</span> value of 0.0883. The lack of even a moderate correlation here suggests one of the following:</p>
+<ul>
+<li><p>The wider spread of data from multiple websites and wider range of products reduced the correlation found by <span class="citation" data-cites="percUse">Guha Majumder, Dutta Gupta, and Paul (<a href="references.html#ref-percUse" role="doc-biblioref">2022</a>)</span></p></li>
+<li><p>The linear model is not generalizable.</p></li>
+<li><p>The model is no better than randomly guessing the number of votes a comment could or should have associated with it.</p></li>
+</ul>
+<!--Our testing produced the following coefficients:
+
+$\beta_0$: 0.431, $\beta_1$: -0.086,$\beta_2$: -0.012,$\beta_3$: 0.21,$\beta_4$: 1.528,$\beta_5$: -0.136,$\beta_6$: -0.262
+
+On new training data, the model appears to underpredict the output value, across the board, for the new data.  That being said, there is still a strong linear trend between the predictors and the response.  The intent of this model is not to predict the actual number of votes that a review might have, but whether or not that review would be considered useful to customers.  
+
+Generally examining this result, we would conclude that there is a linear trend between these features, their coefficients, and their corresponding response.-->
 </section>
-<section id="homoscedasticity-on-normalized-data" class="level4" data-number="3.3.1.2">
-<h4 data-number="3.3.1.2" class="anchored" data-anchor-id="homoscedasticity-on-normalized-data"><span class="header-section-number">3.3.1.2</span> Homoscedasticity on Normalized Data</h4>
+<section id="homoscedasticity-on-normalized-data" class="level4" data-number="3.3.2.2">
+<h4 data-number="3.3.2.2" class="anchored" data-anchor-id="homoscedasticity-on-normalized-data"><span class="header-section-number">3.3.2.2</span> Homoscedasticity on Normalized Data</h4>
 <p>This model has substantial challenges with heteroscedasticity. Let’s examine a plot of fitted vs.&nbsp;residuals in the model:</p>
-<div id="cell-fig-non-constant-var-1" class="cell" data-execution_count="9">
+<div id="cell-fig-non-constant-var-1" class="cell" data-execution_count="11">
 <div class="cell-output cell-output-display">
 <div id="fig-non-constant-var-1" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-non-constant-var-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="models implemented_files/figure-html/fig-non-constant-var-1-output-1.png" width="596" height="449" class="figure-img">
+<img src="models implemented_files/figure-html/fig-non-constant-var-1-output-1.png" width="604" height="449" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-non-constant-var-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;3.2: Heteroscedasticity in Model
@@ -661,36 +772,19 @@ Figure&nbsp;3.2: Heteroscedasticity in Model
 </div>
 </div>
 </div>
-<p>There is a clear linear pattern in the residuals of this plot. It seems that the test data may have other linear factors associated with it. If we adjust the output to this additional linear factor, we can examine for heteroscedasticity in the adjusted plot.</p>
-<p>Performing a further linear regression on the fitted vs.&nbsp;observed values, we identified a slope <span class="math inline">\(\beta_{1^*}\)</span> of approximately 1.44 and intercept of <span class="math inline">\(\beta_{0^*}\)</span> of approximately 0.003. Adjusting the predictions and plotting the re-fitted vs.&nbsp;observed values, we see the following:</p>
-<div id="cell-fig-non-constant-var-2" class="cell" data-execution_count="10">
-<div class="cell-output cell-output-display">
-<div id="fig-non-constant-var-2" class="quarto-figure quarto-figure-center quarto-float anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-non-constant-var-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="models implemented_files/figure-html/fig-non-constant-var-2-output-1.png" width="569" height="411" class="figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-non-constant-var-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3.3: Heteroscedasticity in Adjusted Model
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>This plot also appears to have issues with non-constant variance in the residuals. As we traverse from left to right on this plot, the magnitude of the residuals appears to shrink or reduce.</p>
-<p>Once again, the output of this model is not necessarily to predict the precise value of the number of votes a review comment will have, but instead to project how useful this vote would be perceived by new customers. Although the issues with heteroscedasticity do exist for this model, we still find that the output of this model is potentially useful.</p>
+<p>As expected for a model that does not have a clear linear pattern, the residuals for this linear model are heteroscedastic. We should expect to see a constant variance in a plot of predicted vs.&nbsp;residual values, with no correlation between the errors and the predictions. Here, we witness this issue directly, lending to the idea that the model is a poor fit for the data, and the nature of the model (e.g.&nbsp;additional data, additional features, or other feature/response transformations) would need to change substantially to produce effective predictive results.</p>
 </section>
-<section id="normality-in-residuals" class="level4" data-number="3.3.1.3">
-<h4 data-number="3.3.1.3" class="anchored" data-anchor-id="normality-in-residuals"><span class="header-section-number">3.3.1.3</span> Normality in Residuals</h4>
-<div id="cell-fig-qq-resid" class="cell" data-execution_count="11">
+<section id="normality-in-residuals" class="level4" data-number="3.3.2.3">
+<h4 data-number="3.3.2.3" class="anchored" data-anchor-id="normality-in-residuals"><span class="header-section-number">3.3.2.3</span> Normality in Residuals</h4>
+<div id="cell-fig-qq-resid" class="cell" data-execution_count="12">
 <div class="cell-output cell-output-display">
 <div id="fig-qq-resid" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-qq-resid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="models implemented_files/figure-html/fig-qq-resid-output-1.png" width="597" height="477" class="figure-img">
+<img src="models implemented_files/figure-html/fig-qq-resid-output-1.png" width="585" height="477" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-qq-resid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3.4: Model Residuals are Abnormal
+Figure&nbsp;3.3: Model Residuals are Abnormal
 </figcaption>
 </figure>
 </div>
@@ -698,92 +792,100 @@ Figure&nbsp;3.4: Model Residuals are Abnormal
 </div>
 <p>From the above plot, it is clear that this model fails to adhere to the multiple linear regression requirement for residual normality.</p>
 </section>
-<section id="conclusion-on-mlr-model" class="level4" data-number="3.3.1.4">
-<h4 data-number="3.3.1.4" class="anchored" data-anchor-id="conclusion-on-mlr-model"><span class="header-section-number">3.3.1.4</span> Conclusion on MLR model</h4>
-<p>We conclude that the MLR model is <em>not</em> a statistically well-performing model for the purpose of <em>predicting</em> the number of <em>helpful votes</em> a review comment will receive.</p>
-<p>That being said, in spite of its violations of the assumptions of multiple linear regression, we <em>do</em> find that the model is useful in predicting a relative usefulness score for a given review comment. If all comments in a thread for a specific product were run against this model, we believe that the model will reflect the relative usefulness of a comment with respect to other comments in the same thread. Sorting and organizing comments based on the maximum output value could bring the most useful comments to the top of the queue for review by potential shoppers.</p>
-<p>We’ll examine the per-product correlation next:</p>
-<div id="6670ebff" class="cell" data-execution_count="12">
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="models implemented_files/figure-html/cell-13-output-1.png" width="593" height="429" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Having pursued the suggested research of <span class="citation" data-cites="percUse">Guha Majumder, Dutta Gupta, and Paul (<a href="references.html#ref-percUse" role="doc-biblioref">2022</a>)</span> and producing similar results, we will proceed to evaluate other models for detecting useful comments.</p>
+<section id="conclusion-on-mlr-model" class="level4" data-number="3.3.2.4">
+<h4 data-number="3.3.2.4" class="anchored" data-anchor-id="conclusion-on-mlr-model"><span class="header-section-number">3.3.2.4</span> Conclusion on MLR model</h4>
+<p>Expanding the Multiple Linear Regression beyond the scope of the study performed by <span class="citation" data-cites="percUse">Guha Majumder, Dutta Gupta, and Paul (<a href="references.html#ref-percUse" role="doc-biblioref">2022</a>)</span> seems to fail all of the assumptions of a linear model, and does not appear to produce a tracable predictive pattern that may support classification of a review comment as being useful or not to prospective customers.</p>
 </section>
 </section>
 </section>
 <section id="logistic-regression-classification" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="logistic-regression-classification"><span class="header-section-number">3.4</span> Logistic Regression Classification</h2>
-<p>Our next choice for examination was logistic regression. The MLR called for use of only numeric or continuous variables. Logisitic regression enables us to examine the inclusion of additional categorical variables as part of the regression consideration.</p>
+<p>Given the aforementioned challenges with the linear model, our next choice for examination was logistic regression. The MLR called for use of only numeric or continuous variables. Logisitic regression enables us to examine the inclusion of additional categorical variables as part of the regression consideration.</p>
 <section id="hyperparameter-tuning" class="level3" data-number="3.4.1">
 <h3 data-number="3.4.1" class="anchored" data-anchor-id="hyperparameter-tuning"><span class="header-section-number">3.4.1</span> Hyperparameter Tuning</h3>
-<p>Logistic regression is one of the best performing models in the project after SVM. There are 3 logistic regression models - one was tuned using the class weight hyperparameter to address the class imbalance present in the dataset. By assigning a higher weight to the minority class (useful level 1) and a lower weight to the majority class (useful level 0), the model was able to better capture the patterns associated with the minority class, leading to improved performance metrics.</p>
+<p>Logistic regression is one of the best performing models in the project after SVM <!--with respect to which metrics?-->. We inspected 3 logistic regression models - one was tuned using the class weight hyperparameter to address the class imbalance present in the dataset. By assigning a higher weight to the minority class (useful level 1) and a lower weight to the majority class (useful level 0), the model was able to better capture the patterns associated with the minority class, leading to improved performance metrics.</p>
 </section>
 <section id="oversampling-techniques" class="level3" data-number="3.4.2">
 <h3 data-number="3.4.2" class="anchored" data-anchor-id="oversampling-techniques"><span class="header-section-number">3.4.2</span> Oversampling techniques</h3>
 <p>Additionally, 2 more logistic regression models are trained using two oversampling techniques, namely ADASYN and SMOTE. ADASYN, which generates synthetic samples for the minority class based on their difficulty in learning regions, and SMOTE, which creates synthetic samples by interpolating between existing minority class samples, were used to address the class imbalance problem. These techniques help to provide the model with more balanced training data, allowing it to learn the characteristics of both classes more effectively.</p>
-<p>It is a well know fact that oversampling techniques are employed if there a severe class imbalance if hyperparameter tuning does not improve the model performance. However, despite the heavy class imbalance, the tuned model and the SMOTE model achieve great result with 98% accuracy indicating that it is proficient at making correct predictions. 68% recall is decent, but indicates that the model maybe classifying the positive instances from minority class incorrectly.</p>
-<!--try to tweak and tune this model for better performance-->
+<p>It is a well know fact that oversampling techniques are employed if there a severe class imbalance if hyperparameter tuning does not improve the model performance. However, despite the heavy class imbalance, the tuned model and the SMOTE model achieve great result with 98% accuracy indicating that it is proficient at making correct predictions. <!--adjust this?-->68% recall is decent, but indicates that the model maybe classifying the positive instances from minority class incorrectly.</p>
 </section>
 <section id="logistic-regression-test-results" class="level3" data-number="3.4.3">
 <h3 data-number="3.4.3" class="anchored" data-anchor-id="logistic-regression-test-results"><span class="header-section-number">3.4.3</span> Logistic Regression Test Results</h3>
-<pre><code></code></pre>
-<div id="2d16e4b7" class="cell" data-execution_count="13">
+<div class="cell" data-execution_count="13">
+<div id="tbl-log-reg-results" class="cell quarto-float anchored" data-execution_count="13">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-log-reg-results-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.5: Test Scores for Logistic Regression
+</figcaption>
+<div aria-describedby="tbl-log-reg-results-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output cell-output-display">
 <style type="text/css">
 </style>
 
-<table id="T_27f53" data-quarto-postprocess="true" class="table table-sm table-striped small">
+<table id="T_5cede" class="do-not-create-environment cell table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
-<th id="T_27f53_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Model</th>
-<th id="T_27f53_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Useful Level</th>
-<th id="T_27f53_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Accuracy</th>
-<th id="T_27f53_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">F1</th>
-<th id="T_27f53_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Precision</th>
-<th id="T_27f53_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">Recall</th>
+<th id="T_5cede_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Model</th>
+<th id="T_5cede_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Accuracy</th>
+<th id="T_5cede_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">F1</th>
+<th id="T_5cede_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Precision</th>
+<th id="T_5cede_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Recall</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_27f53_row0_col0" class="data row0 col0">Logistic Regression (TUNED)</td>
-<td id="T_27f53_row0_col1" class="data row0 col1">above 0</td>
-<td id="T_27f53_row0_col2" class="data row0 col2">0.795551</td>
-<td id="T_27f53_row0_col3" class="data row0 col3">0.643692</td>
-<td id="T_27f53_row0_col4" class="data row0 col4">1.000000</td>
-<td id="T_27f53_row0_col5" class="data row0 col5">0.474592</td>
+<td id="T_5cede_row0_col0" class="data row0 col0">Logistic Regression (TUNED)</td>
+<td id="T_5cede_row0_col1" class="data row0 col1">0.827358</td>
+<td id="T_5cede_row0_col2" class="data row0 col2">0.474599</td>
+<td id="T_5cede_row0_col3" class="data row0 col3">0.433375</td>
+<td id="T_5cede_row0_col4" class="data row0 col4">0.524491</td>
 </tr>
 <tr class="even">
-<td id="T_27f53_row1_col0" class="data row1 col0">Logistic Regression (ADASYN)</td>
-<td id="T_27f53_row1_col1" class="data row1 col1">above 0</td>
-<td id="T_27f53_row1_col2" class="data row1 col2">0.794138</td>
-<td id="T_27f53_row1_col3" class="data row1 col3">0.640345</td>
-<td id="T_27f53_row1_col4" class="data row1 col4">1.000000</td>
-<td id="T_27f53_row1_col5" class="data row1 col5">0.470962</td>
+<td id="T_5cede_row1_col0" class="data row1 col0">Logistic Regression (ADASYN)</td>
+<td id="T_5cede_row1_col1" class="data row1 col1">0.783330</td>
+<td id="T_5cede_row1_col2" class="data row1 col2">0.474171</td>
+<td id="T_5cede_row1_col3" class="data row1 col3">0.370906</td>
+<td id="T_5cede_row1_col4" class="data row1 col4">0.657121</td>
 </tr>
 <tr class="odd">
-<td id="T_27f53_row2_col0" class="data row2 col0">Logistic Regression (SMOTE)</td>
-<td id="T_27f53_row2_col1" class="data row2 col1">above 0</td>
-<td id="T_27f53_row2_col2" class="data row2 col2">0.790254</td>
-<td id="T_27f53_row2_col3" class="data row2 col3">0.631056</td>
-<td id="T_27f53_row2_col4" class="data row2 col4">1.000000</td>
-<td id="T_27f53_row2_col5" class="data row2 col5">0.460980</td>
+<td id="T_5cede_row2_col0" class="data row2 col0">Logistic Regression (SMOTE)</td>
+<td id="T_5cede_row2_col1" class="data row2 col1">0.800022</td>
+<td id="T_5cede_row2_col2" class="data row2 col2">0.485442</td>
+<td id="T_5cede_row2_col3" class="data row2 col3">0.393091</td>
+<td id="T_5cede_row2_col4" class="data row2 col4">0.634514</td>
 </tr>
 </tbody>
 </table>
 </div>
+</div>
+</figure>
+</div>
+</div>
+<div id="cell-fig-cm-logreg" class="cell" data-execution_count="14">
 <div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="models implemented_files/figure-html/cell-14-output-2.png" width="301" height="566" class="figure-img"></p>
+<div id="fig-cm-logreg" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cm-logreg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="models implemented_files/figure-html/fig-cm-logreg-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="301" height="566">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cm-logreg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.4: Logistic Regression Confusion Matrices
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
+<p>Amongst these models, it appears that the tuned model provides the highest F1 score. The recall and precision are the lowest…meaning…</p>
+<!--Let's examine some of its outputs.  We'll predict the probability that the comment belongs to the "useful" class and sort in descending order, then filter out any comments that are flagged as not useful.  This may introduce to us new comments that are useful to prospective buyers.-->
+<!-- These comments, holding high probability from the Logistic Regression-Tuned model, seem to have the following qualities:
+
+* Longer comments with descriptive detail
+
+* ...
+
+Subjectively, if our research team were prospective buyers of these products, we find that these comments would be beneficial to us in pursuing a decision as to whether or not to purchase the product. -->
+<p>Comments, sorted by probabability of being useful in descending order, are located here (link).</p>
 </section>
 </section>
 <section id="k-nearest-neighbors-classification" class="level2" data-number="3.5">
@@ -795,265 +897,278 @@ Figure&nbsp;3.4: Model Residuals are Abnormal
 <p>We have looked at multiple values of k for our given data and compared a set of model metrics - accuracy, F1 score, precision, and recall to find the most optimal model to be the model with <code>k = 3</code>.</p>
 <p>Looking the results shown below we can say that:</p>
 <ol type="1">
-<li><p>Just by looking at the accuracy for any given value of k, it ranges between 98-99% indicating that KNN might be a good model for the given data.</p></li>
-<li><p>Among the evaluated models, KNN with <code>k = 3</code> achieves the highest F1 score of approximately 78.2%, indicating a balanced trade-off between precision and recall.</p></li>
-<li><p>While all models have high precision and recall rates, KNN with higher k values (5, 7, and 9) demonstrate slightly lower F1 scores.</p></li>
+<li><p>KNN at each neighbor level performs poorer in comparison to logistic regression. The accuracy and precision do not reach sufficient levels. Furthermore, the total percent prediction of positive cases (ranging from 21.5-25.6%) far exceed the percent of true positive cases in the testing dataset (approximately 17%). These over-optimistic prediction levels (in combination with a high number of false negatives) suggest we may not be meeting the mark with this model, as once again, votes for a comment as being useful is relatively rare in this dataset.</p></li>
+<li><p>For KNN with n=3 neighbors, we are the closest to the actual percent of positives in the source dataset. This model, however, has poor performance for precision, recall, and F1.</p></li>
+<li><p>For KNN with n=9 neighbors, we improve the F1 score, but the precision and recall remain substantially low.</p></li>
+<li><p>KNN, for any number of neighbors and given our selected features, may be an insufficient model for our use case.</p></li>
 </ol>
+<!--1. Just by looking at the accuracy for any given value of k, it ranges between 98-99% indicating that KNN might be a good model for the given data.
+
+2. Among the evaluated models, KNN with `k = 3` achieves the highest F1 score of approximately 78.2%, indicating a balanced trade-off between precision and recall.
+
+3. While all models have high precision and recall rates, KNN with higher k values (5, 7, and 9) demonstrate slightly lower F1 scores.-->
 </section>
 <section id="knn-test-results" class="level3" data-number="3.5.2">
 <h3 data-number="3.5.2" class="anchored" data-anchor-id="knn-test-results"><span class="header-section-number">3.5.2</span> KNN Test Results</h3>
 <!--try to tweak and tune this model for better performance-->
-<div id="67b9e511" class="cell" data-execution_count="15">
+<div class="cell" data-execution_count="16">
+<div id="tbl-knn-test-results" class="cell quarto-float anchored" data-execution_count="16">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-knn-test-results-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.6: Test Scores for K-Nearest Neighbors
+</figcaption>
+<div aria-describedby="tbl-knn-test-results-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output cell-output-display">
 <style type="text/css">
 </style>
 
-<table id="T_cadd5" data-quarto-postprocess="true" class="table table-sm table-striped small">
+<table id="T_65797" class="do-not-create-environment cell table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
-<th id="T_cadd5_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Model</th>
-<th id="T_cadd5_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Useful Level</th>
-<th id="T_cadd5_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Accuracy</th>
-<th id="T_cadd5_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">F1</th>
-<th id="T_cadd5_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Precision</th>
-<th id="T_cadd5_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">Recall</th>
+<th id="T_65797_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Model</th>
+<th id="T_65797_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Accuracy</th>
+<th id="T_65797_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">F1</th>
+<th id="T_65797_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Precision</th>
+<th id="T_65797_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Recall</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_cadd5_row0_col0" class="data row0 col0">KNN (k=3)</td>
-<td id="T_cadd5_row0_col1" class="data row0 col1">above 0</td>
-<td id="T_cadd5_row0_col2" class="data row0 col2">0.731992</td>
-<td id="T_cadd5_row0_col3" class="data row0 col3">0.480493</td>
-<td id="T_cadd5_row0_col4" class="data row0 col4">0.977716</td>
-<td id="T_cadd5_row0_col5" class="data row0 col5">0.318512</td>
+<td id="T_65797_row0_col0" class="data row0 col0">KNN (k=3)</td>
+<td id="T_65797_row0_col1" class="data row0 col1">0.772014</td>
+<td id="T_65797_row0_col2" class="data row0 col2">0.373268</td>
+<td id="T_65797_row0_col3" class="data row0 col3">0.315625</td>
+<td id="T_65797_row0_col4" class="data row0 col4">0.456669</td>
 </tr>
 <tr class="even">
-<td id="T_cadd5_row1_col0" class="data row1 col0">KNN (k=5)</td>
-<td id="T_cadd5_row1_col1" class="data row1 col1">above 0</td>
-<td id="T_cadd5_row1_col2" class="data row1 col2">0.727048</td>
-<td id="T_cadd5_row1_col3" class="data row1 col3">0.462821</td>
-<td id="T_cadd5_row1_col4" class="data row1 col4">0.988131</td>
-<td id="T_cadd5_row1_col5" class="data row1 col5">0.302178</td>
+<td id="T_65797_row1_col0" class="data row1 col0">KNN (k=5)</td>
+<td id="T_65797_row1_col1" class="data row1 col1">0.768877</td>
+<td id="T_65797_row1_col2" class="data row1 col2">0.397312</td>
+<td id="T_65797_row1_col3" class="data row1 col3">0.324427</td>
+<td id="T_65797_row1_col4" class="data row1 col4">0.512434</td>
 </tr>
 <tr class="odd">
-<td id="T_cadd5_row2_col0" class="data row2 col0">KNN (k=7)</td>
-<td id="T_cadd5_row2_col1" class="data row2 col1">above 0</td>
-<td id="T_cadd5_row2_col2" class="data row2 col2">0.720339</td>
-<td id="T_cadd5_row2_col3" class="data row2 col3">0.443038</td>
-<td id="T_cadd5_row2_col4" class="data row2 col4">0.984375</td>
-<td id="T_cadd5_row2_col5" class="data row2 col5">0.285844</td>
+<td id="T_65797_row2_col0" class="data row2 col0">KNN (k=7)</td>
+<td id="T_65797_row2_col1" class="data row2 col1">0.769886</td>
+<td id="T_65797_row2_col2" class="data row2 col2">0.412471</td>
+<td id="T_65797_row2_col3" class="data row2 col3">0.332411</td>
+<td id="T_65797_row2_col4" class="data row2 col4">0.543331</td>
 </tr>
 <tr class="even">
-<td id="T_cadd5_row3_col0" class="data row3 col0">KNN (k=9)</td>
-<td id="T_cadd5_row3_col1" class="data row3 col1">above 0</td>
-<td id="T_cadd5_row3_col2" class="data row3 col2">0.714689</td>
-<td id="T_cadd5_row3_col3" class="data row3 col3">0.424501</td>
-<td id="T_cadd5_row3_col4" class="data row3 col4">0.986755</td>
-<td id="T_cadd5_row3_col5" class="data row3 col5">0.270417</td>
+<td id="T_65797_row3_col0" class="data row3 col0">KNN (k=9)</td>
+<td id="T_65797_row3_col1" class="data row3 col1">0.766973</td>
+<td id="T_65797_row3_col2" class="data row3 col2">0.417040</td>
+<td id="T_65797_row3_col3" class="data row3 col3">0.331995</td>
+<td id="T_65797_row3_col4" class="data row3 col4">0.560663</td>
 </tr>
 </tbody>
 </table>
 </div>
+</div>
+</figure>
+</div>
+</div>
+<div id="cell-fig-cm-knn" class="cell" data-execution_count="17">
 <div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="models implemented_files/figure-html/cell-16-output-2.png" width="319" height="950" class="figure-img"></p>
+<div id="fig-cm-knn" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cm-knn-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="models implemented_files/figure-html/fig-cm-knn-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="319" height="950">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cm-knn-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.5: Confusion Matrices for KNN Models
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
+<p>Simply examining the above confusion matrices, especially the upper-right hand corner false posistives, we see that KNN is likely over-optimistic about the usefulness of customer feedback.</p>
 </section>
 </section>
 <section id="support-vector-machine-classification" class="level2" data-number="3.6">
 <h2 data-number="3.6" class="anchored" data-anchor-id="support-vector-machine-classification"><span class="header-section-number">3.6</span> Support Vector Machine Classification</h2>
-<p>Support Vector Machines work on classification problems by finding an optimal hyperplane that best classifies the target classes in the given feature space. Because of its flexibility of moving the hyperplane and adapting to the intricacies of the data, SVM proves to be a powerful algorithm.</p>
+<p>Support Vector Machines work on classification problems by finding an optimal hyperplane that best classifies the target classes in the given feature space. Because of its flexibility of moving the hyperplane and adapting to the intricacies of the data, SVM could be a useful and powerful algorithm for our use case.</p>
 <section id="hyperparameter-tuning-2" class="level3" data-number="3.6.1">
 <h3 data-number="3.6.1" class="anchored" data-anchor-id="hyperparameter-tuning-2"><span class="header-section-number">3.6.1</span> Hyperparameter Tuning</h3>
-<p>The complexity of a SVM model is determined by the choice of kernel function that allows to capture all nuances of the data. Below are the implmentation results of the performance metrics of Support Vector Machine (SVM) models trained with different kernel functions: polynomial (SVM-Poly), radial basis function (SVM-RBF), and sigmoid (SVM-Sigmoid).</p>
-<p>To tune each version of this model, we leveraged a reduced set of principal components, and adjusted class weighting, as having useful votes for a product is a relative rarity across each of the e-commerce platforms. To boost our recall, we elected to assign weights of 0.1 to class 0 (not useful) and 0.9 to class 1 (useful).</p>
+<p>The complexity of a SVM model is determined by the choice of kernel function that supports the capturing of nuances within the data. Below are our implmentation results of the performance metrics of Support Vector Machine (SVM) models trained with different kernel functions: polynomial (SVM-Poly), radial basis function (SVM-RBF), and sigmoid (SVM-Sigmoid).</p>
+<p>To tune each version of this model, we leveraged a reduced set of principal components, and adjusted class weighting, as having useful votes for a product is a relative rarity across each of the e-commerce platforms. To boost our recall, we elected to assign weights of 0.2 to class 0 (not useful) and 0.8 to class 1 (useful).</p>
 </section>
 <section id="svm-test-results" class="level3" data-number="3.6.2">
 <h3 data-number="3.6.2" class="anchored" data-anchor-id="svm-test-results"><span class="header-section-number">3.6.2</span> SVM Test Results</h3>
-<div id="f4752587" class="cell" data-execution_count="17">
+<div class="cell" data-execution_count="19">
+<div id="tbl-svm-test-results" class="cell quarto-float anchored" data-execution_count="19">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-svm-test-results-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.7: Test Scores for Support Vector Machine
+</figcaption>
+<div aria-describedby="tbl-svm-test-results-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output cell-output-display">
 <style type="text/css">
 </style>
 
-<table id="T_37e61" data-quarto-postprocess="true" class="table table-sm table-striped small">
+<table id="T_0392b" class="do-not-create-environment cell table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
-<th id="T_37e61_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Model</th>
-<th id="T_37e61_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Useful Level</th>
-<th id="T_37e61_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Accuracy</th>
-<th id="T_37e61_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">F1</th>
-<th id="T_37e61_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Precision</th>
-<th id="T_37e61_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">Recall</th>
+<th id="T_0392b_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Model</th>
+<th id="T_0392b_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Accuracy</th>
+<th id="T_0392b_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">F1</th>
+<th id="T_0392b_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Precision</th>
+<th id="T_0392b_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Recall</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_37e61_row0_col0" class="data row0 col0">SVM-Poly</td>
-<td id="T_37e61_row0_col1" class="data row0 col1">above 0</td>
-<td id="T_37e61_row0_col2" class="data row0 col2">0.785664</td>
-<td id="T_37e61_row0_col3" class="data row0 col3">0.619912</td>
-<td id="T_37e61_row0_col4" class="data row0 col4">1.000000</td>
-<td id="T_37e61_row0_col5" class="data row0 col5">0.449183</td>
+<td id="T_0392b_row0_col0" class="data row0 col0">SVM-Poly</td>
+<td id="T_0392b_row0_col1" class="data row0 col1">0.827022</td>
+<td id="T_0392b_row0_col2" class="data row0 col2">0.465374</td>
+<td id="T_0392b_row0_col3" class="data row0 col3">0.430493</td>
+<td id="T_0392b_row0_col4" class="data row0 col4">0.506405</td>
 </tr>
 <tr class="even">
-<td id="T_37e61_row1_col0" class="data row1 col0">SVM-RBF</td>
-<td id="T_37e61_row1_col1" class="data row1 col1">above 0</td>
-<td id="T_37e61_row1_col2" class="data row1 col2">0.781780</td>
-<td id="T_37e61_row1_col3" class="data row1 col3">0.612782</td>
-<td id="T_37e61_row1_col4" class="data row1 col4">0.989879</td>
-<td id="T_37e61_row1_col5" class="data row1 col5">0.443739</td>
+<td id="T_0392b_row1_col0" class="data row1 col0">SVM-RBF</td>
+<td id="T_0392b_row1_col1" class="data row1 col1">0.849989</td>
+<td id="T_0392b_row1_col2" class="data row1 col2">0.418079</td>
+<td id="T_0392b_row1_col3" class="data row1 col3">0.493840</td>
+<td id="T_0392b_row1_col4" class="data row1 col4">0.362472</td>
 </tr>
 <tr class="odd">
-<td id="T_37e61_row2_col0" class="data row2 col0">SVM-Sigmoid</td>
-<td id="T_37e61_row2_col1" class="data row2 col1">above 0</td>
-<td id="T_37e61_row2_col2" class="data row2 col2">0.737288</td>
-<td id="T_37e61_row2_col3" class="data row2 col3">0.583893</td>
-<td id="T_37e61_row2_col4" class="data row2 col4">0.760933</td>
-<td id="T_37e61_row2_col5" class="data row2 col5">0.473684</td>
+<td id="T_0392b_row2_col0" class="data row2 col0">SVM-Sigmoid</td>
+<td id="T_0392b_row2_col1" class="data row2 col1">0.768205</td>
+<td id="T_0392b_row2_col2" class="data row2 col2">0.367085</td>
+<td id="T_0392b_row2_col3" class="data row2 col3">0.308960</td>
+<td id="T_0392b_row2_col4" class="data row2 col4">0.452148</td>
 </tr>
 </tbody>
 </table>
 </div>
+</div>
+</figure>
+</div>
+</div>
+<div id="cell-fig-cm-svm" class="cell" data-execution_count="20">
 <div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="models implemented_files/figure-html/cell-18-output-2.png" width="301" height="566" class="figure-img"></p>
+<div id="fig-cm-svm" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cm-svm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="models implemented_files/figure-html/fig-cm-svm-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="301" height="566">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cm-svm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.6: Confusion Matrices for Support Vector Machines
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>Looking the results shown below we can say that:</p>
 <ol type="1">
-<li><p>SVM with a polynomial kernel (SVM-Poly) achieves the highest F1 score of approximately 81.09%. This model also exhibits perfect precision, indicating that it classifies all positive instances correctly.</p></li>
-<li><p>SVM with a radial basis function kernel (SVM-RBF) follows closely with an F1 score of approximately 78.15%. Although it has slightly lower precision compared to SVM-Poly, it demonstrates a balanced trade-off between precision and recall.</p></li>
-<li><p>SVM with a sigmoid kernel (SVM-Sigmoid) exhibits the lowest F1 score of approximately 59.24%, indicating comparatively lower performance in capturing both precision and recall.</p></li>
+<li><p>SVM with a polynomial kernel (set to degree 1 or linear) predicts a total percent of true positives close to the underlying source data (approximately 17%).</p></li>
+<li><p>SVM with radial basis function kernel appears to under-predict positive cases.</p></li>
+<li><p>SVM with sigmoid kernel strongly over-predicts false positives</p></li>
 </ol>
-<p>While all SVM models exhibit high accuracy, SVM with a polynomial kernel (SVM-Poly) emerges as the most favorable choice based on its highest F1 score and perfect precision.</p>
-<!-- 
-Is this what we want to say? if our goals are to instead identify potentially useful comments, not just predict whether or not it will have any votes against it, I think that the RBF or the sigmoid model may be best for our application
+<p>SVM Poly appears to achieve reasonable accuracy while hitting an appropriate level for F1 and Recall for our use case. The presence of false positives gives us something to subjectively examine for its usefulness as a potential customer.</p>
+<!--1. SVM with a polynomial kernel (SVM-Poly) achieves the highest F1 score of approximately 81.09%. This model also exhibits perfect precision, indicating that it classifies all positive instances correctly.
 
-Here's an example - 
+2. SVM with a radial basis function kernel (SVM-RBF) follows closely with an F1 score of approximately 78.15%. Although it has slightly lower precision compared to SVM-Poly, it demonstrates a balanced trade-off between precision and recall. 
 
-Here, the resuts of the sigmoid model are most promising for our outcomes, as the recall is high, and the model is predicting instances of potentially useful customer feedback comments that have no votes marking them as favorable.
+3. SVM with a sigmoid kernel (SVM-Sigmoid) exhibits the lowest F1 score of approximately 59.24%, indicating comparatively lower performance in capturing both precision and recall.
 
-Let's have a look at some of those predictions.
-
--->
-<p>RBF, unexpectedly, seems to associate being part of a promotion with a comment being useful. It’s possible that other comments in this group have similar features and qualities to promotional review comments. These results are sorted by the probability that they would be classified has having votes flagging them as being useful. The highest</p>
-<p>What about sigmoid?</p>
-<p>Sigmoid seems to identify a wider variety of comments, some (subjectively) useful, some not, and identifies fewer items that were part of a promotion.</p>
+While all SVM models exhibit high accuracy, SVM with a polynomial kernel (SVM-Poly) emerges as the most favorable choice based on its highest F1 score and perfect precision. -->
 </section>
 </section>
 <section id="model-comparison" class="level2" data-number="3.7">
 <h2 data-number="3.7" class="anchored" data-anchor-id="model-comparison"><span class="header-section-number">3.7</span> Model Comparison</h2>
 <p>We examine the following table to compare and contrast our implemented models on our collected data.</p>
-<div class="cell" data-execution_count="20">
-<div id="tbl-final-results" class="cell quarto-float anchored" data-execution_count="20">
+<div class="cell" data-execution_count="21">
+<div id="tbl-final-results" class="cell quarto-float anchored" data-execution_count="21">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-final-results-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;3.4: Summary Metrics (all evaluated models)
+Table&nbsp;3.8: Summary Metrics (all evaluated models)
 </figcaption>
 <div aria-describedby="tbl-final-results-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="cell-output cell-output-display" data-execution_count="20">
+<div class="cell-output cell-output-display" data-execution_count="21">
 <style type="text/css">
 </style>
 
-<table id="T_71a7d" class="do-not-create-environment cell table table-sm table-striped small" data-quarto-postprocess="true">
+<table id="T_520b1" class="do-not-create-environment cell table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
-<th id="T_71a7d_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Model</th>
-<th id="T_71a7d_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Useful Level</th>
-<th id="T_71a7d_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Accuracy</th>
-<th id="T_71a7d_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">F1</th>
-<th id="T_71a7d_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Precision</th>
-<th id="T_71a7d_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">Recall</th>
+<th id="T_520b1_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Model</th>
+<th id="T_520b1_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Accuracy</th>
+<th id="T_520b1_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">F1</th>
+<th id="T_520b1_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Precision</th>
+<th id="T_520b1_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Recall</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_71a7d_row0_col0" class="data row0 col0">Logistic Regression (TUNED)</td>
-<td id="T_71a7d_row0_col1" class="data row0 col1">above 0</td>
-<td id="T_71a7d_row0_col2" class="data row0 col2">0.795551</td>
-<td id="T_71a7d_row0_col3" class="data row0 col3">0.643692</td>
-<td id="T_71a7d_row0_col4" class="data row0 col4">1.000000</td>
-<td id="T_71a7d_row0_col5" class="data row0 col5">0.474592</td>
+<td id="T_520b1_row0_col0" class="data row0 col0">Logistic Regression (TUNED)</td>
+<td id="T_520b1_row0_col1" class="data row0 col1">0.827358</td>
+<td id="T_520b1_row0_col2" class="data row0 col2">0.474599</td>
+<td id="T_520b1_row0_col3" class="data row0 col3">0.433375</td>
+<td id="T_520b1_row0_col4" class="data row0 col4">0.524491</td>
 </tr>
 <tr class="even">
-<td id="T_71a7d_row1_col0" class="data row1 col0">Logistic Regression (ADASYN)</td>
-<td id="T_71a7d_row1_col1" class="data row1 col1">above 0</td>
-<td id="T_71a7d_row1_col2" class="data row1 col2">0.794138</td>
-<td id="T_71a7d_row1_col3" class="data row1 col3">0.640345</td>
-<td id="T_71a7d_row1_col4" class="data row1 col4">1.000000</td>
-<td id="T_71a7d_row1_col5" class="data row1 col5">0.470962</td>
+<td id="T_520b1_row1_col0" class="data row1 col0">Logistic Regression (ADASYN)</td>
+<td id="T_520b1_row1_col1" class="data row1 col1">0.783330</td>
+<td id="T_520b1_row1_col2" class="data row1 col2">0.474171</td>
+<td id="T_520b1_row1_col3" class="data row1 col3">0.370906</td>
+<td id="T_520b1_row1_col4" class="data row1 col4">0.657121</td>
 </tr>
 <tr class="odd">
-<td id="T_71a7d_row2_col0" class="data row2 col0">Logistic Regression (SMOTE)</td>
-<td id="T_71a7d_row2_col1" class="data row2 col1">above 0</td>
-<td id="T_71a7d_row2_col2" class="data row2 col2">0.790254</td>
-<td id="T_71a7d_row2_col3" class="data row2 col3">0.631056</td>
-<td id="T_71a7d_row2_col4" class="data row2 col4">1.000000</td>
-<td id="T_71a7d_row2_col5" class="data row2 col5">0.460980</td>
+<td id="T_520b1_row2_col0" class="data row2 col0">Logistic Regression (SMOTE)</td>
+<td id="T_520b1_row2_col1" class="data row2 col1">0.800022</td>
+<td id="T_520b1_row2_col2" class="data row2 col2">0.485442</td>
+<td id="T_520b1_row2_col3" class="data row2 col3">0.393091</td>
+<td id="T_520b1_row2_col4" class="data row2 col4">0.634514</td>
 </tr>
 <tr class="even">
-<td id="T_71a7d_row3_col0" class="data row3 col0">KNN (k=3)</td>
-<td id="T_71a7d_row3_col1" class="data row3 col1">above 0</td>
-<td id="T_71a7d_row3_col2" class="data row3 col2">0.731992</td>
-<td id="T_71a7d_row3_col3" class="data row3 col3">0.480493</td>
-<td id="T_71a7d_row3_col4" class="data row3 col4">0.977716</td>
-<td id="T_71a7d_row3_col5" class="data row3 col5">0.318512</td>
+<td id="T_520b1_row3_col0" class="data row3 col0">KNN (k=3)</td>
+<td id="T_520b1_row3_col1" class="data row3 col1">0.772014</td>
+<td id="T_520b1_row3_col2" class="data row3 col2">0.373268</td>
+<td id="T_520b1_row3_col3" class="data row3 col3">0.315625</td>
+<td id="T_520b1_row3_col4" class="data row3 col4">0.456669</td>
 </tr>
 <tr class="odd">
-<td id="T_71a7d_row4_col0" class="data row4 col0">KNN (k=5)</td>
-<td id="T_71a7d_row4_col1" class="data row4 col1">above 0</td>
-<td id="T_71a7d_row4_col2" class="data row4 col2">0.727048</td>
-<td id="T_71a7d_row4_col3" class="data row4 col3">0.462821</td>
-<td id="T_71a7d_row4_col4" class="data row4 col4">0.988131</td>
-<td id="T_71a7d_row4_col5" class="data row4 col5">0.302178</td>
+<td id="T_520b1_row4_col0" class="data row4 col0">KNN (k=5)</td>
+<td id="T_520b1_row4_col1" class="data row4 col1">0.768877</td>
+<td id="T_520b1_row4_col2" class="data row4 col2">0.397312</td>
+<td id="T_520b1_row4_col3" class="data row4 col3">0.324427</td>
+<td id="T_520b1_row4_col4" class="data row4 col4">0.512434</td>
 </tr>
 <tr class="even">
-<td id="T_71a7d_row5_col0" class="data row5 col0">KNN (k=7)</td>
-<td id="T_71a7d_row5_col1" class="data row5 col1">above 0</td>
-<td id="T_71a7d_row5_col2" class="data row5 col2">0.720339</td>
-<td id="T_71a7d_row5_col3" class="data row5 col3">0.443038</td>
-<td id="T_71a7d_row5_col4" class="data row5 col4">0.984375</td>
-<td id="T_71a7d_row5_col5" class="data row5 col5">0.285844</td>
+<td id="T_520b1_row5_col0" class="data row5 col0">KNN (k=7)</td>
+<td id="T_520b1_row5_col1" class="data row5 col1">0.769886</td>
+<td id="T_520b1_row5_col2" class="data row5 col2">0.412471</td>
+<td id="T_520b1_row5_col3" class="data row5 col3">0.332411</td>
+<td id="T_520b1_row5_col4" class="data row5 col4">0.543331</td>
 </tr>
 <tr class="odd">
-<td id="T_71a7d_row6_col0" class="data row6 col0">KNN (k=9)</td>
-<td id="T_71a7d_row6_col1" class="data row6 col1">above 0</td>
-<td id="T_71a7d_row6_col2" class="data row6 col2">0.714689</td>
-<td id="T_71a7d_row6_col3" class="data row6 col3">0.424501</td>
-<td id="T_71a7d_row6_col4" class="data row6 col4">0.986755</td>
-<td id="T_71a7d_row6_col5" class="data row6 col5">0.270417</td>
+<td id="T_520b1_row6_col0" class="data row6 col0">KNN (k=9)</td>
+<td id="T_520b1_row6_col1" class="data row6 col1">0.766973</td>
+<td id="T_520b1_row6_col2" class="data row6 col2">0.417040</td>
+<td id="T_520b1_row6_col3" class="data row6 col3">0.331995</td>
+<td id="T_520b1_row6_col4" class="data row6 col4">0.560663</td>
 </tr>
 <tr class="even">
-<td id="T_71a7d_row7_col0" class="data row7 col0">SVM-Poly</td>
-<td id="T_71a7d_row7_col1" class="data row7 col1">above 0</td>
-<td id="T_71a7d_row7_col2" class="data row7 col2">0.785664</td>
-<td id="T_71a7d_row7_col3" class="data row7 col3">0.619912</td>
-<td id="T_71a7d_row7_col4" class="data row7 col4">1.000000</td>
-<td id="T_71a7d_row7_col5" class="data row7 col5">0.449183</td>
+<td id="T_520b1_row7_col0" class="data row7 col0">SVM-Poly</td>
+<td id="T_520b1_row7_col1" class="data row7 col1">0.827022</td>
+<td id="T_520b1_row7_col2" class="data row7 col2">0.465374</td>
+<td id="T_520b1_row7_col3" class="data row7 col3">0.430493</td>
+<td id="T_520b1_row7_col4" class="data row7 col4">0.506405</td>
 </tr>
 <tr class="odd">
-<td id="T_71a7d_row8_col0" class="data row8 col0">SVM-RBF</td>
-<td id="T_71a7d_row8_col1" class="data row8 col1">above 0</td>
-<td id="T_71a7d_row8_col2" class="data row8 col2">0.781780</td>
-<td id="T_71a7d_row8_col3" class="data row8 col3">0.612782</td>
-<td id="T_71a7d_row8_col4" class="data row8 col4">0.989879</td>
-<td id="T_71a7d_row8_col5" class="data row8 col5">0.443739</td>
+<td id="T_520b1_row8_col0" class="data row8 col0">SVM-RBF</td>
+<td id="T_520b1_row8_col1" class="data row8 col1">0.849989</td>
+<td id="T_520b1_row8_col2" class="data row8 col2">0.418079</td>
+<td id="T_520b1_row8_col3" class="data row8 col3">0.493840</td>
+<td id="T_520b1_row8_col4" class="data row8 col4">0.362472</td>
 </tr>
 <tr class="even">
-<td id="T_71a7d_row9_col0" class="data row9 col0">SVM-Sigmoid</td>
-<td id="T_71a7d_row9_col1" class="data row9 col1">above 0</td>
-<td id="T_71a7d_row9_col2" class="data row9 col2">0.737288</td>
-<td id="T_71a7d_row9_col3" class="data row9 col3">0.583893</td>
-<td id="T_71a7d_row9_col4" class="data row9 col4">0.760933</td>
-<td id="T_71a7d_row9_col5" class="data row9 col5">0.473684</td>
+<td id="T_520b1_row9_col0" class="data row9 col0">SVM-Sigmoid</td>
+<td id="T_520b1_row9_col1" class="data row9 col1">0.768205</td>
+<td id="T_520b1_row9_col2" class="data row9 col2">0.367085</td>
+<td id="T_520b1_row9_col3" class="data row9 col3">0.308960</td>
+<td id="T_520b1_row9_col4" class="data row9 col4">0.452148</td>
 </tr>
 </tbody>
 </table>
@@ -1062,12 +1177,29 @@ Table&nbsp;3.4: Summary Metrics (all evaluated models)
 </figure>
 </div>
 </div>
-<p>Each of these models had similar performance in terms of accuracy and precision. A key consideration for us is within the realm of recall in that false positives are potentially beneficial to the generalization of this model to identify reviews that are useful, but currently possess no helpful votes. None of the models delivered any false positives, but having high recall may support identification of new, useful comments.</p>
-<p>The top 2 performing models were our Support Vector Machine and Logistic Regression implementations. Between the two, SVM had higher recall, which is preferable in our use case. That being said, on every metric between the two models, there was near equivalent performance.</p>
-<p>With our preferences toward higher recall, the implementation of the SVM-Sigmoid and SVM-RBF models delivered best on our objectives, identifying the highest volume of true positives, minimizing false negatives, and providing a limited number of true positives that could identify comments with no votes that are useful to customers.</p>
-<p>From a stakeholder standpoint, these two models can both be beneficial, whether looking from the standpoint of the customer or the e-commerce platform.</p>
-<p>The RBF model, with more exploration and examination, could be very beneficial to e-commerce platforms. If the model could be modified and updated to identify comments that are closer in proximity to promotional comments (which potentially come at a cost to these platforms), it may allow them to present comments similar in quality to a paid promotional review without the platform having to pay for it.</p>
-<p>The Sigmoid model, with additional training and tuning, could be of greater benefit to customers. This model is less inclined to capture promomtional feedback comments and provide potentially useful feedback absent other outside influence. At a subjective level, not all of the content contained in these classified reviews are useful, though many are. <!-- any additional writeup comments here--></p>
+<p>The most interesting results, we find, come from the tuned Logistic Regression model and SVM-Poly models. These seem to hit a sweet spot when it comes to F1 and recall scores. Exceeding certain thresholds (at or around 0.5), seems to have too high a percentage of false positives.</p>
+<p>50% of our oversampled training data held votes as being useful comments, and our regular training data contained samples with approximately 7% being voted as useful.</p>
+<p>For our testing data, approximately 17% of the records held votes for being useful.</p>
+<p>The Tuned Logistic Regression predicted a total number of positive (true and false positives) of 1603, or 18% of the available samples. This result is very close in proximity to the actual total for true positives within the data.</p>
+<p>The SVM Poly model also produced a prediction of approximately 17.7% of the testing data being useful (comparable to the actual value of 17%).</p>
+<p>None of the other model formulations or permutations achieved a percentage of total positive prediction rate as in close proximity to the actual underlying data.</p>
+<p>The false positives for SVM-Poly and Tuned Logistic Regression are located here:</p>
+<ul>
+<li><p>link to Logisitic Regression file here</p></li>
+<li><p>link to SVM-Poly here</p></li>
+</ul>
+<!--
+Each of these models had similar performance in terms of accuracy and precision. A key consideration for us is within the realm of recall in that false positives are potentially beneficial to the generalization of this model to identify reviews that are useful, but currently possess no helpful votes.  None of the models delivered any false positives, but having high recall may support identification of new, useful comments.
+
+The top 2 performing models were our Support Vector Machine and Logistic Regression implementations.  Between the two, SVM had higher recall, which is preferable in our use case.  That being said, on every metric between the two models, there was near equivalent performance.
+
+With our preferences toward higher recall, the implementation of the SVM-Sigmoid and SVM-RBF models delivered best on our objectives, identifying the highest volume of true positives, minimizing false negatives, and providing a limited number of true positives that could identify comments with no votes that are useful to customers. 
+
+From a stakeholder standpoint, these two models can both be beneficial, whether looking from the standpoint of the customer or the e-commerce platform.
+
+The RBF model, with more exploration and examination, could be very beneficial to e-commerce platforms.  If the model could be modified and updated to identify comments that are closer in proximity to promotional comments (which potentially come at a cost to these platforms), it may allow them to present comments similar in quality to a paid promotional review without the platform having to pay for it.
+
+The Sigmoid model, with additional training and tuning, could be of greater benefit to customers.  This model is less inclined to capture promomtional feedback comments and provide potentially useful feedback absent other outside influence.  At a subjective level, not all of the content contained in these classified reviews are useful, though many are. <!-- any additional writeup comments here-->
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
