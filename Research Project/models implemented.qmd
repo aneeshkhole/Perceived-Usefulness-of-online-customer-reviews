@@ -565,11 +565,11 @@ Amongst these models, it appears that the tuned model provides the highest F1 sc
 # for i in x:
 #     print(i)
 #print(len(x))
-test_frame['lm_pred_useful'] = LogMod.predict_proba(X_test_pca)[:,1]
+test_frame['pred_useful'] = LogMod.predict_proba(X_test_pca)[:,1]
 test_frame['product'] = test_frame.apply(lambda row:product_data[product_data['prodSiteID']==row['prodSiteID']]['product_title'].iloc[0],axis=1)
-dat = test_frame[test_frame['is_helpful']==0].sort_values(by='lm_pred_useful',ascending=False).head(10).copy().reset_index()
+dat = test_frame[test_frame['is_helpful']==0].sort_values(by='pred_useful',ascending=False)[['site_y','product','product_price','review_header','reviewer_name','review_content','review_star_rating','review_helpful_votes','pred_useful']].copy().reset_index()
 
-
+dat.to_csv('../data/LogisticRegressionPredUseful.csv')
 # for i,row in dat.iterrows():
 #     print(
 #         "Review #{} ({})\n{}\n".format(i+1,row['product'],row['review_content'])
@@ -715,14 +715,15 @@ plt.show()
 Simply examining the above confusion matrices, especially the upper-right hand corner false posistives, we see that KNN is likely over-optimistic about the usefulness of customer feedback.
 
 ```{python UsefulComments-knn}
-test_frame['knn_pred_useful'] = y_pred_3
-dat = test_frame[test_frame['is_helpful']==0].sort_values(by='knn_pred_useful',ascending=False).head(10).copy().reset_index()
+test_frame['pred_useful'] = y_pred_3
+dat = test_frame[test_frame['is_helpful']==0].sort_values(by='pred_useful',ascending=False)[['site_y','product','product_price','review_header','reviewer_name','review_content','review_star_rating','review_helpful_votes','pred_useful']].copy().reset_index()
 
 # for i,row in dat.iterrows():
 #     print(
 #         "Review #{} ({})\n{}\n".format(i+1,row['product'],row['review_content'])
 #     )
 
+dat.to_csv('../data/KNNPredUseful.csv')
 ```
 
 ## Support Vector Machine Classification
@@ -819,6 +820,18 @@ axes[2].set_title('SVM Sigmoid Model')
 
 plt.tight_layout()
 plt.show()
+```
+
+```{python UsefulComments-knn}
+test_frame['pred_useful'] = y_pred_poly
+dat = test_frame[test_frame['is_helpful']==0].sort_values(by='pred_useful',ascending=False)[['site_y','product','product_price','review_header','reviewer_name','review_content','review_star_rating','review_helpful_votes','pred_useful']].copy().reset_index()
+
+# for i,row in dat.iterrows():
+#     print(
+#         "Review #{} ({})\n{}\n".format(i+1,row['product'],row['review_content'])
+#     )
+
+dat.to_csv('../data/SVMPolyPredUseful.csv')
 ```
 
 Looking the results shown below we can say that:
