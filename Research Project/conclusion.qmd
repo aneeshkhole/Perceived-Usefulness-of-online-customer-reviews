@@ -2,7 +2,41 @@
 
 ```{python}
 #module imports
-import pandas as pd, numpy as np, matplotlib.pyplot as plt
+#import pandas as pd, numpy as np, matplotlib.pyplot as plt
 ```
 
-Here's our conclusions section
+Evaluating the performance our models in comparison to the source data, we find that our selected features are likely weak in the prediction of a feedback comment being useful.  There are substantial issues with recall, precision, and F1 scores for both the training and testing data.
+
+We attempted multiple iterations of feature selection, splitting our training and testing data, countless permutation of model hyperparameters, and multiple transformations of our feature variables to offer each model every opportunity to deliver good performance.  Whether working with IQR vs. standard deviation adjustments, sampling all data collected for training vs. sampling only common items for training, and other data adjustments simply didn't deliver a strong model in any of our cases.
+
+In our eyes, this leads us to believe that further feature selection and transformation may be necessary to achieve greater confidence in any of these models.
+
+* We leveraged python's TextBlob as a means to gather the subjectivity and polarity.  Other libraries and means for assessing compound sentiment may be more prudent.  Due to resource constraints, we were unable to explore some methods suggested by:
+
+    * @Hu_Gong_Guo_2010 for mitigating common positive and negative sentiment prior to computing sentiment scores
+
+    * @Rajeev_Rekha_2015 for exploring Naive Bayes classification of review polarity
+
+    * @Wang_Li_Tian_Wang_Cheng_2018 for text mining methods to further support feature extraction
+
+Taking our methods and applying some of the above could greatly support stronger features and model performance.
+
+<!--add stuff here for recommended tweaks, research, etc-->
+
+Despite what we perceive as weakness in the models, the degree of detail and specificity within some of the predicted "useful" comments is enlightening.  Let's have a look at a small selection of comments, near the top of the prediction list  for MLR, SVM, and for Logistic Regression - 
+
+![Comment on Dyson Vacuum Cleaner - predicted useful by Logistic Regression](./imgs/Comment.jpg){#fig-dyson-vacuum}
+
+A Dyson vacuum is an expensive product.  Hearing of someone's challenges, particularly this extreme, may make one think twice about the investment.  While appearing negative in sentiment, the commenter appears to provide a degree of objectivity to their review - and does talk about both the good and the bad of the product.  These are all things we believe may be useful to a customer.
+
+![Comment on a Sofa - predicted useful by SVM](./imgs/Comment2.jpg){#fig-cheap-sofa}
+
+An approximately $400 sofa is also quite the investment, and knowing about issues with returns, issues with the product and its craftsmanship is likely a useful datapoint for a prospective customer.
+
+![Comment on a Pizza Oven - predicted useful by MLR](./imgs/Comment3.jpg){#fig-pizza-oven}
+
+This customer looks like they had a good experience - so good in fact that they went and found somewhere online that they could post about it.  Knowing the settings used, how quickly the oven managed to cook their food, and the ease of use likely all give utility to a prospective customer!
+
+None of these reviews had any votes for the comment as being useful to other buyers.  That being said - it's all subjective in terms of determining utility.
+
+<!--more stuff here if/how needed -->

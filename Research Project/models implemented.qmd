@@ -628,7 +628,7 @@ plt.show()
 #print(len(x))
 test_frame['pred_useful'] = LogMod.predict_proba(X_test_pca)[:,1]
 
-dat = test_frame[test_frame['is_helpful']==0].sort_values(by='pred_useful',ascending=False)[['site_y','product','product_price','review_header','reviewer_name','review_content','review_star_rating','review_helpful_votes','review_polarity','review_subjectivity','pred_useful']].copy().reset_index()
+dat = test_frame[test_frame['is_helpful']==0].sort_values(by='pred_useful',ascending=False)[['site_y','product','product_price','review_header','reviewer_name','review_content','review_star_rating','review_helpful_votes','review_polarity','review_subjectivity','review_length','total_star_rating','prod_subjectivity','pred_useful']].copy().reset_index()
 
 dat['rank'] = list(range(1,len(dat)+1))
 
@@ -907,7 +907,7 @@ dat = test_frame[test_frame['is_helpful']==0].sort_values(by='pred_useful',ascen
 #     print(
 #         "Review #{} ({})\n{}\n".format(i+1,row['product'],row['review_content'])
 #     )
-
+dat['rank'] = list(range(1,len(dat)+1))
 dat.to_csv('../data/SVMPolyPredUseful.csv')
 ```
 
@@ -973,43 +973,60 @@ Amongst the ranking of outputs from MLR, Logistic Regression, and SVM, we see so
 lg_pred = pd.read_csv('../data/LogisticRegressionPredUseful.csv')
 mlr_pred = pd.read_csv('../data/MLRPredUseful.csv')
 svm_pred = pd.read_csv('../data/SVMPolyPredUseful.csv')
-resLG = pd.DataFrame(lg_pred.head(30).describe())
 
-resLG = resLG[resLG.index.isin(['mean','std'])]
+resLG = pd.DataFrame(
+    lg_pred.head(30).describe()
+)
+resLG = resLG[resLG.index.isin(['mean','std'])].copy()
 resLG['model'] = "Logistic Regression (Tuned)"
+resLG = resLG.reset_index()
 
-resMLR = pd.DataFrame(mlr_pred.head(30).dropna(axis=1).describe())
+# resMLR = pd.DataFrame(
+#     mlr_pred.head(30).describe()
+# )
+# resMLR = resMLR[resMLR.index.isin(['mean','std'])]
+# resMLR['model'] = "MLR"
 
-resMLR = resMLR[resMLR.index.isin(['mean','std'])]
-resMLR['model'] = "MLR"
+resMLR = pd.DataFrame(
+    mlr_pred.head(30).describe()
+)
+resMLR = resMLR[resMLR.index.isin(['mean','std'])].copy()
+resMLR['model'] = "Multiple Linear Reguression"
+resMLR = resMLR.reset_index()
+summary = pd.concat([resMLR,resLG],ignore_index=True)
+
 
 resSVM = pd.DataFrame(
     svm_pred.head(30).describe()
 )
 
-resSVM = resSVM[resSVM.index.isin(['mean','std'])]
+resSVM = resSVM[resSVM.index.isin(['mean','std'])].copy()
 resSVM['model'] = "SVM-Poly (Tuned)"
+resSVM = resSVM.reset_index()
+summary = pd.concat([summary,resSVM],ignore_index=True)
+summary.rename({'level_0':'metric'},axis=1,inplace=True)
 
-        # 'review_subjectivity', 'review_polarity',
-        # 'review_length','prod_subjectivity','total_star_rating', 'site', 'review_helpful_votes'
 
-summary = pd.concat([resLG,resMLR,resSVM])
 display(
-    summary[[
-        'review_subjectivity', 'review_polarity',
+    summary[['model','metric',
+        'review_subjectivity', 'review_polarity','review_star_rating',
         'review_length','prod_subjectivity','total_star_rating'
     ]]
 )
+
+# 'review_star_rating', #'review_helpful_votes',
+#         'review_subjectivity', 'review_polarity',
+#         'review_length','prod_subjectivity','total_star_rating', 'site', 'review_helpful_votes'
 
 ```
 
 * Examining some metrics from the top 30 recommended "useful" reviews - 
 
-    * Logistic Regression and SVM had similar means and standard deviations for review star rating, review subjectivity, and review polarity.  Each seemed to prefer slightly positive reviews (as follows from our EDA), and an even split on the subjectivity of the text (not overly precise, not overly vague).
+    * Logistic Regression and SVM had similar means and standard deviations for review star rating, review subjectivity, and review polarity.  Each seemed to prefer slightly positive reviews (as follows from our EDA), and an even split on the subjectivity of the text (not overly precise, not overly vague).  Similarly, they made more false positive predictions where the products subjective description of itself was near center, just like the review's subjectivity.
 
-    * Each model seemed to hold a preference for longer reviews, and for product descriptions that we assess may be considered "mixed" products (part search, part experience).  Each model also held a preference for higher total star ratings for the product.
+    * Each model seemed to hold a preference for longer reviews, and for product descriptions that we assess may be considered "mixed" products (part search, part experience).  Each model also held a bias for higher total star ratings for the product, with the MLR holding the greatest bias.
 
-    * The MLR holds a bias toward higher star ratings (4.1) in its predictions.  Similarly, it had a greater bias toward positivity in the review  similar subjectivity preference as held within Logisitic Regression and SVM.
+    * The MLR holds a bias toward higher star ratings (4.1) in its predictions.  Similarly, it had a slightly greater bias toward positivity in the review.  However, it held comparable results for subjectivity in comparison to SVM and Logisitic regression.
 
     * Generally the near "neutrality" with regards to polarity, subjectivity, and star rating for logistic regression and SVM could be useful to prospective customers.  Allowing users to filter results based off of these predicted classifications could bring balance to other reviews presented when sorted in descending order by number of useful votes.  The neutrality aspect can give the customer insight into unknown positive or negative reviews and shed light on useful information as a potential customer.
 
