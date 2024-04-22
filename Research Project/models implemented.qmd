@@ -240,7 +240,7 @@ Here is a sample (first 10 observations) of our data prior to the transformation
 
 #Let's look at this from the perspective of
 #key variables we're exploring...
-reviews[['review_star_rating', 
+train_frame[['review_star_rating', 
         'review_subjectivity', 
         'review_polarity',
         'review_length',
@@ -273,7 +273,7 @@ Classes in the response variable (the number of helpful votes a review received)
 
 * 1: if the review had one or more than 1 helpful votes
 
-Our reasoning for this transformation is that, across the totality of our data, a comment receiving a vote as being useful is exceedingly rare, as uncovered during our exploratory data analysis.  As such, even a single vote for being useful should put the comment in the running for being considered useful. 
+Our reasoning for this transformation is that, across the totality of our data, a comment receiving more than one vote as being useful is quite rare in our dataset, as uncovered during our exploratory data analysis.  As such, even a single vote for being useful should put the comment in the running for being considered useful. 
 
 ### Dimensionality Reduction
 
@@ -285,17 +285,17 @@ For all models outside of the multiple linear regression, we performed a princip
 display(cum_var_df.style.hide(axis='index'))
 ```
 
-To reduce dimensionality for Logistic Regression, Support Vector Machine, and K-Nearest Neighbor models, we elected to reduce from 7 principal commponents to 6.  From the above table, we see that these 6 components explain approximately 95% of the variation within the training data.  We projected our training and testing data from their 7-dimensional feature space to a reduced 6-dimensional principal component vector space.
+To reduce dimensionality for Logistic Regression, Support Vector Machine, and K-Nearest Neighbor models, we elected to reduce from 7 principal commponents to 6.  From the above table, we see that these 6 components explain approximately 95% of the variation within the training data.  We projected our training and testing data from their 7-dimensional feature space to a reduced 6-dimensional principal component vector space and simplify computations.  The only exception here is for our multiple linear regression, which used all 7 dimensions in its perscribed vector space.
 
 ### Training Data
 
-To train our dataset, we leveraged the data post-transformation to train each of our models, including the adjustments of outlier datapoints to being within 3 standard deviations of the mean of each variable.  We selected an 80% sample of this data and leveraged the same dataset to train each model.
+To train our dataset, we leveraged the data, post-transformation to train each of our models, including the adjustments of outlier datapoints to being within 3 standard deviations of the mean of each variable.  We selected an 80% sample of this data and leveraged the same dataset to train each model.
 
 In the interest of generalization, we sought to take our training dataset solely from products that were common across all three e-commerce platforms.  By working with common data from each site, the data and the models may be able to formulate a more generalized construct of how certain variables behave within the different contexts of each platforms, and assist in better prediction and classification of comments as being useful or not.
 
 ### Testing Data
 
-For testing, we evaluated each model against transformed data, omitting the transformation of outliers to being within 3 standard deviations of the mean.  We performed this action to enable a fair comparison of each model against one another when working with real-world data.
+For testing, we evaluated each model against transformed data, omitting the transformation of any outliers to being within 3 standard deviations of the mean.  We performed this action to enable a fair comparison of each model against one another when working with real-world data.
 
 ### Desired Outcomes and Objectives
 
@@ -306,6 +306,8 @@ Our data exploration revealed that having even a single vote for a comment as be
 Additionally, from a technological perspective, the ability of a web user interface programmer or designer to simply filter or arrange comments by the number of votes they received is trivial.
 
 With the above considerations in mind, we are interested in a model that provides reasonable accuracy while also having an apprpriate amount of recall and a reasonable F1 score.  Having a model that perfectly maps predictions to actual outcomes is not useful to this research.  Having a number of classified false positives for exploration and subjective evaluation is what interests us.
+
+When exploring test results, we seek a percent of total positive predictions (true and false positives) matching that of the testing dataset.  With this in mind, we won't have the best accuracy, F1, precision, or recall.  Having values for precision and recall hovering around 0.5 should support us in classifying reviews that have no votes as being useful as potentially being useful.
 
 ## Examination of the Original Multiple Linear Regression
 
@@ -347,7 +349,7 @@ Generally, our examination of the multiple linear regression performed by @percU
 Our model failed to achieve any clear form of linearity between fitted and observed values.
 
 ```{python fig-mlr-results}
-#| label: fig-mlr-resultss
+#| label: fig-mlr-results
 #| fig-cap: Linear Relationship Between Predictors and Response
 
 ##train - test
@@ -390,6 +392,49 @@ The fitted vs. observed values for this plot are not indicative of a linear patt
 * The linear model is not generalizable.
 
 * The model is no better than randomly guessing the number of votes a comment could or should have associated with it.
+
+What about if we filter down the testing data solely to reflect the positive cases - where the review comment has at least 1 vote for being useful?
+
+```{python fig-mlr-useful-only}
+#| label: fig-mlr-useful-only
+#| fig-cap: Relationship Between Predictors and Response (Reviews with at least 1 useful vote)
+
+mlr_data_new = pd.DataFrame(X_test, columns=[
+    'review_star_rating', #'review_helpful_votes',
+    'review_subjectivity', 
+    'review_polarity',
+    'review_length',
+    'prod_subjectivity',
+    'total_star_rating','site'])
+mlr_data_new['is_helpful'] = y_test_mlr
+
+mlr_data_new = pd.DataFrame(mlr_data_new[mlr_data_new['is_helpful']>0])
+
+mlr_X, mlr_y = [
+    mlr_data_new[[
+        'review_star_rating', #'review_helpful_votes',
+        'review_subjectivity', 
+        'review_polarity',
+        'review_length',
+        'prod_subjectivity',
+        'total_star_rating','site'
+    ]],
+    mlr_data_new['is_helpful']
+]
+
+y_hat_new = mlr.predict(mlr_X)
+
+plt.title('Multiple Linear Regression (Reviews Voted Useful Only)')
+plt.xlabel('Predicted Values')
+plt.ylabel('Observed Values')
+plt.scatter(
+    y_hat_new,mlr_y  
+)
+plt.show()
+
+```
+
+The linearity issue remains even in this case.
 
 <!--Our testing produced the following coefficients:
 
@@ -438,7 +483,23 @@ From the above plot, it is clear that this model fails to adhere to the multiple
 
 #### Conclusion on MLR model
 
-Expanding the Multiple Linear Regression beyond the scope of the study performed by @percUse seems to fail all of the assumptions of a linear model, and does not appear to produce a tracable predictive pattern that may support classification of a review comment as being useful or not to prospective customers.
+Expanding the Multiple Linear Regression beyond the scope of the study performed by @percUse seems to fail all of the assumptions of a linear model.<!--, and does not appear to produce a tracable predictive pattern that may support classification of a review comment as being useful or not to prospective customers.-->
+
+Irrespective of this finding, we will output the results of this model sorted in descending order of the score provided by the model, to compare and contrast with the findings of other models.  A simple examination of the MLR with respect to its linearity may not be an effective means to evaluate this model's performance.
+
+Examining instead how the model predicts usefulness in comparison to other methods, alongside a subjective evaluation of the comments themselves may offer greater insight to its performance.
+
+```{python UsefulComments-mlr}
+test_frame['product'] = test_frame.apply(lambda row:product_data[product_data['prodSiteID']==row['prodSiteID']]['product_title'].iloc[0],axis=1)
+test_frame['pred_useful'] = y_hat_base
+dat = test_frame[test_frame['is_helpful']==0].sort_values(by='pred_useful',ascending=False)[['site_y','product','product_price','review_header','reviewer_name','review_content','review_star_rating','review_helpful_votes','review_polarity','review_subjectivity','review_length','total_star_rating','prod_subjectivity','pred_useful']].copy().reset_index()
+
+#add a rank column for comparision
+dat['rank'] = list(range(1,len(dat)+1))
+
+
+dat.to_csv('../data/MLRPredUseful.csv')
+```
 
 ## Logistic Regression Classification
 
@@ -446,13 +507,15 @@ Given the aforementioned challenges with the linear model, our next choice for e
 
 ### Hyperparameter Tuning
 
-Logistic regression is one of the best performing models in the project after SVM <!--with respect to which metrics?-->. We inspected 3 logistic regression models - one was tuned using the class weight hyperparameter to address the class imbalance present in the dataset. By assigning a higher weight to the minority class (useful level 1) and a lower weight to the majority class (useful level 0), the model was able to better capture the patterns associated with the minority class, leading to improved performance metrics.
+Logistic regression is, by our assessment, among the best performing models in our research effort. We inspected 3 logistic regression models - one tuned using the class weight hyperparameter to address the class imbalance present in the dataset. By assigning a higher weight to the minority class (1, or at least 1 vote for being useful) and a lower weight to the majority class (0, or no votes for the comment as being useful), the model was able to better capture the patterns associated with the minority class, leading to metrics in our target range.
 
 ### Oversampling techniques
 
 Additionally, 2 more logistic regression models are trained using two oversampling techniques, namely ADASYN and SMOTE. ADASYN, which generates synthetic samples for the minority class based on their difficulty in learning regions, and SMOTE, which creates synthetic samples by interpolating between existing minority class samples, were used to address the class imbalance problem. These techniques help to provide the model with more balanced training data, allowing it to learn the characteristics of both classes more effectively.
  
-It is a well know fact that oversampling techniques are employed if there a severe class imbalance if hyperparameter tuning does not improve the model performance. However, despite the heavy class imbalance, the tuned model and the SMOTE model achieve great result with 98% accuracy indicating that it is proficient at making correct predictions. <!--adjust this?-->68% recall is decent, but indicates that the model maybe classifying the positive instances from minority class incorrectly. 
+It is a well know fact that oversampling techniques can be employed in the event of a severe class imbalance if hyperparameter tuning does not improve the model performance. However, despite the heavy class imbalance, the tuned model and the SMOTE model achieve great result with approximately 80% accuracy indicating that it is proficient at making correct predictions. However, the models do differ in their scoring for precision and recall.  
+
+The tuned model delivers a higher precision and a lower recall, bouth around our target range of 0.4 to 0.55 for both, leaning us in the direction of examining the tuned model's outputs for predicted useful comments.  The "incorrect" prediction of elements from the minority class, which is what we're looking for.  We don't want an over-prediction for false positives, but a reasonable degree of comments that could potentially be useful from a customer standpoint.
 
 ### Logistic Regression Test Results
 
@@ -555,8 +618,6 @@ plt.tight_layout()
 plt.show()
 ```
 
-Amongst these models, it appears that the tuned model provides the highest F1 score.  The recall and precision are the lowest...meaning...
-
 <!--Let's examine some of its outputs.  We'll predict the probability that the comment belongs to the "useful" class and sort in descending order, then filter out any comments that are flagged as not useful.  This may introduce to us new comments that are useful to prospective buyers.-->
 
 ```{python UsefulComments-logreg}
@@ -566,8 +627,10 @@ Amongst these models, it appears that the tuned model provides the highest F1 sc
 #     print(i)
 #print(len(x))
 test_frame['pred_useful'] = LogMod.predict_proba(X_test_pca)[:,1]
-test_frame['product'] = test_frame.apply(lambda row:product_data[product_data['prodSiteID']==row['prodSiteID']]['product_title'].iloc[0],axis=1)
-dat = test_frame[test_frame['is_helpful']==0].sort_values(by='pred_useful',ascending=False)[['site_y','product','product_price','review_header','reviewer_name','review_content','review_star_rating','review_helpful_votes','pred_useful']].copy().reset_index()
+
+dat = test_frame[test_frame['is_helpful']==0].sort_values(by='pred_useful',ascending=False)[['site_y','product','product_price','review_header','reviewer_name','review_content','review_star_rating','review_helpful_votes','review_polarity','review_subjectivity','pred_useful']].copy().reset_index()
+
+dat['rank'] = list(range(1,len(dat)+1))
 
 dat.to_csv('../data/LogisticRegressionPredUseful.csv')
 # for i,row in dat.iterrows():
@@ -600,15 +663,7 @@ The value of k is the most critial hyperparameter in the KNN Calssification algo
 
 We have looked at multiple values of k for our given data and compared a set of model metrics - accuracy, F1 score, precision, and recall to find the most optimal model to be the model with `k = 3`.
 
-Looking the results shown below we can say that:
-
-1. KNN at each neighbor level performs poorer in comparison to logistic regression.  The accuracy and precision do not reach sufficient levels.  Furthermore, the total percent prediction of positive cases (ranging from 21.5-25.6%) far exceed the percent of true positive cases in the testing dataset (approximately 17%).  These over-optimistic prediction levels (in combination with a high number of false negatives) suggest we may not be meeting the mark with this model, as once again, votes for a comment as being useful is relatively rare in this dataset.
-
-2. For KNN with n=3 neighbors, we are the closest to the actual percent of positives in the source dataset.  This model, however, has poor performance for precision, recall, and F1.
-
-3. For KNN with n=9 neighbors, we improve the F1 score, but the precision and recall remain substantially low.
-
-4. KNN, for any number of neighbors and given our selected features, may be an insufficient model for our use case.
+As we did for our logisitc regression models, we leveraged the SMOTE oversampling technique to support each KNN model in better predicting true positive cases.  Having additional co-located true-positive neighbors will impact the distance metric of test data points and the number of closest neighbors in a particular class.
 
 <!--1. Just by looking at the accuracy for any given value of k, it ranges between 98-99% indicating that KNN might be a good model for the given data.
 
@@ -617,6 +672,16 @@ Looking the results shown below we can say that:
 3. While all models have high precision and recall rates, KNN with higher k values (5, 7, and 9) demonstrate slightly lower F1 scores.-->
 
 ### KNN Test Results
+
+Looking the results shown below we can say that:
+
+1. KNN at each neighbor level performs poorer in comparison to logistic regression.  The accuracy and precision do not reach sufficient levels.  Furthermore, the total percent prediction of positive cases (ranging from 21.5-25.6%) far exceed the percent of true positive cases in the testing dataset (approximately 17%).  These over-optimistic prediction levels (in combination with a high number of false negatives) suggest we may not be meeting the mark with this model, as once again, votes for a comment as being useful is relatively rare in this dataset.
+
+2. For KNN with n=3 neighbors, we are the closest to the actual percent of positives in the source dataset.  This model, however, has poor performance for precision, recall, and F1.
+
+3. For KNN with n=9 neighbors, we improve the F1 score, but the precision and recall remain substantially low.
+
+4. KNN, for any number of neighbors and given our selected features, may be an insufficient model for our use case.  All of the KNN models far exceed our target % of total positive predictions.  The source testing data has around 17% of the reviews as being "useful", whereas each of these models' positive predictions exceed that rate by at least 4%.
 
 <!--try to tweak and tune this model for better performance--> 
 ```{python tbl-knn-test-results}
@@ -630,6 +695,7 @@ random.seed(123)
 knn = KNeighborsClassifier(n_neighbors=3)
 
 knn.fit(X_train_smote,y_train_smote)
+#knn.fit(X_train_pca,y_train)
 y_pred_3 = knn.predict(X_test_pca)
 
 test_metrics.loc[len(test_metrics)] = {
@@ -644,6 +710,7 @@ test_metrics.loc[len(test_metrics)] = {
 # 5 Neighbors
 knn = KNeighborsClassifier(n_neighbors=5)
 knn.fit(X_train_smote,y_train_smote)
+#knn.fit(X_train_pca,y_train)
 y_pred_5 = knn.predict(X_test_pca)
 test_metrics.loc[len(test_metrics)] = {
     'Model':'KNN (k=5)',
@@ -657,6 +724,7 @@ test_metrics.loc[len(test_metrics)] = {
 # 7 Neighbors
 knn = KNeighborsClassifier(n_neighbors=7)
 knn.fit(X_train_smote,y_train_smote)
+#knn.fit(X_train_pca,y_train)
 y_pred_7 = knn.predict(X_test_pca)
 test_metrics.loc[len(test_metrics)] = {
     'Model':'KNN (k=7)',
@@ -670,6 +738,7 @@ test_metrics.loc[len(test_metrics)] = {
 # 9 Neighbors
 knn = KNeighborsClassifier(n_neighbors=9)
 knn.fit(X_train_smote,y_train_smote)
+#knn.fit(X_train_pca,y_train)
 y_pred_9 = knn.predict(X_test_pca)
 test_metrics.loc[len(test_metrics)] = {
     'Model':'KNN (k=9)',
@@ -712,11 +781,13 @@ plt.tight_layout()
 plt.show()
 ```
 
-Simply examining the above confusion matrices, especially the upper-right hand corner false posistives, we see that KNN is likely over-optimistic about the usefulness of customer feedback.
+Simply examining the above confusion matrices, especially the upper-right hand corner false posistives, we see that KNN is likely over-optimistic about the usefulness of customer feedback.  For the purpose of comparison to other models, we will examine the results of KNN `n=3`, as it held the closest value to the overall percent of true positives (17% true positives, 21.4% predicted).
 
 ```{python UsefulComments-knn}
 test_frame['pred_useful'] = y_pred_3
-dat = test_frame[test_frame['is_helpful']==0].sort_values(by='pred_useful',ascending=False)[['site_y','product','product_price','review_header','reviewer_name','review_content','review_star_rating','review_helpful_votes','pred_useful']].copy().reset_index()
+dat = test_frame[test_frame['is_helpful']==0].sort_values(by='pred_useful',ascending=False)[['site_y','product','product_price','review_header','reviewer_name','review_content','review_star_rating','review_helpful_votes','review_polarity','review_subjectivity','review_length','total_star_rating','prod_subjectivity','pred_useful']].copy().reset_index()
+
+dat['rank'] = list(range(1,len(dat)+1))
 
 # for i,row in dat.iterrows():
 #     print(
@@ -734,7 +805,11 @@ Support Vector Machines work on classification problems by finding an optimal hy
 
 The complexity of a SVM model is determined by the choice of kernel function that supports the capturing of nuances within the data. Below are our implmentation results of the performance metrics of Support Vector Machine (SVM) models trained with different kernel functions: polynomial (SVM-Poly), radial basis function (SVM-RBF), and sigmoid (SVM-Sigmoid). 
 
+One note on our SVM-Poly implementation - it is equivalent to a standard SVM linear kernel, as we have implemented it with `degree=1`.  We found during our evaluation, for reasons unknown to us, that polynomial implementation with degree 1 ran faster than that of the standard linear kernel.  This was simply crafted this way to reduce execution time.
+
 To tune each version of this model, we leveraged a reduced set of principal components, and adjusted class weighting, as having useful votes for a product is a relative rarity across each of the e-commerce platforms.  To boost our recall, we elected to assign weights of 0.2 to class 0 (not useful) and 0.8 to class 1 (useful).
+
+Furthermore, for the tuned model, we adjusted the probability threshold to 0.1 vs. the default 0.5 and class weighting set to better adjust the model for mis-classification of the minority class (as we did for the logistic regression).  The combination of this shift with the class weighting allowed us to achieve a total positive prediction rate in close proximity to the actual true positives. 
 
 ### SVM Test Results
 
@@ -750,7 +825,9 @@ spt_vector = svm.SVC(
     kernel='poly',degree=1,class_weight={0:0.2,1:0.8},probability=True,
 ).fit(X_train_pca,y_train)
 
-y_pred_poly = spt_vector.predict_proba(X_test_pca)[:,1] > 0.1 #spt_vector.predict(X_test_pca)
+y_pred_poly_prob = spt_vector.predict_proba(X_test_pca)[:,1]
+
+y_pred_poly = y_pred_poly_prob > 0.1 #spt_vector.predict(X_test_pca)
 test_metrics.loc[len(test_metrics)] = {
     'Model':'SVM-Poly',
     #'Useful Level':"above 0",
@@ -823,8 +900,8 @@ plt.show()
 ```
 
 ```{python UsefulComments-knn}
-test_frame['pred_useful'] = y_pred_poly
-dat = test_frame[test_frame['is_helpful']==0].sort_values(by='pred_useful',ascending=False)[['site_y','product','product_price','review_header','reviewer_name','review_content','review_star_rating','review_helpful_votes','pred_useful']].copy().reset_index()
+test_frame['pred_useful'] = y_pred_poly_prob
+dat = test_frame[test_frame['is_helpful']==0].sort_values(by='pred_useful',ascending=False)[['site_y','product','product_price','review_header','reviewer_name','review_content','review_star_rating','review_helpful_votes','review_polarity','review_subjectivity','review_length','total_star_rating','prod_subjectivity','pred_useful']].copy().reset_index()
 
 # for i,row in dat.iterrows():
 #     print(
@@ -834,24 +911,15 @@ dat = test_frame[test_frame['is_helpful']==0].sort_values(by='pred_useful',ascen
 dat.to_csv('../data/SVMPolyPredUseful.csv')
 ```
 
-Looking the results shown below we can say that:
+Looking the SVM testing results, we can say that:
 
-1. SVM with a polynomial kernel (set to degree 1 or linear) predicts a total percent of true positives close to the underlying source data (approximately 17%).  
+1. SVM with a polynomial kernel (set to degree 1, or linear) predicts a total percent of true positives close to the underlying source data (approximately 17%).  
 
-2. SVM with radial basis function kernel appears to under-predict positive cases.
+2. SVM with radial basis function kernel appears to under-predict positive cases and fails to meet our F1 threshold.
 
-3. SVM with sigmoid kernel strongly over-predicts false positives
+3. SVM with sigmoid kernel over-predicts false positives and fails to meet our F1 threshold.
 
-SVM Poly appears to achieve reasonable accuracy while hitting an appropriate level for F1 and Recall for our use case.  The presence of false positives gives us something to subjectively examine for its usefulness as a potential customer. 
-
-<!--1. SVM with a polynomial kernel (SVM-Poly) achieves the highest F1 score of approximately 81.09%. This model also exhibits perfect precision, indicating that it classifies all positive instances correctly.
-
-2. SVM with a radial basis function kernel (SVM-RBF) follows closely with an F1 score of approximately 78.15%. Although it has slightly lower precision compared to SVM-Poly, it demonstrates a balanced trade-off between precision and recall. 
-
-3. SVM with a sigmoid kernel (SVM-Sigmoid) exhibits the lowest F1 score of approximately 59.24%, indicating comparatively lower performance in capturing both precision and recall.
-
-While all SVM models exhibit high accuracy, SVM with a polynomial kernel (SVM-Poly) emerges as the most favorable choice based on its highest F1 score and perfect precision. -->
-
+SVM Poly (linear, degree 1) appears to achieve reasonable accuracy while hitting an appropriate level for F1 and Recall for our use case.  The presence of false positives gives us something to subjectively examine for its usefulness as a potential customer.
 
 ## Model Comparison
 
@@ -869,17 +937,83 @@ The most interesting results, we find, come from the tuned Logistic Regression m
 
 For our testing data, approximately 17% of the records held votes for being useful.
 
-The Tuned Logistic Regression predicted a total number of positive (true and false positives) of 1603, or 18% of the available samples.  This result is very close in proximity to the actual total for true positives within the data.
+The Tuned Logistic Regression predicted a total number of positive (true and false positives) of 1606, or 17.99% of the available samples.  This result is very close in proximity to the actual total for true positives within the data.
 
-The SVM Poly model also produced a prediction of approximately 17.7% of the testing data being useful (comparable to the actual value of 17%).
+The SVM Poly model also produced a prediction of approximately 17.5% of the testing data being useful (comparable to the actual value of 17%).
 
 None of the other model formulations or permutations achieved a percentage of total positive prediction rate as in close proximity to the actual underlying data.
 
 The false positives for SVM-Poly and Tuned Logistic Regression are located here:
 
-* link to Logisitic Regression file here
+* [Logistic Regression Prediction Results](https://github.com/pconnell/CSCI-Final-Project/blob/main/data/LogisticRegressionPredUseful.csv)
 
-* link to SVM-Poly here
+* [Support Vector Machine Prediction Results](https://github.com/pconnell/CSCI-Final-Project/blob/main/data/SVMPolyPredUseful.csv)
+
+* [K-Nearest Neighbor Prediction Results](https://github.com/pconnell/CSCI-Final-Project/blob/main/data/KNNPredUseful.csv)
+
+* [Multiple Linear Regression Prediction Results](https://github.com/pconnell/CSCI-Final-Project/blob/main/data/MLRPredUseful.csv)
+
+* For each of the models, the files are filtered to solely contain false positive reviews (those for which the model predicted the review is useful, but had no votes in favor of it in the source data).
+
+Amongst the ranking of outputs from MLR, Logistic Regression, and SVM, we see some common threads.
+
+* Each recommended the same top 3 review comments for the following products:
+
+    * Mario Kart 8 from Amazon.
+    
+    * Dyson Ball Vacuum from Target.
+    
+    * HP Deskjet 2755e Printer from Amazon.
+
+
+```{python tbl-met-comp}
+#| label: tbl-met-comp
+#| tbl-cap: Comparison of Metrics, top 30 Reviews for 3 models.
+
+lg_pred = pd.read_csv('../data/LogisticRegressionPredUseful.csv')
+mlr_pred = pd.read_csv('../data/MLRPredUseful.csv')
+svm_pred = pd.read_csv('../data/SVMPolyPredUseful.csv')
+resLG = pd.DataFrame(lg_pred.head(30).describe())
+
+resLG = resLG[resLG.index.isin(['mean','std'])]
+resLG['model'] = "Logistic Regression (Tuned)"
+
+resMLR = pd.DataFrame(mlr_pred.head(30).dropna(axis=1).describe())
+
+resMLR = resMLR[resMLR.index.isin(['mean','std'])]
+resMLR['model'] = "MLR"
+
+resSVM = pd.DataFrame(
+    svm_pred.head(30).describe()
+)
+
+resSVM = resSVM[resSVM.index.isin(['mean','std'])]
+resSVM['model'] = "SVM-Poly (Tuned)"
+
+        # 'review_subjectivity', 'review_polarity',
+        # 'review_length','prod_subjectivity','total_star_rating', 'site', 'review_helpful_votes'
+
+summary = pd.concat([resLG,resMLR,resSVM])
+display(
+    summary[[
+        'review_subjectivity', 'review_polarity',
+        'review_length','prod_subjectivity','total_star_rating'
+    ]]
+)
+
+```
+
+* Examining some metrics from the top 30 recommended "useful" reviews - 
+
+    * Logistic Regression and SVM had similar means and standard deviations for review star rating, review subjectivity, and review polarity.  Each seemed to prefer slightly positive reviews (as follows from our EDA), and an even split on the subjectivity of the text (not overly precise, not overly vague).
+
+    * Each model seemed to hold a preference for longer reviews, and for product descriptions that we assess may be considered "mixed" products (part search, part experience).  Each model also held a preference for higher total star ratings for the product.
+
+    * The MLR holds a bias toward higher star ratings (4.1) in its predictions.  Similarly, it had a greater bias toward positivity in the review  similar subjectivity preference as held within Logisitic Regression and SVM.
+
+    * Generally the near "neutrality" with regards to polarity, subjectivity, and star rating for logistic regression and SVM could be useful to prospective customers.  Allowing users to filter results based off of these predicted classifications could bring balance to other reviews presented when sorted in descending order by number of useful votes.  The neutrality aspect can give the customer insight into unknown positive or negative reviews and shed light on useful information as a potential customer.
+
+    * The presence of common reviews within the top 30 suggests that each of these models could hold a degree of validity.  The interpretation and assessment, however, is subjective.  Performing a further study with participants to evaluate the prediction of useful comments would support determining the validity of these models and their effectiveness.
 
 <!--
 Each of these models had similar performance in terms of accuracy and precision. A key consideration for us is within the realm of recall in that false positives are potentially beneficial to the generalization of this model to identify reviews that are useful, but currently possess no helpful votes.  None of the models delivered any false positives, but having high recall may support identification of new, useful comments.
