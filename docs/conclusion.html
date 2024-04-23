@@ -203,6 +203,7 @@ div.csl-indent {
 </ul></li>
 </ul>
 <p>Taking our methods and applying some of the above could greatly support stronger features and model performance.</p>
+<!--add stuff here for recommended tweaks, research, etc-->
 <p>Despite what we perceive as weakness in the models, the degree of detail and specificity within some of the predicted “useful” comments is enlightening. Let’s have a look at a small selection of comments, near the top of the prediction list for MLR, SVM, and for Logistic Regression -</p>
 <div id="fig-dyson-vacuum" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -238,6 +239,23 @@ Figure&nbsp;4.3: Comment on a Pizza Oven - predicted useful by MLR
 </div>
 <p>This customer looks like they had a good experience - so good in fact that they went and found somewhere online that they could post about it. Knowing the settings used, how quickly the oven managed to cook their food, and the ease of use likely all give utility to a prospective customer!</p>
 <p>None of these reviews had any votes for the comment as being useful to other buyers. That being said - it’s all subjective in terms of determining utility.</p>
+<p>Another interesting outcome from this research is the correlation of predictions between our tuned SVM and Logistic Regression predictions. For each prediction, we assigned it a rank based upon how likely the commment is to be useful as predicted by both models.</p>
+<div id="cell-fig-SVM-LG-corr" class="cell" data-execution_count="2">
+<div class="cell-output cell-output-display">
+<div id="fig-svm-lg-corr" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-svm-lg-corr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="conclusion_files/figure-html/fig-svm-lg-corr-output-1.png" width="601" height="449" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-svm-lg-corr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.4: Examining rank predictions, SVM and Logistic Regression
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The predictions had a correlation coefficient of 0.97</p>
+<p>The strength of this correlation is interesting and suggests the two models seek out similar results, as also shown within the examination of some of the top comments recommended by both. Logistic Regression provided stronger scoring for all metrics (accuracy, F1, precision, and recall) compared to SVM-Poly, though the metrics were all quite similar.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">

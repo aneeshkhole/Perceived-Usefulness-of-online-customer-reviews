@@ -2,7 +2,17 @@
 
 ```{python}
 #module imports
-#import pandas as pd, numpy as np, matplotlib.pyplot as plt
+import pandas as pd, numpy as np, matplotlib.pyplot as plt, seaborn as sns
+from sklearn.metrics import r2_score
+lg_pred = pd.read_csv('../data/LogisticRegressionPredUseful.csv')
+mlr_pred = pd.read_csv('../data/MLRPredUseful.csv')
+svm_pred = pd.read_csv('../data/SVMPolyPredUseful.csv')
+x = lg_pred.merge(right=mlr_pred[['review_id','rank']],how='inner',on=['review_id'],suffixes=['_lg','_mlr'])
+x = x.merge(right=svm_pred[['review_id','rank']],how='inner',on=['review_id'],suffixes=['_svm'])
+x.rename({'rank':'rank_svm'},inplace=True,axis=1)
+from sklearn.metrics import r2_score
+
+
 ```
 
 Evaluating the performance our models in comparison to the source data, we find that our selected features are likely weak in the prediction of a feedback comment being useful.  There are substantial issues with recall, precision, and F1 scores for both the training and testing data.
@@ -39,4 +49,22 @@ This customer looks like they had a good experience - so good in fact that they 
 
 None of these reviews had any votes for the comment as being useful to other buyers.  That being said - it's all subjective in terms of determining utility.
 
-<!--more stuff here if/how needed -->
+Another interesting outcome from this research is the correlation of predictions between our tuned SVM and Logistic Regression predictions.  For each prediction, we assigned it a rank based upon how likely the commment is to be useful as predicted by both models.
+
+```{python fig-SVM-LG-corr}
+#| label: fig-SVM-LG-corr
+#| fig-cap: Examining rank predictions, SVM and Logistic Regression
+sns.scatterplot(
+    data=x,
+    x='rank_lg',
+    y='rank_svm'
+)
+plt.title("Correlation between Logisitic Regression and SVM Predictions")
+plt.xlabel("Log Reg Predicted Rank")
+plt.ylabel("SVM Predicted Rank")
+plt.show()
+```
+
+The predictions had a correlation coefficient of `{python} round(r2_score(x['rank_lg'],x['rank_svm']),2)`
+
+The strength of this correlation is interesting and suggests the two models seek out similar results, as also shown within the examination of some of the top comments recommended by both.  Logistic Regression provided stronger scoring for all metrics (accuracy, F1, precision, and recall) compared to SVM-Poly, though the metrics were all quite similar.
