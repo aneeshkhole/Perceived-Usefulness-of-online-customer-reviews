@@ -1,6 +1,6 @@
 # Conclusion {#sec-conclusions}
 
-```{python}
+<!-- ```{python}
 #module imports
 import pandas as pd, numpy as np, matplotlib.pyplot as plt, seaborn as sns
 from sklearn.metrics import r2_score
@@ -13,15 +13,13 @@ x.rename({'rank':'rank_svm'},inplace=True,axis=1)
 from sklearn.metrics import r2_score
 
 
-```
+``` -->
 
 Evaluating the performance our models in comparison to the source data, we find that our selected features are likely weak in the prediction of a feedback comment being useful.  There are substantial issues with recall, precision, and F1 scores for both the training and testing data.
 
-We attempted multiple iterations of feature selection, splitting our training and testing data, countless permutation of model hyperparameters, and multiple transformations of our feature variables to offer each model every opportunity to deliver good performance.  Whether working with IQR vs. standard deviation adjustments, sampling all data collected for training vs. sampling only common items for training, and other data adjustments simply didn't deliver a strong model in any of our cases.
+We attempted multiple iterations of examining our data, examining models and how to adjust them, and how to optimize performance.  Ultimately, our work did not deliver a system that could definitively be used to predict usefulness of a review.
 
-In our eyes, this leads us to believe that further feature selection and transformation may be necessary to achieve greater confidence in any of these models.
-
-* We leveraged python's TextBlob as a means to gather the subjectivity and polarity.  Other libraries and means for assessing compound sentiment may be more prudent.  Due to resource constraints, we were unable to explore some methods suggested by:
+<!-- * We leveraged python's TextBlob as a means to gather the subjectivity and polarity.  Other libraries and means for assessing compound sentiment may be more prudent.  Due to resource constraints, we were unable to explore some methods suggested by:
 
     * @Hu_Gong_Guo_2010 for mitigating common positive and negative sentiment prior to computing sentiment scores
 
@@ -31,13 +29,59 @@ In our eyes, this leads us to believe that further feature selection and transfo
 
 Taking our methods and applying some of the above could greatly support stronger features and model performance.
 
-<!--add stuff here for recommended tweaks, research, etc-->
+-->
 
-Despite what we perceive as weakness in the models, the degree of detail and specificity within some of the predicted "useful" comments is enlightening.  Let's have a look at a small selection of comments, near the top of the prediction list  for MLR, SVM, and for Logistic Regression - 
+
+<!-- TEAM - LET'S ANSWER ALL THIS IN A NON-TECHNICAL MANNER -->
+
+## Review of Research Questions
+
+At the start of this effort, we set out to answer the following questions:
+
+* Can the model from @percUse be generalized with
+
+    - **larger volume of products and product types from which to mine data?**  We find that a larger mix of products across multiple platforms does support a wider-reaching and more generalizable model.  Their model, with some adaptations, was able to identify (X) useful comments.  However, the methods we used may not be fully appropriate or have sufficient precision and recall to establish confidence in other models we implemented...
+
+    - **a sliding scalar multiplier representing the degree to which a product is a "search" (0) or "experience" (1) product?**  We used a metric for the degree of subjectivity (i.e. does the description use more ) in the description of a product as a proxy for "search" vs. "experience" - namely something that is more concrete in its description should have more specific 
+
+    - Adding modifiers to review content based upon:
+
+        * Customer / Reviewer reliability and reputation? (unable to answer due to ...)
+
+        * Review Polarity? (looks like it contributes... need to expand upon this)
+
+* Can the polarity of reviews be judged accurately by using a Naive Bayes classification model? @Hu_Gong_Guo_2010
+
+    - What is the impact of different feature extraction methods (e.g., bag-of-words, TF-IDF) on the performance of Naive Bayes classification model? @Wang_Li_Tian_Wang_Cheng_2018 (didn't use this...)
+
+* Can products be classified on their degree of being search or experience based by examining product variables such as:
+
+    * Degree of specificity in the product description? (e.g. level of detail, length, numeric values, descriptive values may suggest the product is more search than it is experience-based)  (looks like yes...)
+
+    * **Whether the product is offered in brand-new condition only, or offered as new, used, or refurbished? (e.g. refurbished products may be more search products than they are experience products)**  (couldn't find this feature in sufficient detail, only for select products...)
+
+    * **Which of the 5 senses the product engages? (e.g. engagement of more senses, or engagement of solely specific senses like hearing and vision may suggest more experience-based than search based; examine relationship between search and experience vs. senses engaged)**  (opted to solely explore the product subjectivity due to requirement for manual classification of products and items...avoid human error...etc)
+
+    * **Item rarity (limited production or unique items vs. bulk-produced items)? (e.g. limited production products may be more experience-based than search-based)** (most of our items were common household products...didn't have sufficient research time to dig in on and/or classify "common" vs "unique"...)
+
+* **Can newer natrual language processing libraries provide a better fit for Review Content metrics examined by @percUse?** (we found that there was no clear linear model from the data...this could be an outcome of how we processed sentiment as a numeric variable as opposed to a category).
+
+* How does sentiment in customer reviews correlate with customer satisfaction metrics or sales figures for a particular product?  (found that higher star ratings corresponded to higher median sentiment - stronger polarity and stronger subjectivity...)
+
+* **Can we categorize customer reviews based on customer experience and sentiment?**  (we built classifiers using subjectivity and polarity...but classifers weren't incredibly strong, adapting our methods to better classify sentiment and to classify "usefulness")
+
+* **Do specific product star ratings tend to incite more reviews, and if so, how does this impact the overall reputation measurement?** (we didn't get to dig in on reputation.  We should run some quick numbers on total reviews based on how many star ratings and average star rating and do a write-up here...)
+
+* **Are specific quality descriptors in text-based reviews (e.g., 'enthusiastic', 'disappointed') strongly associated with certain rating levels, and how does this association affect product reputation?**  (Our findings showed a positive trend between star rating and positive polarity...didn't get to look at product reputation...)
+
+
+## Interesting Findings, In Spite of Model Performance
+
+Despite what we perceive as weakness in the models, the degree of detail and specificity within some of the predicted "useful" comments is enlightening.  Let's have a look at a small selection of comments, near the top of the prediction list for MLR, SVM, and for Logistic Regression - 
 
 ![Comment on Dyson Vacuum Cleaner - predicted useful by Logistic Regression](./imgs/Comment.jpg){#fig-dyson-vacuum}
 
-A Dyson vacuum is an expensive product.  Hearing of someone's challenges, particularly this extreme, may make one think twice about the investment.  While appearing negative in sentiment, the commenter appears to provide a degree of objectivity to their review - and does talk about both the good and the bad of the product.  These are all things we believe may be useful to a customer.
+A Dyson vacuum is an expensive product.  Hearing of someone's challenges, particularly an extreme case of having a vacuum *melt* on the user, may make one think twice about the investment.  While appearing negative in sentiment, the commenter appears to provide a degree of objectivity to their review - and does talk about both the good and the bad of the product.  These are all things we believe may be useful to a customer.
 
 ![Comment on a Sofa - predicted useful by SVM](./imgs/Comment2.jpg){#fig-cheap-sofa}
 
@@ -45,12 +89,14 @@ An approximately $400 sofa is also quite the investment, and knowing about issue
 
 ![Comment on a Pizza Oven - predicted useful by MLR](./imgs/Comment3.jpg){#fig-pizza-oven}
 
-This customer looks like they had a good experience - so good in fact that they went and found somewhere online that they could post about it.  Knowing the settings used, how quickly the oven managed to cook their food, and the ease of use likely all give utility to a prospective customer!
+This customer looks like they had a good experience - so good in fact that they went online to a commerce platform that they didn't even use to purchase the item, just so that they could post about their experience.  Knowing the settings used, how quickly the oven managed to cook their food, and the ease of use likely all give utility to a prospective customer.
 
 None of these reviews had any votes for the comment as being useful to other buyers.  That being said - it's all subjective in terms of determining utility.
 
-Another interesting outcome from this research is the correlation of predictions between our tuned SVM and Logistic Regression predictions.  For each prediction, we assigned it a rank based upon how likely the commment is to be useful as predicted by both models.
+<!-- Another interesting outcome from this research is the correlation of predictions between our tuned SVM and Logistic Regression predictions.  For each prediction, we assigned it a rank based upon how likely the commment is to be useful as predicted by both models. -->
 
+
+<!--
 ```{python fig-SVM-LG-corr}
 #| label: fig-SVM-LG-corr
 #| fig-cap: Examining rank predictions, SVM and Logistic Regression
@@ -63,8 +109,8 @@ plt.title("Correlation between Logisitic Regression and SVM Predictions")
 plt.xlabel("Log Reg Predicted Rank")
 plt.ylabel("SVM Predicted Rank")
 plt.show()
-```
+```-->
 
-The predictions had a correlation coefficient of `{python} round(r2_score(x['rank_lg'],x['rank_svm']),2)`
+<!-- The predictions had a correlation coefficient of `{python} round(r2_score(x['rank_lg'],x['rank_svm']),2)`
 
-The strength of this correlation is interesting and suggests the two models seek out similar results, as also shown within the examination of some of the top comments recommended by both.  Logistic Regression provided stronger scoring for all metrics (accuracy, F1, precision, and recall) compared to SVM-Poly, though the metrics were all quite similar.
+The strength of this correlation is interesting and suggests the two models seek out similar results, as also shown within the examination of some of the top comments recommended by both.  Logistic Regression provided stronger scoring for all metrics (accuracy, F1, precision, and recall) compared to SVM-Poly, though the metrics were all quite similar. -->
