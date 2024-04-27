@@ -166,11 +166,18 @@ div.csl-indent {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#review-of-research-questions" id="toc-review-of-research-questions" class="nav-link active" data-scroll-target="#review-of-research-questions"><span class="header-section-number">4.1</span> Review of Research Questions</a></li>
+  <li><a href="#interesting-findings-in-spite-of-model-performance" id="toc-interesting-findings-in-spite-of-model-performance" class="nav-link" data-scroll-target="#interesting-findings-in-spite-of-model-performance"><span class="header-section-number">4.2</span> Interesting Findings, In Spite of Model Performance</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content column-page-right" id="quarto-document-content">
+<main class="content column-body" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -179,7 +186,7 @@ div.csl-indent {
 
 
 
-<div class="quarto-title-meta column-page-right">
+<div class="quarto-title-meta column-body">
 
     
   
@@ -191,19 +198,86 @@ div.csl-indent {
 </header>
 
 
+<!-- #module imports
+import pandas as pd, numpy as np, matplotlib.pyplot as plt, seaborn as sns
+from sklearn.metrics import r2_score
+lg_pred = pd.read_csv('../data/LogisticRegressionPredUseful.csv')
+mlr_pred = pd.read_csv('../data/MLRPredUseful.csv')
+svm_pred = pd.read_csv('../data/SVMPolyPredUseful.csv')
+x = lg_pred.merge(right=mlr_pred[['review_id','rank']],how='inner',on=['review_id'],suffixes=['_lg','_mlr'])
+x = x.merge(right=svm_pred[['review_id','rank']],how='inner',on=['review_id'],suffixes=['_svm'])
+x.rename({'rank':'rank_svm'},inplace=True,axis=1)
+from sklearn.metrics import r2_score -->
 <p>Evaluating the performance our models in comparison to the source data, we find that our selected features are likely weak in the prediction of a feedback comment being useful. There are substantial issues with recall, precision, and F1 scores for both the training and testing data.</p>
-<p>We attempted multiple iterations of feature selection, splitting our training and testing data, countless permutation of model hyperparameters, and multiple transformations of our feature variables to offer each model every opportunity to deliver good performance. Whether working with IQR vs.&nbsp;standard deviation adjustments, sampling all data collected for training vs.&nbsp;sampling only common items for training, and other data adjustments simply didn’t deliver a strong model in any of our cases.</p>
-<p>In our eyes, this leads us to believe that further feature selection and transformation may be necessary to achieve greater confidence in any of these models.</p>
+<p>We attempted multiple iterations of examining our data, examining models and how to adjust them, and how to optimize performance. Ultimately, our work did not deliver a system that could definitively be used to predict usefulness of a review.</p>
+<p>Despite of that, we were able to greatly answer the research questions that were initially laid out by us. This study can prove to be a basis of further examinations into how to better classify sentiment and assess the usefulness of reviews based on customer experience.</p>
+<!-- * We leveraged python's TextBlob as a means to gather the subjectivity and polarity.  Other libraries and means for assessing compound sentiment may be more prudent.  Due to resource constraints, we were unable to explore some methods suggested by:
+
+    * @Hu_Gong_Guo_2010 for mitigating common positive and negative sentiment prior to computing sentiment scores
+
+    * @Rajeev_Rekha_2015 for exploring Naive Bayes classification of review polarity
+
+    * @Wang_Li_Tian_Wang_Cheng_2018 for text mining methods to further support feature extraction
+
+Taking our methods and applying some of the above could greatly support stronger features and model performance.
+
+-->
+<!-- TEAM - LET'S ANSWER ALL THIS IN A NON-TECHNICAL MANNER -->
+<section id="review-of-research-questions" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="review-of-research-questions"><span class="header-section-number">4.1</span> Review of Research Questions</h2>
+<p>At the start of this effort, we set out to answer the following questions:</p>
 <ul>
-<li><p>We leveraged python’s TextBlob as a means to gather the subjectivity and polarity. Other libraries and means for assessing compound sentiment may be more prudent. Due to resource constraints, we were unable to explore some methods suggested by:</p>
+<li><p>Can the model from <span class="citation" data-cites="percUse">Guha Majumder, Dutta Gupta, and Paul (<a href="references.html#ref-percUse" role="doc-biblioref">2022</a>)</span> be generalized with</p>
 <ul>
-<li><p><span class="citation" data-cites="Hu_Gong_Guo_2010">Hu, Gong, and Guo (<a href="references.html#ref-Hu_Gong_Guo_2010" role="doc-biblioref">2010</a>)</span> for mitigating common positive and negative sentiment prior to computing sentiment scores</p></li>
-<li><p><span class="citation" data-cites="Rajeev_Rekha_2015">Rajeev and Rekha (<a href="references.html#ref-Rajeev_Rekha_2015" role="doc-biblioref">2015</a>)</span> for exploring Naive Bayes classification of review polarity</p></li>
-<li><p><span class="citation" data-cites="Wang_Li_Tian_Wang_Cheng_2018">Wang et al. (<a href="references.html#ref-Wang_Li_Tian_Wang_Cheng_2018" role="doc-biblioref">2018</a>)</span> for text mining methods to further support feature extraction</p></li>
+<li><p><strong>larger volume of products and product types from which to mine data?</strong></p>
+<ul>
+<li>We find that a larger mix of products across multiple platforms does support a wider-reaching and more generalizable model. Their model, with some adaptations, was able to identify (X) useful comments. However, the methods we used may not be fully appropriate or have sufficient precision and recall to establish confidence in other models. We implemented Multiple Linear Regression, Logistic regression, K-Nearest-Neighbours and Support Vector Machine models.</li>
+<li>We ascertained that the Linear Regression model used in <span class="citation" data-cites="percUse">Guha Majumder, Dutta Gupta, and Paul (<a href="references.html#ref-percUse" role="doc-biblioref">2022</a>)</span> could not capture the underlying patterns in our case from the larger volume of products. It is found that the results from the tuned Logistic Regression and SVM-Poly models which have credible scores upto a certain threshold. These models were able to capture insights from the large data which was not seen from the logistic regression model</li>
 </ul></li>
+<li><p><strong>a sliding scalar multiplier representing the degree to which a product is a “search” (0) or “experience” (1) product?</strong><br>
+It was found to be a useful strategy to use a sliding scalar multiplier to define the range of “search” and “experience” products. We successfully captured the essence of whether a product leans more toward being a simple “search” item or a complex “experience” one by employing a metric that gauges the level of subjectivity within product descriptions. By using the textblob library to compute subjectivity scores, we have been able to draw significant conclusions about how specific and concrete product descriptions are. This approach provides a useful way to comprehend and classify products across the consumer goods spectrum, facilitating more perceptive analysis and strategic decision-making across a range of industries.</p></li>
+<li><p><strong>Adding modifiers to review content based upon:</strong></p>
+<ul>
+<li>Customer / Reviewer reliability and reputation?</li>
 </ul>
-<p>Taking our methods and applying some of the above could greatly support stronger features and model performance.</p>
-<!--add stuff here for recommended tweaks, research, etc-->
+<p>This question could not be answered from our analysis as for all the websites - Amazon, Target and BestBuy, only a verified buyer was allowed to review a product. Due to this factor, we were forced to accept that every reviewer was reliable. As going around this was to go through eac and every review looking for jargon content which was not feasible.</p>
+<ul>
+<li>Review Polarity?</li>
+</ul>
+<p>Positive, negative and neutral reviews all offer insightful information about the varying subjective experiences that people have with a product. Positive reviews are classified by positive attitudes and recommendations, and they are usually linked to products that provide remarkable experiences or successfully meet particular needs. On the other hand, unfavorable reviews could indicate shortcomings, contradictions, or mismatches between what customers expect from a product and how well it performs.</p></li>
+</ul></li>
+<li><p>Can the polarity of reviews be judged accurately by using a Naive Bayes classification model? <span class="citation" data-cites="Hu_Gong_Guo_2010">Hu, Gong, and Guo (<a href="references.html#ref-Hu_Gong_Guo_2010" role="doc-biblioref">2010</a>)</span></p>
+<ul>
+<li><p><strong>What is the impact of different feature extraction methods (e.g., bag-of-words, TF-IDF) on the performance of Naive Bayes classification model? <span class="citation" data-cites="Wang_Li_Tian_Wang_Cheng_2018">Wang et al. (<a href="references.html#ref-Wang_Li_Tian_Wang_Cheng_2018" role="doc-biblioref">2018</a>)</span></strong></p>
+<p>While formulating the problem statement, we listed using Naive Bayes classification for possible solutions but did not explore them in our analysis.</p></li>
+</ul></li>
+<li><p>Can products be classified on their degree of being search or experience based by examining product variables such as:</p>
+<ul>
+<li><p><strong>Degree of specificity in the product description? (e.g.&nbsp;level of detail, length, numeric values, descriptive values may suggest the product is more search than it is experience-based)</strong></p>
+<ul>
+<li>Products with extremely detailed descriptions typically offer precise and comprehensive details about their characteristics, features, and functionalities. Precise measurements, technical details, and explicit information about the attributes of the product are frequently included in these descriptions. The focus on specificity makes it easier for customers to look for and assess products according to their own requirements, tastes, and standards. Consequently, goods that have extremely detailed descriptions are usually linked to the “search” category, as consumers can readily find and assess them based on objective criteria.</li>
+<li>So indeed, depending on factors like the level of specificity in the product description, products can be categorized as “search” or “experience” in varying degrees.</li>
+</ul></li>
+<li><p><strong>Whether the product is offered in brand-new condition only, or offered as new, used, or refurbished? (e.g.&nbsp;refurbished products may be more search products than they are experience products)</strong></p>
+<p>While we lacked comprehensive data on this aspect, generally, products offered in brand-new condition may incline more towards the search-based category, whereas items available in used or refurbished conditions could incline towards being more experience-based due to the potential history of priduct use associated with them.</p></li>
+<li><p><strong>Which of the 5 senses the product engages? (e.g.&nbsp;engagement of more senses, or engagement of solely specific senses like hearing and vision may suggest more experience-based than search based; examine relationship between search and experience vs.&nbsp;senses engaged)</strong></p>
+<p>While the engagement of the senses is undoubtedly a crucial aspect of the consumer experience, it was not within the scope of our current investigation. However, examining the relationship between the engagement of the senses and the classification of products as “search” or “experience” goods could yield valuable insights</p></li>
+<li><p><strong>Item rarity (limited production or unique items vs.&nbsp;bulk-produced items)? (e.g.&nbsp;limited production products may be more experience-based than search-based)</strong></p>
+<p>Most of the items in our research were common household products i.e.&nbsp;bulk-produced items. We did not give sufficient research time to dig into limited production or unique items. Solely based on human psychology, it might be possible that limited production or unique items typically exhibit more experiential qualities, as they offer distinctive and potentially rare experiences compared to bulk-produced items.</p></li>
+</ul></li>
+<li><p><strong>Can newer natrual language processing libraries provide a better fit for Review Content metrics examined by <span class="citation" data-cites="percUse">Guha Majumder, Dutta Gupta, and Paul (<a href="references.html#ref-percUse" role="doc-biblioref">2022</a>)</span>?</strong></p>
+<p>We found that there was no clear linear model from the data which could be an outcome of we how we processed sentiment as a numeric variable as opposed to a category. Based on this assumption, newer natural language processing libraries might provide an improved fit for analyzing review content metrics like sentiment. For instance, using these libraries could involve more nuanced sentiment analysis techniques that avoid treating sentiment solely as a numeric variable, potentially providing clearer insights into customer feedback.</p></li>
+<li><p><strong>How does sentiment in customer reviews correlate with customer satisfaction metrics or sales figures for a particular product?</strong><br>
+Sentiment in customer reviews, characterized by higher star ratings, tends to correlate positively with customer satisfaction metrics. Higher star ratings often reflect stronger polarity and subjectivity in sentiment, indicating greater overall satisfaction of the customer and potentially influencing purchasing decisions for future buyers.</p></li>
+<li><p><strong>Can we categorize customer reviews based on customer experience and sentiment?</strong></p>
+<p>Our study results show that it is possible to categorize customer reviews based on customer experience and sentiment. One way of doing this is using machine learning algorithms like classifiers that inculcate subjectivity and polarity as model features. The results of the classifiers implemented in this project might not be robust but can act as a base for methodological adaptations to better classify sentiment and assess the usefulness of reviews based on customer experience.</p></li>
+<li><p><strong>Do specific product star ratings tend to incite more reviews, and if so, how does this impact the overall reputation measurement?</strong> (we didn’t get to dig in on reputation. We should run some quick numbers on total reviews based on how many star ratings and average star rating and do a write-up here…)</p></li>
+<li><p><strong>Are specific quality descriptors in text-based reviews (e.g., ‘enthusiastic’, ‘disappointed’) strongly associated with certain rating levels, and how does this association affect product reputation?</strong></p>
+<p>Our findings suggest a positive trend between star ratings and positive polarity in reviews. In review content, specific quality descriptors like ‘enthusiastic’ or ‘disappointed’ seem to be associated with certain rating levels. However, further analysis is needed to assess how these associations impact overall product reputation, including how sentiment and specific descriptors contribute to consumer perceptions and purchasing decisions.</p></li>
+</ul>
+</section>
+<section id="interesting-findings-in-spite-of-model-performance" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="interesting-findings-in-spite-of-model-performance"><span class="header-section-number">4.2</span> Interesting Findings, In Spite of Model Performance</h2>
 <p>Despite what we perceive as weakness in the models, the degree of detail and specificity within some of the predicted “useful” comments is enlightening. Let’s have a look at a small selection of comments, near the top of the prediction list for MLR, SVM, and for Logistic Regression -</p>
 <div id="fig-dyson-vacuum" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -215,7 +289,7 @@ Figure&nbsp;4.1: Comment on Dyson Vacuum Cleaner - predicted useful by Logistic 
 </figcaption>
 </figure>
 </div>
-<p>A Dyson vacuum is an expensive product. Hearing of someone’s challenges, particularly this extreme, may make one think twice about the investment. While appearing negative in sentiment, the commenter appears to provide a degree of objectivity to their review - and does talk about both the good and the bad of the product. These are all things we believe may be useful to a customer.</p>
+<p>A Dyson vacuum is an expensive product. Hearing of someone’s challenges, particularly an extreme case of having a vacuum <em>melt</em> on the user, may make one think twice about the investment. While appearing negative in sentiment, the commenter appears to provide a degree of objectivity to their review - and does talk about both the good and the bad of the product. These are all things we believe may be useful to a customer.</p>
 <div id="fig-cheap-sofa" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-cheap-sofa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -237,25 +311,26 @@ Figure&nbsp;4.3: Comment on a Pizza Oven - predicted useful by MLR
 </figcaption>
 </figure>
 </div>
-<p>This customer looks like they had a good experience - so good in fact that they went and found somewhere online that they could post about it. Knowing the settings used, how quickly the oven managed to cook their food, and the ease of use likely all give utility to a prospective customer!</p>
+<p>This customer looks like they had a good experience - so good in fact that they went online to a commerce platform that they didn’t even use to purchase the item, just so that they could post about their experience. Knowing the settings used, how quickly the oven managed to cook their food, and the ease of use likely all give utility to a prospective customer.</p>
 <p>None of these reviews had any votes for the comment as being useful to other buyers. That being said - it’s all subjective in terms of determining utility.</p>
-<p>Another interesting outcome from this research is the correlation of predictions between our tuned SVM and Logistic Regression predictions. For each prediction, we assigned it a rank based upon how likely the commment is to be useful as predicted by both models.</p>
-<div id="cell-fig-SVM-LG-corr" class="cell" data-execution_count="2">
-<div class="cell-output cell-output-display">
-<div id="fig-svm-lg-corr" class="quarto-figure quarto-figure-center quarto-float anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-svm-lg-corr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="conclusion_files/figure-html/fig-svm-lg-corr-output-1.png" width="601" height="449" class="figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-svm-lg-corr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4.4: Examining rank predictions, SVM and Logistic Regression
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>The predictions had a correlation coefficient of 0.97</p>
-<p>The strength of this correlation is interesting and suggests the two models seek out similar results, as also shown within the examination of some of the top comments recommended by both. Logistic Regression provided stronger scoring for all metrics (accuracy, F1, precision, and recall) compared to SVM-Poly, though the metrics were all quite similar.</p>
+<!-- Another interesting outcome from this research is the correlation of predictions between our tuned SVM and Logistic Regression predictions.  For each prediction, we assigned it a rank based upon how likely the commment is to be useful as predicted by both models. -->
+<!--
+
+#| label: fig-SVM-LG-corr
+#| fig-cap: Examining rank predictions, SVM and Logistic Regression
+sns.scatterplot(
+    data=x,
+    x='rank_lg',
+    y='rank_svm'
+)
+plt.title("Correlation between Logisitic Regression and SVM Predictions")
+plt.xlabel("Log Reg Predicted Rank")
+plt.ylabel("SVM Predicted Rank")
+plt.show()
+```-->
+<!-- The predictions had a correlation coefficient of `{python} round(r2_score(x['rank_lg'],x['rank_svm']),2)`
+
+The strength of this correlation is interesting and suggests the two models seek out similar results, as also shown within the examination of some of the top comments recommended by both.  Logistic Regression provided stronger scoring for all metrics (accuracy, F1, precision, and recall) compared to SVM-Poly, though the metrics were all quite similar. -->
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
@@ -272,6 +347,7 @@ Rajeev, P Venkata, and V Smrithi Rekha. 2015. <span>“Recommending Products to 
 Wang, W. M., Z. Li, Z. G. Tian, J. W. Wang, and M. N. Cheng. 2018. <span>“Extracting and Summarizing Affective Features and Responses from Online Product Descriptions and Reviews: A Kansei Text Mining Approach.”</span> <em>Engineering Applications of Artificial Intelligence</em> 73 (August): 149–62. <a href="https://doi.org/10.1016/j.engappai.2018.05.005">https://doi.org/10.1016/j.engappai.2018.05.005</a>.
 </div>
 </div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -661,7 +737,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<nav class="page-navigation column-page-right">
+<nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
       <a href="./models implemented.html" class="pagination-link  aria-label=" &lt;span="" implemented&lt;="" span&gt;"="">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Models Implemented</span></span>
