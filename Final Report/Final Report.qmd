@@ -1,0 +1,123 @@
+---
+format: 
+  pdf: default
+  acm-pdf:
+    keep-text: true
+
+# use keep-tex to cause quarto to generate a .tex file
+# which you can eventually use with TAPS
+keep-tex: true
+
+bibliography: bibliography.bib
+
+title: Generalizing Models For Predicting the Perceived Usefulness of Online Customer Reviews
+
+# if short-title is defined, then it's used
+short-title: Perceived Usefulness
+
+author:
+  - name: Patrick Connelly
+    email: paco2756@colorado.edu
+  - name: Aneesh Khole
+    email: w@w.w
+  - name: Utarra Ketkar
+    email: w@w.w
+
+# acm-specific metadata
+acm-metadata:
+  # comment this out to make submission anonymous
+  # anonymous: true
+
+  # comment this out to build a draft version
+  final: true
+
+
+  # if present, replaces the list of authors in the page header.
+  shortauthors: Connelly et al.
+
+  keywords:
+    - datasets
+    - statistical modeling
+    - online reviews
+    - sentiment analysis
+  
+  # if uncommented, this produces a teaser figure
+  # 
+  # teaser:
+  #   image: sampleteaser
+  #   caption: figure caption
+  #   description: teaser description    
+
+abstract: |
+  We explore the research performed in @percUse, 
+  and seek to further it via their recommendations 
+  for predicting the perceived usefulness of online 
+  customer reviews to potential customers. Our work 
+  focuses on the expansion and generalization of 
+  their multiple linear regression model.  
+  Furthermore, we explore use of additional 
+  features and coefficients, and use of other 
+  prediction and classification models to assess 
+  the degree to which a customer review is useful 
+  to future customers.  Ultimately, we find a lack 
+  of linear correlation as found by @percUse when 
+  applied with new variables and across a wider dataset.
+
+---
+
+# Introduction
+
+Customers, when searching for products with specific features and aspects, need sufficient information to make a decision as to whether to procure a specific product.  According to research by @percUse, if a customer can gather and understand product quality before the purchase, it is considered a search good, while experience goods are those which must be purchased or experienced to evaluate them.  When a product is more in the directon of experience vs. search-based, other customers experiences can shed light on its features and return on investment than information directly from the vendor can.  Having reviews from reliable sources with sufficiently detailed information can enable greater confidence in a purchase, improved customer satisfaction, and smooth the process of ecommerce for customers.
+
+We seek to expound upon the research of [@percUse] to explore additional recommended research areas to improve upon and increase the general applicability of the model.
+
+Furthermore, the authors provided the following areas for recommended additional research at the conclusion of their paper:
+
+1. Expand the number of products beyond 3 items (one search, one experience, one mixed) to better generalize the model.
+
+1. Explore customer or reviewer metadata for classifying reviewer types to enhance model performance.
+
+We seek to examine the above two above items, and to explore the possibility of assessing a scale for products to determine the extent to which they are a search or experience-based product.  We further seek to inspect additional potential modifiers to the underlying model for statistical and operational applicability; weve sought out work from other research teams to identify potential methods we can leverage to pursue these ends.
+
+* Determining the polarity of a customer review by employing a classifier such as Naive Bayes. 
+
+* Using Kansei engineering approaches to convert unstructured product-related texts into feature–affective opinions.
+
+* Attempting to assess the reliability of customer reviews based on star-rating and a sentiment score of their textual feedback.  
+
+## Related Work
+
+* @percUse 
+
+    * Examined multiple-linear regression modeling to calculate the usefulness of an online review based upon type of product (search vs. experience), review sentiment, review star rating, review length, and number of votes for the review as being "useful".  Suggested exploration using larger number of products as well as customer/reviewer metadata.
+
+* @Hu_Gong_Guo_2010 
+
+    * The proposed system employs a two-step process for opinion mining: identifying opinion sentences using a SentiWordNet-based algorithm and extracting product features from all reviews in the database. This feature extraction function focuses on identifying commonly expressed positive or negative opinions before extracting explicit and implicit product features.
+
+* @Rajeev_Rekha_2015 
+    * This paper presents techniques like Opinion mining, feature extraction and Naives Bayes classification for review polarity determination. The authors suggest performing both Objective and Subjective analysis of features by considering qualitative and quantitative features of the data respectively.  
+
+* @Wang_Li_Tian_Wang_Cheng_2018 
+
+    * Authors have proposed a solution by implementing Kansei engineering and text mining simultaneously which will help customers in decision making process. It helps to categorize reviews into multiple sections and perform text mining by NLP techniques like Sentence segmentation, Tokenization, and POS tagging.
+
+# Data
+
+# Models Implemented
+
+## Methods
+
+## Models Implemented
+
+### Multiple Linear Regression
+
+### Logistic Regression Classification
+
+### K-Nearest Neighbor Classification
+
+### Support Vector Machine Classification
+
+### Summary Findings of Models Implemented
+
+# Conclusion
